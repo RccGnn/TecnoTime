@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class controller
+ * Servlet implementation class RegistrationPage
  */
-@WebServlet("/controller")
-public class controller extends HttpServlet {
+@WebServlet("/RegistrationPage")
+public class RegistrationPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public controller() {
+    public RegistrationPage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +35,20 @@ public class controller extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		
+		String firstName= request.getParameter("firstName");
+		String lastName= request.getParameter("lastName");
+		String birthDate= request.getParameter("birthDate");
+		String ssn= request.getParameter("ssn");
+		String address= request.getParameter("Address");
+		String postalCode= request.getParameter("postalCode");		
+		String email= request.getParameter("E-mail");
+		String telNumb=request.getParameter("telNumb");
+		String gender= request.getParameter("gender");
+		String nation= request.getParameter("nation");
+		
+		
 	}
 
 }
