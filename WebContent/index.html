@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
     <link rel="stylesheet" href="styles.css">
@@ -66,10 +67,12 @@
             <h2>I Nostri Prodotti</h2>
             <div class="product" id="product1">
                 <h3>Prodotto 1</h3>
-                <iframe width="853" height="480" src="https://www.youtube.com/embed/CBlVu0tonUo"
-                        title="T-47 Airspeeder Booom!!!" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <!-- Video responsive -->
+				<div class="responsive-video">
+    			<iframe src="https://www.youtube.com/embed/CBlVu0tonUo" title="T-47 Airspeeder Booom!!!"
+        		frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        			referrerpolicy="strict-origin-when-cross-origin"></iframe>
+				</div>
                 <p>Descrizione del prodotto 1.</p>
                 <button>Aggiungi al carrello</button>
             </div>
@@ -84,21 +87,37 @@
                 <button>Aggiungi al carrello</button>
             </div>
         </section>
+    </main>
 
-        <section id="about">
+  <!-- Pre-footer -->
+<div class="pre-footer">
+    <div class="banner-container">
+        <img src="images/banner_pubblicitario.png" alt="Banner Pubblicitario" class="banner-png">
+    </div>
+    <button class="config-btn" onclick="window.location.href='configuratore.html'">Configura il tuo PC</button>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <!-- Chi siamo -->
+        <section class="footer-center">
             <h2>Chi Siamo</h2>
             <p>Informazioni su TecnoTime.</p>
         </section>
 
-        <section id="contact">
+        <!-- Logo al centro -->
+        <div class="footer-logo">
+            <img src="images/TecnoTime.png" alt="Logo Footer">
+        </div>
+
+        <!-- Contatti a destra -->
+        <section class="footer-right">
             <h2>Contatti</h2>
             <p>Email: info@tecnotime.com</p>
         </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 TecnoTime. Tutti i diritti riservati.</p>
-    </footer>
+    </div>
+    <p class="copy">&copy; 2025 TecnoTime. Tutti i diritti riservati.</p>
+</footer>
 </body>
 </html>
