@@ -48,7 +48,7 @@ public class RegistrationPage extends HttpServlet {
 		String gender= request.getParameter("gender");
 		String nation= request.getParameter("nation");
 		
-		
+		a
 	}
 
 }
