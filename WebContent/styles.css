@@ -14,7 +14,6 @@ body {
     background-color: #F2F2F2;
     color: #011140;
 }
-
 /* Header */
 .main-header {
     display: flex;
@@ -43,27 +42,46 @@ body {
 
 .header-center {
     flex: 1;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    position: relative;
+    width: 50%;
+    max-width: 400px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+
+    /* Questo aumenta il contrasto e rende l'icona ben visibile su sfondo chiaro */
+    filter: brightness(0) saturate(100%) contrast(200%);
 }
 
 .search-bar {
-    width: 50%;
-    max-width: 400px;
-    padding: 8px 12px;
+    width: 100%;
+    padding: 8px 12px 8px 36px; /* padding-left per lasciare spazio all'icona */
     border: 1px solid #F2762E;
     border-radius: 20px;
     font-size: 14px;
     color: #011140;
 }
 
-/*carrello*/
+/* carrello */
 .header-right {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/*omino*/
+/* omino */
 .icon-link {
     display: flex;
     flex-direction: column;
@@ -73,13 +91,13 @@ body {
 }
 
 .icon-link .icon {
-    width: 48px; /* più piccolo */
+    width: 48px;
     height: 48px;
     margin-top: 4px;
     filter: brightness(0) invert(1);
 }
 
-/*login/registrati*/
+/* login/registrati */
 .login-text {
     font-size: 14px;
     color: #F2F2F2;
@@ -167,6 +185,23 @@ main {
     border: 1px solid #ddd;
     margin: 10px 0;
     padding: 10px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
 }
 
 /* Pre-footer */
