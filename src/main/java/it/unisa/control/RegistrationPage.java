@@ -125,16 +125,11 @@ public class RegistrationPage extends HttpServlet {
 		}
 		
 		int tel=0;
-		if (telNumb == null || telNumb.trim().equals("")) {
-		    error += "Insert telephone<br>";
+		if (telNumb == null || telNumb.trim().equals("")||telNumb.matches("//d+")){
+		    error += "Insert a correct telephone number<br>";
 		} else {
 		    telNumb = telNumb.trim();
-		    try {
-		        tel = Integer.parseInt(telNumb);
-		        request.setAttribute("telNumb", tel);
-		    } catch (NumberFormatException e) {
-		        error += "Telephone must be a number<br>";
-		    }
+		    request.setAttribute("telNumb", telNumb);
 		}
 		
 		
