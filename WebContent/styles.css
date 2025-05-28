@@ -29,11 +29,6 @@ body {
     align-items: center;
 }
 
-.logo {
-    width: 150px;
-    margin-right: 10px;
-}
-
 .brand-name {
     font-size: 24px;
     font-weight: bold;
@@ -187,6 +182,77 @@ main {
     padding: 10px;
 }
 
+.hero {
+    background: #0f172a;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+  }
+  .hero-content {
+    max-width: 1200px;
+    margin: auto;
+  }
+  .hero-img {
+    max-width: 200px;
+    margin-bottom: 1rem;
+  }
+  .hero-slogan {
+    font-size: 1.5rem;
+  }
+
+  .product-scroll {
+    background-color: #f3f4f6;
+    padding: 2rem;
+  }
+  .scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .product-card {
+    display: flex;
+    min-width: 300px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .product-left {
+    flex: 1;
+    padding-right: 1rem;
+  }
+  .product-right {
+    text-align: center;
+  }
+  .product-image {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto;
+  }
+  .product-name {
+    margin-top: 0.5rem;
+    font-weight: bold;
+  }
+
+  .featured-builds {
+    background: #e5e7eb;
+    padding: 2rem;
+  }
+  .build-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+  .build-card {
+    min-width: 250px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
 .footer-social {
   display: flex;
   gap: 16px;
@@ -223,7 +289,7 @@ main {
 
 .pre-footer .banner-png {
     width: 100%;
-    height: 150px;
+    height: 200px;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -267,6 +333,7 @@ main {
     width: 150px;
     max-width: 100%;
     height: auto;
+    margin-right: 10px;
 }
 
 /* Footer aggiornato */
@@ -356,6 +423,20 @@ footer p.copy {
 
 /* Responsive */
 @media (max-width: 768px) {
+	.product-card {
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-left, .product-right {
+      padding: 0;
+    }
+    .hero-slogan {
+      font-size: 1.2rem;
+    }
+    .build-card {
+      min-width: 80%;
+    }
+	
     .pre-footer {
         flex-direction: column;
         align-items: stretch;
