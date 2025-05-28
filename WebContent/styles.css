@@ -14,7 +14,6 @@ body {
     background-color: #F2F2F2;
     color: #011140;
 }
-
 /* Header */
 .main-header {
     display: flex;
@@ -30,11 +29,6 @@ body {
     align-items: center;
 }
 
-.logo {
-    width: 150px;
-    margin-right: 10px;
-}
-
 .brand-name {
     font-size: 24px;
     font-weight: bold;
@@ -43,27 +37,46 @@ body {
 
 .header-center {
     flex: 1;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    position: relative;
+    width: 50%;
+    max-width: 400px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+
+    /* Questo aumenta il contrasto e rende l'icona ben visibile su sfondo chiaro */
+    filter: brightness(0) saturate(100%) contrast(200%);
 }
 
 .search-bar {
-    width: 50%;
-    max-width: 400px;
-    padding: 8px 12px;
+    width: 100%;
+    padding: 8px 12px 8px 36px; /* padding-left per lasciare spazio all'icona */
     border: 1px solid #F2762E;
     border-radius: 20px;
     font-size: 14px;
     color: #011140;
 }
 
-/*carrello*/
+/* carrello */
 .header-right {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/*omino*/
+/* omino */
 .icon-link {
     display: flex;
     flex-direction: column;
@@ -73,13 +86,13 @@ body {
 }
 
 .icon-link .icon {
-    width: 48px; /* più piccolo */
+    width: 48px;
     height: 48px;
     margin-top: 4px;
     filter: brightness(0) invert(1);
 }
 
-/*login/registrati*/
+/* login/registrati */
 .login-text {
     font-size: 14px;
     color: #F2F2F2;
@@ -169,10 +182,295 @@ main {
     padding: 10px;
 }
 
-/* Footer */
-footer {
+.hero {
+    background: #0f172a;
+    color: white;
+    padding: 2rem;
     text-align: center;
-    padding: 10px 0;
+  }
+  .hero-content {
+    max-width: 1200px;
+    margin: auto;
+  }
+  .hero-img {
+    max-width: 200px;
+    margin-bottom: 1rem;
+  }
+  .hero-slogan {
+    font-size: 1.5rem;
+  }
+
+  .product-scroll {
+    background-color: #f3f4f6;
+    padding: 2rem;
+  }
+  .scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  .product-card {
+    display: flex;
+    min-width: 300px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .product-left {
+    flex: 1;
+    padding-right: 1rem;
+  }
+  .product-right {
+    text-align: center;
+  }
+  .product-image {
+    max-width: 100px;
+    display: block;
+    margin: 0 auto;
+  }
+  .product-name {
+    margin-top: 0.5rem;
+    font-weight: bold;
+  }
+
+  .featured-builds {
+    background: #e5e7eb;
+    padding: 2rem;
+  }
+  .build-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-top: 1rem;
+  }
+  .build-card {
+    min-width: 250px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+.footer-social {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s;
+}
+
+.social-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Pre-footer */
+.pre-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding: 20px;
+    flex-wrap: wrap;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.pre-footer .banner-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.pre-footer .banner-png {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Bottone configurazione */
+.pre-footer .config-btn {
+    padding: 12px 24px;
+    background-color: #F2762E;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pre-footer .config-btn:hover {
+    background-color: #d1641f;
+}
+
+/* Video responsive */
+.responsive-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    margin: 20px 0;
+}
+
+.responsive-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Header logo responsive */
+.logo {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Footer aggiornato */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    text-align: center;
+}
+
+.footer-center,
+.footer-right {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-logo {
+    flex: 1;
+    min-width: 100px;
+}
+
+.footer-logo img {
+    max-width: 120px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
+
+footer {
     background-color: #011140;
     color: #F2F2F2;
+    padding: 30px 20px;
 }
+
+.footer-center h2,
+.footer-right h2 {
+    color: #F2D230;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-center p,
+.footer-right p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+footer p.copy {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #ccc;
+    text-align: center;
+}
+
+/* Mobile: header + footer */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        margin-bottom: 10px;
+    }
+
+    .search-bar {
+        width: 80%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-center,
+    .footer-logo,
+    .footer-right {
+        margin-bottom: 15px;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.product-card {
+      flex-direction: column;
+      align-items: center;
+    }
+    .product-left, .product-right {
+      padding: 0;
+    }
+    .hero-slogan {
+      font-size: 1.2rem;
+    }
+    .build-card {
+      min-width: 80%;
+    }
+	
+    .pre-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pre-footer .banner-container {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .pre-footer .banner-png {
+        height: 50px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-center,
+    .footer-right {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .pre-footer .banner-png {
+        height: 40px;
+    }
+
+    .pre-footer .config-btn {
+        width: 100%;
+    }
+}
+
+
+
