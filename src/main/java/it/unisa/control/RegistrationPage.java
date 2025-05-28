@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -144,8 +145,12 @@ public class RegistrationPage extends HttpServlet {
 			request.setAttribute("error", error);
 		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-        dispatcher.forward(request, response);
+		
+	/*	RequestDispatcher dispatcher = this.getServletContext().
+				getRequestDispatcher("/RegistrationPage.jsp");
+		dispatcher.forward(request, response); */
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/Registation.jsp");
+        dispatcher.forward(request, response); 
 	
 	}
 }
