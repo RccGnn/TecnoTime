@@ -76,9 +76,10 @@
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-animation">
-                    <img src="images/hero_animation.gif" alt="Animazione" class="hero-img">
-                </div>
-                <h1 class="hero-slogan">Potenzia la tua esperienza di gioco con le nostre build su misura!</h1>
+                    <video autoplay loop muted playsinline class="hero-img" aria-label="Animazione hero">
+  					<source src="video/hero_animation.mp4" type="video/mp4">
+					</video>
+				</div>
             </div>
         </section>
 
