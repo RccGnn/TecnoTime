@@ -40,10 +40,16 @@ public class LoginPage extends HttpServlet {
 		String login = request.getParameter("username");
         String pwd = request.getParameter("password");
         
+        //usare una funzione di hashing per la password
+        String message="password non valida";
+        if(pwdValidator.isValid(pwd)==false) {
+        	request.setAttribute("pwderror", message);
+        }
+        
         //controllo con if se i dati nel db sono corretti mando al model i dati nel caso siano incorretti manda un messaggio di errore alla request
         
        /* request.setAttribute("error", Boolean.TRUE);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
         dispatcher.forward(request, response);
          
          HttpSession session = request.getSession();
