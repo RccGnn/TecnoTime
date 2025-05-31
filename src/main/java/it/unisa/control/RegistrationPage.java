@@ -149,7 +149,7 @@ public class RegistrationPage extends HttpServlet {
 	/*	RequestDispatcher dispatcher = this.getServletContext().
 				getRequestDispatcher("/RegistrationPage.jsp");
 		dispatcher.forward(request, response); */
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/Registation.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
         dispatcher.forward(request, response); 
 	
 	}
