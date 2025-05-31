@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -54,19 +53,25 @@ public class RegistrationPage extends HttpServlet {
 		String gender= request.getParameter("gender");
 		String nation= request.getParameter("nation");
 		
+		String message="";
 		
 		// invece di fare tutti sti controlli il model crea l'oggetto user con la classe DAO
 		if (firstName == null || firstName.trim().equals("")) {
 			error += "Insert name<br>";
 		} else {
 			firstName = firstName.trim();
+			firstName= EncoderHtml.encodeHtml(firstName);
 			request.setAttribute("name", firstName);	
+			message+="first name is"+firstName+"<br>";
 		}
 
 		if (lastName == null || lastName.trim().equals("")) {
 			error += "Insert lastName<br>";
 		} else {
 			lastName = lastName.trim();
+			lastName= EncoderHtml.encodeHtml(lastName);
+			message+=lastName;
+			request.setAttribute("message", message);
 			request.setAttribute("lastName", lastName);
 		}
 				
@@ -74,6 +79,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert ssn<br>";
 		} else {
 			ssn= ssn.trim();
+			ssn= EncoderHtml.encodeHtml(ssn);
 			request.setAttribute("ssn", ssn);
 		}	
 		
@@ -82,6 +88,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert birthdate<br>";
 		} else {
 			birthDateStr = birthDateStr.trim();
+			birthDateStr= EncoderHtml.encodeHtml(birthDateStr);
 			try {
 				 birthDate=LocalDate.parse(birthDateStr);
 			}catch (DateTimeParseException e){
@@ -94,6 +101,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert address<br>";
 		} else {
 			address = address.trim();
+			address= EncoderHtml.encodeHtml(address);
 			request.setAttribute("address", address);
 		}
 		
@@ -114,6 +122,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert email<br>";
 		} else {
 			email = email.trim();
+			email= EncoderHtml.encodeHtml(email);
 			request.setAttribute("email", email);
 		}
 		
@@ -121,6 +130,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert gender<br>";
 		} else {
 			gender = gender.trim();
+			gender= EncoderHtml.encodeHtml(gender);
 		   char genderChr = gender.charAt(0);  //prende solo il primo carattere della stringa e lo salva in una variabile char
 			request.setAttribute("gender", genderChr );
 		}
@@ -130,6 +140,7 @@ public class RegistrationPage extends HttpServlet {
 		    error += "Insert a correct telephone number<br>";
 		} else {
 		    telNumb = telNumb.trim();
+		    telNumb= EncoderHtml.encodeHtml(telNumb);
 		    request.setAttribute("telNumb", telNumb);
 		}
 		
@@ -138,13 +149,13 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid nation selected <br>";
 		} else {
 			nation = nation.trim();
+			nation= EncoderHtml.encodeHtml(nation);
 			request.setAttribute("nation",nation);
 		}
 		
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
 		}
-		
 		
 	/*	RequestDispatcher dispatcher = this.getServletContext().
 				getRequestDispatcher("/RegistrationPage.jsp");
