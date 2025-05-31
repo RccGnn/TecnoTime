@@ -60,7 +60,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert name<br>";
 		} else {
 			firstName = firstName.trim();
-			firstName= EncoderHtml.encodeHtml(firstName);
+			firstName= DecoderHtml.encodeHtml(firstName);
 			request.setAttribute("name", firstName);	
 			message+="first name is"+firstName+"<br>";
 		}
@@ -69,7 +69,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert lastName<br>";
 		} else {
 			lastName = lastName.trim();
-			lastName= EncoderHtml.encodeHtml(lastName);
+			lastName= DecoderHtml.encodeHtml(lastName);
 			message+=lastName;
 			request.setAttribute("message", message);
 			request.setAttribute("lastName", lastName);
@@ -79,7 +79,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert ssn<br>";
 		} else {
 			ssn= ssn.trim();
-			ssn= EncoderHtml.encodeHtml(ssn);
+			ssn= DecoderHtml.encodeHtml(ssn);
 			request.setAttribute("ssn", ssn);
 		}	
 		
@@ -88,7 +88,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert birthdate<br>";
 		} else {
 			birthDateStr = birthDateStr.trim();
-			birthDateStr= EncoderHtml.encodeHtml(birthDateStr);
+			birthDateStr= DecoderHtml.encodeHtml(birthDateStr);
 			try {
 				 birthDate=LocalDate.parse(birthDateStr);
 			}catch (DateTimeParseException e){
@@ -101,7 +101,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert address<br>";
 		} else {
 			address = address.trim();
-			address= EncoderHtml.encodeHtml(address);
+			address= DecoderHtml.encodeHtml(address);
 			request.setAttribute("address", address);
 		}
 		
@@ -122,7 +122,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert email<br>";
 		} else {
 			email = email.trim();
-			email= EncoderHtml.encodeHtml(email);
+			email= DecoderHtml.encodeHtml(email);
 			request.setAttribute("email", email);
 		}
 		
@@ -130,7 +130,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert gender<br>";
 		} else {
 			gender = gender.trim();
-			gender= EncoderHtml.encodeHtml(gender);
+			gender= DecoderHtml.encodeHtml(gender);
 		   char genderChr = gender.charAt(0);  //prende solo il primo carattere della stringa e lo salva in una variabile char
 			request.setAttribute("gender", genderChr );
 		}
@@ -140,7 +140,7 @@ public class RegistrationPage extends HttpServlet {
 		    error += "Insert a correct telephone number<br>";
 		} else {
 		    telNumb = telNumb.trim();
-		    telNumb= EncoderHtml.encodeHtml(telNumb);
+		    telNumb= DecoderHtml.encodeHtml(telNumb);
 		    request.setAttribute("telNumb", telNumb);
 		}
 		
@@ -149,7 +149,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid nation selected <br>";
 		} else {
 			nation = nation.trim();
-			nation= EncoderHtml.encodeHtml(nation);
+			nation= DecoderHtml.encodeHtml(nation);
 			request.setAttribute("nation",nation);
 		}
 		
