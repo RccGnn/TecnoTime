@@ -2,10 +2,10 @@ package it.unisa.model;
 
 import java.time.LocalDate;
 
-public class user {
-	public user() {	}
+public class User {
+	public User() {	}
 	
-	public user(String name,String lastName, LocalDate birthDate,String ssn,String address,int postalCode,String email,String telNumb,char gender,String nation) {
+	public User(String name,String lastName, LocalDate birthDate,String ssn,String address,int postalCode,String email,String telNumb,char gender,String nation) {
 		this.name=name;
 		this.lastName=lastName;
 		this.address=address;
@@ -62,7 +62,6 @@ public class user {
     	this.birthDate=birthdate;
 	}
     
-
 
 	private String name;
 	private String lastName;
