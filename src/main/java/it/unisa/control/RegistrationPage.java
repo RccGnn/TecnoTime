@@ -49,6 +49,7 @@ public class RegistrationPage extends HttpServlet {
 		String address= request.getParameter("Address");
 		String postalCodeStr= request.getParameter("postalCode");		
 		String email= request.getParameter("E-mail");
+		String password=request.getParameter("password");
 		String telNumb=request.getParameter("telNumb");
 		String gender= request.getParameter("gender");
 		String nation= request.getParameter("nation");
@@ -117,6 +118,18 @@ public class RegistrationPage extends HttpServlet {
 				}
 			request.setAttribute("postalCode", postalCode);
 		}
+		
+		if(password==null || email.trim().equals("")) {
+			error += "must insert a password";
+		}else {
+			password= password.trim();
+			password=DecoderHtml.encodeHtml(password);         
+		    if(pwdValidator.isValid(password)==false) {         	
+		    request.setAttribute("pwderror","password non valida" );         
+		    }else {    
+		    	PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	         }
+			}
+		
 		
 		if (email == null || email.trim().equals("")) {
 			error += "Insert email<br>";
