@@ -193,13 +193,15 @@ main {
     margin: auto;
   }
   .hero-img {
-    max-width: 200px;
-    margin-bottom: 1rem;
+  max-width: 100%;           /* Si adatta al contenitore */
+  width: 65%;               /* Occupa tutta la larghezza disponibile */
+  height: auto;              /* Altezza automatica per mantenere proporzioni */
+  aspect-ratio: 16 / 9;      /* Imposta proporzioni orizzontali */
+  object-fit: cover;         /* Ritaglia per riempire senza distorsione */
+  border-radius: 8px;        /* Angoli arrotondati */
+  display: block;            /* Migliore gestione degli spazi */
+  margin: 0 auto;            /* Centra orizzontalmente */
   }
-  .hero-slogan {
-    font-size: 1.5rem;
-  }
-
   .product-scroll {
     background-color: #f3f4f6;
     padding: 2rem;
