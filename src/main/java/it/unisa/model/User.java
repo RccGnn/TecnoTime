@@ -2,10 +2,10 @@ package it.unisa.model;
 
 import java.time.LocalDate;
 
-public class user {
-	public user() {	}
+public class User {
+	public User() {	}
 	
-	public user(String name,String lastName, LocalDate birthDate,String ssn,String address,int postalCode,String email,String telNumb,char gender,String nation) {
+	public User(String name,String hashPwd,String lastName, LocalDate birthDate,String ssn,String address,int postalCode,String email,String telNumb,char gender,String nation) {
 		this.name=name;
 		this.lastName=lastName;
 		this.address=address;
@@ -13,12 +13,14 @@ public class user {
 		this.ssn=ssn;
 		this.postalCode=postalCode;
 		this.email=email;
+		this.hashPwd=hashPwd;
 		this.telNumb=telNumb;
 		this.gender=gender;
 		this.nation=nation;		
 	}
 	
 	//getter
+	public String getHashPwd() { return hashPwd; }
 	public String getName() { return name; }
 	public String getLastName() {return lastName;}
     public String getEmail() { return email; }
@@ -42,6 +44,9 @@ public class user {
     }
     public void setEmail(String email) {
     	this.email=email;
+    }
+    public void setPwd(String hashPwd) {
+    	this.hashPwd=hashPwd;
     }
     public void setTelNumb(String telNumb ) {
     	this.telNumb=telNumb;
@@ -74,4 +79,6 @@ public class user {
 	private String telNumb;
 	private char gender;
 	private String nation;
+	private String hashPwd;
+
 }
