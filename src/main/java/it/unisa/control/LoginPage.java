@@ -40,10 +40,12 @@ public class LoginPage extends HttpServlet {
 		String login = request.getParameter("username");
         String pwd = request.getParameter("password");
         
-        //usare una funzione di hashing per la password
-        String message="password non valida";
-        if(pwdValidator.isValid(pwd)==false) {
-        	request.setAttribute("pwderror", message);
+        String hashedpwd=""; //recupero la hashpwd dal DB e confronto con la pwd attuale
+        boolean isvalid=false;
+        if(isvalid=PasswordUtils.checkPasswordHashed(pwd, hashedpwd)==false) {
+        	request.setAttribute("error", "password errata");  
+        }else {
+        	request.setAttribute("flag","passok");
         }
         
         //controllo con if se i dati nel db sono corretti mando al model i dati nel caso siano incorretti manda un messaggio di errore alla request
