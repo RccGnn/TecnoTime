@@ -33,7 +33,7 @@
             <img src="images/shopping_cart.png" alt="Carrello" class="icon">
              <span class="Carrello">Carrello</span>
         </a>
-        <a href="#login" class="icon-link">
+        <a href="LoginPage.jsp" class="icon-link">
             <img src="images/user.png" alt="Utente" class="icon">
             <span class="login-text">Login / Registrati</span>
         </a>
@@ -65,7 +65,7 @@
                 </ul>
             </li>
             <li><a href="#services">SERVIZI</a></li>
-            <li><a href="#AssemPort">PREASSEMBLATI & PORTATILI</a></li>
+            <li><a href="#AssemPort">PREASSEMBLATI e PORTATILI</a></li>
             <li><a href="#Guide">GUIDE</a></li>
         </ul>
     </nav>
@@ -79,7 +79,7 @@
                     <video autoplay loop muted playsinline class="hero-img" aria-label="Animazione hero">
   					<source src="video/hero_animation.mp4" type="video/mp4">
 					</video>
-				</div>
+                </div>
             </div>
         </section>
 
@@ -93,7 +93,7 @@
                         <p>Gaming Mouse RGB a metà prezzo!</p>
                     </div>
                     <div class="product-right">
-                        <img src="images/mouse.png" alt="Mouse" class="product-image">
+                        <img src="images/mouse-hyperx.png" alt="Mouse" class="product-image">
                         <p class="product-name">Mouse HyperX RGB</p>
                     </div>
                 </div>
