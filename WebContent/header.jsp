@@ -37,7 +37,12 @@
 
     <!-- Menu di navigazione con dropdown -->
     <nav class="main-nav">
-        <ul>
+    	<button class="hamburger" id="hamburgerBtn" aria-label="Apri menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    	</button>
+        <ul id="main-menu">
             <li><a href="#about">CHI SIAMO</a></li>
             <li>
                 <a href="#products">PRODOTTI</a>

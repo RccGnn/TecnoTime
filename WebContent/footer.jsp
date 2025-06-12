@@ -35,6 +35,14 @@
             <img src="images/tiktok.svg" alt="TikTok" class="social-icon">
         </a>
     </div>
+    
+    <!-- Pre-footer -->
+	<div class="pre-footer">
+	    <div class="banner-container">
+	        <img src="images/banner_pubblicitario.png" alt="Banner Pubblicitario" class="banner-png">
+	    </div>
+	    <button class="config-btn" onclick="window.location.href='configuratore.html'">Configura il tuo PC</button>
+	</div>
 
     <footer>
         <div class="footer-content">
