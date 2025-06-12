@@ -64,5 +64,6 @@
             <li><a href="#Guide">GUIDE</a></li>
         </ul>
     </nav>
+    <script src="js/navbar.js" defer></script>
     </body>
     </html>
