@@ -1,24 +1,25 @@
 // js/navbar.js
 document.addEventListener('DOMContentLoaded', function() {
     const navLiElements = document.querySelectorAll('.main-nav > ul > li');
-    const mobileBreakpoint = 768; // Corresponds to your CSS @media (max-width: 768px)
+    const mobileBreakpoint = 768; // Corrisponde al CSS @media (max-width: 768px)
 
     navLiElements.forEach(li => {
-        const link = li.querySelector('a:first-child'); // The main link (e.g., PRODOTTI)
-        const dropdown = li.querySelector('ul.dropdown'); // The dropdown menu itself
+        const link = li.querySelector('a:first-child'); // Il link principale (es. PRODOTTI)
+        const dropdown = li.querySelector('ul.dropdown'); // Il menu a discesa stesso
 
         if (link && dropdown) {
-            // Add ARIA attributes for accessibility
+            // Aggiungere attributi ARIA per l'accessibilità
             link.setAttribute('aria-haspopup', 'true');
             link.setAttribute('aria-expanded', 'false');
 
             link.addEventListener('click', function(event) {
                 if (window.innerWidth <= mobileBreakpoint) {
-                    event.preventDefault(); // Prevent link navigation on mobile for parent items
+                    event.preventDefault(); 
+					// Impedisce la navigazione tramite link su dispositivi mobili per gli elementi padre
 
                     const isCurrentlyOpen = dropdown.classList.contains('show');
 
-                    // Close all other open dropdowns before opening/closing the current one
+                    // Chiudere tutti gli altri menu a discesa aperti prima di aprire/chiudere quello corrente
                     navLiElements.forEach(otherLi => {
                         const otherDropdown = otherLi.querySelector('ul.dropdown');
                         if (otherDropdown && otherDropdown !== dropdown) {
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     });
 
-                    // Toggle the current dropdown
+                    // Attiva/disattiva il menu a discesa corrente
                     if (isCurrentlyOpen) {
                         dropdown.classList.remove('show');
                         link.setAttribute('aria-expanded', 'false');
@@ -36,17 +37,27 @@ document.addEventListener('DOMContentLoaded', function() {
                         link.setAttribute('aria-expanded', 'true');
                     }
                 }
-                // On wider screens (> mobileBreakpoint), CSS hover will manage the dropdowns,
-                // and the link will navigate as usual (e.g., to #products).
+                // Su schermi più ampi (> mobileBreakpoint), CSS hover gestirà i menu a discesa,
+                // e il collegamento proseguirà come di consueto (ad esempio, verso #prodotti).
             });
         }
     });
+	
+	const hamburgerBtn = document.getElementById('hamburgerBtn');
+	const navMenu = document.querySelector('.main-nav ul');
 
-    // Optional: Close dropdowns if clicking outside the main navigation on mobile
+	hamburgerBtn.addEventListener('click', function () {
+	    navMenu.classList.toggle('show');
+
+	    // Alterna l'animazione dell'hamburger
+	    hamburgerBtn.classList.toggle('active');
+	});
+
+    // Chiudere i menu a discesa se si fa clic al di fuori della navigazione principale su dispositivi mobili
     document.addEventListener('click', function(event) {
         if (window.innerWidth <= mobileBreakpoint) {
             const mainNav = document.querySelector('.main-nav');
-            // Check if the click was outside the main navigation area
+            // Controlla se il clic è avvenuto al di fuori dell'area di navigazione principale
             if (mainNav && !mainNav.contains(event.target)) {
                 navLiElements.forEach(li => {
                     const dropdown = li.querySelector('ul.dropdown');
