@@ -8,6 +8,9 @@ public class AccountBean {
 	
 	private String hashedPassword;
 	private String username;
+	private String nome;
+	private String cognome;
+	private char sesso;
 	private String email;
 	private String numeroTelefono; 
 	private String nazione;
@@ -35,6 +38,30 @@ public class AccountBean {
 	    this.username = username;
 	}
 
+	public String getNome() {
+		return this.nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getCognome() {
+		return cognome;
+	}
+	
+	public void setSesso(char sesso) {
+		this.sesso = sesso;
+	}
+	
+	public char getSesso() {
+		return sesso;
+	}
+	
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+	
 	public String getEmail() {
 	    return email;
 	}
@@ -113,6 +140,14 @@ public class AccountBean {
 
 	public void setRuolo(Ruoli ruolo) {
 	    this.ruolo = ruolo;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountBean [hashedPassword=" + hashedPassword + ", username=" + username + ", nome=" + nome
+				+ ", cognome=" + cognome + ", sesso=" + sesso +", email=" + email + ", numeroTelefono=" + numeroTelefono + ", nazione="
+				+ nazione + ", provincia=" + provincia + ", citta=" + citta + ", via=" + via + ", numeroCivico="
+				+ numeroCivico + ", CAP=" + CAP + ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + "]";
 	}
 
 }
