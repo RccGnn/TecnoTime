@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import it.unisa.model.DAO.AccountDao;
+import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.beans.AccountBean;
 
 /**
@@ -124,7 +126,7 @@ public class RegistrationPage extends HttpServlet {
 		    if(pwdValidator.isValid(password)==false) {         	
 		    request.setAttribute("pwderror","password non valida" );         
 		    }else {    
-		    	PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	         }
+		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	         }
 			}
 		
 		
@@ -209,6 +211,8 @@ public class RegistrationPage extends HttpServlet {
 		}
 		
 		AccountBean account = new AccountBean(password, username, firstName, lastName, genderChr, email, nation, telNumb, province, city, address, aptnumber, postalCodeStr, birthDate, null);
+		BeanDaoInterface<AccountBean> dao = new AccountDao();
+		dao.doSave(account);
 		
 	/*	RequestDispatcher dispatcher = this.getServletContext().
 				getRequestDispatcher("/RegistrationPage.jsp");
