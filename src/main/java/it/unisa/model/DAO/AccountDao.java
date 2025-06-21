@@ -5,31 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
-
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.Ruoli;
+import it.unisa.model.connections.*;
 
 import java.util.ArrayList;
 
 public class AccountDao implements BeanDaoInterface<AccountBean> {
-
-	private static DataSource ds;
-	
-	static {
-		try {
-			Context initCtx = new InitialContext();
-			Context envCtx = (Context) initCtx.lookup("java:comp/env");
-
-			ds = (DataSource) envCtx.lookup("jdbc/TecnoTime");
-
-		} catch (NamingException e) {
-			System.out.println("Error:" + e.getMessage());
-		}
-	}
 
 	private static final String TABLE_NAME = "Account";
 
@@ -44,7 +26,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
-			connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			
 			ps = connection.prepareStatement(insertSQL);	
 			
@@ -88,7 +70,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		String selectSQL = "SELECT * FROM " + AccountDao.TABLE_NAME + " WHERE username = ?";
 
 		try {
-			connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
 			ps.setString(1, key);
 
@@ -134,7 +116,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		String deleteSQL = "DELETE FROM " + AccountDao.TABLE_NAME + " WHERE username = ?";
 
 		try {
-			connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
 			ps.setString(1, key);
 
@@ -166,7 +148,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		}
 
 		try {
-			connection = ds.getConnection();
+			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = ps.executeQuery();

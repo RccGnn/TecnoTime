@@ -1,11 +1,11 @@
 -- Creazione del database 
-CREATE DATABASE IF NOT EXISTS TecnoTime;
-USE TecnoTime;
+CREATE DATABASE IF NOT EXISTS TecnoTimeDB;
+USE TecnoTimeDB;
 
 -- Definizione delle tabelle
 CREATE TABLE Account (
   username		VARCHAR(50) 	PRIMARY KEY NOT NULL,
-  password  	VARCHAR(255)	NOT NULL,
+  hashedPassword  	VARCHAR(255)	NOT NULL,
   nome        VARCHAR(255)  NOT NULL,
   cognome     VARCHAR(255)  NOT NULL,
   sesso       VARCHAR(1)     NOT NULL,

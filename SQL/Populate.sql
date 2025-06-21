@@ -1,6 +1,6 @@
-USE TecnoTime;
+USE TecnoTimeDB;
 
-INSERT INTO Account (username, password, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) VALUES
+INSERT INTO Account (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) VALUES
 ('mrossi',   '$2y$10$hash1',  'Mario',     'Rossi',     'M', 'm.rossi@domain.it',   '0810000000', 'Italia', 'MI', 'Milano',   'Via Verdi',             '12', '20121', 'utente_registrato', '1985-07-23'),
 ('lgialli',  '$2y$10$hash2',  'Luca',      'Gialli',    'M', 'l.gialli@domain.it',  '0820000000', 'Italia', 'RM', 'Roma',     'Via Nazionale',         '5',  '00184', 'utente_registrato', '1990-02-14'),
 ('fbianchi', '$2y$10$hash3',  'Francesca', 'Bianchi',   'F', 'f.bianchi@domain.it', '0830000000', 'Italia', 'TO', 'Torino',   'Corso Galileo Ferraris','100','10128', 'utente_registrato', '1988-05-30'),
