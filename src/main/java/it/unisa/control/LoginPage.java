@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+
+import it.unisa.model.DAO.AccountDao;
+import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.beans.AccountBean;
 
 /**
  * Servlet implementation class LoginPage
@@ -37,23 +42,32 @@ public class LoginPage extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		String login = request.getParameter("username");
+		
+		String username= request.getParameter("username");
         String pwd = request.getParameter("password");
         
-        String hashedpwd=""; //recupero la hashpwd dal DB e confronto con la pwd attuale
-        boolean isvalid=false;
-        if(isvalid=PasswordUtils.checkPasswordHashed(pwd, hashedpwd)==false) {
-        	request.setAttribute("error", "password errata");  
-        }else {
-        	request.setAttribute("flag","passok");
-        }
-        
+        BeanDaoInterface<AccountBean> dao= new AccountDao();
         //controllo con if se i dati nel db sono corretti mando al model i dati nel caso siano incorretti manda un messaggio di errore alla request
-        
-       /* request.setAttribute("error", Boolean.TRUE);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+
+        try {
+        	 AccountBean account = dao.doRetrieveByKey(username);
+        	 if(account !=null && username.equals(account.getUsername())) {
+        		 if(PasswordUtils.checkPasswordHashed(pwd, account.gethashedPassword())==true) {
+        			 request.setAttribute("flag","passok");
+        		 }else {
+        			 request.setAttribute("error", "username o password errati"); 
+        		 }
+             }
+        }catch(SQLException e) {
+        	request.setAttribute("serverError", "Login Fallito. Riprova"); //eventuale pagina errore
+        }
+       
+     
+         RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
         dispatcher.forward(request, response);
-         
+       
+        /* request.setAttribute("error", Boolean.TRUE);
+       
          HttpSession session = request.getSession();
         session.setAttribute("user", user);
 
