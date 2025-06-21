@@ -16,7 +16,7 @@ CREATE TABLE Account (
   citta			  VARCHAR(50)    	NOT NULL,
   via      		VARCHAR(100)   	NOT NULL,
   numeroCivico	VARCHAR(10)		NOT NULL,
-  CAP         VARCAR(5)    NOT NULL,
+  CAP         VARCHAR(5)    NOT NULL,
   ruolo			  ENUM('amministratore','utente_registrato')	NOT NULL,
   dataNascita	DATE	NOT NULL
 );
@@ -90,7 +90,7 @@ CREATE TABLE Ordine (
   citta			  VARCHAR(50)    	NOT NULL,
   via      		VARCHAR(100)   	NOT NULL,
   numeroCivico	VARCHAR(10)		NOT NULL,
-  CAP         VARCAR(5)    NOT NULL,
+  CAP         VARCHAR(5)    NOT NULL,
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE

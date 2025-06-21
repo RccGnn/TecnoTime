@@ -27,7 +27,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-			ds = (DataSource) envCtx.lookup("jdbc/TecnoTimeDB");
+			ds = (DataSource) envCtx.lookup("jdbc/TecnoTime");
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
@@ -43,8 +43,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + this.TABLE_NAME
-				+ " (username, hashedPassword, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -52,18 +52,19 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			PreparedStatement ps = connection.prepareStatement(insertSQL);		
 			ps.setString(1, account.getUsername());
 		    ps.setString(2, account.gethashedPassword());
-		    ps.setString(3, account.getEmail());
-		    ps.setString(4, account.getNumeroTelefono());
-		    ps.setString(5, account.getNazione());
-		    ps.setString(6, account.getProvincia());
-		    ps.setString(7, account.getCitta());
-		    ps.setString(8, account.getVia());
-		    ps.setString(9, account.getNumeroCivico());
-		    ps.setString(10, account.getCAP());
-		    // Se ruolo è un enum:
-		    ps.setString(11, account.getRuolo().name());
-		    // Se dataNascita è LocalDate:
-		    ps.setDate(12, (java.sql.Date) account.getDataNascita());
+		    ps.setString(3, account.getNome());
+		    ps.setString(4, account.getCognome());
+		    ps.setString(5, Character.toString(account.getSesso()));
+		    ps.setString(6, account.getEmail());
+		    ps.setString(7, account.getNumeroTelefono());
+		    ps.setString(8, account.getNazione());
+		    ps.setString(9, account.getProvincia());
+		    ps.setString(10, account.getCitta());
+		    ps.setString(11, account.getVia());
+		    ps.setString(12, account.getNumeroCivico());
+		    ps.setString(13, account.getCAP());
+		    ps.setString(14, account.getRuolo().name());
+		    ps.setDate(15, (java.sql.Date) account.getDataNascita());
 
 
 			preparedStatement.executeUpdate();
@@ -98,6 +99,9 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			while (rs.next()) {
 				account.setUsername(rs.getString("username"));
 				account.sethashedPassword(rs.getString("hashedPassword"));
+				account.setNome(rs.getString("nome"));
+				account.setCognome(rs.getString("cognome"));
+				account.setSesso(rs.getString("sesso").charAt(0));
 				account.setEmail(rs.getString("email"));
 				account.setNumeroTelefono(rs.getString("numeroTelefono"));
 				account.setNazione(rs.getString("nazione"));
@@ -174,6 +178,9 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 				account.setUsername(rs.getString("username"));
 				account.sethashedPassword(rs.getString("hashedPassword"));
+				account.setNome(rs.getString("nome"));
+				account.setCognome(rs.getString("cognome"));
+				account.setSesso(rs.getString("sesso").charAt(0));
 				account.setEmail(rs.getString("email"));
 				account.setNumeroTelefono(rs.getString("numeroTelefono"));
 				account.setNazione(rs.getString("nazione"));
@@ -182,8 +189,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 				account.setVia(rs.getString("via"));
 				account.setNumeroCivico(rs.getString("numeroCivico"));
 				account.setCAP(rs.getString("CAP"));
-				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo"))); // enum Ruoli con valueOf
-				account.setDataNascita((java.util.Date)rs.getDate("dataNascita")); // se usi LocalDate
+				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
+				account.setDataNascita((java.util.Date)rs.getDate("dataNascita"));
 			}
 
 		} finally {
