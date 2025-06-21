@@ -84,7 +84,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 			ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				account.setUsername(rs.getString("username"));
 				account.sethashedPassword(rs.getString("hashedPassword"));
 				account.setNome(rs.getString("nome"));
@@ -100,6 +100,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 				account.setCAP(rs.getString("CAP"));
 				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
 				account.setDataNascita((rs.getDate("dataNascita")).toLocalDate());
+			} else {
+				account = null;
 			}
 
 		} finally {
