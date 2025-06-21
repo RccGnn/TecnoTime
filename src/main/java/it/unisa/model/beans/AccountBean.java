@@ -1,6 +1,7 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class AccountBean implements Serializable {
@@ -20,13 +21,36 @@ public class AccountBean implements Serializable {
 	private String via;
 	private String numeroCivico;
 	private String CAP;
-	private Date dataNascita;
+	private LocalDate dataNascita;
 	private Ruoli ruolo;
 	
+
+
+	public AccountBean(String password, String username, String firstName, String lastName, char genderChr,
+			String email, String nation,String numtel, String province, String city, String address, String aptnumber,
+			String postalCode, LocalDate birthDate, Ruoli rule) {
+		this.hashedPassword = password;
+		this.username = username;
+		this.nome = firstName;
+		this.cognome = lastName;
+		this.sesso = genderChr;
+		this.email = email;
+		this.numeroTelefono = numtel;
+		this.nazione = nation;
+		this.provincia = province;
+		this.citta = city;
+		this.via = address;
+		this.numeroCivico = aptnumber;
+		this.CAP =postalCode ;
+		this.dataNascita = birthDate;
+		this.ruolo = rule;
+	
+	}
+
 	public String gethashedPassword() {
 	    return hashedPassword;
 	}
-
+	
 	public void sethashedPassword(String hashedPassword) {
 	    this.hashedPassword = hashedPassword;
 	}

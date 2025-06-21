@@ -1,5 +1,4 @@
 package it.unisa.control;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import it.unisa.model.beans.AccountBean;
 
 /**
  * Servlet implementation class RegistrationPage
@@ -45,7 +46,6 @@ public class RegistrationPage extends HttpServlet {
 		String firstName= request.getParameter("firstName");
 		String lastName= request.getParameter("lastName");
 		String birthDateStr= request.getParameter("birthDate");
-		String ssn= request.getParameter("ssn");
 		String address= request.getParameter("Address");
 		String postalCodeStr= request.getParameter("postalCode");		
 		String email= request.getParameter("E-mail");
@@ -53,6 +53,12 @@ public class RegistrationPage extends HttpServlet {
 		String telNumb=request.getParameter("telNumb");
 		String gender= request.getParameter("gender");
 		String nation= request.getParameter("nation");
+		String username= request.getParameter("username");
+		String province=request.getParameter("province");
+		String city=request.getParameter("city");
+		String aptnumber=request.getParameter("apartament number");
+		String rule = request.getParameter("rule");
+		char genderChr;
 		
 		String message="";
 		
@@ -75,14 +81,6 @@ public class RegistrationPage extends HttpServlet {
 			request.setAttribute("message", message);
 			request.setAttribute("lastName", lastName);
 		}
-				
-		if (ssn == null || ssn.trim().equals("")) {
-			error += "Insert ssn<br>";
-		} else {
-			ssn= ssn.trim();
-			ssn= DecoderHtml.encodeHtml(ssn);
-			request.setAttribute("ssn", ssn);
-		}	
 		
 		LocalDate birthDate=null;
 		if (birthDateStr == null || birthDateStr.trim().equals("")) {
@@ -106,17 +104,16 @@ public class RegistrationPage extends HttpServlet {
 			request.setAttribute("address", address);
 		}
 		
-		int postalCode=0;
+		
 		if (postalCodeStr == null || postalCodeStr.trim().equals("")) {
-			error += "Insert postalCode<br>";
+			error += "Invalid postalCode<br>";
 		} else {
 			postalCodeStr = postalCodeStr.trim();
-				try {
-					postalCode=Integer.parseInt(postalCodeStr);
-				}catch(NumberFormatException e) {
-					error+="invalid postalCode";
-				}
-			request.setAttribute("postalCode", postalCode);
+			if(postalCodeStr.matches("\\d{5}")) {
+				request.setAttribute("postalCode", postalCodeStr);
+			}else {
+				error+="Invalid postalCode<br>";
+			}
 		}
 		
 		if(password==null || email.trim().equals("")) {
@@ -144,7 +141,7 @@ public class RegistrationPage extends HttpServlet {
 		} else {
 			gender = gender.trim();
 			gender= DecoderHtml.encodeHtml(gender);
-		   char genderChr = gender.charAt(0);  //prende solo il primo carattere della stringa e lo salva in una variabile char
+		    genderChr = gender.charAt(0);  //prende solo il primo carattere della stringa e lo salva in una variabile char
 			request.setAttribute("gender", genderChr );
 		}
 		
@@ -166,9 +163,52 @@ public class RegistrationPage extends HttpServlet {
 			request.setAttribute("nation",nation);
 		}
 		
+		if (username == null || username.trim().equals("")) {
+			error += "Invalid username selected <br>";
+		} else {
+			username = username.trim();
+			username= DecoderHtml.encodeHtml(nation);
+			request.setAttribute("username",username);
+		}
+		
+		if (province == null || province.trim().equals("")) {
+			error += "Invalid province selected <br>";
+		} else {
+			province = province.trim();
+			province= DecoderHtml.encodeHtml(nation);
+			request.setAttribute("province",province);
+		}
+		
+		if (city == null || city.trim().equals("")) {
+			error += "Invalid city selected <br>";
+		} else {
+			nation = nation.trim();
+			nation= DecoderHtml.encodeHtml(nation);
+			request.setAttribute("city",city);
+		}
+		
+		if (aptnumber == null || aptnumber.trim().equals("")) {
+			error += "Invalid nation selected <br>";
+		} else {
+			aptnumber = aptnumber.trim();
+			aptnumber= DecoderHtml.encodeHtml(nation);
+			request.setAttribute("aptnumber",aptnumber);
+		}
+		
+		if (rule == null || rule.trim().equals("")) {
+			error += "Invalid nation selected <br>";
+		} else {
+			rule = nation.trim();
+			rule= DecoderHtml.encodeHtml(nation);
+			request.setAttribute("rule",rule);
+		}
+		
+			
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
 		}
+		
+		AccountBean account = new AccountBean(password, username, firstName, lastName, genderChr, email, nation, telNumb, province, city, address, aptnumber, postalCodeStr, birthDate, null);
 		
 	/*	RequestDispatcher dispatcher = this.getServletContext().
 				getRequestDispatcher("/RegistrationPage.jsp");
