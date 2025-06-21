@@ -27,14 +27,11 @@
             <label for="birthDate">Data di nascita:</label>
             <input type="date" id="birthDate" name="birthDate" required>
 
-            <label for="ssn">Codice Fiscale:</label>
-            <input type="text" id="ssn" name="ssn" required>
-
             <label for="address">Indirizzo:</label>
-            <input type="text" id="address" name="Address" required>
+            <input type="text" id="address" name="address" required>
 
             <label for="aptnumber">Numero Civico / Appartamento:</label>
-            <input type="text" id="aptnumber" name="apartament number">
+            <input type="text" id="aptnumber" name="aptnumber">
 
             <label for="postalCode">CAP:</label>
             <input type="text" id="postalCode" name="postalCode" required>
@@ -46,7 +43,7 @@
             <input type="text" id="city" name="city" required>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="E-mail" required>
+            <input type="email" id="email" name="email" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
@@ -66,8 +63,8 @@
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="rule">Ruolo (es. utente/admin):</label>
-            <input type="text" id="rule" name="rule" required>
+            <label for="role">Ruolo (es. utente/admin):</label>
+            <input type="text" id="role" name="role" required>
 
             <button type="submit">Registrati</button>
             <button type="reset">Reset</button>

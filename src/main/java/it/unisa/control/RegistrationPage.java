@@ -1,4 +1,5 @@
 package it.unisa.control;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -48,9 +49,9 @@ public class RegistrationPage extends HttpServlet {
 		String firstName= request.getParameter("firstName");
 		String lastName= request.getParameter("lastName");
 		String birthDateStr= request.getParameter("birthDate");
-		String address= request.getParameter("Address");
+		String address= request.getParameter("address");
 		String postalCodeStr= request.getParameter("postalCode");		
-		String email= request.getParameter("E-mail");
+		String email= request.getParameter("email");
 		String password=request.getParameter("password");
 		String telNumb=request.getParameter("telNumb");
 		String gender= request.getParameter("gender");
@@ -58,20 +59,18 @@ public class RegistrationPage extends HttpServlet {
 		String username= request.getParameter("username");
 		String province=request.getParameter("province");
 		String city=request.getParameter("city");
-		String aptnumber=request.getParameter("apartament number");
-		String rule = request.getParameter("rule");
-		char genderChr;
+		String aptnumber=request.getParameter("aptnumber");
+		String role = request.getParameter("role");
+		char genderChr = ' ';
 		
-		String message="";
 		
-		// invece di fare tutti sti controlli il model crea l'oggetto user con la classe DAO
+		// invece di fare tutti i controlli, il model crea l'oggetto user con la classe DAO
 		if (firstName == null || firstName.trim().equals("")) {
 			error += "Insert name<br>";
 		} else {
 			firstName = firstName.trim();
 			firstName= DecoderHtml.encodeHtml(firstName);
-			request.setAttribute("name", firstName);	
-			message+="first name is"+firstName+"<br>";
+			request.setAttribute("fistName", firstName);	
 		}
 
 		if (lastName == null || lastName.trim().equals("")) {
@@ -79,8 +78,6 @@ public class RegistrationPage extends HttpServlet {
 		} else {
 			lastName = lastName.trim();
 			lastName= DecoderHtml.encodeHtml(lastName);
-			message+=lastName;
-			request.setAttribute("message", message);
 			request.setAttribute("lastName", lastName);
 		}
 		
@@ -128,7 +125,7 @@ public class RegistrationPage extends HttpServlet {
 		    }else {    
 		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	         }
 			}
-		
+		}
 		
 		if (email == null || email.trim().equals("")) {
 			error += "Insert email<br>";
@@ -169,7 +166,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid username selected <br>";
 		} else {
 			username = username.trim();
-			username= DecoderHtml.encodeHtml(nation);
+			username= DecoderHtml.encodeHtml(username);
 			request.setAttribute("username",username);
 		}
 		
@@ -177,15 +174,15 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid province selected <br>";
 		} else {
 			province = province.trim();
-			province= DecoderHtml.encodeHtml(nation);
+			province= DecoderHtml.encodeHtml(province);
 			request.setAttribute("province",province);
 		}
 		
 		if (city == null || city.trim().equals("")) {
 			error += "Invalid city selected <br>";
 		} else {
-			nation = nation.trim();
-			nation= DecoderHtml.encodeHtml(nation);
+			city = city.trim();
+			city= DecoderHtml.encodeHtml(city);
 			request.setAttribute("city",city);
 		}
 		
@@ -193,16 +190,16 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid nation selected <br>";
 		} else {
 			aptnumber = aptnumber.trim();
-			aptnumber= DecoderHtml.encodeHtml(nation);
+			aptnumber= DecoderHtml.encodeHtml(aptnumber);
 			request.setAttribute("aptnumber",aptnumber);
 		}
 		
-		if (rule == null || rule.trim().equals("")) {
+		if (role == null || role.trim().equals("")) {
 			error += "Invalid nation selected <br>";
 		} else {
-			rule = nation.trim();
-			rule= DecoderHtml.encodeHtml(nation);
-			request.setAttribute("rule",rule);
+			role = role.trim();
+			role= DecoderHtml.encodeHtml(role);
+			request.setAttribute("role",role);
 		}
 		
 			
@@ -210,15 +207,37 @@ public class RegistrationPage extends HttpServlet {
 			request.setAttribute("error", error);
 		}
 		
-		AccountBean account = new AccountBean(password, username, firstName, lastName, genderChr, email, nation, telNumb, province, city, address, aptnumber, postalCodeStr, birthDate, null);
+		AccountBean account = new AccountBean();
+
+		account.setUsername(username);
+		account.sethashedPassword(password);
+		account.setNome(firstName);
+		account.setCognome(lastName);
+		account.setSesso(genderChr);
+		account.setEmail(email);
+		account.setNazione(nation);
+		account.setNumeroTelefono(telNumb);
+		account.setProvincia(province);
+		account.setCitta(city);
+		account.setVia(address);
+		account.setNumeroCivico(aptnumber);
+		account.setCAP(postalCodeStr);
+		account.setDataNascita(birthDate);
+
 		BeanDaoInterface<AccountBean> dao = new AccountDao();
-		dao.doSave(account);
+		try {
+			dao.doSave(account);
+		} catch (Exception e) {
+			e.getMessage();
+		}
 		
 	/*	RequestDispatcher dispatcher = this.getServletContext().
 				getRequestDispatcher("/RegistrationPage.jsp");
 		dispatcher.forward(request, response); */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
-        dispatcher.forward(request, response); 
-	
+        dispatcher.forward(request, response); 		
+        
+
 	}
+	
 }

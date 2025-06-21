@@ -2,7 +2,6 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class AccountBean implements Serializable {
 
@@ -24,7 +23,7 @@ public class AccountBean implements Serializable {
 	private LocalDate dataNascita;
 	private Ruoli ruolo;
 	
-
+	public AccountBean() {}
 
 	public AccountBean(String password, String username, String firstName, String lastName, char genderChr,
 			String email, String nation,String numtel, String province, String city, String address, String aptnumber,
@@ -151,11 +150,11 @@ public class AccountBean implements Serializable {
 	    this.CAP = CAP;
 	}
 
-	public Date getDataNascita() {
+	public LocalDate getDataNascita() {
 	    return dataNascita;
 	}
 
-	public void setDataNascita(Date dataNascita) {
+	public void setDataNascita(LocalDate dataNascita) {
 	    this.dataNascita = dataNascita;
 	}
 

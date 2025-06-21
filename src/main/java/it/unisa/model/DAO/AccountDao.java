@@ -5,12 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.beans.AccountBean;
-import it.unisa.model.beans.Ruoli;
+import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.sql.Date;
 
+/*
+  	| Da...            	| A		                             	| Metodo                            |
+	| ---------------- 	| ------------------------------------- | --------------------------------- |
+	| java.sql.Date  	| java.time.LocalDate              		| `[Date].toLocalDate()` 			|
+	| LocalDate      	| java.sql.Date			                | `Date.valueof([LocalDate)`       	|
+
+ */
 public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 	private static final String TABLE_NAME = "Account";
@@ -20,7 +28,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 		Connection connection = null;
 		PreparedStatement ps = null;
-
+		
 		String insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
 				+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -29,7 +37,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			connection = DriverManagerConnectionPool.getConnection();
 			
 			ps = connection.prepareStatement(insertSQL);	
-			
+
 			ps.setString(1, account.getUsername());
 		    ps.setString(2, account.gethashedPassword());
 		    ps.setString(3, account.getNome());
@@ -43,13 +51,12 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		    ps.setString(11, account.getVia());
 		    ps.setString(12, account.getNumeroCivico());
 		    ps.setString(13, account.getCAP());
-		    ps.setString(14, account.getRuolo().name());
-		    ps.setDate(15, (java.sql.Date) account.getDataNascita());
-
-
+		    ps.setString(14, "amministratore");
+		    ps.setDate(15, Date.valueOf(account.getDataNascita()));
 			ps.executeUpdate();
 
 		} finally {
+			
 			try {
 				if (ps != null)
 					ps.close();
@@ -58,6 +65,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 					connection.close();
 			}
 		}
+		
 	}
 
 	@Override
@@ -91,7 +99,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 				account.setNumeroCivico(rs.getString("numeroCivico"));
 				account.setCAP(rs.getString("CAP"));
 				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
-				account.setDataNascita((java.util.Date)rs.getDate("dataNascita"));
+				account.setDataNascita((rs.getDate("dataNascita")).toLocalDate());
 			}
 
 		} finally {
@@ -170,7 +178,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 				account.setNumeroCivico(rs.getString("numeroCivico"));
 				account.setCAP(rs.getString("CAP"));
 				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
-				account.setDataNascita((java.util.Date)rs.getDate("dataNascita"));
+				account.setDataNascita(rs.getDate("dataNascita").toLocalDate());
 			}
 
 		} finally {
