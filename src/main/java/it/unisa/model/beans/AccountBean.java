@@ -1,25 +1,57 @@
 package it.unisa.model.beans;
 
-public class AccountBean {
-	
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class AccountBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
-	private String password;
-	private String username; 
+	private String hashedPassword;
+	private String username;
+	private String nome;
+	private String cognome;
+	private char sesso;
+	private String email;
 	private String numeroTelefono; 
-	private String nazione; 
+	private String nazione;
+	private String provincia;
 	private String citta; 
 	private String via;
 	private String numeroCivico;
 	private String CAP;
+	private LocalDate dataNascita;
 	private Ruoli ruolo;
 	
-	public String getPassword() {
-	    return password;
+	public AccountBean() {}
+
+	public AccountBean(String password, String username, String firstName, String lastName, char genderChr,
+			String email, String nation,String numtel, String province, String city, String address, String aptnumber,
+			String postalCode, LocalDate birthDate, Ruoli rule) {
+		this.hashedPassword = password;
+		this.username = username;
+		this.nome = firstName;
+		this.cognome = lastName;
+		this.sesso = genderChr;
+		this.email = email;
+		this.numeroTelefono = numtel;
+		this.nazione = nation;
+		this.provincia = province;
+		this.citta = city;
+		this.via = address;
+		this.numeroCivico = aptnumber;
+		this.CAP =postalCode ;
+		this.dataNascita = birthDate;
+		this.ruolo = rule;
+	
 	}
 
-	public void setPassword(String password) {
-	    this.password = password;
+	public String gethashedPassword() {
+	    return hashedPassword;
+	}
+	
+	public void sethashedPassword(String hashedPassword) {
+	    this.hashedPassword = hashedPassword;
 	}
 
 	public String getUsername() {
@@ -28,6 +60,38 @@ public class AccountBean {
 
 	public void setUsername(String username) {
 	    this.username = username;
+	}
+
+	public String getNome() {
+		return this.nome;
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	public String getCognome() {
+		return cognome;
+	}
+	
+	public void setSesso(char sesso) {
+		this.sesso = sesso;
+	}
+	
+	public char getSesso() {
+		return sesso;
+	}
+	
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+	
+	public String getEmail() {
+	    return email;
+	}
+
+	public void setEmail(String email) {
+	    this.email = email;
 	}
 
 	public String getNumeroTelefono() {
@@ -44,6 +108,14 @@ public class AccountBean {
 
 	public void setNazione(String nazione) {
 	    this.nazione = nazione;
+	}
+
+	public String getProvincia() {
+	    return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+	    this.provincia = provincia;
 	}
 
 	public String getCitta() {
@@ -78,12 +150,28 @@ public class AccountBean {
 	    this.CAP = CAP;
 	}
 
+	public LocalDate getDataNascita() {
+	    return dataNascita;
+	}
+
+	public void setDataNascita(LocalDate dataNascita) {
+	    this.dataNascita = dataNascita;
+	}
+
 	public Ruoli getRuolo() {
 	    return ruolo;
 	}
 
 	public void setRuolo(Ruoli ruolo) {
 	    this.ruolo = ruolo;
+	}
+
+	@Override
+	public String toString() {
+		return "AccountBean [hashedPassword=" + hashedPassword + ", username=" + username + ", nome=" + nome
+				+ ", cognome=" + cognome + ", sesso=" + sesso +", email=" + email + ", numeroTelefono=" + numeroTelefono + ", nazione="
+				+ nazione + ", provincia=" + provincia + ", citta=" + citta + ", via=" + via + ", numeroCivico="
+				+ numeroCivico + ", CAP=" + CAP + ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + "]";
 	}
 
 }

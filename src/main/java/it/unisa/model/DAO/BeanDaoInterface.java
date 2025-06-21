@@ -1,14 +1,14 @@
 package it.unisa.model.DAO;
 
 import java.sql.SQLException;
-import java.util.Collection;
+import java.util.ArrayList;
 
 public interface BeanDaoInterface<T> {
-	public void doSave(T product) throws SQLException;
+	public void doSave(T entity) throws SQLException;
 
-	public boolean doDelete(int code) throws SQLException;
+	public boolean doDelete(String key) throws SQLException;
 
-	public T doRetrieveByKey(int code) throws SQLException;
+	public T doRetrieveByKey(String key) throws SQLException;
 	
-	public Collection<T> doRetrieveAll(String order) throws SQLException;
+	public ArrayList<T> doRetrieveAll(String order) throws SQLException;
 }
