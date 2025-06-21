@@ -55,7 +55,7 @@
 	    <h2>Capitolo 2: La Scelta dei Componenti</h2>
 	    <p class="intro2"> Questa è la fase più divertente, dove scegli i "mattoni" della tua build.</p>
 	    <h3>Processore (CPU)</h3>
-	    <p class="intro3"> Il cervello del tuo computer. I due produttori principali sono Intel e AMD. La scelta dipende dal budget e dall'uso. Assicurati che il socket della CPU sia compatibile con quello della scheda madre (es. AM5 per le nuove CPU AMD 7000/9000, LGA 1700 per le CPU Intel di 12ª/13ª/14ª gen/ core ultra). </p>
+	    <p class="intro3"> Il cervello del tuo computer. I due produttori principali sono Intel e AMD. La scelta dipende dal budget e dall'uso. Assicurati che il socket della CPU sia compatibile con quello della scheda madre (es. AM5 per le nuove CPU AMD 7000/9000, LGA 1700 per le CPU Intel di 12ª/13ª/14ª gen ed LGA 1851 Core Ultra). </p>
 	    <h3> Scheda Madre (Motherboard) </h3>
 	    <p class="intro3"> È la spina dorsale che connette tutto. Oltre a scegliere un modello con il socket giusto per la tua CPU, valuta: </p>
 	    <ul>
@@ -109,7 +109,7 @@
 	    	<li>Un cacciavite a croce (meglio se con punta magnetica).</li>
 	    	<li>Fascette stringicavo o in velcro per la gestione dei cavi.</li>
 	    </ul>
-		<p class="intro3"><strong>CONSIGLIO D'ORO:</strong>Il <strong>manuale della scheda madre</strong>è il tuo migliore amico. Consultalo sempre! Contiene diagrammi e istruzioni specifiche per l'installazione di CPU, RAM e per il collegamento dei cavi del case.
+		<p class="intro3"><strong>CONSIGLIO D'ORO:</strong>Il <strong>manuale della scheda madre</strong> è il tuo migliore amico. Consultalo sempre! Contiene diagrammi e istruzioni specifiche per l'installazione di CPU, RAM e per il collegamento dei cavi del case.
 	    <h3>3.2 Passaggi di Montaggio</h3>
 	    <ol>
 	      <li><strong>Preparazione del Case:</strong> Apri i pannelli laterali e installa i distanziali metallici nei fori corrispondenti al formato della tua scheda madre.</li>
