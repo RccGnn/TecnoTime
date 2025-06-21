@@ -1,9 +1,10 @@
 package it.unisa.model.beans;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class AccountBean {
-	
+public class AccountBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	private String hashedPassword;

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -15,7 +13,6 @@ import javax.sql.DataSource;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.Ruoli;
 
-import java.util.Date;
 import java.util.ArrayList;
 
 public class AccountDao implements BeanDaoInterface<AccountBean> {
@@ -40,16 +37,17 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 	public synchronized void doSave(AccountBean account) throws SQLException {
 
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
 
-		String insertSQL = "INSERT INTO " + this.TABLE_NAME
+		String insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
 				+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			
-			PreparedStatement ps = connection.prepareStatement(insertSQL);		
+			ps = connection.prepareStatement(insertSQL);	
+			
 			ps.setString(1, account.getUsername());
 		    ps.setString(2, account.gethashedPassword());
 		    ps.setString(3, account.getNome());
@@ -67,12 +65,12 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		    ps.setDate(15, (java.sql.Date) account.getDataNascita());
 
 
-			preparedStatement.executeUpdate();
+			ps.executeUpdate();
 
 		} finally {
 			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
+				if (ps != null)
+					ps.close();
 			} finally {
 				if (connection != null)
 					connection.close();
@@ -83,18 +81,18 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 	@Override
 	public synchronized AccountBean doRetrieveByKey(String key) throws SQLException {
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
 
 		AccountBean account = new AccountBean();
 
-		String selectSQL = "SELECT * FROM " + this.TABLE_NAME + " WHERE username = ?";
+		String selectSQL = "SELECT * FROM " + AccountDao.TABLE_NAME + " WHERE username = ?";
 
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, key);
+			ps = connection.prepareStatement(selectSQL);
+			ps.setString(1, key);
 
-			ResultSet rs = preparedStatement.executeQuery();
+			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				account.setUsername(rs.getString("username"));
@@ -116,8 +114,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 		} finally {
 			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
+				if (ps != null)
+					ps.close();
 			} finally {
 				if (connection != null)
 					connection.close();
@@ -129,23 +127,23 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 	@Override
 	public synchronized boolean doDelete(String key) throws SQLException {
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + this.TABLE_NAME + " WHERE username = ?";
+		String deleteSQL = "DELETE FROM " + AccountDao.TABLE_NAME + " WHERE username = ?";
 
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(deleteSQL);
-			preparedStatement.setString(1, key);
+			ps = connection.prepareStatement(deleteSQL);
+			ps.setString(1, key);
 
-			result = preparedStatement.executeUpdate();
+			result = ps.executeUpdate();
 
 		} finally {
 			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
+				if (ps != null)
+					ps.close();
 			} finally {
 				if (connection != null)
 					connection.close();
@@ -157,7 +155,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 	@Override
 	public synchronized ArrayList<AccountBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
-		PreparedStatement preparedStatement = null;
+		PreparedStatement ps = null;
 
 		ArrayList<AccountBean> products = new ArrayList<>();
 
@@ -169,9 +167,9 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
+			ps = connection.prepareStatement(selectSQL);
 
-			ResultSet rs = preparedStatement.executeQuery();
+			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				AccountBean account = new AccountBean();
@@ -195,8 +193,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 		} finally {
 			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
+				if (ps != null)
+					ps.close();
 			} finally {
 				if (connection != null)
 					connection.close();
