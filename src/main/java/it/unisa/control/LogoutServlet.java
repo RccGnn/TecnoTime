@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -26,7 +28,13 @@ public class LogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		    request.getSession().invalidate(); // elimina la sessione
+			HttpSession session = request.getSession(false);
+			if (session == null || session.getAttribute("user") == null) {
+			    response.sendRedirect("loginPage.jsp");
+			    return;
+			}
+
+			request.getSession().invalidate(); // elimina la sessione
 		    response.sendRedirect("index.jsp");
 		}
 
