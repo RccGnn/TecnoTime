@@ -1,5 +1,6 @@
 package it.unisa.control;
 
+// Classe di utilità per tradurre da html
 public class DecoderHtml {
 	public static String encodeHtml(String input) {
 		if(input==null) return null;
