@@ -76,4 +76,3 @@
 	<script src="js/navbar.js" defer></script>
 </body>
 </html>
-
