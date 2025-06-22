@@ -36,10 +36,14 @@
             <input type="text" id="postalCode" name="postalCode" required>
 
             <label for="province">Provincia:</label>
-            <input type="text" id="province" name="province" required>
+            <select id="province" name="province" required>
+                <option value="">Seleziona provincia…</option>
+            </select>
 
             <label for="city">Città:</label>
-            <input type="text" id="city" name="city" required>
+            <select id="city" name="city" required>
+                <option value="">Seleziona città…</option>
+            </select>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
@@ -81,5 +85,6 @@
 	<jsp:include page="footer.jsp" />
     
     <script src="js/navbar.js" defer></script>
+    <script src="js/ajaxCercaProvincia.js" defer></script>
 </body>
 </html>
