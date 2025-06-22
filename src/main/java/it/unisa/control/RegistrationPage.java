@@ -44,6 +44,10 @@ public class RegistrationPage extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		
+		AccountBean account = new AccountBean();
+		
+		
+		
 	String error="";
 		
 		String firstName= request.getParameter("firstName");
@@ -67,23 +71,28 @@ public class RegistrationPage extends HttpServlet {
 		// invece di fare tutti i controlli, il model crea l'oggetto user con la classe DAO
 		if (firstName == null || firstName.trim().equals("")) {
 			error += "Insert name<br>";
+			account=null;
 		} else {
 			firstName = firstName.trim();
 			firstName= DecoderHtml.encodeHtml(firstName);
-			request.setAttribute("fistName", firstName);	
+			request.setAttribute("fistName", firstName);
+			account.setNome(firstName);			
 		}
 
 		if (lastName == null || lastName.trim().equals("")) {
 			error += "Insert lastName<br>";
+			account=null;
 		} else {
 			lastName = lastName.trim();
 			lastName= DecoderHtml.encodeHtml(lastName);
 			request.setAttribute("lastName", lastName);
+			account.setCognome(lastName);
 		}
 		
 		LocalDate birthDate=null;
 		if (birthDateStr == null || birthDateStr.trim().equals("")) {
 			error += "Insert birthdate<br>";
+			account=null;
 		} else {
 			birthDateStr = birthDateStr.trim();
 			birthDateStr= DecoderHtml.encodeHtml(birthDateStr);
@@ -93,109 +102,136 @@ public class RegistrationPage extends HttpServlet {
 				  error += "Invalid date format<br>";
 			}
 			request.setAttribute("birthDate", birthDate);
+			account.setDataNascita(birthDate);
 		}
 				
 		if (address == null || address.trim().equals("")) {
 			error += "Insert address<br>";
+			account=null;
 		} else {
 			address = address.trim();
 			address= DecoderHtml.encodeHtml(address);
 			request.setAttribute("address", address);
+			account.setVia(address);
 		}
 		
 		
 		if (postalCodeStr == null || postalCodeStr.trim().equals("")) {
 			error += "Invalid postalCode<br>";
+			account=null;
 		} else {
 			postalCodeStr = postalCodeStr.trim();
 			if(postalCodeStr.matches("\\d{5}")) {
 				request.setAttribute("postalCode", postalCodeStr);
+				account.setCAP(postalCodeStr);
 			}else {
 				error+="Invalid postalCode<br>";
+				account=null;
 			}
 		}
 		
-		if(password==null || email.trim().equals("")) {
+		if(password==null || password.trim().equals("")) {
 			error += "must insert a password";
+			account=null;
 		}else {
 			password= password.trim();
 			password=DecoderHtml.encodeHtml(password);         
 		    if(pwdValidator.isValid(password)==false) {         	
-		    request.setAttribute("pwderror","password non valida" );         
+		    request.setAttribute("pwderror","password non valida" );  
+		    account=null;
 		    }else {    
-		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	         }
+		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	
+		    	account.sethashedPassword(password);
 			}
 		}
 		
 		if (email == null || email.trim().equals("")) {
 			error += "Insert email<br>";
+			account=null;
 		} else {
 			email = email.trim();
 			email= DecoderHtml.encodeHtml(email);
 			request.setAttribute("email", email);
+			account.setEmail(email);
 		}
+		
 		
 		if (gender == null || gender.trim().equals("")) {
 			error += "Insert gender<br>";
+			account=null;
 		} else {
 			gender = gender.trim();
 			gender= DecoderHtml.encodeHtml(gender);
 		    genderChr = gender.charAt(0);  //prende solo il primo carattere della stringa e lo salva in una variabile char
 			request.setAttribute("gender", genderChr );
+			account.setSesso(genderChr);
 		}
 		
-		int tel=0;
+	
 		if (telNumb == null || telNumb.trim().equals("")||telNumb.matches("//d+")){
 		    error += "Insert a correct telephone number<br>";
+		    account=null;
 		} else {
 		    telNumb = telNumb.trim();
 		    telNumb= DecoderHtml.encodeHtml(telNumb);
 		    request.setAttribute("telNumb", telNumb);
+			account.setNumeroTelefono(telNumb);
 		}
 		
 		
 		if (nation == null || nation.trim().equals("")) {
 			error += "Invalid nation selected <br>";
+			account=null;
 		} else {
 			nation = nation.trim();
 			nation= DecoderHtml.encodeHtml(nation);
 			request.setAttribute("nation",nation);
+			account.setNazione(nation);
 		}
 		
 		if (username == null || username.trim().equals("")) {
 			error += "Invalid username selected <br>";
+			account=null;
 		} else {
 			username = username.trim();
 			username= DecoderHtml.encodeHtml(username);
 			request.setAttribute("username",username);
+			account.setUsername(username);
 		}
 		
 		if (province == null || province.trim().equals("")) {
 			error += "Invalid province selected <br>";
+			account=null;
 		} else {
 			province = province.trim();
 			province= DecoderHtml.encodeHtml(province);
 			request.setAttribute("province",province);
+			account.setProvincia(province);
 		}
 		
 		if (city == null || city.trim().equals("")) {
 			error += "Invalid city selected <br>";
+			account=null;
 		} else {
 			city = city.trim();
 			city= DecoderHtml.encodeHtml(city);
 			request.setAttribute("city",city);
+			account.setCitta(city);
 		}
 		
 		if (aptnumber == null || aptnumber.trim().equals("")) {
 			error += "Invalid nation selected <br>";
+			account=null;
 		} else {
 			aptnumber = aptnumber.trim();
 			aptnumber= DecoderHtml.encodeHtml(aptnumber);
 			request.setAttribute("aptnumber",aptnumber);
+			account.setNumeroCivico(aptnumber);
 		}
 		
 		if (role == null || role.trim().equals("")) {
 			error += "Invalid nation selected <br>";
+			account=null;
 		} else {
 			role = role.trim();
 			role= DecoderHtml.encodeHtml(role);
@@ -205,24 +241,13 @@ public class RegistrationPage extends HttpServlet {
 			
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
+			account=null;
 		}
 		
-		AccountBean account = new AccountBean();
-
-		account.setUsername(username);
-		account.sethashedPassword(password);
-		account.setNome(firstName);
-		account.setCognome(lastName);
-		account.setSesso(genderChr);
-		account.setEmail(email);
-		account.setNazione(nation);
-		account.setNumeroTelefono(telNumb);
-		account.setProvincia(province);
-		account.setCitta(city);
-		account.setVia(address);
-		account.setNumeroCivico(aptnumber);
-		account.setCAP(postalCodeStr);
-		account.setDataNascita(birthDate);
+		
+		
+	
+		
 
 		BeanDaoInterface<AccountBean> dao = new AccountDao();
 		try {
