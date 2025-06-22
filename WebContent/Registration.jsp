@@ -86,5 +86,6 @@
     
     <script src="js/navbar.js" defer></script>
     <script src="js/ajaxCercaProvincia.js" defer></script>
+    <script src="js/formValidation.js" defer></script>
 </body>
 </html>
