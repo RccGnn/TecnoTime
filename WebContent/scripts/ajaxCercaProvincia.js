@@ -1,14 +1,14 @@
-/*
 function cercaCapoluogo() {
-    var input = document.getElementById('Provincia').value; // Otteni l'elemento Provincia
+    var input = document.getElementById('provincie').value; // Otteni il "valore" dell'elemento con id provincie
     var params = 'CAP=' + input;
-	// Passa l'url formato da nome_servelt?nomeProvincia=provincia - Metodo GET...
-    //var url = 'cercaCapoluogo?CAP=' + input; 
-    //loadAjaxDoc(url, handleCAP); 
-	//... Metodo POST
-    loadAjaxDoc('cercaCapoluogoJson', "GET", params, handleCAP);
+	
+	// Passa l'url formato da nome_servelt?nomeProvincia=provincia - Metodo POST...
+    var url = 'cercaProvincia?CAP=' + input; 
+    loadAjaxDoc(url, handleCAP); 
+	
+	//... Metodo GET
+    //loadAjaxDoc('cercaCapoluogoJson', "GET", params, handleCAP);
 }
-*/
 
 function createXMLHttpRequest() {
 	var request;
@@ -73,14 +73,14 @@ function loadAjaxDoc(url, method, params, cFuction) {
 		// Metodo usato: POST
 		} else {
 			
-				// Se i parametri sono presenti
+				// Se i parametri sono presenti - POST
 			if(params){
 				request.open("POST", url, true);
 				request.setRequestHeader("Connection", "close");
 				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	        	request.send(params);
 			} else {
-				// Non ci sono parametri
+				// Non ci sono parametri - GET
 				console.log("Usa GET se non ci sono parametri!");
 				return null;
 			}
@@ -90,10 +90,9 @@ function loadAjaxDoc(url, method, params, cFuction) {
 	}
 }
 
-/*
-function handleCAP(request){
+
+function handleProvincie(request){
 	var response = JSON.parse(request.responseText);
 	alert("Risposta: \n" + request.responseText);
-    document.getElementById("datiCapoluogo").innerHTML = response.result;
+    document.getElementById("provincia").innerHTML = response.result;
 }
-*/
