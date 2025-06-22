@@ -14,7 +14,6 @@
 <body>
     <jsp:include page="header.jsp" />
 
-    <main>
     <div class="form-container">
         <h2>Registrazione Utente</h2>
         <form action="RegistrationPage" method="post">
@@ -79,7 +78,6 @@
             <div class="success-message"><%= message %></div>
         <% } %>
     </div>
-</main>
 	<jsp:include page="footer.jsp" />
     
     <script src="js/navbar.js" defer></script>
