@@ -36,9 +36,15 @@
             <input type="text" id="postalCode" name="postalCode" required>
 
             <label for="province">Provincia:</label>
-            <select id="province" name="province" required>
-                <option value="">Seleziona provincia…</option>
-            </select>
+			<input list="provinceList"
+			       id="province"
+			       name="province"
+			       placeholder="Inizia a digitare…"
+			       oninput="filterDatalist()"
+			       required>
+			<datalist id="provinceList">
+			  <!-- Sarà popolato da AJAX -->
+			</datalist>
 
             <label for="city">Città:</label>
             <select id="city" name="city" required>

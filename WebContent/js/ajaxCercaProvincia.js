@@ -1,15 +1,3 @@
-function cercaCapoluogo() {
-    var input = document.getElementById('provincie').value; // Otteni il "valore" dell'elemento con id provincie
-    var params = 'CAP=' + input;
-	
-	// Passa l'url formato da nome_servelt?nomeProvincia=provincia - Metodo POST...
-    var url = 'cercaProvincia?CAP=' + input; 
-    loadAjaxDoc(url, handleCAP); 
-	
-	//... Metodo GET
-    //loadAjaxDoc('cercaCapoluogoJson', "GET", params, handleCAP);
-}
-
 function createXMLHttpRequest() {
 	var request;
 	try {
@@ -73,14 +61,14 @@ function loadAjaxDoc(url, method, params, cFuction) {
 		// Metodo usato: POST
 		} else {
 			
-				// Se i parametri sono presenti - POST
+				// Se i parametri sono presenti
 			if(params){
 				request.open("POST", url, true);
 				request.setRequestHeader("Connection", "close");
 				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	        	request.send(params);
 			} else {
-				// Non ci sono parametri - GET
+				// Non ci sono parametri
 				console.log("Usa GET se non ci sono parametri!");
 				return null;
 			}
@@ -90,9 +78,47 @@ function loadAjaxDoc(url, method, params, cFuction) {
 	}
 }
 
+// Array globale che conterrà tutte le province
+var allProvinces = [];
 
-function handleProvincie(request){
-	var response = JSON.parse(request.responseText);
-	alert("Risposta: \n" + request.responseText);
-    document.getElementById("provincia").innerHTML = response.result;
+// Funzione di callback AJAX: riceve tutte le province e popola il datalist
+function handleProvincie(xhr) {
+  	allProvinces = JSON.parse(xhr.responseText);
+  	renderOptionsDatalist(allProvinces);
 }
+
+// Funzione che popola il datalist
+function renderOptionsDatalist(list) {
+  	var datalist = document.getElementById("provinceList");
+  	datalist.innerHTML = "";
+  	list.forEach(function(p) { // Per ogni elemento p della lista, esegui la funzione dove p è una provincia
+    	var opt = document.createElement("option");
+    	opt.value = p;
+    	datalistl.appendChild(opt);
+  });
+}
+
+// Funzione chiamata all'“Oninput” dell’id<input> che filtra le province
+function filterDatalist() {
+	var x = document.getElementById("province").value.trim().toLowerCase();
+  	if (!x) { // Se non sono presenti provincie, mostra tutte le opzioni
+    renderOptionsDatalist(allProvinces);
+    return;
+  }
+  // Altrimenti mostra solo la lista di provincie filtrate
+  var filtered = allProvinces.filter(function(name) {
+    	return name.toLowerCase().indexOf(x) === 0;
+  });
+  renderOptionsDatalist(filtered);
+}
+
+// Funzione che chiama loadAjax usando come url l'API comuni-istat-api
+function caricaProvince() {
+  loadAjaxDoc(
+    'https://comuni-istat-api.belicedigital.com/api/province',
+    "GET",
+    null,
+    handleProvincie
+  );
+}
+caricaProvince();
