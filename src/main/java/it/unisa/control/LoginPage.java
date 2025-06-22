@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -47,32 +49,36 @@ public class LoginPage extends HttpServlet {
         String pwd = request.getParameter("password");
         
         BeanDaoInterface<AccountBean> dao= new AccountDao();
-        //controllo con if se i dati nel db sono corretti mando al model i dati nel caso siano incorretti manda un messaggio di errore alla request
-
+        AccountBean account = new AccountBean();
+        
         try {
-        	 AccountBean account = dao.doRetrieveByKey(username);
+        	 account = dao.doRetrieveByKey(username);
         	 if(account !=null && username.equals(account.getUsername())) {
         		 if(PasswordUtils.checkPasswordHashed(pwd, account.gethashedPassword())==true) {
         			 request.setAttribute("flag","passok");
         		 }else {
         			 request.setAttribute("error", "username o password errati"); 
+        	         RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+        	         dispatcher.forward(request, response);      
+        	         return;
         		 }
              }
         }catch(SQLException e) {
         	request.setAttribute("serverError", "Login Fallito. Riprova"); //eventuale pagina errore
         }
        
-     
-         RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
-        dispatcher.forward(request, response);
-       
-        /* request.setAttribute("error", Boolean.TRUE);
-       
-         HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-
+        //creazione sessione utente
+        HttpSession session = request.getSession();
+        session.setAttribute("user", account);
+        
+        
         // Redirect a pagina protetta
-        response.sendRedirect(request.getContextPath() + "/home.jsp");*/
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+       
+       
+     
+
+        
 	}
 
 }
