@@ -4,7 +4,7 @@ function createXMLHttpRequest() {
 		// Firefox 1+, Chrome 1+, Opera 8+, Safari 1.2+, Edge 12+, Internet Explorer 7+
 		request = new XMLHttpRequest();
 	} catch (e) {
-		// Versioni precednti di Internet Explorer 
+		// Versioni precedenti di Internet Explorer 
 		try {
 			request = new ActiveXObject("Msxml2.XMLHTTP");  
 		} catch (e) {
@@ -94,7 +94,7 @@ function renderOptionsDatalist(list) {
   	list.forEach(function(p) { // Per ogni elemento p della lista, esegui la funzione dove p è una provincia
     	var opt = document.createElement("option");
     	opt.value = p;
-    	datalistl.appendChild(opt);
+    	datalist.appendChild(opt);
   });
 }
 
