@@ -7,10 +7,18 @@ import it.unisa.model.beans.Ruoli;
 
 public class DaoUtils {
 	
-	public static String getRuoloAccount(AccountBean account) {
+	/**
+	 * Verifica ed assegna il valore di ruolo ad un oggetto AccountBean
+	 * @param account oggetto a cui assegnare il {@code Ruolo}
+	 * @return ruolo, se assegnato
+	 */
+	public static String getRuoloAccountString(AccountBean account) throws NullPointerException{
+		
+		if (account == null)
+			throw new NullPointerException("Oggetto account nullo");
 		
 		String email = account.getEmail();
-		Pattern pattern = Pattern.compile("^.+@tecnotime.it$", Pattern.CASE_INSENSITIVE);
+		Pattern pattern = Pattern.compile("^.+@tecnotime.it$");
 		Matcher match = pattern.matcher(email);
 		
 		Ruoli ruolo = null;
@@ -20,5 +28,28 @@ public class DaoUtils {
 			ruolo = Ruoli.utente_registrato;
 		
 		return ruolo.toString();
+	}
+	
+	/**
+	 * Verifica ed assegna il valore di ruolo ad un oggetto AccountBean
+	 * @param account oggetto a cui assegnare il {@code Ruolo}
+	 * @return ruolo, se assegnato
+	 */
+	public static Ruoli getRuoloAccount(AccountBean account) throws NullPointerException{
+		
+		if (account == null)
+			throw new NullPointerException("Oggetto account nullo");
+		
+		String email = account.getEmail();
+		Pattern pattern = Pattern.compile("^.+@tecnotime.it$");
+		Matcher match = pattern.matcher(email);
+		
+		Ruoli ruolo = null;
+		if(match.find())
+			ruolo = Ruoli.amministratore;
+		else
+			ruolo = Ruoli.utente_registrato;
+		
+		return ruolo;
 	}
 }

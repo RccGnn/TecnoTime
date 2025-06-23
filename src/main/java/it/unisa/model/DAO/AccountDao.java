@@ -45,7 +45,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		    ps.setString(11, account.getVia());
 		    ps.setString(12, account.getNumeroCivico());
 		    ps.setString(13, account.getCAP());
-		    ps.setString(14, DaoUtils.getRuoloAccount(account)); // Ruolo scelto in base all'email dell'account
+		    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
 		    ps.setDate(15, Date.valueOf(account.getDataNascita()));
 			ps.executeUpdate();
 

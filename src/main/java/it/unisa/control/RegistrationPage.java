@@ -12,7 +12,9 @@ import java.time.format.DateTimeParseException;
 
 import it.unisa.model.DAO.AccountDao;
 import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.Ruoli;
 
 /**
  * Servlet implementation class RegistrationPage
@@ -64,7 +66,7 @@ public class RegistrationPage extends HttpServlet {
 		String province=request.getParameter("province");
 		String city=request.getParameter("city");
 		String aptnumber=request.getParameter("aptnumber");
-		String role = request.getParameter("role");
+		String role = ""; // Da ricavare
 		char genderChr = ' ';
 		
 		
@@ -220,7 +222,7 @@ public class RegistrationPage extends HttpServlet {
 		}
 		
 		if (aptnumber == null || aptnumber.trim().equals("")) {
-			error += "Invalid nation selected <br>";
+			error += "Invalid apartment number <br>";
 			account=null;
 		} else {
 			aptnumber = aptnumber.trim();
@@ -228,32 +230,34 @@ public class RegistrationPage extends HttpServlet {
 			request.setAttribute("aptnumber",aptnumber);
 			account.setNumeroCivico(aptnumber);
 		}
+
+		
+		role = DaoUtils.getRuoloAccountString(account);
+		account.setRuolo(DaoUtils.getRuoloAccount(account));
 		
 		if (role == null || role.trim().equals("")) {
-			error += "Invalid nation selected <br>";
+			error += "Invalid role <br>";
 			account=null;
 		} else {
-			role = role.trim();
-			role= DecoderHtml.encodeHtml(role);
+			role = role.trim();			
 			request.setAttribute("role",role);
 		}
-		
-			
+
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
 			account=null;
 		}
 		
-		
-		
-	
-		
 
 		BeanDaoInterface<AccountBean> dao = new AccountDao();
 		try {
 			dao.doSave(account);
+		} catch (java.sql.SQLException e) {
+			e.getMessage();
+			System.out.println("Errore SQL: " + e);
 		} catch (Exception e) {
 			e.getMessage();
+			System.out.println(e);
 		}
 		
 	/*	RequestDispatcher dispatcher = this.getServletContext().

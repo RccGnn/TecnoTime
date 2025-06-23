@@ -9,7 +9,7 @@ CREATE TABLE Account (
   nome        VARCHAR(255)  NOT NULL,
   cognome     VARCHAR(255)  NOT NULL,
   sesso       VARCHAR(1)     NOT NULL,
-  email     	VARCHAR(100)   	NOT NULL,
+  email     	VARCHAR(100)   	UNIQUE NOT NULL,
   numeroTelefono VARCHAR(13)  NOT NULL,
   nazione     VARCHAR(50)     NOT NULL,
   provincia		VARCHAR(50)    	NOT NULL,

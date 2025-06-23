@@ -62,9 +62,9 @@
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
-            <label for="role">Ruolo (es. utente/admin):</label>
+<!-- 		<label for="role">Ruolo (es. utente/admin):</label>
             <input type="text" id="role" name="role" required>
-
+-->
             <button type="submit">Registrati</button>
             <button type="reset">Reset</button>
         </form>
