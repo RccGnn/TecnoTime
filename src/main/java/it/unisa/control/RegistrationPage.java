@@ -148,15 +148,19 @@ public class RegistrationPage extends HttpServlet {
 		}
 		
 		if (email == null || email.trim().equals("")) {
-			error += "Insert email<br>";
+			error += "Invalid email selected <br>";
 			account=null;
 		} else {
-			email = email.trim();
-			email= DecoderHtml.encodeHtml(email);
-			request.setAttribute("email", email);
-			account.setEmail(email);
+			if(!PasswordUtils.checkEmail(username, email)) {
+				error += "Email alredy in use <br>";
+				account.setEmail(""); // E' necessario per il controllo dell'email
+			} else {
+				email = email.trim();
+				email= DecoderHtml.encodeHtml(email);
+				request.setAttribute("email", email);
+				account.setEmail(email);
+			}
 		}
-		
 		
 		if (gender == null || gender.trim().equals("")) {
 			error += "Insert gender<br>";
@@ -197,6 +201,7 @@ public class RegistrationPage extends HttpServlet {
 		} else {
 			if(!PasswordUtils.checkUsername(username)) {
 				error += "Username alredy in use <br>";
+				account.setUsername("");
 			} else {
 				username = username.trim();
 				username= DecoderHtml.encodeHtml(username);

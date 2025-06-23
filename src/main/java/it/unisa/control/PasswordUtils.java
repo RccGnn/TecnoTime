@@ -18,7 +18,11 @@ public class PasswordUtils {
 	}
 	
 	public static boolean checkUsername(String username) {
+		if(username == null)
+			return false;
+		
 		boolean flag = false;
+		
 		try {
 			AccountDao dao = new AccountDao();
 			ArrayList<AccountBean> accList = dao.doRetrieveAll(username);
@@ -26,6 +30,29 @@ public class PasswordUtils {
 				flag = false;
 			else
 				flag = true;
+		} catch (java.sql.SQLException e) {
+			System.err.print(e.getMessage());
+		} 
+		
+		return flag;
+	}
+	
+	public static boolean checkEmail(String username, String email) {
+		if(username == null || email == null)
+			return false;
+		
+		boolean flag = false;
+		try {
+			AccountDao dao = new AccountDao();
+			ArrayList<AccountBean> accList = dao.doRetrieveAll(username);
+			if (accList == null)
+				flag = false;
+			else { // accList non è null ed è formato da un solo elemento (usr è chiave primaria)
+				if (accList.get(0).getEmail().equals(email))
+					flag = false;	// E' già presente email sul database
+				else
+					flag = true;
+			}
 		} catch (java.sql.SQLException e) {
 			System.err.print(e.getMessage());
 		}
