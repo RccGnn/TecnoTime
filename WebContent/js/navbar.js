@@ -1,25 +1,24 @@
 // js/navbar.js
 document.addEventListener('DOMContentLoaded', function() {
+    // ======================================================
+    // LOGICA ESISTENTE PER LA NAVIGAZIONE PRINCIPALE (Mobile)
+    // ======================================================
     const navLiElements = document.querySelectorAll('.main-nav > ul > li');
     const mobileBreakpoint = 768; // Corrisponde al CSS @media (max-width: 768px)
 
     navLiElements.forEach(li => {
-        const link = li.querySelector('a:first-child'); // Il link principale (es. PRODOTTI)
-        const dropdown = li.querySelector('ul.dropdown'); // Il menu a discesa stesso
+        const link = li.querySelector('a:first-child');
+        const dropdown = li.querySelector('ul.dropdown');
 
         if (link && dropdown) {
-            // Aggiungere attributi ARIA per l'accessibilità
             link.setAttribute('aria-haspopup', 'true');
             link.setAttribute('aria-expanded', 'false');
 
             link.addEventListener('click', function(event) {
                 if (window.innerWidth <= mobileBreakpoint) {
                     event.preventDefault(); 
-					// Impedisce la navigazione tramite link su dispositivi mobili per gli elementi padre
-
                     const isCurrentlyOpen = dropdown.classList.contains('show');
 
-                    // Chiudere tutti gli altri menu a discesa aperti prima di aprire/chiudere quello corrente
                     navLiElements.forEach(otherLi => {
                         const otherDropdown = otherLi.querySelector('ul.dropdown');
                         if (otherDropdown && otherDropdown !== dropdown) {
@@ -28,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     });
 
-                    // Attiva/disattiva il menu a discesa corrente
                     if (isCurrentlyOpen) {
                         dropdown.classList.remove('show');
                         link.setAttribute('aria-expanded', 'false');
@@ -37,8 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         link.setAttribute('aria-expanded', 'true');
                     }
                 }
-                // Su schermi più ampi (> mobileBreakpoint), CSS hover gestirà i menu a discesa,
-                // e il collegamento proseguirà come di consueto (ad esempio, verso #prodotti).
             });
         }
     });
@@ -48,16 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	hamburgerBtn.addEventListener('click', function () {
 	    navMenu.classList.toggle('show');
-
-	    // Alterna l'animazione dell'hamburger
 	    hamburgerBtn.classList.toggle('active');
 	});
 
-    // Chiudere i menu a discesa se si fa clic al di fuori della navigazione principale su dispositivi mobili
     document.addEventListener('click', function(event) {
         if (window.innerWidth <= mobileBreakpoint) {
             const mainNav = document.querySelector('.main-nav');
-            // Controlla se il clic è avvenuto al di fuori dell'area di navigazione principale
             if (mainNav && !mainNav.contains(event.target)) {
                 navLiElements.forEach(li => {
                     const dropdown = li.querySelector('ul.dropdown');
@@ -67,6 +59,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
             }
+        }
+    });
+
+    // =================================================
+    // --- NUOVA LOGICA PER ADMIN MENU NELL'HEADER ---
+    // =================================================
+    const adminMenuBtn = document.getElementById('adminMenuBtn');
+    const adminDropdown = document.getElementById('adminDropdown');
+
+    // Assicurati che gli elementi esistano prima di aggiungere gli event listener
+    if (adminMenuBtn && adminDropdown) {
+        
+        // Gestisce il click sul pulsante hamburger dell'admin
+        adminMenuBtn.addEventListener('click', function(event) {
+            // Ferma la propagazione per evitare che il click venga subito catturato 
+            // dal listener sulla finestra (window) e chiuda il menu appena aperto.
+            event.stopPropagation();
+            
+            // Aggiunge o rimuove la classe 'show' per mostrare/nascondere il menu.
+            adminDropdown.classList.toggle('show');
+        });
+    }
+
+    // Listener globale per chiudere il menu admin se si clicca altrove.
+    // Questo funziona su QUALSIASI dimensione dello schermo.
+    window.addEventListener('click', function(event) {
+        // Controlla se il menu admin è aperto
+        if (adminDropdown && adminDropdown.classList.contains('show')) {
+            // Se il click NON è avvenuto sul pulsante del menu, chiudilo.
+             if (!adminMenuBtn.contains(event.target)) {
+                adminDropdown.classList.remove('show');
+             }
         }
     });
 });
