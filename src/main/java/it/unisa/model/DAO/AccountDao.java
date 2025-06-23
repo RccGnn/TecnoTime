@@ -5,20 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.beans.*;
+import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.Ruoli;
 import it.unisa.model.connections.*;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.sql.Date;
 
-/*
-  	| Da...            	| A		                             	| Metodo                            |
-	| ---------------- 	| ------------------------------------- | --------------------------------- |
-	| java.sql.Date  	| java.time.LocalDate              		| `[Date].toLocalDate()` 			|
-	| LocalDate      	| java.sql.Date			                | `Date.valueof([LocalDate)`       	|
 
- */
 public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 	private static final String TABLE_NAME = "Account";
@@ -51,7 +45,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		    ps.setString(11, account.getVia());
 		    ps.setString(12, account.getNumeroCivico());
 		    ps.setString(13, account.getCAP());
-		    ps.setString(14, "amministratore");
+		    ps.setString(14, DaoUtils.getRuoloAccount(account)); // Ruolo scelto in base all'email dell'account
 		    ps.setDate(15, Date.valueOf(account.getDataNascita()));
 			ps.executeUpdate();
 
