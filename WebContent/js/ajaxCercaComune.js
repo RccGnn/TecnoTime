@@ -50,7 +50,7 @@ function loadAjaxDoc(url, method, params, cFuction) {
 		
 		// Metodo usato: GET
 		if (method.toLowerCase() === "get") {
-		  request.open("GET", params ? `${url}?${params}` : url, true);
+		  request.open("GET", params ? `${url}?${params}` : url, true); // Simile alle fString di pyhton
 		  request.send(null);
 		}
 
@@ -66,8 +66,7 @@ function loadAjaxDoc(url, method, params, cFuction) {
 	}
 }
 
-// Array di oggetti { provincia, sigla }
-// Array globale che conterrà tutte le sigle delle provincie
+// Array JSON contente tutte le provincie e le loro sigle
 var allProvincesSigles = [
   { "provincia": "Agrigento", "sigla": "AG" },
   { "provincia": "Alessandria", "sigla": "AL" },
@@ -177,37 +176,56 @@ var allProvincesSigles = [
   { "provincia": "Viterbo", "sigla": "VT" }
 ]
 
+/**
+ * Dopo la selezione di una provincia (da datalist), vengono caricati i comuni tramite l'API ISTAT.
+ * Se la provincia non è valida, disabilita il campo select dei comuni.
+ */
+function cercaComune() {
+    var provName      = document.getElementById("province").value.trim();
+    var selectComuni  = document.getElementById("city");
 
-// All'avvio, popola il datalist con tutte le province disponibili
-(function() {
-    var dataList = document.getElementById("provinceList");
-    if (!dataList) {
-        // console.error("Elemento datalist 'provinceList' non trovato.");
+    // Disabilità campo City fintanto che non viene inserita una città valida
+    selectComuni.innerHTML = '<option value="">Seleziona città…</option>';
+    selectComuni.disabled  = true;
+
+    // Trova la sigla associata alla provincia 
+    var provinceSigle = allProvincesSigles.find(function(item) { // Funzione di 'find'
+        return item.provincia.toLowerCase() === provName.toLowerCase();
+    });
+    if (!provinceSigle) {
+		// Equivalente di error and output di System (java)
+        console.warn("Provincia non valida:", provName);
         return;
     }
 
-    allProvincesSigles.forEach(function(item) { 	// Funzione che un'opzione per ogni provincia nel datalist (primo avvio)
-        var option = document.createElement("option");
-        option.value = item.provincia; // usa il nome della provincia come valore
-        dataList.appendChild(option);
-    });
-})();
+    var sigla  = provinceSigle.sigla;
+    var apiUrl = "https://comuni-istat-api.belicedigital.com/api/provincia/"
+               + encodeURIComponent(sigla)
+               + "/comuni";
 
-/**
- * Funzione che filtra le opzioni del datalist in base al testo inserito nell'input provincia.
- * Vengono mostrati solo i nomi delle province che iniziano con il testo digitato (case-insensitive).
- */
-function cercaProvincia() {
-    var inputElem = document.getElementById("province");
-    var filter = inputElem.value.trim().toLowerCase(); // Per uniformare la stringa
-    var dataList = document.getElementById("provinceList");
-    dataList.innerHTML = "";
-    // Ricerca tra tutte le province
-    allProvincesSigles.forEach(function(item) { // Funzione per il confronto: si verifica se il nome della provincia inizia col testo inserito dall'utente
-        if (item.provincia.toLowerCase().startsWith(filter)) {
-            var option = document.createElement("option");
-            option.value = item.provincia; // aggiunge come opzione il nome della provincia
-            dataList.appendChild(option); // aggiunge opzione alla lista
+    // console.log("Chiamata ad API comuni:", apiUrl);
+
+    //url, metodo, params, callback(xhr)
+    loadAjaxDoc(apiUrl, "GET", null, function(xhr) {
+        // console.log("Status comuni:", xhr.status);
+        // console.log("ResponseText comuni:", xhr.responseText);
+
+        var arr;
+        try {
+			// Conversione JSON --> OBJECT
+            arr = JSON.parse(xhr.responseText);
+        } catch (e) {
+            return console.error("Impossibile parsare JSON:", e);
         }
+        // console.log("Ricevuti comuni:", arr.length);
+
+        // Popolamento select di City
+        arr.forEach(function(c) { // Funzione appliacata ad ogni elemento di arr
+            var o = document.createElement("option");
+			o.text  = (typeof c === "string" ? c : (c.nome || c.comune || c.denominazione));
+			o.value = o.text;
+            selectComuni.add(o);
+        });
+        selectComuni.disabled = false;
     });
 }

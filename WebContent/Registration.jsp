@@ -35,15 +35,16 @@
             <label for="postalCode">CAP:</label>
             <input type="text" id="postalCode" name="postalCode" required>
 
-            <label for="province">Provincia:</label>
+		    <label for="province">Provincia:</label>
 			<input list="provinceList"
 			       id="province"
 			       name="province"
 			       placeholder="Inizia a digitare…"
-			       oninput="filterDatalist()"
+			       oninput="cercaProvincia()"
+			       onchange="cercaComune()"
 			       required>
 			<datalist id="provinceList">
-			  <!-- Sarà popolato da AJAX -->
+			  <!-- Popolato da ajaxCercaPrivincia-->
 			</datalist>
 
             <label for="city">Città:</label>
@@ -93,5 +94,6 @@
     <script src="js/navbar.js" defer></script>
     <script src="js/ajaxCercaProvincia.js" defer></script>
     <script src="js/formValidation.js" defer></script>
+    <script src="js/ajaxCercaComune.js" defer></script>
 </body>
 </html>
