@@ -10,7 +10,7 @@ public class DaoUtils {
 	public static String getRuoloAccount(AccountBean account) {
 		
 		String email = account.getEmail();
-		Pattern pattern = Pattern.compile("@tecnotime", Pattern.CASE_INSENSITIVE);
+		Pattern pattern = Pattern.compile("^.+@tecnotime.it$", Pattern.CASE_INSENSITIVE);
 		Matcher match = pattern.matcher(email);
 		
 		Ruoli ruolo = null;
