@@ -78,7 +78,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 			ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				account.setUsername(rs.getString("username"));
 				account.sethashedPassword(rs.getString("hashedPassword"));
 				account.setNome(rs.getString("nome"));
@@ -94,6 +94,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 				account.setCAP(rs.getString("CAP"));
 				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
 				account.setDataNascita((rs.getDate("dataNascita")).toLocalDate());
+			} else {
+				account = null;
 			}
 
 		} finally {
@@ -141,7 +143,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		ArrayList<AccountBean> products = new ArrayList<>();
+		ArrayList<AccountBean> accounts = new ArrayList<>();
 
 		String selectSQL = "SELECT * FROM " + AccountDao.TABLE_NAME;
 
@@ -155,24 +157,30 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 			ResultSet rs = ps.executeQuery();
 
-			while (rs.next()) {
-				AccountBean account = new AccountBean();
+			if (rs.next()) {
+				while (rs.next()) {
+					AccountBean account = new AccountBean();
 
-				account.setUsername(rs.getString("username"));
-				account.sethashedPassword(rs.getString("hashedPassword"));
-				account.setNome(rs.getString("nome"));
-				account.setCognome(rs.getString("cognome"));
-				account.setSesso(rs.getString("sesso").charAt(0));
-				account.setEmail(rs.getString("email"));
-				account.setNumeroTelefono(rs.getString("numeroTelefono"));
-				account.setNazione(rs.getString("nazione"));
-				account.setProvincia(rs.getString("provincia"));
-				account.setCitta(rs.getString("citta"));
-				account.setVia(rs.getString("via"));
-				account.setNumeroCivico(rs.getString("numeroCivico"));
-				account.setCAP(rs.getString("CAP"));
-				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
-				account.setDataNascita(rs.getDate("dataNascita").toLocalDate());
+					account.setUsername(rs.getString("username"));
+					account.sethashedPassword(rs.getString("hashedPassword"));
+					account.setNome(rs.getString("nome"));
+					account.setCognome(rs.getString("cognome"));
+					account.setSesso(rs.getString("sesso").charAt(0));
+					account.setEmail(rs.getString("email"));
+					account.setNumeroTelefono(rs.getString("numeroTelefono"));
+					account.setNazione(rs.getString("nazione"));
+					account.setProvincia(rs.getString("provincia"));
+					account.setCitta(rs.getString("citta"));
+					account.setVia(rs.getString("via"));
+					account.setNumeroCivico(rs.getString("numeroCivico"));
+					account.setCAP(rs.getString("CAP"));
+					account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
+					account.setDataNascita(rs.getDate("dataNascita").toLocalDate());
+					
+					accounts.add(account);
+				}
+			} else {
+				accounts = null;
 			}
 
 		} finally {
@@ -184,7 +192,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 					connection.close();
 			}
 		}
-		return products;
+		return accounts;
 	}
 
 }

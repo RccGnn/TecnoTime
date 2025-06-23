@@ -195,10 +195,14 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid username selected <br>";
 			account=null;
 		} else {
-			username = username.trim();
-			username= DecoderHtml.encodeHtml(username);
-			request.setAttribute("username",username);
-			account.setUsername(username);
+			if(!PasswordUtils.checkUsername(username)) {
+				error += "Username alredy in use <br>";
+			} else {
+				username = username.trim();
+				username= DecoderHtml.encodeHtml(username);
+				request.setAttribute("username",username);
+				account.setUsername(username);	
+			}
 		}
 		
 		if (province == null || province.trim().equals("")) {
