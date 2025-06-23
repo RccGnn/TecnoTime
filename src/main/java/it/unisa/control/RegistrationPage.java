@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -66,6 +67,7 @@ public class RegistrationPage extends HttpServlet {
 		String province=request.getParameter("province");
 		String city=request.getParameter("city");
 		String aptnumber=request.getParameter("aptnumber");
+		String passwordConfirm=request.getParameter("passwordConfirm");
 		String role = ""; // Da ricavare
 		char genderChr = ' ';
 		
@@ -73,7 +75,6 @@ public class RegistrationPage extends HttpServlet {
 		// invece di fare tutti i controlli, il model crea l'oggetto user con la classe DAO
 		if (firstName == null || firstName.trim().equals("")) {
 			error += "Insert name<br>";
-			account=null;
 		} else {
 			firstName = firstName.trim();
 			firstName= DecoderHtml.encodeHtml(firstName);
@@ -83,7 +84,6 @@ public class RegistrationPage extends HttpServlet {
 
 		if (lastName == null || lastName.trim().equals("")) {
 			error += "Insert lastName<br>";
-			account=null;
 		} else {
 			lastName = lastName.trim();
 			lastName= DecoderHtml.encodeHtml(lastName);
@@ -94,22 +94,22 @@ public class RegistrationPage extends HttpServlet {
 		LocalDate birthDate=null;
 		if (birthDateStr == null || birthDateStr.trim().equals("")) {
 			error += "Insert birthdate<br>";
-			account=null;
 		} else {
 			birthDateStr = birthDateStr.trim();
 			birthDateStr= DecoderHtml.encodeHtml(birthDateStr);
 			try {
 				 birthDate=LocalDate.parse(birthDateStr);
+				 request.setAttribute("birthDate", birthDate);
+				 account.setDataNascita(birthDate);
 			}catch (DateTimeParseException e){
 				  error += "Invalid date format<br>";
 			}
-			request.setAttribute("birthDate", birthDate);
-			account.setDataNascita(birthDate);
+			
+			
 		}
 				
 		if (address == null || address.trim().equals("")) {
 			error += "Insert address<br>";
-			account=null;
 		} else {
 			address = address.trim();
 			address= DecoderHtml.encodeHtml(address);
@@ -120,7 +120,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (postalCodeStr == null || postalCodeStr.trim().equals("")) {
 			error += "Invalid postalCode<br>";
-			account=null;
 		} else {
 			postalCodeStr = postalCodeStr.trim();
 			if(postalCodeStr.matches("\\d{5}")) {
@@ -128,28 +127,25 @@ public class RegistrationPage extends HttpServlet {
 				account.setCAP(postalCodeStr);
 			}else {
 				error+="Invalid postalCode<br>";
-				account=null;
 			}
 		}
 		
 		if(password==null || password.trim().equals("")) {
 			error += "must insert a password";
-			account=null;
 		}else {
 			password= password.trim();
 			password=DecoderHtml.encodeHtml(password);         
-		    if(pwdValidator.isValid(password)==false) {         	
-		    request.setAttribute("pwderror","password non valida" );  
-		    account=null;
+		    if(pwdValidator.isValid(password,passwordConfirm)==false) {         	
+		    	request.setAttribute("pwderror","password non valida" );  
 		    }else {    
 		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	
 		    	account.sethashedPassword(password);
 			}
 		}
+		//implementare box di conferma password nella jsp
 		
 		if (email == null || email.trim().equals("")) {
 			error += "Invalid email selected <br>";
-			account=null;
 		} else {
 			if(!PasswordUtils.checkEmail(username, email)) {
 				error += "Email alredy in use <br>";
@@ -164,7 +160,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (gender == null || gender.trim().equals("")) {
 			error += "Insert gender<br>";
-			account=null;
 		} else {
 			gender = gender.trim();
 			gender= DecoderHtml.encodeHtml(gender);
@@ -174,9 +169,8 @@ public class RegistrationPage extends HttpServlet {
 		}
 		
 	
-		if (telNumb == null || telNumb.trim().equals("")||telNumb.matches("//d+")){
+		if (telNumb == null || telNumb.trim().equals("")||!telNumb.matches("\\d+")){
 		    error += "Insert a correct telephone number<br>";
-		    account=null;
 		} else {
 		    telNumb = telNumb.trim();
 		    telNumb= DecoderHtml.encodeHtml(telNumb);
@@ -187,7 +181,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (nation == null || nation.trim().equals("")) {
 			error += "Invalid nation selected <br>";
-			account=null;
 		} else {
 			nation = nation.trim();
 			nation= DecoderHtml.encodeHtml(nation);
@@ -197,7 +190,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (username == null || username.trim().equals("")) {
 			error += "Invalid username selected <br>";
-			account=null;
 		} else {
 			if(!PasswordUtils.checkUsername(username)) {
 				error += "Username alredy in use <br>";
@@ -212,7 +204,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (province == null || province.trim().equals("")) {
 			error += "Invalid province selected <br>";
-			account=null;
 		} else {
 			province = province.trim();
 			province= DecoderHtml.encodeHtml(province);
@@ -222,7 +213,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (city == null || city.trim().equals("")) {
 			error += "Invalid city selected <br>";
-			account=null;
 		} else {
 			city = city.trim();
 			city= DecoderHtml.encodeHtml(city);
@@ -232,7 +222,6 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (aptnumber == null || aptnumber.trim().equals("")) {
 			error += "Invalid apartment number <br>";
-			account=null;
 		} else {
 			aptnumber = aptnumber.trim();
 			aptnumber= DecoderHtml.encodeHtml(aptnumber);
@@ -246,29 +235,35 @@ public class RegistrationPage extends HttpServlet {
 		
 		if (role == null || role.trim().equals("")) {
 			error += "Invalid role <br>";
-			account=null;
 		} else {
 			role = role.trim();			
 			request.setAttribute("role",role);
 		}
+		
+		
 
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
-			account=null;
+			return;
 		}
 		
 
 		BeanDaoInterface<AccountBean> dao = new AccountDao();
 		try {
-			dao.doSave(account);
-		} catch (java.sql.SQLException e) {
-			e.getMessage();
-			System.out.println("Errore SQL: " + e);
-		} catch (Exception e) {
-			e.getMessage();
-			System.out.println(e);
+		    dao.doSave(account);
+		} catch (SQLException e) {
+		    String sqlState = e.getSQLState();
+		    if (sqlState != null && sqlState.startsWith("23")) {
+		        // Username già presente
+		        request.setAttribute("error", "Username già esistente, scegline un altro.");
+		        request.getRequestDispatcher("/Registration.jsp").forward(request, response);
+		    } else {
+		        // Altri errori
+		        request.setAttribute("error", "Errore imprevisto durante la registrazione.");
+		        request.getRequestDispatcher("/Registration.jsp").forward(request, response);
+		    }
 		}
-		
+
 	/*	RequestDispatcher dispatcher = this.getServletContext().
 				getRequestDispatcher("/RegistrationPage.jsp");
 		dispatcher.forward(request, response); */

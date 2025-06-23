@@ -1,8 +1,8 @@
 package it.unisa.control;
 
 public class pwdValidator {
-	public static boolean isValid(String pwd) {
-		if(pwd.length()<9) {
+	public static boolean isValid(String pwd,String pwdConferm) {
+		if(pwd.length()<9||!pwd.equals(pwdConferm)) {
 			return false;
 		}
 		else {
