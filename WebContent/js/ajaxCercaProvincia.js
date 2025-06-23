@@ -49,30 +49,18 @@ function loadAjaxDoc(url, method, params, cFuction) {
     	}, 15000/*ms*/); 
 		
 		// Metodo usato: GET
-		if(method.toLowerCase() == "get"){
-			if(params){
-				request.open("GET", url + "?" + params, true);
-			} else {
-				request.open("GET", url, true);
-			}
-			request.setRequestHeader("Connection", "close");
-	        request.send(null);
-	        
+		if (method.toLowerCase() === "get") {
+		  request.open("GET", params ? `${url}?${params}` : url, true);
+		  request.send(null);
+		}
+
 		// Metodo usato: POST
-		} else {
+		 else {
 			
 				// Se i parametri sono presenti
-			if(params){
 				request.open("POST", url, true);
-				request.setRequestHeader("Connection", "close");
 				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	        	request.send(params);
-			} else {
-				// Non ci sono parametri
-				console.log("Usa GET se non ci sono parametri!");
-				return null;
-			}
-			
+				request.send(params);
 		}
 		
 	}
