@@ -2,6 +2,7 @@ package it.unisa.control;
 
 import it.unisa.model.DAO.AccountDao;
 import it.unisa.model.beans.AccountBean;
+import java.util.ArrayList;
 
 public class Validator {
 	public static boolean pwdValidator(String pwd, String pwdConferm) {
@@ -70,11 +71,20 @@ public class Validator {
 		
 		try {
 			AccountDao dao = new AccountDao();
-			AccountBean account = dao.doRetrieveByUnique(email);
-			if(account == null)
+			ArrayList<AccountBean> accList = dao.doRetrieveAll("");
+			// Nessun elemento presente nella tabella Account
+			if (accList == null) 
 				flag = true;
-			else
-				flag = false;
+			else {	// Esiste almeno un elemento nella tabella Account
+				// Controlla se esiste almeno un elemento account con la stessa email
+				for (AccountBean account : accList) {	
+					if (account.getEmail().equals(email))
+						flag = false;
+					else
+						flag = true;
+				}
+			}
+				
 		} catch (java.sql.SQLException e) {
 			System.err.print(e.getMessage());
 		} 

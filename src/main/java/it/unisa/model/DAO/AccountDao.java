@@ -109,60 +109,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		}
 		return account;
 	}
-
-	/**
-	 * Funzionamento analogo a {@code doRetrieveByKey} ma usato per un attributo UNIQUE di Account, ovvero email.
-	 * SI vuole impostare che la stessa email non può essere usata da più utenti.
-	 * @param attribute {@code String} valore dell'attributo email (sul database)
-	 * @return {@code null} se non vi è riscontro sul databse, {@code AccountBean} altrimenti
-	 * @throws SQLException
-	 */
-	public synchronized AccountBean doRetrieveByUnique(String attribute) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-
-		AccountBean account = new AccountBean();
-
-		String selectSQL = "SELECT * FROM " + AccountDao.TABLE_NAME + " WHERE email = ?";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, attribute);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				account.setUsername(rs.getString("username"));
-				account.sethashedPassword(rs.getString("hashedPassword"));
-				account.setNome(rs.getString("nome"));
-				account.setCognome(rs.getString("cognome"));
-				account.setSesso(rs.getString("sesso").charAt(0));
-				account.setEmail(rs.getString("email"));
-				account.setNumeroTelefono(rs.getString("numeroTelefono"));
-				account.setNazione(rs.getString("nazione"));
-				account.setProvincia(rs.getString("provincia"));
-				account.setCitta(rs.getString("citta"));
-				account.setVia(rs.getString("via"));
-				account.setNumeroCivico(rs.getString("numeroCivico"));
-				account.setCAP(rs.getString("CAP"));
-				account.setRuolo(Ruoli.valueOf(rs.getString("ruolo")));
-				account.setDataNascita((rs.getDate("dataNascita")).toLocalDate());
-			} else {
-				account = null;
-			}
-
-		} finally {
-			try {
-				if (ps != null)
-					ps.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return account;
-	}
+	
 	
 	@Override
 	public synchronized boolean doDelete(String key) throws SQLException {
