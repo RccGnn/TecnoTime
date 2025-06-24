@@ -45,7 +45,36 @@
 		riferimento online per appassionati e professionisti dell’informatica e del gaming, facendo leva sulla vasta gamma di
 		prodotti e servizi in vendita.
 		</p>
-	</section>		
+	</section>
+
+	<section class="team-page">
+	  <section class="team-intro">
+	    <h1>Il Nostro Team</h1>
+	    <p>Scopri chi siamo e cosa facciamo ogni giorno per offrirti il meglio.</p>
+	  </section>
+	
+	  <section class="team-employees">
+	    <!-- Per ogni membro creare un “card” -->
+	    <div class="team-employees__employee" style="background-image:url('images/mario_mascheri.jpg')">
+	      <div class="team-employees__info">
+	        <h3 class="team-employees__name">Mario Mascheri</h3>
+	        <p class="team-employees__position">Sviluppatore Front-end</p>
+	      </div>
+	    </div>
+	    <div class="team-employees__employee" style="background-image:url('images/mario_mascheri.jpg')">
+	      <div class="team-employees__info">
+	        <h3 class="team-employees__name">Giovanni Riccardi</h3>
+	        <p class="team-employees__position">DAO admin e Deployer</p>
+	      </div>
+	    </div>
+	    <div class="team-employees__employee" style="background-image:url('images/mario_mascheri.jpg')">
+	      <div class="team-employees__info">
+	        <h3 class="team-employees__name">Stefano Santoro</h3>
+	        <p class="team-employees__position">Sviluppatore Back-end</p>
+	      </div>
+	    </div>
+	  </section>
+	</section>
     </main>
     
     <jsp:include page="footer.jsp" />
