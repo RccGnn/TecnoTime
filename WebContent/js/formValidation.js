@@ -9,23 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const usernameRe = /^[A-Za-z0-9_]{3,20}$/;
   const pwdRe      = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{9,}$/;
 
-  // mappa field → { regex, message }
+  // regex per i vari campi
   const rules = {
-    firstName: { re: nameRe,    msg: 'Nome non valido' },
-    lastName:  { re: nameRe,    msg: 'Cognome non valido' },
-    address:   { re: addressRe, msg: 'Indirizzo non valido' },
-    postalCode:{ re: postalRe,  msg: 'CAP non valido (5 cifre)' },
-    telNumb:   { re: phoneRe,   msg: 'Telefono non valido' },     // opzionale
-    username:  { re: usernameRe,msg: 'Username non valido (3-20 caratteri)' },
-    password:  { re: pwdRe,     msg: 'Password deve avere almeno 9 caratteri, con almeno una maiuscola, una minuscola, un numero e un simbolo' }
+    firstName:      { re: nameRe,    msg: 'Nome non valido' },
+    lastName:       { re: nameRe,    msg: 'Cognome non valido' },
+    address:        { re: addressRe, msg: 'Indirizzo non valido' },
+    postalCode:     { re: postalRe,  msg: 'CAP non valido (5 cifre)' },
+    telNumb:        { re: phoneRe,   msg: 'Telefono non valido' },     // opzionale
+    username:       { re: usernameRe,msg: 'Username non valido (3-20 caratteri)' },
+    password:       { re: pwdRe,     msg: 'Password deve avere almeno 9 caratteri, con almeno una maiuscola, una minuscola, un numero e un simbolo' }
   };
 
   // helper che pulisce eventuale messaggio
   function clearError(field) {
-    const next = field.nextElementSibling;
-    if (next && next.classList.contains('inline-error')) {
-      next.remove();
-    }
+    const nxt = field.nextElementSibling;
+    if (nxt && nxt.classList.contains('inline-error')) nxt.remove();
     field.classList.remove('invalid');
   }
 
@@ -49,10 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!val) {
         showError(field, 'Inserisci una data di nascita valida');
         return false;
-      } else {
-        clearError(field);
-        return true;
       }
+      clearError(field);
+      return true;
     }
 
     // email (HTML5) con il TAG HTML
@@ -60,10 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!field.checkValidity()) {
         showError(field, 'Email non valida');
         return false;
-      } else {
-        clearError(field);
-        return true;
       }
+      clearError(field);
+      return true;
     }
 
     // telefono opzionale
@@ -71,21 +67,40 @@ document.addEventListener('DOMContentLoaded', () => {
       if (val && !rules.telNumb.re.test(val)) {
         showError(field, rules.telNumb.msg);
         return false;
-      } else {
-        clearError(field);
-        return true;
       }
+      clearError(field);
+      return true;
     }
 
-    // controllo su tutti gli altri basati su regex
+    // password
+    if (name === 'password') {
+      if (!rules.password.re.test(val)) {
+        showError(field, rules.password.msg);
+        return false;
+      }
+      clearError(field);
+      return true;
+    }
+
+    // conferma password
+    if (name === 'confirmPassword') {
+      const pw = form.password.value.trim();
+      if (val !== pw) {
+        showError(field, 'Le password non corrispondono');
+        return false;
+      }
+      clearError(field);
+      return true;
+    }
+
+	// controllo su tutti gli altri basati su regex
     if (rules[name]) {
       if (!rules[name].re.test(val)) {
         showError(field, rules[name].msg);
         return false;
-      } else {
-        clearError(field);
-        return true;
       }
+      clearError(field);
+      return true;
     }
 
     // messaggio default OK
@@ -93,9 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
     return true;
   }
 
-  // aggiunge listener a ogni field interessato
+  // aggiungo listener a tutti i campi che mi interessano
   Array.from(form.elements).forEach(el => {
-    if (el.id && (rules[el.id] || ['birthDate','email','telNumb'].includes(el.id))) {
+    if (!el.id) return;
+    // campi con regex + birthDate, email, telNumb, confirmPassword
+    if (rules[el.id] || ['birthDate','email','telNumb','confirmPassword'].includes(el.id)) {
       el.addEventListener('change', () => validateField(el));
       el.addEventListener('input',  () => {
         if (el.classList.contains('invalid')) validateField(el);
@@ -103,12 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // submit
+  // al submit, valido tutto e blocco se c'è almeno un errore
   form.addEventListener('submit', e => {
     let valid = true;
-    // validazione di tutti campi
     Array.from(form.elements).forEach(el => {
-      if (el.id && (rules[el.id] || ['birthDate','email','telNumb'].includes(el.id))) {
+      if (!el.id) return;
+      if (rules[el.id] || ['birthDate','email','telNumb','confirmPassword'].includes(el.id)) {
         if (!validateField(el)) valid = false;
       }
     });
