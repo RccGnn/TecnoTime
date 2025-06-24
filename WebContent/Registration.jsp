@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
-    <title>Login - TecnoTime</title>
+    <title>Registrazione - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
     <link rel="stylesheet" href="styles.css">
 </head>
