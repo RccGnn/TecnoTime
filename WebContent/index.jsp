@@ -25,10 +25,10 @@
             <div class="hero-content">
                 <div class="hero-animation">
                     <video autoplay loop muted playsinline class="hero-img" aria-label="Animazione hero">
-  					<source src="video/hero_animation.mp4" type="video/mp4">
-					<source src="video/hero_animation.webm" type="video/webm">
-  					<source src="video/hero_animation.ogv" type="video/ogg">
-					</video>
+                    <source src="video/hero_animation.mp4" type="video/mp4">
+                    <source src="video/hero_animation.webm" type="video/webm">
+                    <source src="video/hero_animation.ogv" type="video/ogg">
+                </video>
                 </div>
             </div>
         </section>
