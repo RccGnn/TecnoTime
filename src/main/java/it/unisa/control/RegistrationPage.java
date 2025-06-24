@@ -135,7 +135,7 @@ public class RegistrationPage extends HttpServlet {
 		}else {
 			password= password.trim();
 			password=DecoderHtml.encodeHtml(password);         
-		    if(pwdValidator.isValid(password,passwordConfirm)==false) {         	
+		    if(Validator.pwdValidator(password,passwordConfirm)==false) {         	
 		    	request.setAttribute("pwderror","password non valida" );  
 		    }else {    
 		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	
@@ -147,7 +147,7 @@ public class RegistrationPage extends HttpServlet {
 		if (email == null || email.trim().equals("")) {
 			error += "Invalid email selected <br>";
 		} else {
-			if(!PasswordUtils.checkEmail(username, email)) {
+			if(!Validator.checkEmail(email)) {
 				error += "Email alredy in use <br>";
 				account.setEmail(""); // E' necessario per il controllo dell'email
 			} else {
@@ -191,7 +191,7 @@ public class RegistrationPage extends HttpServlet {
 		if (username == null || username.trim().equals("")) {
 			error += "Invalid username selected <br>";
 		} else {
-			if(!PasswordUtils.checkUsername(username)) {
+			if(!Validator.checkUsername(username)) {
 				error += "Username alredy in use <br>";
 				account.setUsername("");
 			} else {
@@ -244,6 +244,8 @@ public class RegistrationPage extends HttpServlet {
 
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
+	        dispatcher.forward(request, response);
 			return;
 		}
 		
@@ -254,10 +256,12 @@ public class RegistrationPage extends HttpServlet {
 		} catch (SQLException e) {
 		    String sqlState = e.getSQLState();
 		    if (sqlState != null && sqlState.startsWith("23")) {
+
 		        // Username già presente
 		        request.setAttribute("error", "Username già esistente, scegline un altro.");
 		        request.getRequestDispatcher("/Registration.jsp").forward(request, response);
 		    } else {
+
 		        // Altri errori
 		        request.setAttribute("error", "Errore imprevisto durante la registrazione.");
 		        request.getRequestDispatcher("/Registration.jsp").forward(request, response);
@@ -268,7 +272,9 @@ public class RegistrationPage extends HttpServlet {
 				getRequestDispatcher("/RegistrationPage.jsp");
 		dispatcher.forward(request, response); */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
+
         dispatcher.forward(request, response); 		
+
         
 
 	}
