@@ -57,6 +57,9 @@
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            
+		    <label for="confirmPassword">Conferma Password:</label>
+		    <input type="password" id="confirmPassword" name="confirmPassword" required>
 
             <label for="telNumb">Telefono:</label>
             <input type="text" id="telNumb" name="telNumb">
