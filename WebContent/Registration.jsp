@@ -35,17 +35,31 @@
             <label for="postalCode">CAP:</label>
             <input type="text" id="postalCode" name="postalCode" required>
 
-            <label for="province">Provincia:</label>
-            <input type="text" id="province" name="province" required>
+		    <label for="province">Provincia:</label>
+			<input list="provinceList"
+			       id="province"
+			       name="province"
+			       placeholder="Inizia a digitare…"
+			       oninput="cercaProvincia()"
+			       onchange="cercaComune()"
+			       required>
+			<datalist id="provinceList">
+			  <!-- Popolato da ajaxCercaPrivincia-->
+			</datalist>
 
             <label for="city">Città:</label>
-            <input type="text" id="city" name="city" required>
+            <select id="city" name="city" required>
+                <option value="">Seleziona città…</option>
+            </select>
 
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            
+		    <label for="confirmPassword">Conferma Password:</label>
+		    <input type="password" id="confirmPassword" name="confirmPassword" required>
 
             <label for="telNumb">Telefono:</label>
             <input type="text" id="telNumb" name="telNumb">
@@ -81,5 +95,8 @@
 	<jsp:include page="footer.jsp" />
     
     <script src="js/navbar.js" defer></script>
+    <script src="js/ajaxCercaProvincia.js" defer></script>
+    <script src="js/formValidation.js" defer></script>
+    <script src="js/ajaxCercaComune.js" defer></script>
 </body>
 </html>
