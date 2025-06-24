@@ -840,6 +840,21 @@ footer p.copy {
 	.assembly-guide h3 { font-size: 1.2rem; }
 }
 
+/* --- errori blocchi registrazione ---*/
+
+/* inline error style */
+.inline-error {
+  display: block;
+  color: #c00;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.invalid {
+  border-color: #c00;
+  background-color: #fee;
+}
+
 /* --- Solo Mobile (fino a 480px) --- */
 @media (max-width: 480px) {
     .pre-footer .banner-png {
@@ -854,6 +869,3 @@ footer p.copy {
     font-size: 44px;
   }
 }
-
-
-

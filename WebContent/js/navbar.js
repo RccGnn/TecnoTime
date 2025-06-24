@@ -1,4 +1,3 @@
-// js/navbar.js
 document.addEventListener('DOMContentLoaded', function() {
     const navLiElements = document.querySelectorAll('.main-nav > ul > li');
     const mobileBreakpoint = 768; // Corrisponde al CSS @media (max-width: 768px)
