@@ -1,8 +1,6 @@
 // js/navbar.js
 document.addEventListener('DOMContentLoaded', function() {
-    // ======================================================
-    // LOGICA ESISTENTE PER LA NAVIGAZIONE PRINCIPALE (Mobile)
-    // ======================================================
+	
     const navLiElements = document.querySelectorAll('.main-nav > ul > li');
     const mobileBreakpoint = 768; // Corrisponde al CSS @media (max-width: 768px)
 
@@ -62,13 +60,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // =================================================
-    // --- NUOVA LOGICA PER ADMIN MENU NELL'HEADER ---
-    // =================================================
+
     const adminMenuBtn = document.getElementById('adminMenuBtn');
     const adminDropdown = document.getElementById('adminDropdown');
 
-    // Assicurati che gli elementi esistano prima di aggiungere gli event listener
     if (adminMenuBtn && adminDropdown) {
         
         // Gestisce il click sul pulsante hamburger dell'admin
@@ -88,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Controlla se il menu admin è aperto
         if (adminDropdown && adminDropdown.classList.contains('show')) {
             // Se il click NON è avvenuto sul pulsante del menu, chiudilo.
+
              if (!adminMenuBtn.contains(event.target)) {
                 adminDropdown.classList.remove('show');
              }
