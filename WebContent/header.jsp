@@ -45,7 +45,7 @@
         <span class="bar"></span>
     	</button>
         <ul id="main-menu">
-            <li><a href="#about">CHI SIAMO</a></li>
+            <li><a href="chiSiamo.jsp">CHI SIAMO</a></li>
             <li>
                 <a href="#products">PRODOTTI</a>
                 <ul class="dropdown">
