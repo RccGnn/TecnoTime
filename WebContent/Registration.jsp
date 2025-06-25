@@ -44,7 +44,7 @@
 			       onchange="cercaComune()"
 			       required>
 			<datalist id="provinceList">
-			  <!-- Popolato da ajaxCercaPrivincia-->
+			  <!-- Popolato da ajaxCercaProvincia-->
 			</datalist>
 
             <label for="city">Città:</label>
@@ -52,9 +52,12 @@
                 <option value="">Seleziona città…</option>
             </select>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+			<label for="email">Email:</label>
+			<input type="email" id="email" name="email" required>
 
+			<label for="username">Username:</label>
+			<input type="text" id="username" name="username" required>
+			
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
@@ -72,9 +75,6 @@
 
             <label for="nation">Nazionalità:</label>
             <input type="text" id="nation" name="nation">
-
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
 
 <!-- 		<label for="role">Ruolo (es. utente/admin):</label>
             <input type="text" id="role" name="role" required>
@@ -98,5 +98,6 @@
     <script src="js/ajaxCercaProvincia.js" defer></script>
     <script src="js/formValidation.js" defer></script>
     <script src="js/ajaxCercaComune.js" defer></script>
+    <script src="js/fieldValidator.js" defer></script>
 </body>
 </html>
