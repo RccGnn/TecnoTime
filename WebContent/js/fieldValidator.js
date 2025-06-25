@@ -62,7 +62,7 @@ function loadAjaxDoc(url, method, params, cFuction) {
 				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				request.send(params);
 		}
-		
+
 	}
 }
 
@@ -71,40 +71,40 @@ function loadAjaxDoc(url, method, params, cFuction) {
  */
 function handleUsernameResponse(xhr) {
 	try {
-        let response = JSON.parse(xhr.responseText);
-        let errorMsg = response.errore;  // dal campo JSON "errore"
-        let msgElem = document.getElementById("usernameMessage");
-        if (!msgElem) return;
-        
-        // Se "None", l'username è libero; altrimenti è occupato
-        if (errorMsg === "None" || !errorMsg) {
-            msgElem.innerHTML = "<span class=inline-error style='color: white;'>Username</span>";
-        } else {
-            msgElem.innerHTML = "<span class=inline-error >" + errorMsg + "</span>";
-        }
-    } catch (e) {
-        console.error("Errore nel parsing della risposta JSON per username:", e);
-    }
+		let response = JSON.parse(xhr.responseText);
+		let errorMsg = response.errore;  // dal campo JSON "errore"
+		let msgElem = document.getElementById("usernameMessage");
+		if (!msgElem) return;
+
+		// Se "None", l'username è libero; altrimenti è occupato
+		if (errorMsg === "None" || !errorMsg) {
+			msgElem.innerHTML = "<span class=inline-error style='color: white;'>.</span>";
+		} else {
+			msgElem.innerHTML = "<span class=inline-error >" + errorMsg + "</span>";
+		}
+	} catch (e) {
+		console.error("Errore nel parsing della risposta JSON per username:", e);
+	}
 }
 
 /**
  * Funzione di callback per la verifica email.
  */
 function handleEmailResponse(xhr) {
-    try {
-        let response = JSON.parse(xhr.responseText);
-        let errorMsg = response.errore;  // dal campo JSON "errore"
-        let msgElem = document.getElementById("emailMessage");
-        if (!msgElem) return;
-        
-        if (errorMsg === "None" || !errorMsg) {
-            msgElem.innerHTML = "<span class=inline-error style='color: white;'>Email</span>";
-        } else {
-            msgElem.innerHTML = "<span class=inline-error >" + errorMsg + "</span>";
-        }
-    } catch (e) {
-        console.error("Errore nel parsing della risposta JSON per email:", e);
-    }
+	try {
+		let response = JSON.parse(xhr.responseText);
+		let errorMsg = response.errore;  // dal campo JSON "errore"
+		let msgElem = document.getElementById("emailMessage");
+		if (!msgElem) return;
+
+		if (errorMsg === "None" || !errorMsg) {
+			msgElem.innerHTML = "<span class=inline-error style='color: white;'>.</span>";
+		} else {
+			msgElem.innerHTML = "<span class=inline-error >" + errorMsg + "</span>";
+		}
+	} catch (e) {
+		console.error("Errore nel parsing della risposta JSON per email:", e);
+	}
 }
 
 /**
@@ -113,39 +113,39 @@ function handleEmailResponse(xhr) {
  * Crea gli span per i messaggi di feedback se non esistono.
  */
 window.onload = function() {
-    // Seleziona gli elementi input
-    let userInput = document.getElementById("username");
-    let emailInput = document.getElementById("email");
-    
-    if (userInput) {
-        // Crea uno span per mostrare il messaggio di username, se non esiste
-        if (!document.getElementById("usernameMessage")) {
-            userInput.insertAdjacentHTML('afterend', '<span id="usernameMessage";"></span>');
-        }
-        // Al termine dell'input (onblur) chiama la verifica AJAX
-        userInput.onblur = function() {
-            let username = userInput.value.trim();
-            //if (username !== "") {
-                // Parametro della richiesta
-                let params = "control=" + encodeURIComponent(username);
-                loadAjaxDoc("RegistrationFormValidator", "GET", params, handleUsernameResponse);
-            //}
-        };
-    }
-    
-    if (emailInput) {
-        // Crea uno span per mostrare il messaggio di email, se non esiste
-        if (!document.getElementById("emailMessage")) {
-            emailInput.insertAdjacentHTML('afterend', '<span id="emailMessage";"></span>');
-        }
-        // Al termine dell'input (onblur) chiama la verifica AJAX
-        emailInput.onblur = function() {
-            let email = emailInput.value.trim();
-            //if (email !== "") {
-                // Parametro della richiesta
-                let params = "control=" + encodeURIComponent(email);
-                loadAjaxDoc("RegistrationFormValidator", "GET", params, handleEmailResponse);
-            //}
-        };
-    }
+	// Seleziona gli elementi input
+	let userInput = document.getElementById("username");
+	let emailInput = document.getElementById("email");
+
+	if (userInput) {
+		// Crea uno span per mostrare il messaggio di username, se non esiste
+		if (!document.getElementById("usernameMessage")) {
+			userInput.insertAdjacentHTML('afterend', '<span id="usernameMessage";"></span>');
+		}
+		// Al termine dell'input (onblur) chiama la verifica AJAX
+		userInput.onblur = function() {
+			let username = userInput.value.trim();
+			//if (username !== "") {
+				// Parametro della richiesta
+				let params = "control=" + encodeURIComponent(username);
+				loadAjaxDoc("RegistrationFormValidator", "GET", params, handleUsernameResponse);
+			//}
+		};
+	}
+	
+	if (emailInput) {
+		// Crea uno span per mostrare il messaggio di email, se non esiste
+		if (!document.getElementById("emailMessage")) {
+			emailInput.insertAdjacentHTML('afterend', '<span id="emailMessage";"></span>');
+		}
+		// Al termine dell'input (onblur) chiama la verifica AJAX
+		emailInput.onblur = function() {
+			let email = emailInput.value.trim();
+			//if (email !== "") {
+				// Parametro della richiesta
+				let params = "control=" + encodeURIComponent(email);
+				loadAjaxDoc("RegistrationFormValidator", "GET", params, handleEmailResponse);
+			//}
+		};
+	}
 };
