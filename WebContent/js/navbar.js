@@ -69,3 +69,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+    const adminMenuBtn = document.getElementById('adminMenuBtn');
+    const adminDropdown = document.getElementById('adminDropdown');
+
+    if (adminMenuBtn && adminDropdown) {
+        
+        // Gestisce il click sul pulsante hamburger dell'admin
+        adminMenuBtn.addEventListener('click', function(event) {
+            // Ferma la propagazione per evitare che il click venga subito catturato 
+            // dal listener sulla finestra (window) e chiuda il menu appena aperto.
+            event.stopPropagation();
+            
+            // Aggiunge o rimuove la classe 'show' per mostrare/nascondere il menu.
+            adminDropdown.classList.toggle('show');
+        });
+    }
+
+    // Listener globale per chiudere il menu admin se si clicca altrove.
+    // Questo funziona su QUALSIASI dimensione dello schermo.
+    window.addEventListener('click', function(event) {
+        // Controlla se il menu admin è aperto
+        if (adminDropdown && adminDropdown.classList.contains('show')) {
+            // Se il click NON è avvenuto sul pulsante del menu, chiudilo.
+
+             if (!adminMenuBtn.contains(event.target)) {
+                adminDropdown.classList.remove('show');
+             }
+        }
+    });
