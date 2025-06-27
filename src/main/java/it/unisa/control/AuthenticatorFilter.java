@@ -15,6 +15,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.net.http.HttpRequest;
 
+import it.unisa.model.DAO.DaoUtils;
+import it.unisa.model.beans.AccountBean;
+
 /**
  * Servlet Filter implementation class AuthenticatorFilter
  */
@@ -44,10 +47,21 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
-		if (session == null || session.getAttribute("user") == null) {
+		if (session == null || ((Boolean)session.getAttribute("user") == false && (Boolean)session.getAttribute("admin")==false)) {
 		    res.sendRedirect(req.getContextPath()+"/LoginPage.jsp");		
 		    return;
-		}
+		}else {
+				Boolean user= (Boolean) session.getAttribute("user");
+				Boolean admin= (Boolean) session.getAttribute("admin");
+				String path = req.getServletPath();
+				if (path.contains("/utente/")&& user==false){
+					res.sendRedirect("LoginPage.jsp");		
+					return;
+				}else if(path.contains("/amministratore/")&& admin==false) {
+					res.sendRedirect("LoginPage.jsp");
+					return;			    
+				}
+		}	
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
 	}

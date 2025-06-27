@@ -13,6 +13,7 @@ import java.sql.SQLException;
 
 import it.unisa.model.DAO.AccountDao;
 import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.AccountBean;
 
 /**
@@ -56,6 +57,7 @@ public class LoginPage extends HttpServlet {
         try {
         	 account = dao.doRetrieveByKey(username);
         	 if(account !=null && username.equals(account.getUsername())) {
+        		
         		 if(PasswordUtils.checkPasswordHashed(pwd, account.gethashedPassword())==true) {
         			 request.setAttribute("flag","passok");
         		 }else {
@@ -68,14 +70,22 @@ public class LoginPage extends HttpServlet {
         }catch(SQLException e) {
         	request.setAttribute("serverError", "Login Fallito. Riprova"); //eventuale pagina errore
         }
-       
-        //creazione sessione utente
+        
+        
         HttpSession session = request.getSession();
-        session.setAttribute("user", account);
-        
-        
-        // Redirect a pagina protetta
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        if(DaoUtils.getRuoloAccountString(account)=="amministratore") {
+        	//creazione sessione admin       
+            session.setAttribute("admin", Boolean.TRUE);  
+            response.sendRedirect(request.getContextPath() + "/index.jsp");	// Redirect a pagina protetta
+        }
+        else if(DaoUtils.getRuoloAccountString(account)=="utente_registrato") {
+        	 //creazione sessione utente 
+            session.setAttribute("user", Boolean.TRUE);  
+            response.sendRedirect(request.getContextPath() + "/index.jsp");	// Redirect a pagina protetta
+        }
+       
+       
+      
        
        
      
