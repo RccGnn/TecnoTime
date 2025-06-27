@@ -71,17 +71,16 @@ public class LoginPage extends HttpServlet {
         	request.setAttribute("serverError", "Login Fallito. Riprova"); //eventuale pagina errore
         }
         
-        
         HttpSession session = request.getSession();
         if(DaoUtils.getRuoloAccountString(account)=="amministratore") {
         	//creazione sessione admin      
             session.setAttribute("admin", Boolean.TRUE);  
-            response.sendRedirect(request.getContextPath() + "/amministratore/index.jsp");	// Redirect a pagina protetta
+            response.sendRedirect(request.getContextPath() + "/amministratore/index-amministratore.jsp");	// Redirect a pagina protetta
         }
         else if(DaoUtils.getRuoloAccountString(account)=="utente_registrato") {
         	 //creazione sessione utente 
             session.setAttribute("user", Boolean.TRUE);  
-            response.sendRedirect(request.getContextPath() + "/utente/index.jsp");	// Redirect a pagina protetta
+            response.sendRedirect(request.getContextPath() + "/utente/index-utente.jsp");	// Redirect a pagina protetta
         }
        
        

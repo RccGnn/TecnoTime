@@ -28,7 +28,7 @@
             <img src="../images/shopping_cart.png" alt="Carrello" class="icon">
              <span class="Carrello">Carrello</span>
         </a>
-        <a href="../index.jsp" class="icon-link">
+        <a href="${pageContext.request.contextPath}/LogoutServlet" class="icon-link">
             <img src="../images/user.png" alt="Utente" class="icon">
             <span class="login-text">Logout</span>
         </a>

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form-container form');
 
   // regex per i vari campi
-  const nameRe     = /^[A-Za-zÀ-ÖØ-öø-ÿ' ]{2,50}$/;
+  const nameRe     = /^[A-Za-zÀ-ÖØ-öø-ÿ']{2,50}$/;
   const addressRe  = /^[A-Za-z0-9À-ÖØ-öø-ÿ'.,\-\s]{5,100}$/;
   const postalRe   = /^\d{5}$/;
   const phoneRe    = /^\+?\d{7,15}$/;

@@ -47,8 +47,10 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
-		if (session == null || ((Boolean)session.getAttribute("user") == false && (Boolean)session.getAttribute("admin")==false)) {
-		    res.sendRedirect(req.getContextPath()+"/LoginPage.jsp");		
+		
+		if (session == null || (session.getAttribute("user") == null && session.getAttribute("admin")==null)) {
+		    res.sendRedirect(req.getContextPath()+"/LoginPage.jsp");
+		    // messagio d'errore
 		    return;
 		}else {
 				Boolean user= (Boolean) session.getAttribute("user");
@@ -61,10 +63,10 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 				}
 		}	
 		// pass the request along the filter chain
-		if (req.getRequestURI().endsWith("login.jsp") || req.getRequestURI().endsWith("login")) {
+		//if (req.getRequestURI().endsWith("login.jsp") || req.getRequestURI().endsWith("login")) {
 		    chain.doFilter(request, response); // non bloccare login
-		    return;
-		}
+		    //return;
+		//}
 	}
 
 	/**
