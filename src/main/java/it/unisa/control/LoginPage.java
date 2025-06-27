@@ -74,7 +74,7 @@ public class LoginPage extends HttpServlet {
         
         HttpSession session = request.getSession();
         if(DaoUtils.getRuoloAccountString(account)=="amministratore") {
-        	//creazione sessione admin       
+        	//creazione sessione admin      
             session.setAttribute("admin", Boolean.TRUE);  
             response.sendRedirect(request.getContextPath() + "/index.jsp");	// Redirect a pagina protetta
         }
