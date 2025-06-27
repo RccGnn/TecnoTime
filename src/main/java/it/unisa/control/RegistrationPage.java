@@ -48,10 +48,8 @@ public class RegistrationPage extends HttpServlet {
 		//doGet(request, response);
 		
 		AccountBean account = new AccountBean();
-		
-		
-		
-	String error="";
+
+		String error="";
 		
 		String firstName= request.getParameter("firstName");
 		String lastName= request.getParameter("lastName");
@@ -67,10 +65,9 @@ public class RegistrationPage extends HttpServlet {
 		String province=request.getParameter("province");
 		String city=request.getParameter("city");
 		String aptnumber=request.getParameter("aptnumber");
-		String passwordConfirm=request.getParameter("passwordConfirm");
+		String passwordConfirm=request.getParameter("confirmPassword");
 		String role = ""; // Da ricavare
 		char genderChr = ' ';
-		
 		
 		// invece di fare tutti i controlli, il model crea l'oggetto user con la classe DAO
 		if (firstName == null || firstName.trim().equals("")) {
@@ -134,11 +131,17 @@ public class RegistrationPage extends HttpServlet {
 			error += "must insert a password";
 		}else {
 			password= password.trim();
-			password=DecoderHtml.encodeHtml(password);         
-		    if(Validator.pwdValidator(password,passwordConfirm)==false) {         	
+			password=DecoderHtml.encodeHtml(password);
+			passwordConfirm = passwordConfirm.trim();
+			passwordConfirm = DecoderHtml.encodeHtml(passwordConfirm);
+			
+			if(Validator.pwdValidator(password,passwordConfirm)==false) {
+		    	System.out.println("-"+password + "1");
 		    	request.setAttribute("pwderror","password non valida" );  
 		    }else {    
+		    	System.out.println("-"+password  + "2");
 		    	password=PasswordUtils.hashPassword(password);       //la stringa di ritorno deve essere memorizzata nel db con l'oggetto user  	
+				System.out.println("-"+password  + "1");
 		    	account.sethashedPassword(password);
 			}
 		}
@@ -244,9 +247,6 @@ public class RegistrationPage extends HttpServlet {
 
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
-	        dispatcher.forward(request, response);
-			return;
 		}
 		
 
@@ -254,29 +254,22 @@ public class RegistrationPage extends HttpServlet {
 		try {
 		    dao.doSave(account);
 		} catch (SQLException e) {
-		    String sqlState = e.getSQLState();
-		    if (sqlState != null && sqlState.startsWith("23")) {
+			String msg = e.getMessage().toLowerCase();
+			
+			if (msg != null && msg.startsWith("23")) { // I codici che iniziano per 23xxx sono SQLIntegrityConstraintViolationException
+				if (msg.contains("for key 'username'")) // Errore sull'username
+					request.setAttribute("error", "Username già esistente.");
+				else if (msg.contains("for key 'email'")) // Errore sull'email
+					request.setAttribute("error", "Email già esistente.");
+				else
+					request.setAttribute("error", "Errore di vincolo d'integrità: " + msg);
+			} else { // Altri errori
+				request.setAttribute("error", "Errore:" + msg);
+			}
+		} 
 
-		        // Username già presente
-		        request.setAttribute("error", "Username già esistente, scegline un altro.");
-		        request.getRequestDispatcher("/Registration.jsp").forward(request, response);
-		    } else {
-
-		        // Altri errori
-		        request.setAttribute("error", "Errore imprevisto durante la registrazione.");
-		        request.getRequestDispatcher("/Registration.jsp").forward(request, response);
-		    }
-		}
-
-	/*	RequestDispatcher dispatcher = this.getServletContext().
-				getRequestDispatcher("/RegistrationPage.jsp");
-		dispatcher.forward(request, response); */
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
-
-        dispatcher.forward(request, response); 		
-
-        
-
+        dispatcher.forward(request, response);
 	}
 	
 }

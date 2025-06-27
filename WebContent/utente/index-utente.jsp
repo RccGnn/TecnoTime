@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <jsp:include page="header-utente-registrato.jsp" />
+    <jsp:include page="header-utente.jsp" />
 	
     <!-- Contenuto principale -->
     <main>

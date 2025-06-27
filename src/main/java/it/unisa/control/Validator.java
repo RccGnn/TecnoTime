@@ -5,8 +5,11 @@ import it.unisa.model.beans.AccountBean;
 import java.util.ArrayList;
 
 public class Validator {
+	
+	private static final int pwdMinLenght = 9;
+	
 	public static boolean pwdValidator(String pwd, String pwdConferm) {
-		if(pwd.length()<9||!pwd.equals(pwdConferm)) {
+		if(pwd.length()<Validator.pwdMinLenght || !pwd.equals(pwdConferm)) {
 			return false;
 		}
 		else {
@@ -34,7 +37,7 @@ public class Validator {
 	/**
 	 * Metodo di utilità per poter verificare un account è presente nel database dato l'username.
 	 * @param username - {@code String} username da ricercare
-	 * @return {@code false} se l'account con username {@code username} non è presente sul database,
+	 * @return {@code false} se l'account con username {@code username} è presente sul database,
 	 * {@code true} altrimenti
 	 */
 	public static boolean checkUsername(String username) {
@@ -46,9 +49,11 @@ public class Validator {
 		try {
 			AccountDao dao = new AccountDao();
 			AccountBean account = dao.doRetrieveByKey(username);
+			// Non sono presenti account con lo stesso username, il controllo è passato
 			if(account == null)
 				flag = true;
-			else
+			// Esiste un account con lo stesso username, in controllo non è passato
+			else 
 				flag = false;
 		} catch (java.sql.SQLException e) {
 			System.err.print(e.getMessage());
@@ -77,11 +82,13 @@ public class Validator {
 				flag = true;
 			else {	// Esiste almeno un elemento nella tabella Account
 				// Controlla se esiste almeno un elemento account con la stessa email
+				flag = true;
 				for (AccountBean account : accList) {	
-					if (account.getEmail().equals(email))
+					// E' presente un account con la stessa email
+					if (account.getEmail().equals(email)) {
 						flag = false;
-					else
-						flag = true;
+						break;
+					}
 				}
 			}
 				
