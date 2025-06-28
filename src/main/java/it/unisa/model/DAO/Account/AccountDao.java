@@ -1,13 +1,15 @@
-package it.unisa.model.DAO;
+package it.unisa.model.DAO.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.beans.AccountBean;
-import it.unisa.model.beans.Ruoli;
+import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.beans.Account.AccountBean;
+import it.unisa.model.beans.Account.Ruoli;
 import it.unisa.model.connections.*;
+import it.unisa.model.DAO.*;
 
 import java.util.ArrayList;
 import java.sql.Date;

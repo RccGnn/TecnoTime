@@ -1,4 +1,4 @@
-package it.unisa.control;
+package it.unisa.control.Authentication;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,10 +11,11 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.AccountDao;
+import it.unisa.control.PasswordUtils;
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
-import it.unisa.model.beans.AccountBean;
+import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.beans.Account.AccountBean;
 
 /**
  * Servlet implementation class LoginPage

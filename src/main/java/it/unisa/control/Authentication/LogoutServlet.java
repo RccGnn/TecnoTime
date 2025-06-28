@@ -1,4 +1,4 @@
-package it.unisa.control;
+package it.unisa.control.Authentication;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,8 +29,7 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			HttpSession session = request.getSession(false);
-			
-			request.getSession().invalidate(); // elimina la sessione
+			session.invalidate(); // elimina la sessione
 		    response.sendRedirect("index.jsp");
 		}
 

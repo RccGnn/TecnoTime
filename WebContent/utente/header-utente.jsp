@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="/images/TecnoTimeIcon.svg">
+    <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
     <link rel="stylesheet" href="styles.css">
@@ -15,23 +15,23 @@
     <!-- Header con logo, ricerca, icone -->
 <header class="main-header">
     <div class="header-left">
-        <img src="/images/TecnoTime.png" alt="Logo TecnoTime" class="logo">
+        <img src="../images/TecnoTime.png" alt="Logo TecnoTime" class="logo">
         <span class="brand-name">TECNOTIME</span>
     </div>
     <div class="header-center">
         <div class="search-container">
-            <img src="/images/magnifying_glass.png" alt="Ricerca" class="search-icon">
+            <img src="../images/magnifying_glass.png" alt="Ricerca" class="search-icon">
             <input type="text" class="search-bar" placeholder="Cerca...">
         </div>
     </div>
     <div class="header-right">
         <a href="#cart" class="icon-link">
-            <img src="/images/shopping_cart.png" alt="Carrello" class="icon">
+            <img src="../images/shopping_cart.png" alt="Carrello" class="icon">
              <span class="Carrello">Carrello</span>
         </a>
       
         <a href="${pageContext.request.contextPath}/LogoutServlet" class="icon-link">
-            <img src="/images/user.png" alt="Utente" class="icon">
+            <img src="../images/user.png" alt="Utente" class="icon">
             <span class="login-text">Logout</span>
         </a>
     </div>

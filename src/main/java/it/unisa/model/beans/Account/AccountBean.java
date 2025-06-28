@@ -1,4 +1,4 @@
-package it.unisa.model.beans;
+package it.unisa.model.beans.Account;
 
 import java.io.Serializable;
 import java.time.LocalDate;

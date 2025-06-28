@@ -13,7 +13,7 @@
   
  <filter>
     <filter-name>AuthenticatorFilter</filter-name>
-    <filter-class>it.unisa.control.AuthenticatorFilter</filter-class>
+    <filter-class>it.unisa.control.Authentication.AuthenticatorFilter</filter-class>
 </filter>
 
 <filter-mapping>

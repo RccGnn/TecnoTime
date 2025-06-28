@@ -1,4 +1,4 @@
-package it.unisa.control;
+package it.unisa.control.Registration;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -11,11 +11,13 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import it.unisa.model.DAO.AccountDao;
+import it.unisa.control.DecoderHtml;
+import it.unisa.control.PasswordUtils;
+import it.unisa.control.Validator;
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
-import it.unisa.model.beans.AccountBean;
-import it.unisa.model.beans.Ruoli;
+import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.beans.Account.AccountBean;
 
 /**
  * Servlet implementation class RegistrationPage

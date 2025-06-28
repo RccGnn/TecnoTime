@@ -1,4 +1,4 @@
-package it.unisa.control;
+package it.unisa.control.Registration;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.google.gson.*;
+
+import it.unisa.control.Validator;
 
 /**
  * Servlet implementation class RegistrationFormValidator

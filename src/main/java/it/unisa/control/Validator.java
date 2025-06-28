@@ -1,7 +1,8 @@
 package it.unisa.control;
 
-import it.unisa.model.DAO.AccountDao;
-import it.unisa.model.beans.AccountBean;
+import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.beans.Account.AccountBean;
+
 import java.util.ArrayList;
 
 public class Validator {
