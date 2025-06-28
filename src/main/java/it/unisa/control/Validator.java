@@ -1,7 +1,7 @@
 package it.unisa.control;
 
 import it.unisa.model.DAO.Account.AccountDao;
-import it.unisa.model.beans.Account.AccountBean;
+import it.unisa.model.beans.AccountBean;
 
 import java.util.ArrayList;
 

@@ -15,7 +15,7 @@ import it.unisa.control.PasswordUtils;
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
-import it.unisa.model.beans.Account.AccountBean;
+import it.unisa.model.beans.AccountBean;
 
 /**
  * Servlet implementation class LoginPage

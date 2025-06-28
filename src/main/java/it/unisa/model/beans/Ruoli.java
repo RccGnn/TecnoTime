@@ -1,4 +1,4 @@
-package it.unisa.model.beans.Account;
+package it.unisa.model.beans;
 
 public enum Ruoli {
     amministratore,

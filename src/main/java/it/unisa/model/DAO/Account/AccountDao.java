@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unisa.model.DAO.BeanDaoInterface;
-import it.unisa.model.beans.Account.AccountBean;
-import it.unisa.model.beans.Account.Ruoli;
+import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.Ruoli;
 import it.unisa.model.connections.*;
 import it.unisa.model.DAO.*;
 
