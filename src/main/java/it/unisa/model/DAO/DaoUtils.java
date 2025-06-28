@@ -2,8 +2,8 @@ package it.unisa.model.DAO;
 
 import java.util.regex.*;
 
-import it.unisa.model.beans.Account.AccountBean;
-import it.unisa.model.beans.Account.Ruoli;
+import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.Ruoli;
 
 public class DaoUtils {
 	

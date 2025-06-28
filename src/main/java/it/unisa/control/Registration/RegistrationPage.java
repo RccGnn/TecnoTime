@@ -17,7 +17,7 @@ import it.unisa.control.Validator;
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
-import it.unisa.model.beans.Account.AccountBean;
+import it.unisa.model.beans.AccountBean;
 
 /**
  * Servlet implementation class RegistrationPage
