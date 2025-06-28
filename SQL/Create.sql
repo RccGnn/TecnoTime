@@ -9,7 +9,7 @@ CREATE TABLE Account (
   nome        VARCHAR(255)  NOT NULL,
   cognome     VARCHAR(255)  NOT NULL,
   sesso       VARCHAR(1)     NOT NULL,
-  email     	VARCHAR(100)   	UNIQUE NOT NULL,
+  email     	VARCHAR(100)   	NOT NULL UNIQUE,
   numeroTelefono VARCHAR(13)  NOT NULL,
   nazione     VARCHAR(50)     NOT NULL,
   provincia		VARCHAR(50)    	NOT NULL,
@@ -17,7 +17,7 @@ CREATE TABLE Account (
   via      		VARCHAR(100)   	NOT NULL,
   numeroCivico	VARCHAR(10)		NOT NULL,
   CAP         VARCHAR(5)    NOT NULL,
-  ruolo			  ENUM('amministratore','utente_registrato')	NOT NULL,
+  ruolo			  ENUM('amministratore','utente_registrato')	,
   dataNascita	DATE	NOT NULL
 );
 
@@ -44,11 +44,20 @@ CREATE TABLE Wishlist (
 CREATE TABLE Articolo (
   codiceIdentificativo	VARCHAR(20)		PRIMARY KEY NOT NULL,
   descrizione         	TEXT        	NOT NULL,
+  tipologia				VARCHAR(50)		NOT NULL,
   nome                	VARCHAR(100)	NOT NULL,
   prezzo              	DECIMAL(6,2)  	NOT NULL,
   dataUltimaPromozione 	DATE          	NOT NULL,
   enteErogatore       	VARCHAR(100)   	NOT NULL,
   disponibilita       	BOOLEAN        	NOT NULL DEFAULT TRUE
+);
+
+CREATE TABLE Immagine ( 
+	identificatore			INT AUTO_INCREMENT	PRIMARY KEY NOT NULL,
+    dati					MEDIUMBLOB			NOT NULL,
+    codiceIdentificativo	VARCHAR(20)			NOT NULL,
+    CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Prodotto_Fisico (
@@ -64,7 +73,6 @@ CREATE TABLE Prodotto_Fisico (
 CREATE TABLE Servizio (
   codiceServizio     VARCHAR(20)    PRIMARY KEY NOT NULL,
   durata           	 INT            NOT NULL, -- ORE/GIORNI
-  tipologia          VARCHAR(50)    NOT NULL,	
   codiceArticolo     VARCHAR(20)    NOT NULL,
   CONSTRAINT FOREIGN KEY (codiceArticolo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
