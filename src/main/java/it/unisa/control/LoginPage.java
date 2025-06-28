@@ -56,7 +56,7 @@ public class LoginPage extends HttpServlet {
         
         try {
         	 account = dao.doRetrieveByKey(username);
-        	 if(account !=null && username.equals(account.getUsername())) {
+        	 if(account != null && username.equals(account.getUsername())) {
         		
         		 if(PasswordUtils.checkPasswordHashed(pwd, account.gethashedPassword())==true) {
         			 request.setAttribute("flag","passok");
@@ -67,8 +67,12 @@ public class LoginPage extends HttpServlet {
         	         return;
         		 }
              }
-        }catch(SQLException e) {
-        	request.setAttribute("serverError", "Login Fallito. Riprova"); //eventuale pagina errore
+        }catch (SQLException e) {
+        	request.setAttribute("serverError", "Errore d'accesso: Login Fallito. Riprova"); //eventuale pagina errore
+        }catch (NullPointerException e) {
+        	request.setAttribute("serverError", "Errore recupero dati (null): Login Fallito. Riprova"); //eventuale pagina errore        	
+        }finally {
+        	request.setAttribute("serverError", "Errore"); //eventuale pagina errore        	
         }
         
         HttpSession session = request.getSession();
