@@ -9,12 +9,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import it.unisa.model.DAO.Articoli.ArticoloDao;
-import it.unisa.model.DAO.Articoli.ImmagineDao;
-import it.unisa.model.DAO.Articoli.ServizioDao;
-import it.unisa.model.beans.ArticoloBean;
-import it.unisa.model.beans.ImmagineBean;
-import it.unisa.model.beans.ServizioBean;
+import it.unisa.model.DAO.Articoli.*;
+import it.unisa.model.DAO.Articoli.ProdottoFisicoDao;
+import it.unisa.model.beans.*;
+import it.unisa.model.beans.ProdottoFisicoBean;
 
 /**
  * Servlet implementation class test
@@ -38,9 +36,9 @@ public class test extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 			
-				ServizioDao i = new ServizioDao();
+				ProdottoFisicoDao i = new ProdottoFisicoDao();
 				try {
-					ServizioBean art = i.doRetrieveByKey("SRV001");
+					ProdottoFisicoBean art = i.doRetrieveByKey("PF1001");
 					PrintWriter pw = response.getWriter();
 					pw.println("+\n"+art.toString()+"\n");
 				} catch (Exception e) {
@@ -48,10 +46,10 @@ public class test extends HttpServlet {
 				}
 				
 				try {
-					ArrayList<ServizioBean> art = i.doRetrieveAll("");
+					ArrayList<ProdottoFisicoBean> art = i.doRetrieveAll("");
 					PrintWriter pw = response.getWriter();
 					
-					for (ServizioBean ab : art) {
+					for (ProdottoFisicoBean ab : art) {
 						pw.println("+\n"+ab.toString());
 					}
 				} catch (Exception e) {

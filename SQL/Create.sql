@@ -61,20 +61,20 @@ CREATE TABLE Immagine (
 );
 
 CREATE TABLE Prodotto_Fisico (
-  seriale          	 VARCHAR(50)    PRIMARY KEY NOT NULL,
-  isPreassemblato    BOOLEAN        NOT NULL DEFAULT FALSE,
-  quantitaMagazzino  INT            NOT NULL DEFAULT 0,
-  codiceArticolo     VARCHAR(20)    NOT NULL,
-  CONSTRAINT FOREIGN KEY (codiceArticolo) REFERENCES Articolo(codiceIdentificativo)
+  seriale          	 	VARCHAR(50)    PRIMARY KEY NOT NULL,
+  isPreassemblato    	BOOLEAN        NOT NULL DEFAULT FALSE,
+  quantitaMagazzino  	INT            NOT NULL DEFAULT 0,
+  codiceIdentificativo 	VARCHAR(20)    NOT NULL,
+  CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
 
 CREATE TABLE Servizio (
-  codiceServizio     VARCHAR(20)    PRIMARY KEY NOT NULL,
-  durata           	 INT            NOT NULL, -- ORE/GIORNI
-  codiceArticolo     VARCHAR(20)    NOT NULL,
-  CONSTRAINT FOREIGN KEY (codiceArticolo) REFERENCES Articolo(codiceIdentificativo)
+  codiceServizio     	VARCHAR(20)    PRIMARY KEY NOT NULL,
+  durata           	 	INT            NOT NULL, -- ORE/GIORNI
+  codiceIdentificativo	VARCHAR(20)    NOT NULL,
+  CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
