@@ -161,7 +161,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				while (rs.next()) {
+				do{
 					AccountBean account = new AccountBean();
 
 					account.setUsername(rs.getString("username"));
@@ -181,7 +181,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 					account.setDataNascita(rs.getDate("dataNascita").toLocalDate());
 					
 					accounts.add(account);
-				}
+				} while (rs.next());
 			} else {
 				accounts = null;
 			}

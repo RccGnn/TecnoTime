@@ -3,10 +3,10 @@ package it.unisa.model.beans;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ArticoloBean implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+public class ArticoloBean implements Serializable, BeanMarker{
 
+	private static final long serialVersionUID = 1L;
+	
 	private String codiceIdentificativo;
 	private String descrizione;
 	private String tipologia;
@@ -84,5 +84,13 @@ public class ArticoloBean implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	@Override
+	public String toString() {
+		return "ArticoloBean [codiceIdentificativo=" + codiceIdentificativo + ", descrizione=" + descrizione
+				+ ", tipologia=" + tipologia + ", nome=" + nome + ", prezzo=" + prezzo + ", dataUltimaPromozione="
+				+ dataUltimaPromozione + ", enteErogatore=" + enteErogatore + ", disponibilita=" + disponibilita + "]";
+	}
 		
+	
 }

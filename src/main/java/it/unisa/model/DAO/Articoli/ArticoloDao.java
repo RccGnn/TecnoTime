@@ -146,7 +146,7 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				while (rs.next()) {
+				do {
 					ArticoloBean articolo = new ArticoloBean();
 
 					articolo.setCodiceIdentificativo(rs.getString("codiceIdentificativo"));
@@ -159,7 +159,7 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 					articolo.setDisponibilita(rs.getBoolean("disponibilita"));
 					
 					articoli.add(articolo);
-				}
+				} while (rs.next());
 			} else {
 				articoli = null;
 			}

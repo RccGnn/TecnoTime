@@ -53,9 +53,9 @@ CREATE TABLE Articolo (
 );
 
 CREATE TABLE Immagine ( 
-	identificatore			INT AUTO_INCREMENT	PRIMARY KEY NOT NULL,
-    dati					MEDIUMBLOB			NOT NULL,
-    codiceIdentificativo	VARCHAR(20)			NOT NULL,
+	indice					INT				AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	url						VARCHAR(400)	NOT NULL,
+    codiceIdentificativo	VARCHAR(20)		NOT NULL,
     CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
 );
