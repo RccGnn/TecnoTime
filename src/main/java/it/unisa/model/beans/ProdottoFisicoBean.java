@@ -9,7 +9,10 @@ public class ProdottoFisicoBean implements Serializable, BeanMarker{
 	private String seriale;
 	private boolean isPreassemblato;
 	private int quantitaMagazzino;
-	private String codiceIdentificativo;
+	private String Articolo_codiceIdentificativo;
+	private float prezzo;
+	private String descrizione;
+	
 	public String getSeriale() {
 		return seriale;
 	}
@@ -29,19 +32,38 @@ public class ProdottoFisicoBean implements Serializable, BeanMarker{
 		this.quantitaMagazzino = quantitaMagazzino;
 	}
 	public String getArticolo_CodiceIdentificativo() {
-		return codiceIdentificativo;
+		return Articolo_codiceIdentificativo;
 	}
-	public void setArticolo_CodiceIdentificativo(String codiceIdentificativo) {
-		this.codiceIdentificativo = codiceIdentificativo;
+	public void setArticolo_CodiceIdentificativo(String Articolo_codiceIdentificativo) {
+		this.Articolo_codiceIdentificativo = Articolo_codiceIdentificativo;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 	
+	public String getArticolo_codiceIdentificativo() {
+		return Articolo_codiceIdentificativo;
+	}
+	public void setArticolo_codiceIdentificativo(String Articolo_codiceIdentificativo) {
+		this.Articolo_codiceIdentificativo = Articolo_codiceIdentificativo;
+	}
+	public float getPrezzo() {
+		return prezzo;
+	}
+	public void setPrezzo(float prezzo) {
+		this.prezzo = prezzo;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProdottoFisicoBean [seriale=" + seriale + ", isPreassemblato=" + isPreassemblato
-				+ ", quantitaMagazzino=" + quantitaMagazzino + ", codiceIdentificativo=" + codiceIdentificativo + "]";
+				+ ", quantitaMagazzino=" + quantitaMagazzino + ", Articolo_codiceIdentificativo="
+				+ Articolo_codiceIdentificativo + ", prezzo=" + prezzo + ", descrizione=" + descrizione + "]";
 	}
-	
 }

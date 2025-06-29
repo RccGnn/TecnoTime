@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterfaceInt;
+import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.beans.ImmagineBean;
 import it.unisa.model.connections.*;
 
@@ -13,7 +13,7 @@ import it.unisa.model.connections.*;
 import java.util.ArrayList;
 
 
-public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
+public class ImmagineDao implements BeanDaoInterfaceArray<ImmagineBean> {
 
 	private static final String TABLE_NAME = "Immagine";
 
@@ -51,18 +51,19 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 	}
 
 	@Override
-	public synchronized ImmagineBean doRetrieveByKey(int key) throws SQLException {
+	public synchronized ImmagineBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		ImmagineBean immagine = new ImmagineBean();
 
-		String selectSQL = "SELECT * FROM " + ImmagineDao.TABLE_NAME + " WHERE indice = ?";
+		String selectSQL = "SELECT * FROM " + ImmagineDao.TABLE_NAME + " WHERE indice = ? AND codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setInt(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -88,18 +89,19 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 	
 	
 	@Override
-	public synchronized boolean doDelete(int key) throws SQLException {
+	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ImmagineDao.TABLE_NAME + " WHERE indice = ?";
+		String deleteSQL = "DELETE FROM " + ImmagineDao.TABLE_NAME + " WHERE indice = ? AND codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setInt(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			result = ps.executeUpdate();
 

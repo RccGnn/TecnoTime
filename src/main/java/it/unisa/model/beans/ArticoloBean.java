@@ -8,10 +8,8 @@ public class ArticoloBean implements Serializable, BeanMarker{
 	private static final long serialVersionUID = 1L;
 	
 	private String codiceIdentificativo;
-	private String descrizione;
-	private String tipologia;
+	private String categoria;
 	private String nome;
-	private float prezzo;
 	private LocalDate dataUltimaPromozione;
 	private String enteErogatore;
 	private boolean disponibilita;
@@ -25,20 +23,12 @@ public class ArticoloBean implements Serializable, BeanMarker{
 		this.codiceIdentificativo = codiceIdentificativo;
 	}
 	
-	public String getDescrizione() {
-		return descrizione;
+	public String getCategoria() {
+		return categoria;
 	}
 	
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	
-	public String getTipologia() {
-		return tipologia;
-	}
-	
-	public void setTipologia(String tipologia) {
-		this.tipologia = tipologia;
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	
 	public String getNome() {
@@ -48,15 +38,7 @@ public class ArticoloBean implements Serializable, BeanMarker{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public float getPrezzo() {
-		return prezzo;
-	}
-	
-	public void setPrezzo(float prezzo) {
-		this.prezzo = prezzo;
-	}
-	
+		
 	public LocalDate getDataUltimaPromozione() {
 		return dataUltimaPromozione;
 	}
@@ -87,10 +69,9 @@ public class ArticoloBean implements Serializable, BeanMarker{
 
 	@Override
 	public String toString() {
-		return "ArticoloBean [codiceIdentificativo=" + codiceIdentificativo + ", descrizione=" + descrizione
-				+ ", tipologia=" + tipologia + ", nome=" + nome + ", prezzo=" + prezzo + ", dataUltimaPromozione="
-				+ dataUltimaPromozione + ", enteErogatore=" + enteErogatore + ", disponibilita=" + disponibilita + "]";
-	}
-		
+		return "ArticoloBean [codiceIdentificativo=" + codiceIdentificativo + ", categoria=" + categoria + ", nome="
+				+ nome + ", dataUltimaPromozione=" + dataUltimaPromozione + ", enteErogatore=" + enteErogatore
+				+ ", disponibilita=" + disponibilita + "]";
+	}		
 	
 }

@@ -25,8 +25,8 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ ArticoloDao.TABLE_NAME
-				+ "(codiceIdentificativo, descrizione, tipologia, nome, prezzo, dataUltimaPromozione, enteErogatore, disponibilita) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+				+ "(codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -34,13 +34,11 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 			ps = connection.prepareStatement(insertSQL);	
 
 			ps.setString(1, articolo.getCodiceIdentificativo());
-		    ps.setString(2, articolo.getDescrizione());
-		    ps.setString(3, articolo.getTipologia());
-		    ps.setString(4, articolo.getNome());
-		    ps.setFloat(5, articolo.getPrezzo());
-		    ps.setDate(6,  Date.valueOf(articolo.getDataUltimaPromozione()));
-		    ps.setString(7, articolo.getEnteErogatore());
-		    ps.setBoolean(8, articolo.isDisponibilita());
+		    ps.setString(2, articolo.getCategoria());
+		    ps.setString(3, articolo.getNome());
+		    ps.setDate(4, Date.valueOf(articolo.getDataUltimaPromozione()));
+		    ps.setString(5, articolo.getEnteErogatore());
+		    ps.setBoolean(6, articolo.isDisponibilita());
 			ps.executeUpdate();
 
 		} finally {
@@ -74,10 +72,8 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 
 			if (rs.next()) {
 				articolo.setCodiceIdentificativo(rs.getString("codiceIdentificativo"));
-				articolo.setDescrizione(rs.getString("descrizione"));
-				articolo.setTipologia(rs.getString("tipologia"));
+				articolo.setCategoria(rs.getString("categoria"));
 				articolo.setNome(rs.getString("nome"));
-				articolo.setPrezzo(rs.getFloat("prezzo"));
 				articolo.setDataUltimaPromozione(rs.getDate("dataUltimaPromozione").toLocalDate());
 				articolo.setEnteErogatore(rs.getString("enteErogatore"));
 				articolo.setDisponibilita(rs.getBoolean("disponibilita"));
@@ -150,10 +146,8 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 					ArticoloBean articolo = new ArticoloBean();
 
 					articolo.setCodiceIdentificativo(rs.getString("codiceIdentificativo"));
-					articolo.setDescrizione(rs.getString("descrizione"));
-					articolo.setTipologia(rs.getString("tipologia"));
+					articolo.setCategoria(rs.getString("categoria"));
 					articolo.setNome(rs.getString("nome"));
-					articolo.setPrezzo(rs.getFloat("prezzo"));
 					articolo.setDataUltimaPromozione(rs.getDate("dataUltimaPromozione").toLocalDate());
 					articolo.setEnteErogatore(rs.getString("enteErogatore"));
 					articolo.setDisponibilita(rs.getBoolean("disponibilita"));

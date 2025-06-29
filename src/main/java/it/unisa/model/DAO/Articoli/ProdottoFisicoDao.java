@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.beans.ProdottoFisicoBean;
 import it.unisa.model.connections.*;
 
 
 import java.util.ArrayList;
 
-public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
+public class ProdottoFisicoDao implements BeanDaoInterfaceArray<ProdottoFisicoBean> {
 
 	private static final String TABLE_NAME = "Prodotto_Fisico";
 
@@ -23,8 +23,8 @@ public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ ProdottoFisicoDao.TABLE_NAME
-				+ "(seriale, isPreassemblato, quantitaMagazzino, codiceIdentificativo) "
-				+ "VALUES (?, ?, ?, ?)";
+				+ "(seriale, isPreassemblato, quantitaMagazzino, codiceIdentificativo, prezzo, descrizione) "
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -35,6 +35,9 @@ public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
 			ps.setBoolean(2, prodottoFisico.isPreassemblato());
 			ps.setInt(3,  prodottoFisico.getQuantitaMagazzino());
 		    ps.setString(4, prodottoFisico.getArticolo_CodiceIdentificativo());
+		    ps.setFloat(5, prodottoFisico.getPrezzo());
+		    ps.setString(6, prodottoFisico.getDescrizione());
+		    
 			ps.executeUpdate();
 
 		} finally {
@@ -51,18 +54,19 @@ public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
 	}
 
 	@Override
-	public synchronized ProdottoFisicoBean doRetrieveByKey(String key) throws SQLException {
+	public synchronized ProdottoFisicoBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		ProdottoFisicoBean prodottoFisico = new ProdottoFisicoBean();
 
-		String selectSQL = "SELECT * FROM " + ProdottoFisicoDao.TABLE_NAME + " WHERE seriale = ?";
+		String selectSQL = "SELECT * FROM " + ProdottoFisicoDao.TABLE_NAME + " WHERE seriale = ? AND codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -71,6 +75,8 @@ public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
 				prodottoFisico.setPreassemblato(rs.getBoolean("isPreassemblato"));
 				prodottoFisico.setQuantitaMagazzino(rs.getInt("quantitaMagazzino"));
 				prodottoFisico.setArticolo_CodiceIdentificativo(rs.getString("codiceIdentificativo"));
+				prodottoFisico.setPrezzo(rs.getFloat("prezzo"));
+				prodottoFisico.setDescrizione(rs.getString("descrizione"));
 				
 			} else {
 				prodottoFisico = null;
@@ -90,18 +96,19 @@ public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
 	
 	
 	@Override
-	public synchronized boolean doDelete(String key) throws SQLException {
+	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ProdottoFisicoDao.TABLE_NAME + " WHERE seriale = ?";
+		String deleteSQL = "DELETE FROM " + ProdottoFisicoDao.TABLE_NAME + " WHERE seriale = ? AND codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			result = ps.executeUpdate();
 
@@ -144,6 +151,9 @@ public class ProdottoFisicoDao implements BeanDaoInterface<ProdottoFisicoBean> {
 					prodottoFisico.setPreassemblato(rs.getBoolean("isPreassemblato"));
 					prodottoFisico.setQuantitaMagazzino(rs.getInt("quantitaMagazzino"));
 					prodottoFisico.setArticolo_CodiceIdentificativo(rs.getString("codiceIdentificativo"));
+					prodottoFisico.setPrezzo(rs.getFloat("prezzo"));
+					prodottoFisico.setDescrizione(rs.getString("descrizione"));
+
 					
 					prodottiFisici.add(prodottoFisico);
 				} while (rs.next());

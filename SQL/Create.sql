@@ -22,10 +22,11 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE Carrello (
-  numeroCarrello	INT				PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  numeroCarrello	INT				NOT NULL AUTO_INCREMENT,
   subtotale     	DECIMAL(6,2)	NOT NULL DEFAULT 0.00,
   numeroProdotti	INT				NOT NULL DEFAULT 0,
   username          VARCHAR(50)		NOT NULL,
+  CONSTRAINT PRIMARY KEY (numeroCarrello, username),
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -43,37 +44,42 @@ CREATE TABLE Wishlist (
 
 CREATE TABLE Articolo (
   codiceIdentificativo	VARCHAR(20)		PRIMARY KEY NOT NULL,
-  descrizione         	TEXT        	NOT NULL,
-  tipologia				VARCHAR(50)		NOT NULL,
+  categoria				VARCHAR(50)		NOT NULL,
   nome                	VARCHAR(100)	NOT NULL,
-  prezzo              	DECIMAL(6,2)  	NOT NULL,
   dataUltimaPromozione 	DATE          	NOT NULL,
-  enteErogatore       	VARCHAR(100)   	NOT NULL,
+  marca_enteErogatore       	VARCHAR(100)   	NOT NULL,
   disponibilita       	BOOLEAN        	NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE Immagine ( 
-	indice					INT				AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	indice					INT				AUTO_INCREMENT NOT NULL,
 	url						VARCHAR(400)	NOT NULL,
     codiceIdentificativo	VARCHAR(20)		NOT NULL,
+    CONSTRAINT PRIMARY KEY (indice, codiceIdentificativo),
     CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
 );
 
 CREATE TABLE Prodotto_Fisico (
-  seriale          	 	VARCHAR(50)    PRIMARY KEY NOT NULL,
+  seriale          	 	VARCHAR(50)    NOT NULL,
+  prezzo              	DECIMAL(6,2)  	NOT NULL,
+  descrizione         	TEXT        	NOT NULL,
   isPreassemblato    	BOOLEAN        NOT NULL DEFAULT FALSE,
   quantitaMagazzino  	INT            NOT NULL DEFAULT 0,
   codiceIdentificativo 	VARCHAR(20)    NOT NULL,
+  CONSTRAINT PRIMARY KEY (seriale, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
 
 CREATE TABLE Servizio (
-  codiceServizio     	VARCHAR(20)    PRIMARY KEY NOT NULL,
+  codiceServizio     	VARCHAR(20)    NOT NULL,
+  prezzo              	DECIMAL(6,2)  	NOT NULL,
+  descrizione         	TEXT        	NOT NULL,
   durata           	 	INT            NOT NULL, -- ORE/GIORNI
   codiceIdentificativo	VARCHAR(20)    NOT NULL,
+  CONSTRAINT PRIMARY KEY (codiceServizio, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
     ON UPDATE CASCADE

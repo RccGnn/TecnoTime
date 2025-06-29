@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.beans.ServizioBean;
 import it.unisa.model.connections.*;
 
@@ -13,7 +13,7 @@ import it.unisa.model.connections.*;
 import java.util.ArrayList;
 
 
-public class ServizioDao implements BeanDaoInterface<ServizioBean> {
+public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 
 	private static final String TABLE_NAME = "Servizio";
 
@@ -24,8 +24,8 @@ public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ ServizioDao.TABLE_NAME
-				+ "(codiceIdentificativo, durata, codiceIdentificativo) "
-				+ "VALUES (?, ?, ?)";
+				+ "(codiceServizio, durata, codiceIdentificativo, prezzo, descrizione) "
+				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -35,6 +35,9 @@ public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 			ps.setString(1, servizio.getCodiceServizio());
 			ps.setInt(2, servizio.getDurata());
 		    ps.setString(3, servizio.getArticolo_codiceIdentificativo());
+		    ps.setFloat(4, servizio.getPrezzo());
+		    ps.setString(5, servizio.getDescrizione());
+		    
 			ps.executeUpdate();
 
 		} finally {
@@ -51,18 +54,19 @@ public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 	}
 
 	@Override
-	public synchronized ServizioBean doRetrieveByKey(String key) throws SQLException {
+	public synchronized ServizioBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		ServizioBean servizio = new ServizioBean();
 
-		String selectSQL = "SELECT * FROM " + ServizioDao.TABLE_NAME + " WHERE codiceServizio = ?";
+		String selectSQL = "SELECT * FROM " + ServizioDao.TABLE_NAME + " WHERE codiceServizio = ? AND codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -70,6 +74,8 @@ public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 				servizio.setCodiceServizio(rs.getString("codiceServizio"));
 				servizio.setDurata(rs.getInt("durata"));
 				servizio.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
+				servizio.setPrezzo(rs.getFloat("prezzo"));
+				servizio.setDescrizione(rs.getString("descrizione"));
 				
 			} else {
 				servizio = null;
@@ -89,18 +95,19 @@ public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 	
 	
 	@Override
-	public synchronized boolean doDelete(String key) throws SQLException {
+	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ServizioDao.TABLE_NAME + " WHERE codiceServizio = ?";
+		String deleteSQL = "DELETE FROM " + ServizioDao.TABLE_NAME + " WHERE codiceServizio = ? AND codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			result = ps.executeUpdate();
 
@@ -142,6 +149,8 @@ public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 					servizio.setCodiceServizio(rs.getString("codiceServizio"));
 					servizio.setDurata(rs.getInt("durata"));
 					servizio.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
+					servizio.setPrezzo(rs.getFloat("prezzo"));
+					servizio.setDescrizione(rs.getString("descrizione"));
 					
 					servizi.add(servizio);
 				} while (rs.next());

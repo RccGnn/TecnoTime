@@ -2,17 +2,6 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 
-/*
- * CREATE TABLE Servizio (
-  codiceServizio     VARCHAR(20)    PRIMARY KEY NOT NULL,
-  durata           	 INT            NOT NULL, -- ORE/GIORNI
-  codiceArticolo     VARCHAR(20)    NOT NULL,
-  CONSTRAINT FOREIGN KEY (codiceArticolo) REFERENCES Articolo(codiceIdentificativo)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
-
- */
 public class ServizioBean implements Serializable, BeanMarker{
 	
 	private static final long serialVersionUID = 1L;
@@ -20,6 +9,8 @@ public class ServizioBean implements Serializable, BeanMarker{
 	private String codiceServizio;
 	private int durata;
 	private String Articolo_codiceIdentificativo;
+	private float prezzo;
+	private String descrizione;
 	
 	public String getCodiceServizio() {
 		return codiceServizio;
@@ -42,12 +33,23 @@ public class ServizioBean implements Serializable, BeanMarker{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+	public float getPrezzo() {
+		return prezzo;
+	}
+	public void setPrezzo(float prezzo) {
+		this.prezzo = prezzo;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
 	@Override
 	public String toString() {
 		return "ServizioBean [codiceServizio=" + codiceServizio + ", durata=" + durata
-				+ ", Articolo_codiceIdentificativo=" + Articolo_codiceIdentificativo + "]";
+				+ ", Articolo_codiceIdentificativo=" + Articolo_codiceIdentificativo + ", prezzo=" + prezzo
+				+ ", descrizione=" + descrizione + "]";
 	}
-	
 	
 }
