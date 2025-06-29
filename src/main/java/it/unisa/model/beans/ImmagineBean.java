@@ -8,7 +8,7 @@ public class ImmagineBean implements Serializable, BeanMarker{
 	
 	private int indice;
 	private String url;
-	private String Account_codiceIdentificativo;
+	private String Articolo_codiceIdentificativo;
 	
 	
 	public int getIndice() {
@@ -31,18 +31,18 @@ public class ImmagineBean implements Serializable, BeanMarker{
 		return serialVersionUID;
 	}
 	
-	public String getAccount_codiceIdentificativo() {
-		return Account_codiceIdentificativo;
+	public String getArticolo_codiceIdentificativo() {
+		return Articolo_codiceIdentificativo;
 	}
 
-	public void setAccount_codiceIdentificativo(String account_codiceIdentificativo) {
-		Account_codiceIdentificativo = account_codiceIdentificativo;
+	public void setArticolo_codiceIdentificativo(String Articolo_codiceIdentificativo) {
+		this.Articolo_codiceIdentificativo = Articolo_codiceIdentificativo;
 	}
 
 	@Override
 	public String toString() {
-		return "ImmagineBean [indice=" + indice + ", url=" + url + ", Account_codiceIdentificativo="
-				+ Account_codiceIdentificativo + "]";
+		return "ImmagineBean [indice=" + indice + ", url=" + url + ", Articolo_codiceIdentificativo="
+				+ Articolo_codiceIdentificativo + "]";
 	}
 
 }

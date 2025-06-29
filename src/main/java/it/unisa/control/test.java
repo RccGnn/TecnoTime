@@ -11,8 +11,10 @@ import java.util.ArrayList;
 
 import it.unisa.model.DAO.Articoli.ArticoloDao;
 import it.unisa.model.DAO.Articoli.ImmagineDao;
+import it.unisa.model.DAO.Articoli.ServizioDao;
 import it.unisa.model.beans.ArticoloBean;
 import it.unisa.model.beans.ImmagineBean;
+import it.unisa.model.beans.ServizioBean;
 
 /**
  * Servlet implementation class test
@@ -36,9 +38,9 @@ public class test extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 			
-				ImmagineDao i = new ImmagineDao();
+				ServizioDao i = new ServizioDao();
 				try {
-					ImmagineBean art = i.doRetrieveByKey(1);
+					ServizioBean art = i.doRetrieveByKey("SRV001");
 					PrintWriter pw = response.getWriter();
 					pw.println("+\n"+art.toString()+"\n");
 				} catch (Exception e) {
@@ -46,10 +48,10 @@ public class test extends HttpServlet {
 				}
 				
 				try {
-					ArrayList<ImmagineBean> art = i.doRetrieveAll("");
+					ArrayList<ServizioBean> art = i.doRetrieveAll("");
 					PrintWriter pw = response.getWriter();
 					
-					for (ImmagineBean ab : art) {
+					for (ServizioBean ab : art) {
 						pw.println("+\n"+ab.toString());
 					}
 				} catch (Exception e) {

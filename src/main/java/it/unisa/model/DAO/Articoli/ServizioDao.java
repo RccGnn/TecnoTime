@@ -5,26 +5,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterfaceInt;
-import it.unisa.model.beans.ImmagineBean;
+import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.beans.ServizioBean;
 import it.unisa.model.connections.*;
 
 
 import java.util.ArrayList;
 
 
-public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
+public class ServizioDao implements BeanDaoInterface<ServizioBean> {
 
-	private static final String TABLE_NAME = "Immagine";
+	private static final String TABLE_NAME = "Servizio";
 
 	@Override
-	public synchronized void doSave(ImmagineBean immagine) throws SQLException {
+	public synchronized void doSave(ServizioBean servizio) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement ps = null;
 		
-		String insertSQL = "INSERT INTO "+ ImmagineDao.TABLE_NAME
-				+ "(indice, url, codiceIdentificativo) "
+		String insertSQL = "INSERT INTO "+ ServizioDao.TABLE_NAME
+				+ "(codiceIdentificativo, durata, codiceIdentificativo) "
 				+ "VALUES (?, ?, ?)";
 		
 		try {
@@ -32,9 +32,9 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 			
 			ps = connection.prepareStatement(insertSQL);	
 
-			ps.setInt(1, immagine.getIndice());
-			ps.setString(2, immagine.getUrl());
-		    ps.setString(3, immagine.getArticolo_codiceIdentificativo());
+			ps.setString(1, servizio.getCodiceServizio());
+			ps.setInt(2, servizio.getDurata());
+		    ps.setString(3, servizio.getArticolo_codiceIdentificativo());
 			ps.executeUpdate();
 
 		} finally {
@@ -51,27 +51,28 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 	}
 
 	@Override
-	public synchronized ImmagineBean doRetrieveByKey(int key) throws SQLException {
+	public synchronized ServizioBean doRetrieveByKey(String key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		ImmagineBean immagine = new ImmagineBean();
+		ServizioBean servizio = new ServizioBean();
 
-		String selectSQL = "SELECT * FROM " + ImmagineDao.TABLE_NAME + " WHERE indice = ?";
+		String selectSQL = "SELECT * FROM " + ServizioDao.TABLE_NAME + " WHERE codiceServizio = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setInt(1, key);
+			ps.setString(1, key);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				immagine.setIndice(rs.getInt("indice"));
-				immagine.setUrl(rs.getString("url"));
-				immagine.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
+				servizio.setCodiceServizio(rs.getString("codiceServizio"));
+				servizio.setDurata(rs.getInt("durata"));
+				servizio.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
+				
 			} else {
-				immagine = null;
+				servizio = null;
 			}
 
 		} finally {
@@ -83,23 +84,23 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 					connection.close();
 			}
 		}
-		return immagine;
+		return servizio;
 	}
 	
 	
 	@Override
-	public synchronized boolean doDelete(int key) throws SQLException {
+	public synchronized boolean doDelete(String key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ImmagineDao.TABLE_NAME + " WHERE indice = ?";
+		String deleteSQL = "DELETE FROM " + ServizioDao.TABLE_NAME + " WHERE codiceServizio = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setInt(1, key);
+			ps.setString(1, key);
 
 			result = ps.executeUpdate();
 
@@ -116,13 +117,13 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 	}
 
 	@Override
-	public synchronized ArrayList<ImmagineBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized ArrayList<ServizioBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		ArrayList<ImmagineBean> immagini = new ArrayList<>();
+		ArrayList<ServizioBean> servizi = new ArrayList<>();
 
-		String selectSQL = "SELECT * FROM " + ImmagineDao.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + ServizioDao.TABLE_NAME;
 
 		if (order != null && !order.equals("")) {
 			selectSQL += " ORDER BY " + order;
@@ -136,16 +137,16 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 
 			if (rs.next()) {
 				do {
-					ImmagineBean immagine = new ImmagineBean();
+					ServizioBean servizio = new ServizioBean();
 
-					immagine.setIndice(rs.getInt("indice"));
-					immagine.setUrl(rs.getString("url"));
-					immagine.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
+					servizio.setCodiceServizio(rs.getString("codiceServizio"));
+					servizio.setDurata(rs.getInt("durata"));
+					servizio.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
 					
-					immagini.add(immagine);
+					servizi.add(servizio);
 				} while (rs.next());
 			} else {
-				immagini = null;
+				servizi = null;
 			}
 
 		} finally {
@@ -157,7 +158,7 @@ public class ImmagineDao implements BeanDaoInterfaceInt<ImmagineBean> {
 					connection.close();
 			}
 		}
-		return immagini;
+		return servizi;
 	}
 
 }
