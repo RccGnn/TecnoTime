@@ -45,7 +45,7 @@ public class test extends HttpServlet {
 
         // 1) Articolo
         ArticoloBean articolo = new ArticoloBean();
-        articolo.setCodiceIdentificativo("ART001");
+        articolo.setCodiceIdentificativo("ART002");
         articolo.setCategoria("Software");
         articolo.setNome("Microsoft Office 365");
         articolo.setDataUltimaPromozione(LocalDate.now());
@@ -54,22 +54,10 @@ public class test extends HttpServlet {
         catalogo.setArticolo(articolo);
 
         // 2) Prodotto Fisico
-        ProdottoFisicoBean pf = new ProdottoFisicoBean();
-        pf.setSeriale("PF700-MSOFF");
-        pf.setPrezzo(129.99f);
-        pf.setDescrizione("Pacchetto fisico con DVD di installazione");
-        pf.setPreassemblato(false);
-        pf.setQuantitaMagazzino(25);
-        pf.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
-        catalogo.setPdFisico(pf);
+        catalogo.setPdFisico(null);
 
         // 3) Prodotto Digitale
-        ProdottoDigitaleBean pd = new ProdottoDigitaleBean();
-        pd.setCodiceSoftware("SW-OFF365");
-        pd.setDescrizione("Licenza digitale Office 365, download istantaneo");
-        pd.setPrezzo(69.99f);
-        pd.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
-        catalogo.setPdDigitale(pd);
+        catalogo.setPdDigitale(null);
 
         // 4) Servizio
         ServizioBean servizio = new ServizioBean();

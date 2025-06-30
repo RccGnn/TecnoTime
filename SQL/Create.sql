@@ -61,12 +61,12 @@ CREATE TABLE Immagine (
 );
 
 CREATE TABLE Prodotto_Fisico (
-  seriale          	 	VARCHAR(50)    NOT NULL,
+  seriale          	 	VARCHAR(50)    	NOT NULL UNIQUE,
   prezzo              	DECIMAL(6,2)  	NOT NULL,
   descrizione         	TEXT        	NOT NULL,
-  isPreassemblato    	BOOLEAN        NOT NULL DEFAULT FALSE,
-  quantitaMagazzino  	INT            NOT NULL DEFAULT 0,
-  codiceIdentificativo 	VARCHAR(20)    NOT NULL,
+  isPreassemblato    	BOOLEAN        	NOT NULL DEFAULT FALSE,
+  quantitaMagazzino  	INT            	NOT NULL DEFAULT 0,
+  codiceIdentificativo 	VARCHAR(20)    	NOT NULL,
   CONSTRAINT PRIMARY KEY (seriale, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
@@ -74,7 +74,7 @@ CREATE TABLE Prodotto_Fisico (
 );
 
 CREATE TABLE Prodotto_Digitale (
-  codiceSoftware 	VARCHAR(20) 	NOT NULL,
+  codiceSoftware 	VARCHAR(20) 	NOT NULL UNIQUE,
   descrizione 		TEXT NOT 		NULL,
   prezzo 			DECIMAL(6,2) 	NOT NULL,
   chiaviDisponibili	INT				NOT NULL DEFAULT 0,
@@ -87,11 +87,11 @@ CREATE TABLE Prodotto_Digitale (
 );
 
 CREATE TABLE Servizio (
-  codiceServizio     	VARCHAR(20)    NOT NULL,
+  codiceServizio     	VARCHAR(20)    	NOT NULL UNIQUE,
   prezzo              	DECIMAL(6,2)  	NOT NULL,
   descrizione         	TEXT        	NOT NULL,
-  durata           	 	INT            NOT NULL, -- ORE/GIORNI
-  codiceIdentificativo	VARCHAR(20)    NOT NULL,
+  durata           	 	INT            	NOT NULL, -- ORE/GIORNI
+  codiceIdentificativo	VARCHAR(20)    	 NOT NULL,
   CONSTRAINT PRIMARY KEY (codiceServizio, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE

@@ -76,18 +76,24 @@ public class CatalogoDao{
 		artDao.doSave(articoloCatalogo.getArticolo());
 			
 		// Verifico ora quale tra le sottoclassi devo memorizzare
-			
-		ProdottoFisicoDao pdfDao = new ProdottoFisicoDao();
-		if (articoloCatalogo.getPdFisico() != null)
-			pdfDao.doSave(articoloCatalogo.getPdFisico());
-			
-		ProdottoDigitaleDao pddDao = new ProdottoDigitaleDao();
-		if (articoloCatalogo.getPdDigitale() != null)
-			pddDao.doSave(articoloCatalogo.getPdDigitale());
-			
-		ServizioDao srvDao = new ServizioDao();
-		if (articoloCatalogo.getServizio() != null)
-			srvDao.doSave(articoloCatalogo.getServizio());		
+
+		try {
+			ProdottoFisicoDao pdfDao = new ProdottoFisicoDao();
+			if (articoloCatalogo.getPdFisico() != null)
+				pdfDao.doSave(articoloCatalogo.getPdFisico());
+				
+			ProdottoDigitaleDao pddDao = new ProdottoDigitaleDao();
+			if (articoloCatalogo.getPdDigitale() != null)
+				pddDao.doSave(articoloCatalogo.getPdDigitale());
+				
+			ServizioDao srvDao = new ServizioDao();
+			if (articoloCatalogo.getServizio() != null)
+				srvDao.doSave(articoloCatalogo.getServizio());			
+		} catch (SQLException e) { // ATOMICITA'
+			// L'inserimento della sottoclasse è fallito, quindi si deve eliminare anche l'Articolo inserito precedentemente
+			artDao.doDelete(articoloCatalogo.getArticolo().getCodiceIdentificativo());
+			throw e; 
+		}
 	}
 	
 	public synchronized CatalogoBean doRetrieveByKey(String key) throws SQLException {
