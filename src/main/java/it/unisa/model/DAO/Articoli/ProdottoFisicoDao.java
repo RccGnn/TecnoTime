@@ -34,7 +34,7 @@ public class ProdottoFisicoDao implements BeanDaoInterfaceArray<ProdottoFisicoBe
 			ps.setString(1, prodottoFisico.getSeriale());
 			ps.setBoolean(2, prodottoFisico.isPreassemblato());
 			ps.setInt(3,  prodottoFisico.getQuantitaMagazzino());
-		    ps.setString(4, prodottoFisico.getArticolo_CodiceIdentificativo());
+		    ps.setString(4, prodottoFisico.getArticolo_codiceIdentificativo());
 		    ps.setFloat(5, prodottoFisico.getPrezzo());
 		    ps.setString(6, prodottoFisico.getDescrizione());
 		    
@@ -74,7 +74,7 @@ public class ProdottoFisicoDao implements BeanDaoInterfaceArray<ProdottoFisicoBe
 				prodottoFisico.setSeriale(rs.getString("Seriale"));
 				prodottoFisico.setPreassemblato(rs.getBoolean("isPreassemblato"));
 				prodottoFisico.setQuantitaMagazzino(rs.getInt("quantitaMagazzino"));
-				prodottoFisico.setArticolo_CodiceIdentificativo(rs.getString("codiceIdentificativo"));
+				prodottoFisico.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
 				prodottoFisico.setPrezzo(rs.getFloat("prezzo"));
 				prodottoFisico.setDescrizione(rs.getString("descrizione"));
 				
@@ -150,7 +150,7 @@ public class ProdottoFisicoDao implements BeanDaoInterfaceArray<ProdottoFisicoBe
 					prodottoFisico.setSeriale(rs.getString("Seriale"));
 					prodottoFisico.setPreassemblato(rs.getBoolean("isPreassemblato"));
 					prodottoFisico.setQuantitaMagazzino(rs.getInt("quantitaMagazzino"));
-					prodottoFisico.setArticolo_CodiceIdentificativo(rs.getString("codiceIdentificativo"));
+					prodottoFisico.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
 					prodottoFisico.setPrezzo(rs.getFloat("prezzo"));
 					prodottoFisico.setDescrizione(rs.getString("descrizione"));
 

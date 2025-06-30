@@ -8,8 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import it.unisa.model.DAO.Articoli.ProdottoFisicoDao;
-import it.unisa.model.beans.ProdottoFisicoBean;
+import it.unisa.model.DAO.Articoli.ProdottoDigitaleDao;
+import it.unisa.model.beans.ProdottoDigitaleBean;
 
 /**
  * Servlet implementation class test
@@ -31,13 +31,13 @@ public class test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ProdottoFisicoDao  a = new ProdottoFisicoDao();
+		ProdottoDigitaleDao  a = new ProdottoDigitaleDao();
 		try {
 			
 			ArrayList<Object> key = new ArrayList<>();
-			key.add("PF100A");
-			key.add("ART100");
-			ProdottoFisicoBean b = a.doRetrieveByKey(key);
+			key.add("SW-PSCC");
+			key.add("ART800");
+			ProdottoDigitaleBean b = a.doRetrieveByKey(key);
 			response.getWriter().println(b.toString());
 		} catch(Exception e){
 			System.err.println(e.getMessage());

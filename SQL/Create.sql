@@ -47,7 +47,7 @@ CREATE TABLE Articolo (
   categoria				VARCHAR(50)		NOT NULL,
   nome                	VARCHAR(100)	NOT NULL,
   dataUltimaPromozione 	DATE          	NOT NULL,
-  marca_enteErogatore       	VARCHAR(100)   	NOT NULL,
+  enteErogatore       	VARCHAR(100)   	NOT NULL,
   disponibilita       	BOOLEAN        	NOT NULL DEFAULT TRUE
 );
 
@@ -69,6 +69,19 @@ CREATE TABLE Prodotto_Fisico (
   codiceIdentificativo 	VARCHAR(20)    NOT NULL,
   CONSTRAINT PRIMARY KEY (seriale, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);
+
+CREATE TABLE Prodotto_Digitale (
+  codiceSoftware 	VARCHAR(20) 	NOT NULL,
+  descrizione 		TEXT NOT 		NULL,
+  prezzo 			DECIMAL(6,2) 	NOT NULL,
+  chiaviDisponibili	INT				NOT NULL DEFAULT 0,
+  codiceIdentificativo VARCHAR(20) 	NOT NULL,
+  CONSTRAINT PK_ProdottoDigitale PRIMARY KEY (codiceSoftware, codiceIdentificativo),
+  CONSTRAINT FK_ProdottoDigitale_Articolo FOREIGN KEY (codiceIdentificativo)
+    REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );

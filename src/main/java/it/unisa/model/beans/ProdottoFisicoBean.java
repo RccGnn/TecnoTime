@@ -31,21 +31,14 @@ public class ProdottoFisicoBean implements Serializable, BeanMarker{
 	public void setQuantitaMagazzino(int quantitaMagazzino) {
 		this.quantitaMagazzino = quantitaMagazzino;
 	}
-	public String getArticolo_CodiceIdentificativo() {
-		return Articolo_codiceIdentificativo;
-	}
-	public void setArticolo_CodiceIdentificativo(String Articolo_codiceIdentificativo) {
-		this.Articolo_codiceIdentificativo = Articolo_codiceIdentificativo;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	public String getArticolo_codiceIdentificativo() {
 		return Articolo_codiceIdentificativo;
 	}
 	public void setArticolo_codiceIdentificativo(String Articolo_codiceIdentificativo) {
 		this.Articolo_codiceIdentificativo = Articolo_codiceIdentificativo;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public float getPrezzo() {
 		return prezzo;
