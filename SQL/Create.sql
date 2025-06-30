@@ -4,21 +4,21 @@ USE TecnoTimeDB;
 
 -- Definizione delle tabelle
 CREATE TABLE Account (
-  username		VARCHAR(50) 	PRIMARY KEY NOT NULL,
+  username			VARCHAR(50) 	PRIMARY KEY NOT NULL,
   hashedPassword  	VARCHAR(255)	NOT NULL,
-  nome        VARCHAR(255)  NOT NULL,
-  cognome     VARCHAR(255)  NOT NULL,
-  sesso       VARCHAR(1)     NOT NULL,
-  email     	VARCHAR(100)   	NOT NULL UNIQUE,
-  numeroTelefono VARCHAR(13)  NOT NULL,
-  nazione     VARCHAR(50)     NOT NULL,
-  provincia		VARCHAR(50)    	NOT NULL,
-  citta			  VARCHAR(50)    	NOT NULL,
-  via      		VARCHAR(100)   	NOT NULL,
-  numeroCivico	VARCHAR(10)		NOT NULL,
-  CAP         VARCHAR(5)    NOT NULL,
-  ruolo			  ENUM('amministratore','utente_registrato')	,
-  dataNascita	DATE	NOT NULL
+  nome        		VARCHAR(255)  	NOT NULL,
+  cognome     		VARCHAR(255)  	NOT NULL,
+  sesso       		VARCHAR(1)     	NOT NULL,
+  email     		VARCHAR(100)   	NOT NULL UNIQUE,
+  numeroTelefono 	VARCHAR(13)  	NOT NULL,
+  nazione     		VARCHAR(50)     NOT NULL,
+  provincia			VARCHAR(50)    	NOT NULL,
+  citta			  	VARCHAR(50)    	NOT NULL,
+  via      			VARCHAR(100)   	NOT NULL,
+  numeroCivico		VARCHAR(10)		NOT NULL,
+  CAP         		VARCHAR(5)    	NOT NULL,
+  ruolo			  	ENUM('amministratore','utente_registrato'),
+  dataNascita		DATE			NOT NULL
 );
 
 CREATE TABLE Carrello (
@@ -197,3 +197,26 @@ CREATE TABLE Associato_a (
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
+
+USE tecnotimedb;
+CREATE OR REPLACE VIEW Catalogo AS
+SELECT 
+	a.*,
+    pf.seriale,
+	pf.prezzo AS prezzo_prodotto_fisico,
+	pf.descrizione AS descrizione_prodotto_fisico,
+	pf.isPreassemblato,
+	pf.quantitaMagazzino,
+    s.codiceServizio,
+	s.prezzo AS prezzo_servizio,
+	s.descrizione AS descrizione_servizio,
+	s.durata,
+    pd.codiceSoftware,
+    pd.prezzo AS prezzo_prodotto_digitale,
+	pd.descrizione AS descrizione_prodotto_digitale,
+    pd.chiaviDisponibili
+FROM Articolo AS a
+	LEFT JOIN Prodotto_Fisico AS pf USING (codiceIdentificativo)
+    LEFT JOIN Servizio AS s USING (codiceIdentificativo)
+    LEFT JOIN Prodotto_Digitale AS pd USING (codiceIdentificativo);
+-- DROP VIEW Catalogo;

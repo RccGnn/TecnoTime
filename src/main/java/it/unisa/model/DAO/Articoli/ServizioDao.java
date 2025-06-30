@@ -54,6 +54,9 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 	}
 
 	@Override
+	/**
+	 * Key = ({@code String}: codiceServizio, {@code String}: Articolo.codiceIdentificativo)
+	 */
 	public synchronized ServizioBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -95,6 +98,9 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 	
 	
 	@Override
+	/**
+	 * Key = ({@code String}: codiceServizio, {@code String}: Articolo.codiceIdentificativo)
+	 */
 	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

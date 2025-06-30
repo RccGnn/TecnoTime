@@ -54,6 +54,9 @@ public class ProdottoFisicoDao implements BeanDaoInterfaceArray<ProdottoFisicoBe
 	}
 
 	@Override
+	/**
+	 * Key = ({@code String}: seriale, {@code String}: Articolo.codiceIdentificativo)
+	 */
 	public synchronized ProdottoFisicoBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -96,6 +99,9 @@ public class ProdottoFisicoDao implements BeanDaoInterfaceArray<ProdottoFisicoBe
 	
 	
 	@Override
+	/**
+	 * Key = ({@code String}: seriale, {@code String}: Articolo.codiceIdentificativo)
+	 */
 	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

@@ -53,6 +53,9 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 	}
 
 	@Override
+	/**
+	 * Key = ({@code String}: codiceSoftware, {@code String}: Articolo.codiceIdentificativo)
+	 */
 	public synchronized ProdottoDigitaleBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -94,6 +97,9 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 	
 	
 	@Override
+	/**
+	 * Key = ({@code String}: codiceSoftware, {@code String}: Articolo.codiceIdentificativo)
+	 */
 	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
