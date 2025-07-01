@@ -49,7 +49,7 @@ public class ProductFilter extends HttpServlet {
 		    		for (ArticoloBean p : prodotti) {
 		    			if(marca != null && marca.equals(p.getEnteErogatore()))
 		    				pfilter.add(p);
-		    			if(prezzo_min!=null && prezzo_max!=null && (prezzo_min<=p.getPrezzo()||prezzo_max<=p.getPrezzo)
+//		    			if(prezzo_min!=null && prezzo_max!=null && (prezzo_min<=p.getPrezzo()||prezzo_max<=p.getPrezzo)
 		    				pfilter.add(p);
 		    			if(categoria!=null && categoria.equals(p.getCategoria()))
 		    				pfilter.add(p);

@@ -1,7 +1,6 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class CatalogoBean implements Serializable, BeanMarker{
 	

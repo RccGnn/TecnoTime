@@ -33,7 +33,7 @@ public class CatalogoDao{
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String createViewSQL = "CREATE OR REPLACE VIEW "+ this.TABLE_NAME +" AS "
+		String createViewSQL = "CREATE OR REPLACE VIEW "+ CatalogoDao.TABLE_NAME +" AS "
 				+ "SELECT "
 				+ "	a.*,"
 				+ " 	pf.seriale, "

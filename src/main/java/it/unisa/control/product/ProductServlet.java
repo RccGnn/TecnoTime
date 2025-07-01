@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.unisa.control.PasswordUtils;
 import it.unisa.model.DAO.Articoli.ArticoloDao;
 import it.unisa.model.beans.ArticoloBean;
 

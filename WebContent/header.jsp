@@ -47,7 +47,7 @@
         <ul id="main-menu">
             <li><a href="#about">CHI SIAMO</a></li>
             <li>
-                <a href="#products">PRODOTTI</a>
+                <a href="articoli.jsp">PRODOTTI</a>
                 <ul class="dropdown">
                     <li><a href="#product1">Processori</a></li>
                     <li><a href="#product2">Schede Video</a></li>
