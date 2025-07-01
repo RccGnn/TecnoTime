@@ -31,6 +31,11 @@
                  value="${param.max != null ? param.max : 10000}">
         </div>
         <div class="filter-group">
+          <label for="name">Cerca per nome:</label>
+          <input  onchange="sortedProducts()" type="text" id="name" name="name"
+                 value="${param.nome != null ? param.nome : ''}">
+        </div>
+        <div class="filter-group">
           <label for="sort">Ordina per:</label>
           <select  onchange="sortedProducts()" id="sort" name="sort">
             <option value="prezzo asc"  ${param.sort=='price asc' ? 'selected':''}>Prezzo ↑</option>

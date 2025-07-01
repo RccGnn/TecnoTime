@@ -111,13 +111,11 @@ function sortedProducts() {
 	const minInput = parseFloat(document.getElementById("min").value);
 	const maxInput = parseFloat(document.getElementById("max").value);
 	const sortInput = document.getElementById("sort").value;	
-	// Aggiungere filtro nome
-	const nome = null;
+	const nomeInput = document.getElementById("name").value;
 	
 	let params = 	"min="+ encodeURIComponent(minInput) +"&max="+ encodeURIComponent(maxInput)
-					+"&sort="+ encodeURIComponent(sortInput);
+					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput);
 	
-					console.log("UNO");
 	loadAjaxDoc("ProductFilter", "GET", params, handleFilter);
 }
 
@@ -134,7 +132,6 @@ function cleanSection() {
 function handleFilter(xhr) {
 	let response = JSON.parse(xhr.responseText);
 	// Eventuale errore
-	console.log("DUE");	
 	// Si ripuliscono gli articoli già presenti
 	cleanSection();
 	

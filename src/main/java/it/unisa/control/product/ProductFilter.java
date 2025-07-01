@@ -1,4 +1,4 @@
-package it.unisa.control;
+package it.unisa.control.product;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -31,7 +31,7 @@ public class ProductFilter extends HttpServlet {
 		for (CatalogoBean c : catalogo) {
 
 			String nome = c.getArticolo().getNome();			
-			if(nome != null && nome.toLowerCase().equals(nomeComparator.toLowerCase()))
+			if(nome != null && nome.toLowerCase().contains(nomeComparator.toLowerCase()))
 				filtered.add(c);
 		}
 		return filtered;
@@ -110,7 +110,7 @@ public class ProductFilter extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double min = (req.getParameter("min") != null) ? Double.parseDouble(req.getParameter("min")) : 0;
         double max = (req.getParameter("max") != null) ? Double.parseDouble(req.getParameter("max")) : Double.MAX_VALUE;
-        String nome = (req.getParameter("nome") != null) ? req.getParameter("nome") : null; 
+        String nome = (req.getParameter("name") != null) ? req.getParameter("name") : null; 
         String sort = req.getParameter("sort");
         
         CatalogoDao dao = new CatalogoDao();
@@ -124,7 +124,7 @@ public class ProductFilter extends HttpServlet {
 	        catalogo = priceFilter(catalogo, min, max);
 	        
 	        // Filtra facendo un match sul nome
-	        if (nome != null && nome.trim().equals(""))
+	        if (nome != null && !nome.trim().equals(""))
 	        	catalogo = nameFilter(catalogo, nome);
 	        
 	        ArrayList<JsonObject> listaJson = Jsonify(catalogo);
