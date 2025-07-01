@@ -1,3 +1,4 @@
+// Serve per far partire la funzione appena la pagina ha finito di caricare il DOM
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.querySelector('.form-container form');
 

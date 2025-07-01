@@ -34,30 +34,33 @@ public class CatalogoDao{
 		PreparedStatement ps = null;
 
 		String createViewSQL = "CREATE OR REPLACE VIEW "+ CatalogoDao.TABLE_NAME +" AS "
-				+ "SELECT "
-				+ "	a.*,"
-				+ " 	pf.seriale, "
-				+ "	pf.prezzo AS prezzo_prodotto_fisico, "
+				+ "SELECT  "
+				+ "	a.*, "
+				+ "    COALESCE ( "
+				+ "		pf.prezzo, "
+				+ "		s.prezzo,  "
+				+ "		pd.prezzo  "
+				+ "	) AS prezzo, "
+				+ "    pf.seriale, "
 				+ "	pf.descrizione AS descrizione_prodotto_fisico, "
 				+ "	pf.isPreassemblato, "
 				+ "	pf.quantitaMagazzino, "
-				+ " 	s.codiceServizio, "
-				+ "	s.prezzo AS prezzo_servizio, "
+				+ "    s.codiceServizio, "
 				+ "	s.descrizione AS descrizione_servizio, "
 				+ "	s.durata, "
 				+ "    pd.codiceSoftware, "
-				+ " pd.prezzo AS prezzo_prodotto_digitale, "
-				+ "	pd.descrizione AS descrizione_prodotto_digitale, "
-				+ " pd.chiaviDisponibili, "
-				+ " FROM Articolo AS a "
-				+ "		LEFT JOIN Prodotto_Fisico AS pf USING (codiceIdentificativo) "
-				+ "    	LEFT JOIN Servizio AS s USING (codiceIdentificativo) "
-				+ "    	LEFT JOIN Prodotto_Digitale AS pd USING (codiceIdentificativo); ";
+				+ "    pd.descrizione AS descrizione_prodotto_digitale, "
+				+ "    pd.chiaviDisponibili "
+				+ "	 "
+				+ "FROM Articolo AS a "
+				+ "	LEFT JOIN Prodotto_Fisico AS pf USING (codiceIdentificativo) "
+				+ "    LEFT JOIN Servizio AS s USING (codiceIdentificativo) "
+				+ "    LEFT JOIN Prodotto_Digitale AS pd USING (codiceIdentificativo);";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(createViewSQL);
-			ps.executeQuery(createViewSQL);
+			ps.executeUpdate();
 		} finally {
 			try {
 				if (ps != null)

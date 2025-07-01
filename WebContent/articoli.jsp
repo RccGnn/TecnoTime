@@ -20,33 +20,30 @@
     <!-- SIDEBAR FILTRI -->
     <aside id="filters-sidebar" class="filters-sidebar">
       <h2>Filtra Prodotti</h2>
-      <form id="filter-form" method="get" action="prodotti">
         <div class="filter-group">
           <label for="min">Prezzo min (€):</label>
-          <input type="number" id="min" name="min" min="0"
+          <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0"
                  value="${param.min != null ? param.min : 0}">
         </div>
         <div class="filter-group">
           <label for="max">Prezzo max (€):</label>
-          <input type="number" id="max" name="max" min="0"
+          <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0"
                  value="${param.max != null ? param.max : 10000}">
         </div>
         <div class="filter-group">
           <label for="sort">Ordina per:</label>
-          <select id="sort" name="sort">
-            <option value="price-asc"  ${param.sort=='price-asc' ? 'selected':''}>Prezzo ↑</option>
-            <option value="price-desc" ${param.sort=='price-desc' ? 'selected':''}>Prezzo ↓</option>
-            <option value="name-asc"   ${param.sort=='name-asc' ? 'selected':''}>Nome A→Z</option>
-            <option value="name-desc"  ${param.sort=='name-desc' ? 'selected':''}>Nome Z→A</option>
+          <select  onchange="sortedProducts()" id="sort" name="sort">
+            <option value="prezzo asc"  ${param.sort=='price asc' ? 'selected':''}>Prezzo ↑</option>
+            <option value="prezzo desc" ${param.sort=='price desc' ? 'selected':''}>Prezzo ↓</option>
+            <option value="nome asc"   ${param.sort=='name asc' ? 'selected':''}>Nome A→Z</option>
+            <option value="nome desc"  ${param.sort=='name desc' ? 'selected':''}>Nome Z→A</option>
           </select>
         </div>
-        <button type="submit" class="apply-filters-btn">Applica</button>
-      </form>
     </aside>
 
     <!-- GRID PRODOTTI -->
     <section class="products-container">
-      <c:forEach var="p" items="${products}">
+        <!--  
         <div class="product-card">
           <img src="${p.imageURL}" alt="${p.name}" class="product-image"/>
           <h3 class="product-name">${p.name}</h3>
@@ -54,7 +51,7 @@
           <p class="product-description">${p.description}</p>
           <button class="add-to-cart-btn">Aggiungi al carrello</button>
         </div>
-      </c:forEach>
+        -->
     </section>
   </main>
 

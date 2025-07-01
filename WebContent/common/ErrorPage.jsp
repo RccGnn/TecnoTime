@@ -32,10 +32,10 @@
 	  <h2 style="color: #011140; font-size: 1.5rem; margin-bottom: 1.5rem;">
 	    <c:choose>
 	      <c:when test="${pageContext.errorData.statusCode == 404}">
-	        La pagina non è stata trovata
+	        La pagina non è stata trovata <br>
 	      </c:when>
 	      <c:otherwise>
-	        Si è verificato un errore interno al server
+	        Si è verificato un errore interno al server <br>
 	      </c:otherwise>
 	    </c:choose>
 	  </h2>

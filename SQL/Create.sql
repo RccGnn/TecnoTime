@@ -202,19 +202,22 @@ USE tecnotimedb;
 CREATE OR REPLACE VIEW Catalogo AS
 SELECT 
 	a.*,
+    COALESCE (
+		pf.prezzo,
+		s.prezzo, 
+		pd.prezzo 
+	) AS prezzo,
     pf.seriale,
-	pf.prezzo AS prezzo_prodotto_fisico,
 	pf.descrizione AS descrizione_prodotto_fisico,
 	pf.isPreassemblato,
 	pf.quantitaMagazzino,
     s.codiceServizio,
-	s.prezzo AS prezzo_servizio,
 	s.descrizione AS descrizione_servizio,
 	s.durata,
     pd.codiceSoftware,
-    pd.prezzo AS prezzo_prodotto_digitale,
-	pd.descrizione AS descrizione_prodotto_digitale,
+    pd.descrizione AS descrizione_prodotto_digitale,
     pd.chiaviDisponibili
+	
 FROM Articolo AS a
 	LEFT JOIN Prodotto_Fisico AS pf USING (codiceIdentificativo)
     LEFT JOIN Servizio AS s USING (codiceIdentificativo)

@@ -975,7 +975,8 @@ footer p.copy {
 @media (max-width: 768px) {
   .products-page {
     flex-direction: column;
-    padding: 10px;
+    margin-right: 50px;
+    padding: 25px;
   }
   .filter-toggle-btn {
     display: block;
