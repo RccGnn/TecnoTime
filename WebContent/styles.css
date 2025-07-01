@@ -927,18 +927,21 @@ footer p.copy {
 .products-container {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
 }
 .product-card {
   background: #fff;
   border-radius: 8px;
+  margin: 1rem;
   padding: 1rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  margin-bottom: 1.5rem;
+  margin-right: 2rem;
 }
 .product-image {
   width: 100%;
