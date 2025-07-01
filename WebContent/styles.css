@@ -995,7 +995,7 @@ footer p.copy {
   }
   .filters-sidebar {
     position: fixed;
-    top: 80px; /* sotto header */
+    top: 150px; /* sotto header */
     left: -260px;
     transition: left .3s ease;
     z-index: 999;
