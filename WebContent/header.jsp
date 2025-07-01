@@ -67,7 +67,7 @@
                 </ul>
             </li>
             <li><a href="#services">SERVIZI</a></li>
-            <li><a href="#AssemPort">PREASSEMBLATI e PORTATILI</a></li>
+            <li><a href="preassemblati.jsp">PREASSEMBLATI e PORTATILI</a></li>
             <li><a href="guide.jsp" class="icon-link">GUIDE</a></li>
         </ul>
     </nav>
