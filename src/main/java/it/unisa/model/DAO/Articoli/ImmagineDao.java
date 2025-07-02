@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unisa.model.DAO.BeanDaoInterfaceArray;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.ImmagineBean;
 import it.unisa.model.connections.*;
 
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 
 public class ImmagineDao implements BeanDaoInterfaceArray<ImmagineBean> {
 
+	private static final String[] whitelist = {"url", "codiceIdentificativo"};
+	
 	private static final String TABLE_NAME = "Immagine";
 
 	@Override
@@ -125,7 +128,7 @@ public class ImmagineDao implements BeanDaoInterfaceArray<ImmagineBean> {
 
 		String selectSQL = "SELECT * FROM " + ImmagineDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(ImmagineDao.whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 

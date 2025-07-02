@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Date;
 
 import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.ArticoloBean;
 import it.unisa.model.connections.*;
 
@@ -18,9 +19,12 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 
 	private static final String TABLE_NAME = "Articolo";
 
+	private static final String[] whitelist = 
+		{"codiceIdentificativo", "categoria", "nome", "dataUltimaPromozione", "enteErogatore", "disponibilita"};
+	
 	@Override
 	public synchronized void doSave(ArticoloBean articolo) throws SQLException {
-
+		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		
@@ -131,7 +135,7 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 
 		String selectSQL = "SELECT * FROM " + ArticoloDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 

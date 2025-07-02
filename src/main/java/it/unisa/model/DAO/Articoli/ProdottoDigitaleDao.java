@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unisa.model.DAO.BeanDaoInterfaceArray;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.ProdottoDigitaleBean;
 import it.unisa.model.connections.*;
 
@@ -16,6 +17,9 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 
 	private static final String TABLE_NAME = "Prodotto_Digitale";
 
+	private static final String[] whitelist = 
+		{"codiceSoftware", "descrizione", "prezzo", "chiaviDisponibili", "codiceIdentificativo"};
+	
 	@Override
 	public synchronized void doSave(ProdottoDigitaleBean prodottoDigitale) throws SQLException {
 
@@ -137,7 +141,7 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 
 		String selectSQL = "SELECT * FROM " + ProdottoDigitaleDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 

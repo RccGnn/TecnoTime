@@ -17,6 +17,10 @@ import java.sql.Date;
 
 public class AccountDao implements BeanDaoInterface<AccountBean> {
 
+	private static final String[] whitelist = 
+		{"username", "hashedPassword", "nome", "cognome", "sesso", "email", "numeroTelefono", 
+		 "nazione", "provincia", "citta", "via", "numeroCivico", "CAP", "ruolo", "dataNascita", "asc", "disc"};
+	
 	private static final String TABLE_NAME = "Account";
 
 	@Override
@@ -150,7 +154,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 		String selectSQL = "SELECT * FROM " + AccountDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 

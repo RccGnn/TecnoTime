@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unisa.model.DAO.BeanDaoInterfaceArray;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.ServizioBean;
 import it.unisa.model.connections.*;
 
@@ -17,6 +18,9 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 
 	private static final String TABLE_NAME = "Servizio";
 
+	private static final String[] whitelist = 
+		{"codiceServizio", "prezzo", "descrizione", "durata", "codiceIdentificativo"};
+	
 	@Override
 	public synchronized void doSave(ServizioBean servizio) throws SQLException {
 
@@ -138,7 +142,7 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 
 		String selectSQL = "SELECT * FROM " + ServizioDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 

@@ -78,23 +78,16 @@ public class LoginPage extends HttpServlet {
         
         HttpSession session = request.getSession();
         if(DaoUtils.getRuoloAccountString(account)=="amministratore") {
-        	//creazione sessione admin      
-            session.setAttribute("admin", Boolean.TRUE);  
+        	//creazione sessione admin
+            session.setAttribute("admin", Boolean.TRUE);
             response.sendRedirect(request.getContextPath() + "/amministratore/index-amministratore.jsp");	// Redirect a pagina protetta
         }
         else if(DaoUtils.getRuoloAccountString(account)=="utente_registrato") {
         	 //creazione sessione utente 
             session.setAttribute("user", Boolean.TRUE);  
             response.sendRedirect(request.getContextPath() + "/utente/index-utente.jsp");	// Redirect a pagina protetta
-        }
-       
-       
-      
-       
-       
-     
-
         
+        }        
 	}
 
 }

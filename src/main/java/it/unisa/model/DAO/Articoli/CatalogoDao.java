@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
 
@@ -27,6 +28,27 @@ import java.util.ArrayList;
  */
 public class CatalogoDao{
 
+	private static final String[] whitelist = 
+		{
+		    "codiceIdentificativo",
+		    "categoria",
+		    "nome",
+		    "dataUltimaPromozione",
+		    "enteErogatore",
+		    "disponibilita",
+		    "prezzo",
+		    "seriale",
+		    "descrizione_prodotto_fisico",
+		    "isPreassemblato",
+		    "quantitaMagazzino",
+		    "codiceServizio",
+		    "descrizione_servizio",
+		    "durata",
+		    "codiceSoftware",
+		    "descrizione_prodotto_digitale",
+		    "chiaviDisponibili"
+		};
+	
 	private static final String TABLE_NAME = "Catalogo";
 
 	private synchronized void createView() throws SQLException {
@@ -212,7 +234,7 @@ public class CatalogoDao{
 
 		String selectSQL = "SELECT * FROM " + CatalogoDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(CatalogoDao.whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 
