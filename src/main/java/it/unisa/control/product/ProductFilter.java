@@ -93,7 +93,13 @@ public class ProductFilter extends HttpServlet {
 			obj.addProperty("nome", c.getArticolo().getNome());
 			obj.addProperty("descrizione", descrizione);
 			obj.addProperty("prezzo", df.format(price));
-			obj.addProperty("immagine", "dasdas");
+			ArrayList<ImmagineBean> imgs = c.getImmagini();
+			if(imgs == null || imgs.isEmpty())
+				obj.addProperty("immagine", "");
+			else
+				obj.addProperty("immagine", DecoderDropboxUrl(imgs.get(0).getUrl()));
+			
+			System.out.println(obj.toString());
 			listaJson.add(obj);
 		}
 		
@@ -161,4 +167,15 @@ public class ProductFilter extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
+	private String DecoderDropboxUrl(String url) {
+		
+		String newUrl;
+		if(url == null || url.trim().equals(""))
+			newUrl = url;
+		else
+			newUrl = url.replace("&dl=0", "&raw=1");
+		
+		return newUrl;
+	}
 } 

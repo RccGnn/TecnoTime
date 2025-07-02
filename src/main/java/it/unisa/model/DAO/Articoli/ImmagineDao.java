@@ -24,17 +24,16 @@ public class ImmagineDao implements BeanDaoInterfaceArray<ImmagineBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ ImmagineDao.TABLE_NAME
-				+ "(indice, url, codiceIdentificativo) "
-				+ "VALUES (?, ?, ?)";
+				+ "(url, codiceIdentificativo) "
+				+ "VALUES (?, ?)";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			
 			ps = connection.prepareStatement(insertSQL);	
 
-			ps.setInt(1, immagine.getIndice());
-			ps.setString(2, immagine.getUrl());
-		    ps.setString(3, immagine.getArticolo_codiceIdentificativo());
+			ps.setString(1, immagine.getUrl());
+		    ps.setString(2, immagine.getArticolo_codiceIdentificativo());
 			ps.executeUpdate();
 
 		} finally {
@@ -159,7 +158,60 @@ public class ImmagineDao implements BeanDaoInterfaceArray<ImmagineBean> {
 					connection.close();
 			}
 		}
+		
+		
 		return immagini;
 	}
 
+	/**
+	 * Permette di ottenere tutte le immagini relative ad un determinato articolo
+	 * @param Articolo_codiceIdentificativo	{@code String} - codiceIdentificativo (FK) dell'entità Articolo di riferimento
+	 * @return	{@code ArrayList<ImmagineBean>} con tutte le immagini che hanno come FK Articolo_codiceIdentificativo
+	 * @throws SQLException
+	 */
+	public synchronized ArrayList<ImmagineBean> doRetrieveByCodiceIdentificativo(String Articolo_codiceIdentificativo) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<ImmagineBean> immagini = new ArrayList<>();
+
+		String selectSQL = "SELECT * FROM " + ImmagineDao.TABLE_NAME;
+
+		if (Articolo_codiceIdentificativo != null && !Articolo_codiceIdentificativo.equals("")) {
+			selectSQL += " WHERE codiceIdentificativo = ?";
+		}
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+			ps.setString(1, Articolo_codiceIdentificativo);
+			
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				do {
+					ImmagineBean immagine = new ImmagineBean();
+
+					immagine.setIndice(rs.getInt("indice"));
+					immagine.setUrl(rs.getString("url"));
+					immagine.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
+					
+					immagini.add(immagine);
+				} while (rs.next());
+			} else {
+				immagini = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+	
+		return immagini;
+	}
 }

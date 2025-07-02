@@ -74,13 +74,22 @@ public class CatalogoDao{
 	
 	public synchronized void doSave(CatalogoBean articoloCatalogo) throws SQLException {
 
-		// Il doSave di articolo è obbligatorio
+		
 		ArticoloDao artDao = new ArticoloDao();
+		// Il doSave di articolo è obbligatorio
 		artDao.doSave(articoloCatalogo.getArticolo());
-			
-		// Verifico ora quale tra le sottoclassi devo memorizzare
-
+					
 		try {
+			
+			// Se sono presenti immagini, vengono memorizzate
+			ArrayList<ImmagineBean> imgs = articoloCatalogo.getImmagini();
+			if (imgs!= null && !imgs.isEmpty()) {
+				ImmagineDao imgDao = new ImmagineDao();
+				for (ImmagineBean img : imgs)
+					imgDao.doSave(img);					
+			}
+			
+			// Verifico ora quale tra le sottoclassi devo memorizzare
 			ProdottoFisicoDao pdfDao = new ProdottoFisicoDao();
 			if (articoloCatalogo.getPdFisico() != null)
 				pdfDao.doSave(articoloCatalogo.getPdFisico());
@@ -91,9 +100,10 @@ public class CatalogoDao{
 				
 			ServizioDao srvDao = new ServizioDao();
 			if (articoloCatalogo.getServizio() != null)
-				srvDao.doSave(articoloCatalogo.getServizio());			
+				srvDao.doSave(articoloCatalogo.getServizio());
+			
 		} catch (SQLException e) { // ATOMICITA'
-			// L'inserimento della sottoclasse è fallito, quindi si deve eliminare anche l'Articolo inserito precedentemente
+			// L'inserimento della sottoclasse o delle immagini è fallito, quindi si deve eliminare anche l'Articolo inserito precedentemente
 			artDao.doDelete(articoloCatalogo.getArticolo().getCodiceIdentificativo());
 			throw e; 
 		}
@@ -123,7 +133,15 @@ public class CatalogoDao{
 				ArticoloBean artBean = artDao.doRetrieveByKey(key);
 				articoloCatalogo.setArticolo(artBean);
 				
-				// Verifico ora se le sottoclassi sono presenti; se non lo sono, imposto null
+				// Verifica se sono presenti immagini per l'articolo
+				ImmagineDao imgDao = new ImmagineDao();
+				ArrayList<ImmagineBean> imgList = imgDao.doRetrieveByCodiceIdentificativo(key);
+				if (imgList != null && !imgList.isEmpty())
+					articoloCatalogo.setImmagini(imgList);
+				else
+					articoloCatalogo.setImmagini(null);
+				
+				// Verifica ora se le sottoclassi sono presenti; se non lo sono, imposto null
 			
 				String seriale = rs.getString("seriale");
 				if (seriale != null && !seriale.trim().equals("")) {
@@ -176,7 +194,7 @@ public class CatalogoDao{
 	
 	/*
 	 * L'attributo codiceIdentificativo usato come chiave esterna per le sottoclassi dell'entità Articolo
-	 * è vincolato dalla proprietà ON DELETE (UPDATE) CASCADE, quindi basta eliminare Articolo per eliminare
+	 * ed Immagine è vincolato dalla proprietà ON DELETE (UPDATE) CASCADE, quindi basta eliminare Articolo per eliminare
 	 * anche la sottoclasse 
 	 */
 	public synchronized boolean doDelete(String key) throws SQLException {
@@ -213,6 +231,14 @@ public class CatalogoDao{
 					ArticoloDao artDao = new ArticoloDao();
 					ArticoloBean artBean = artDao.doRetrieveByKey(key);
 					articoloCatalogo.setArticolo(artBean);
+					
+					// Verifica se sono presenti immagini per l'articolo
+					ImmagineDao imgDao = new ImmagineDao();
+					ArrayList<ImmagineBean> imgList = imgDao.doRetrieveByCodiceIdentificativo(key);
+					if (imgList != null && !imgList.isEmpty())
+						articoloCatalogo.setImmagini(imgList);
+					else
+						articoloCatalogo.setImmagini(null);
 					
 					// Verifico ora se le sottoclassi sono presenti; se non lo sono, imposto null
 				

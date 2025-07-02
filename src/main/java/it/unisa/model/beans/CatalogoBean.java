@@ -1,6 +1,7 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class CatalogoBean implements Serializable, BeanMarker{
 	
@@ -10,6 +11,7 @@ public class CatalogoBean implements Serializable, BeanMarker{
 	private ProdottoFisicoBean pdFisico;
 	private ProdottoDigitaleBean pdDigitale;
 	private ServizioBean servizio;
+	private ArrayList<ImmagineBean> immagini;
 	
 	public CatalogoBean() {
 		articolo = new ArticoloBean();
@@ -41,14 +43,21 @@ public class CatalogoBean implements Serializable, BeanMarker{
 	public void setServizio(ServizioBean servizio) {
 		this.servizio = servizio;
 	}
+	public ArrayList<ImmagineBean> getImmagini() {
+		return immagini;
+	}
+	public void setImmagini(ArrayList<ImmagineBean> immagini) {
+		this.immagini = immagini;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "CatalogoViewBean [articolo=" + articolo + ", pdFisico=" + pdFisico
-				+ ", pdDigitale=" + pdDigitale + ", servizio=" + servizio + "]";
+		return "CatalogoBean [articolo=" + articolo + ", pdFisico=" + pdFisico + ", pdDigitale=" + pdDigitale
+				+ ", servizio=" + servizio + ", immagini=" + immagini + "]";
 	}
 	
 }
