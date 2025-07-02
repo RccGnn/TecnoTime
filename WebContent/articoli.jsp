@@ -64,6 +64,6 @@
   <jsp:include page="footer.jsp"/>
 
   <script src="js/navbar.js" defer></script>
-  <script src="js/articoli.js" defer></script>
+  <script src="js/ajaxArticoli.js" defer></script>
 </body>
 </html>

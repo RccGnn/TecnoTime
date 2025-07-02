@@ -113,6 +113,7 @@ function sortedProducts() {
 	const sortInput = document.getElementById("sort").value;	
 	const nomeInput = document.getElementById("name").value;
 	
+	console.log(window.location.pathname);
 	let params = 	"min="+ encodeURIComponent(minInput) +"&max="+ encodeURIComponent(maxInput)
 					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput);
 	
