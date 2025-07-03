@@ -7,12 +7,10 @@ import java.sql.SQLException;
 
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.beans.CarrelloBean;
-import it.unisa.model.beans.Ruoli;
 import it.unisa.model.connections.*;
 import it.unisa.model.DAO.*;
 
 import java.util.ArrayList;
-import java.sql.Date;
 
 
 public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
@@ -120,7 +118,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		ArrayList<CarrelloBean> carrellos = new ArrayList<>();
+		ArrayList<CarrelloBean> carrelli = new ArrayList<>();
 
 		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME;
 
@@ -140,10 +138,10 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 
 					carrello.setAccount_username((rs.getString("username")) );
 					
-					carrellos.add(carrello);
+					carrelli.add(carrello);
 				} while (rs.next());
 			} else {
-				carrellos = null;
+				carrelli = null;
 			}
 
 		} finally {
@@ -155,7 +153,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 					connection.close();
 			}
 		}
-		return carrellos;
+		return carrelli;
 	}
 
 }
