@@ -55,13 +55,17 @@ document.addEventListener('DOMContentLoaded', () => {
 			let currentDate = new Date();
 			let inputDate = new Date(val);
 			
+			const y = currentDate.getFullYear() - 13;
+			const m = currentDate.getMonth();
+			const d = currentDate.getDay();
+			
+			currentDate.setFullYear(y, m, d);
 			// Voglio confrontare solo il giorno, non l'ora
 			inputDate.setHours(0, 0, 0, 0); // (h, m, s, ms?)
 			currentDate.setHours(0, 0, 0, 0);
 
-			console.log("curr: "+currentDate+"\ninput: "+inputDate+"\nval: "+val);
 			if (inputDate >= currentDate) {
-				showError(field, 'Inserisci una data di nascita valida');
+				showError(field, 'Devi avere almeno 13 anni per poterti registrare al sito');
 				return false;
 			}
 			clearError(field);
