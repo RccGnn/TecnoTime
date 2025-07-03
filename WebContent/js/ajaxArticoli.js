@@ -145,11 +145,21 @@ function cleanSection() {
 // Funzione di gestione della visualizzazione degli articoli
 function handleFilter(xhr) {
 	let response = JSON.parse(xhr.responseText);
-	// Eventuale errore
+		
 	// Si ripuliscono gli articoli già presenti
 	cleanSection();
 	
 	let element = document.querySelector(".products-container"); // E' unico
+	
+	// Eventuale errore se non ci sono articoli 
+	if (response && response.length === 0) {
+		let noResults = document.createElement("p");
+		noResults.textContent = "Nessun articolo trovato \n(._.)";
+		noResults.className = "error-subtitle";
+		element.appendChild(noResults);
+		return; // Termina la funzione se non ci sono prodotti
+	}
+
 	// Itera per ogni prodotto della lista response
 	response.forEach(art => {
 		let articolo = document.createElement("div");
