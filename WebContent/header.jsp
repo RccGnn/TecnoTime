@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="header-right">
-        <a href="#cart" class="icon-link">
+        <a href="carrello.jsp" class="icon-link">
             <img src="images/shopping_cart.png" alt="Carrello" class="icon">
              <span class="Carrello">Carrello</span>
         </a>
