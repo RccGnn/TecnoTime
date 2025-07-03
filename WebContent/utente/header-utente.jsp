@@ -47,7 +47,7 @@
         <ul id="main-menu">
             <li><a href="#about">CHI SIAMO</a></li>
             <li>
-                <a href="#products">PRODOTTI</a>
+                <a href="../articoliProdotti.jsp">PRODOTTI</a>
                 <ul class="dropdown">
                     <li><a href="#product1">Processori</a></li>
                     <li><a href="#product2">Schede Video</a></li>
@@ -57,7 +57,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#license">LICENZE</a>
+                <a href="../articoliLicenze.jsp">LICENZE</a>
                 <ul class="dropdown">
                     <li><a href="#license1">Windows 11 Home</a></li>
                     <li><a href="#license2">Windows 11 Pro</a></li>
@@ -66,7 +66,7 @@
                     <li><a href="#license5">Office Package</a></li>
                 </ul>
             </li>
-            <li><a href="#services">SERVIZI</a></li>
+            <li><a href="../articoliServizi.jsp">SERVIZI</a></li>
             <li><a href="#AssemPort">PREASSEMBLATI e PORTATILI</a></li>
             <li><a href="guide.jsp" class="icon-link">GUIDE</a></li>
         </ul>

@@ -1053,6 +1053,10 @@ footer p.copy {
   cursor: pointer;
 }
 
+#slider {
+    font-size: 14px;
+}
+
 /* --------------------
    RESPONSIVE
    -------------------- */

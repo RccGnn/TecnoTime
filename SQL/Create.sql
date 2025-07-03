@@ -90,8 +90,8 @@ CREATE TABLE Servizio (
   codiceServizio     	VARCHAR(20)    	NOT NULL UNIQUE,
   prezzo              	DECIMAL(6,2)  	NOT NULL,
   descrizione         	TEXT        	NOT NULL,
-  durata           	 	INT            	NOT NULL, -- ORE/GIORNI
-  codiceIdentificativo	VARCHAR(20)    	 NOT NULL,
+  durata           	 	DECIMAL(6,2)    NOT NULL, -- GIORNI
+  codiceIdentificativo	VARCHAR(20)    	NOT NULL,
   CONSTRAINT PRIMARY KEY (codiceServizio, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE

@@ -37,9 +37,9 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 			ps = connection.prepareStatement(insertSQL);	
 
 			ps.setString(1, servizio.getCodiceServizio());
-			ps.setInt(2, servizio.getDurata());
+			ps.setDouble(2, servizio.getDurata());
 		    ps.setString(3, servizio.getArticolo_codiceIdentificativo());
-		    ps.setFloat(4, servizio.getPrezzo());
+		    ps.setDouble(4, servizio.getPrezzo());
 		    ps.setString(5, servizio.getDescrizione());
 		    
 			ps.executeUpdate();
@@ -79,9 +79,9 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 
 			if (rs.next()) {
 				servizio.setCodiceServizio(rs.getString("codiceServizio"));
-				servizio.setDurata(rs.getInt("durata"));
+				servizio.setDurata(rs.getDouble("durata"));
 				servizio.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
-				servizio.setPrezzo(rs.getFloat("prezzo"));
+				servizio.setPrezzo(rs.getDouble("prezzo"));
 				servizio.setDescrizione(rs.getString("descrizione"));
 				
 			} else {
@@ -157,9 +157,9 @@ public class ServizioDao implements BeanDaoInterfaceArray<ServizioBean> {
 					ServizioBean servizio = new ServizioBean();
 
 					servizio.setCodiceServizio(rs.getString("codiceServizio"));
-					servizio.setDurata(rs.getInt("durata"));
+					servizio.setDurata(rs.getDouble("durata"));
 					servizio.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
-					servizio.setPrezzo(rs.getFloat("prezzo"));
+					servizio.setPrezzo(rs.getDouble("prezzo"));
 					servizio.setDescrizione(rs.getString("descrizione"));
 					
 					servizi.add(servizio);

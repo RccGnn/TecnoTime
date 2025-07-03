@@ -93,18 +93,18 @@ function loadAjaxDoc(url, method, params, cFuction) {
 	}
 }
 
-/*
-<!-- GRID PRODOTTI -->
-<section class="products-container">
-    <div class="product-card">
-      <img src="${p.imageURL}" alt="${p.name}" class="product-image"/>
-      <h3 class="product-name">${p.name}</h3>
-      <p class="product-price">€ ${p.price}</p>
-      <p class="product-description">${p.description}</p>
-      <button class="add-to-cart-btn">Aggiungi al carrello</button>
-    </div>
-</section>
-*/
+// Funzione per la gestione delle pagine
+function contexEnum(contex) {
+	let flag = 0;
+	if (contex.includes("articoliProdotti.jsp"))  
+		flag = 1;
+	if (contex.includes("articoliLicenze.jsp"))  
+		flag = 2;
+	if (contex.includes("articoliServizi.jsp"))  
+		flag = 3;
+
+	return flag;		
+}
 
 // Funzione di parsing dell'input dei filtri
 function sortedProducts() {
@@ -112,10 +112,23 @@ function sortedProducts() {
 	const maxInput = parseFloat(document.getElementById("max").value);
 	const sortInput = document.getElementById("sort").value;	
 	const nomeInput = document.getElementById("name").value;
+	const contestoInput = window.location.pathname;
+	let durataInput;
+	console.log(contestoInput);	
+	let contexChoice = contexEnum(contestoInput);
 	
-	console.log(window.location.pathname);
+	// In base a quale pagina effettua la chiamata ajax, si impostano i parametri da passare nel GET 
+	if (contexChoice === 1) { // Prodotti fisici
+		durataInput = "";
+	} else if (contexChoice === 2) { // Prodotti digitali
+		durataInput = "";
+	} else if (contexChoice === 3) { // Servizi 
+		durataInput = document.getElementById("duration").value;
+	}
+	
 	let params = 	"min="+ encodeURIComponent(minInput) +"&max="+ encodeURIComponent(maxInput)
-					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput);
+					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput)
+					+"&contex="+ encodeURIComponent(contestoInput) +"&duration="+ encodeURIComponent(durataInput);
 	
 	loadAjaxDoc("ProductFilter", "GET", params, handleFilter);
 }
@@ -177,7 +190,15 @@ function handleFilter(xhr) {
 		element.appendChild(articolo);
 	});
 	
-	
 }
 
+window.onload = sortedProducts;
+
+
+function displaySlider() {
+	let slider = document.getElementById("slider");
+	let sliderValue = document.getElementById("duration");
+	
+	slider.innerHTML = sliderValue.value + " giorni";
+}
 

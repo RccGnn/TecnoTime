@@ -7,9 +7,9 @@ public class ServizioBean implements Serializable, BeanMarker{
 	private static final long serialVersionUID = 1L;
 	
 	private String codiceServizio;
-	private int durata;
+	private double durata;
 	private String Articolo_codiceIdentificativo;
-	private float prezzo;
+	private double prezzo;
 	private String descrizione;
 	
 	public String getCodiceServizio() {
@@ -18,10 +18,10 @@ public class ServizioBean implements Serializable, BeanMarker{
 	public void setCodiceServizio(String codiceServizio) {
 		this.codiceServizio = codiceServizio;
 	}
-	public int getDurata() {
+	public double getDurata() {
 		return durata;
 	}
-	public void setDurata(int durata) {
+	public void setDurata(double durata) {
 		this.durata = durata;
 	}
 	public String getArticolo_codiceIdentificativo() {
@@ -33,10 +33,10 @@ public class ServizioBean implements Serializable, BeanMarker{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public float getPrezzo() {
+	public double getPrezzo() {
 		return prezzo;
 	}
-	public void setPrezzo(float prezzo) {
+	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
 	public String getDescrizione() {

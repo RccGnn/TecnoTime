@@ -1,4 +1,4 @@
-package it.unisa.control.product;
+package it.unisa.control.Product;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;

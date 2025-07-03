@@ -1,4 +1,4 @@
-package it.unisa.control.product;
+package it.unisa.control.Product;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,46 +22,6 @@ import com.google.gson.*;
 public class ProductFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DecimalFormat df = new DecimalFormat("#.00");
-	
-	private ArrayList<CatalogoBean> nameFilter(ArrayList<CatalogoBean> catalogo, String nomeComparator) {
-
-		ArrayList<CatalogoBean> filtered = new ArrayList<>();
-		if (nomeComparator == null || nomeComparator.trim().isEmpty() || catalogo == null) return filtered;
-
-		for (CatalogoBean c : catalogo) {
-
-			String nome = c.getArticolo().getNome();			
-			if(nome != null && nome.toLowerCase().contains(nomeComparator.toLowerCase()))
-				filtered.add(c);
-		}
-		return filtered;
-	}
-
-	private ArrayList<CatalogoBean> priceFilter(ArrayList<CatalogoBean> catalogo, double min, double max) {
-		
-		min = Math.abs(min);
-		max = Math.abs(max);
-		ArrayList<CatalogoBean> filtered = new ArrayList<>();
-		if (min > max || catalogo == null) return filtered;
-		
-		for (CatalogoBean c : catalogo) {
-
-			double price = 0;
-			// L'articolo considerato è un prodotto digitale
-			if (c.getPdDigitale() != null)
-				price = c.getPdDigitale().getPrezzo();
-			// L'articolo considerato è un prodotto fisico
-			else if (c.getPdFisico() != null)
-				price = c.getPdFisico().getPrezzo();
-			// L'articolo considerato è un servizio
-			else if (c.getServizio() != null)
-				price = c.getServizio().getPrezzo();
-			
-			if(price >= min && price <= max)
-				filtered.add(c);
-		}
-		return filtered;
-	}
 	
 	/**
 	 * Restituisce un'array di letterali (anch'essi array) json del tipo [immagine, nome, prezzo, descrizione]
@@ -114,27 +74,43 @@ public class ProductFilter extends HttpServlet {
 	 */
 	// Sfrutta il fatto che getParameter ritorna il valore null se il parametro non esiste
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        double min = (req.getParameter("min") != null) ? Double.parseDouble(req.getParameter("min")) : 0;
-        double max = (req.getParameter("max") != null) ? Double.parseDouble(req.getParameter("max")) : Double.MAX_VALUE;
-        String nome = (req.getParameter("name") != null) ? req.getParameter("name") : null; 
+        double min = (req.getParameter("min") != null && !req.getParameter("min").equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
+        double max = (req.getParameter("max") != null && !req.getParameter("max").equals("")) ? Double.parseDouble(req.getParameter("max")) : Double.MAX_VALUE;
+        String nome = (req.getParameter("name") != null && !req.getParameter("name").equals("")) ? req.getParameter("name") : null; 
         String sort = req.getParameter("sort");
-        
+        String contesto = (req.getParameter("contex") != null && !req.getParameter("contex").equals("")) ? req.getParameter("contex") : null;
+        double durata = (req.getParameter("duration") != null && !req.getParameter("duration").equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
+        		
         CatalogoDao dao = new CatalogoDao();
-        System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort );
+        System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {
 	        ArrayList<CatalogoBean> catalogo = dao.doRetrieveAll(sort); 
 	        
+	        // Filtra per il contesto
+	        catalogo = Filters.contexFilter(catalogo, contesto);
+
+	        //System.out.println("\n\n"+catalogo.toString());
 	        // Filtra per il prezzo
-	        catalogo = priceFilter(catalogo, min, max);
+	        catalogo = Filters.priceFilter(catalogo, min, max);
+	        //System.out.println(catalogo.toString());
 	        
 	        // Filtra facendo un match sul nome
-	        if (nome != null && !nome.trim().equals(""))
-	        	catalogo = nameFilter(catalogo, nome);
+	        if (nome != null)
+	        	catalogo = Filters.nameFilter(catalogo, nome);
+	        //System.out.println(catalogo.toString());
+	     
+	        // Se si tratta di un servizio, filtra per durata del servizio
+	        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
+	        if (durata != -1)
+	        	catalogo = Filters.durationFilter(catalogo, durata);
+	        //System.out.println(catalogo.toString());
 	        
 	        ArrayList<JsonObject> listaJson = Jsonify(catalogo);
-	        		
+	        
+	        System.out.println(listaJson.toString());
+	        
 	        resp.setContentType("application/json");
 			resp.setCharacterEncoding("UTF-8");
 			PrintWriter out = resp.getWriter();
