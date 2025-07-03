@@ -22,11 +22,8 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE Carrello (
-  numeroCarrello	INT				NOT NULL AUTO_INCREMENT,
-  subtotale     	DECIMAL(6,2)	NOT NULL DEFAULT 0.00,
-  numeroProdotti	INT				NOT NULL DEFAULT 0,
   username          VARCHAR(50)		NOT NULL,
-  CONSTRAINT PRIMARY KEY (numeroCarrello, username),
+  CONSTRAINT PRIMARY KEY (username),
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -138,14 +135,14 @@ CREATE TABLE Elemento_Ordine (
 );
 
 CREATE TABLE Contiene (
-  codiceIdentificativo 	VARCHAR(20)	NOT NULL,
-  numeroCarrello     	INT         NOT NULL,
-  quantita           	INT       	NOT NULL,
-  CONSTRAINT PRIMARY KEY (codiceIdentificativo, numeroCarrello),
+  codiceIdentificativo 	VARCHAR(20)		NOT NULL,
+  usernameCarrello      VARCHAR(50)		NOT NULL,
+  quantita           	INT       		NOT NULL,
+  CONSTRAINT PRIMARY KEY (codiceIdentificativo, usernameCarrello),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
-  CONSTRAINT FOREIGN KEY (numeroCarrello) REFERENCES Carrello(numeroCarrello)
+  CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Carrello(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
