@@ -22,23 +22,23 @@
     <aside id="filters-sidebar" class="filters-sidebar">
       <h2>Filtra Prodotti</h2>
         <div class="filter-group">
-          <label for="min">Prezzo min (€):</label>
+          <label  for="min">Prezzo min (€):<br></label>
           <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0" max = "9999"
                  value="${param.min != null ? param.min : 0}">
         </div>
         <div class="filter-group">
-          <label for="max">Prezzo max (€):</label>
+          <label  for="max">Prezzo max (€):<br></label>
           <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0" max = "9999"
                  value="${param.max != null ? param.max : 10000}">
         </div>
         <div class="filter-group">
-          <label for="name">Cerca per nome:</label>
-          <input  onchange="sortedProducts()" type="text" id="name" name="name"
+          <label  for="name">Cerca per nome:<br></label>
+          <input   onchange="sortedProducts()" type="text" id="name" name="name"
                  value="${param.nome != null ? param.nome : ''}">
         </div>
         <div class="filter-group">
           <label for="duration">Durata minima licenza (giorni):</label>
-          <input onchange="displaySlider(); sortedProducts();" type="range" min="0" id="duration"
+          <input  onchange="displaySlider(); sortedProducts();" type="range" min="0" id="duration"
           value = 0>
           <output id="slider"> </output>
         </div>

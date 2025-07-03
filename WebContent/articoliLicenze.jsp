@@ -22,18 +22,18 @@
     <aside id="filters-sidebar" class="filters-sidebar">
       <h2>Filtra Prodotti</h2>
         <div class="filter-group">
-          <label for="min">Prezzo min (€):</label>
-          <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0"
+          <label  for="min">Prezzo min (€):</label>
+          <input   onchange="sortedProducts()" type="number" id="min" name="min" min="0"
                  value="${param.min != null ? param.min : 0}">
         </div>
         <div class="filter-group">
-          <label for="max">Prezzo max (€):</label>
-          <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0"
+          <label  for="max">Prezzo max (€):</label>
+          <input   onchange="sortedProducts()" type="number" id="max" name="max" min="0"
                  value="${param.max != null ? param.max : 10000}">
         </div>
         <div class="filter-group">
           <label for="name">Cerca per nome:</label>
-          <input  onchange="sortedProducts()" type="text" id="name" name="name"
+          <input   onchange="sortedProducts()" type="text" id="name" name="name"
                  value="${param.nome != null ? param.nome : ''}">
         </div>
         <div class="filter-group">

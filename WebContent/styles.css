@@ -1013,9 +1013,11 @@ footer p.copy {
 .filters-sidebar h2 {
   margin-top: 0;
 }
+
 .filters-sidebar .filter-group {
   margin: 1rem 0;
 }
+
 .apply-filters-btn {
   display: block;
   width: 100%;
