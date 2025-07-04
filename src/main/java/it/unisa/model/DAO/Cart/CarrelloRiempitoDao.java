@@ -234,4 +234,16 @@ public class CarrelloRiempitoDao{
 		return carrelliRiempiti;
 	}
 	
+	/**
+	 * Svuota un carrello, eliminandone i prodotti
+	 * @param carrelloRiempito {@code CarrelloRiempitoBean} - Carrello che si intende svuotare
+	 * @return {@code CarrelloRiempitoBean}
+	 * @throws SQLException
+	 */
+	public synchronized CarrelloRiempitoBean doEmpty(CarrelloRiempitoBean carrelloRiempito) throws SQLException {
+		
+		CarrelloRiempitoBean c = new CarrelloRiempitoBean();
+		c.setAccount_username(carrelloRiempito.getAccount_username());
+		return c;
+	}
 }

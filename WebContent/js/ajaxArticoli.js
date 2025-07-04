@@ -195,6 +195,9 @@ function handleFilter(xhr) {
 		let btn = document.createElement('button');
 		btn.className = 'add-to-cart-btn';
 		btn.innerHTML = 'Aggiungi al carrello';
+		btn.onclick = function () {
+			
+		}
 		articolo.appendChild(btn);
 		
 		element.appendChild(articolo);

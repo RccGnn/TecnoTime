@@ -11,6 +11,12 @@ public class CarrelloRiempitoBean implements BeanMarker, Serializable{
 	private ArrayList<ContieneBean> quantitaArticoli;
 	private ArrayList<CatalogoBean> listaArticoli;
 	
+	public CarrelloRiempitoBean() {
+		this.Account_username = null;
+		this.quantitaArticoli = new ArrayList<ContieneBean>();
+		this.listaArticoli = new ArrayList<CatalogoBean>();
+	}
+	
 	public String getAccount_username() {
 		return Account_username;
 	}

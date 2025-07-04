@@ -44,7 +44,7 @@ VALUES
   'Giovanni', 
   'Verdi', 
   'M', 
-  'giovanni.verdi@example.com', 
+  'giovanni.verdi@example.com',
   '+393334445556', 
   'Italia', 
   'Napoli', 

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import it.unisa.control.DecoderHtml;
+import it.unisa.control.Decoder;
 import it.unisa.control.PasswordUtils;
 import it.unisa.control.Validator;
 import it.unisa.model.DAO.BeanDaoInterface;
@@ -76,7 +76,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert name<br>";
 		} else {
 			firstName = firstName.trim();
-			firstName= DecoderHtml.encodeHtml(firstName);
+			firstName= Decoder.encodeHtml(firstName);
 			request.setAttribute("fistName", firstName);
 			account.setNome(firstName);			
 		}
@@ -85,7 +85,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert lastName<br>";
 		} else {
 			lastName = lastName.trim();
-			lastName= DecoderHtml.encodeHtml(lastName);
+			lastName= Decoder.encodeHtml(lastName);
 			request.setAttribute("lastName", lastName);
 			account.setCognome(lastName);
 		}
@@ -95,7 +95,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert birthdate<br>";
 		} else {
 			birthDateStr = birthDateStr.trim();
-			birthDateStr= DecoderHtml.encodeHtml(birthDateStr);
+			birthDateStr= Decoder.encodeHtml(birthDateStr);
 			try {
 				 birthDate=LocalDate.parse(birthDateStr);
 				 request.setAttribute("birthDate", birthDate);
@@ -111,7 +111,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert address<br>";
 		} else {
 			address = address.trim();
-			address= DecoderHtml.encodeHtml(address);
+			address= Decoder.encodeHtml(address);
 			request.setAttribute("address", address);
 			account.setVia(address);
 		}
@@ -133,9 +133,9 @@ public class RegistrationPage extends HttpServlet {
 			error += "must insert a password";
 		}else {
 			password= password.trim();
-			password=DecoderHtml.encodeHtml(password);
+			password=Decoder.encodeHtml(password);
 			passwordConfirm = passwordConfirm.trim();
-			passwordConfirm = DecoderHtml.encodeHtml(passwordConfirm);
+			passwordConfirm = Decoder.encodeHtml(passwordConfirm);
 			
 			if(Validator.pwdValidator(password,passwordConfirm)==false) {
 		    	System.out.println("-"+password + "1");
@@ -157,7 +157,7 @@ public class RegistrationPage extends HttpServlet {
 				account.setEmail(""); // E' necessario per il controllo dell'email
 			} else {
 				email = email.trim();
-				email= DecoderHtml.encodeHtml(email);
+				email= Decoder.encodeHtml(email);
 				request.setAttribute("email", email);
 				account.setEmail(email);
 			}
@@ -167,7 +167,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Insert gender<br>";
 		} else {
 			gender = gender.trim();
-			gender= DecoderHtml.encodeHtml(gender);
+			gender= Decoder.encodeHtml(gender);
 		    genderChr = gender.charAt(0);  //prende solo il primo carattere della stringa e lo salva in una variabile char
 			request.setAttribute("gender", genderChr );
 			account.setSesso(genderChr);
@@ -178,7 +178,7 @@ public class RegistrationPage extends HttpServlet {
 		    error += "Insert a correct telephone number<br>";
 		} else {
 		    telNumb = telNumb.trim();
-		    telNumb= DecoderHtml.encodeHtml(telNumb);
+		    telNumb= Decoder.encodeHtml(telNumb);
 		    request.setAttribute("telNumb", telNumb);
 			account.setNumeroTelefono(telNumb);
 		}
@@ -188,7 +188,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid nation selected <br>";
 		} else {
 			nation = nation.trim();
-			nation= DecoderHtml.encodeHtml(nation);
+			nation= Decoder.encodeHtml(nation);
 			request.setAttribute("nation",nation);
 			account.setNazione(nation);
 		}
@@ -201,7 +201,7 @@ public class RegistrationPage extends HttpServlet {
 				account.setUsername("");
 			} else {
 				username = username.trim();
-				username= DecoderHtml.encodeHtml(username);
+				username= Decoder.encodeHtml(username);
 				request.setAttribute("username",username);
 				account.setUsername(username);	
 			}
@@ -211,7 +211,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid province selected <br>";
 		} else {
 			province = province.trim();
-			province= DecoderHtml.encodeHtml(province);
+			province= Decoder.encodeHtml(province);
 			request.setAttribute("province",province);
 			account.setProvincia(province);
 		}
@@ -220,7 +220,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid city selected <br>";
 		} else {
 			city = city.trim();
-			city= DecoderHtml.encodeHtml(city);
+			city= Decoder.encodeHtml(city);
 			request.setAttribute("city",city);
 			account.setCitta(city);
 		}
@@ -229,7 +229,7 @@ public class RegistrationPage extends HttpServlet {
 			error += "Invalid apartment number <br>";
 		} else {
 			aptnumber = aptnumber.trim();
-			aptnumber= DecoderHtml.encodeHtml(aptnumber);
+			aptnumber= Decoder.encodeHtml(aptnumber);
 			request.setAttribute("aptnumber",aptnumber);
 			account.setNumeroCivico(aptnumber);
 		}

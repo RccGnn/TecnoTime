@@ -11,10 +11,12 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import it.unisa.control.Decoder;
 import it.unisa.model.DAO.Articoli.CatalogoDao;
 import it.unisa.model.beans.*;
 
 import com.google.gson.*;
+
 /**
  * Servlet implementation class ProductFilter
  */
@@ -51,6 +53,7 @@ public class ProductFilter extends HttpServlet {
 			}
 			
 			JsonObject obj = new JsonObject();
+			obj.addProperty("codiceIdentificativo", c.getArticolo().getCodiceIdentificativo());
 			obj.addProperty("nome", c.getArticolo().getNome());
 			obj.addProperty("descrizione", descrizione);
 			obj.addProperty("prezzo", df.format(price));
@@ -58,9 +61,8 @@ public class ProductFilter extends HttpServlet {
 			if(imgs == null || imgs.isEmpty())
 				obj.addProperty("immagine", "");
 			else
-				obj.addProperty("immagine", DecoderDropboxUrl(imgs.get(0).getUrl()));
+				obj.addProperty("immagine", Decoder.DecoderDropboxUrl(imgs.get(0).getUrl()));
 			
-			System.out.println(obj.toString());
 			listaJson.add(obj);
 		}
 		
@@ -92,7 +94,6 @@ public class ProductFilter extends HttpServlet {
 	        // Filtra per il contesto
 	        catalogo = Filters.contexFilter(catalogo, contesto);
 
-	        //System.out.println("\n\n"+catalogo.toString());
 	        // Filtra per il prezzo
 	        catalogo = Filters.priceFilter(catalogo, min, max);
 	        //System.out.println(catalogo.toString());
@@ -100,7 +101,6 @@ public class ProductFilter extends HttpServlet {
 	        // Filtra facendo un match sul nome
 	        if (nome != null)
 	        	catalogo = Filters.nameFilter(catalogo, nome);
-	        //System.out.println(catalogo.toString());
 	     
 	        // Se si tratta di un servizio, filtra per durata del servizio
 	        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
@@ -144,15 +144,4 @@ public class ProductFilter extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
-	private String DecoderDropboxUrl(String url) {
-		
-		String newUrl;
-		if(url == null || url.trim().equals(""))
-			newUrl = url;
-		else
-			newUrl = url.replace("&dl=0", "&raw=1");
-		
-		return newUrl;
-	}
 } 
