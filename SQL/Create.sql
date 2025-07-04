@@ -22,9 +22,9 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE Carrello (
-  username          VARCHAR(50)		NOT NULL,
-  CONSTRAINT PRIMARY KEY (username),
-  CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
+  usernameCarrello          VARCHAR(50)		NOT NULL,
+  CONSTRAINT PRIMARY KEY (usernameCarrello),
+  CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
 );
@@ -140,10 +140,9 @@ CREATE TABLE Contiene (
   quantita           	INT       		NOT NULL,
   CONSTRAINT PRIMARY KEY (codiceIdentificativo, usernameCarrello),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Carrello(username)
-    ON DELETE CASCADE
+    ON UPDATE CASCADE, -- Un articolo viene cancellato, viene settato isDisponibile=false: nessun motivo per cancellare contiene
+  CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Carrello(usernameCarrello)
+    ON DELETE CASCADE -- Se l'username viene cancellato, allora si devono cancellare tutti gli elementi del carrello (e poi il carrello stesso)
     ON UPDATE CASCADE
 );
 
@@ -220,3 +219,13 @@ FROM Articolo AS a
     LEFT JOIN Servizio AS s USING (codiceIdentificativo)
     LEFT JOIN Prodotto_Digitale AS pd USING (codiceIdentificativo);
 -- DROP VIEW Catalogo;
+
+USE tecnotimedb;
+CREATE OR REPLACE VIEW CarrelloRiempito AS
+SELECT
+	car.usernameCarrello,
+    con.quantita,
+	a.*
+FROM Contiene AS con
+	LEFT JOIN Carrello AS car USING (usernameCarrello)
+    LEFT JOIN Articolo AS a USING (codiceIdentificativo);

@@ -170,4 +170,55 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 		return contieneList;
 	}
 
+	
+	/**
+	 * Permette di recuperare tutti gli oggetti {@code ContieneBean} relativi ad uno specifico carrello
+	 * @param key	{@code String} - chiave primaria di un entità Carrello
+	 * @param order {@code String} - stringa per clausula ORDER BY
+	 * @return {@code ArrayList<ContieneBean}
+	 * @throws SQLException
+	 */
+	public synchronized ArrayList<ContieneBean> doRetrieveByCart(String key, String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<ContieneBean> contieneList = new ArrayList<>();
+
+		String selectSQL = "SELECT * FROM " + ContieneDao.TABLE_NAME + " WHERE usernameCarrello = ? ";
+
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+			ps.setString(1, key);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				do{
+					ContieneBean contiene = new ContieneBean();
+					
+					contiene.setArticolo_codiceIdentificativo(rs.getString("usernameCarrello"));
+					contiene.setAccount_username((rs.getString("usernameCarrello")) );
+					contiene.setQuantità(rs.getInt("quantita"));
+					
+					contieneList.add(contiene);
+				} while (rs.next());
+			} else {
+				contieneList = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return contieneList;
+	}
 }

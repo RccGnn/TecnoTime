@@ -29,6 +29,7 @@ public class ProductFilter extends HttpServlet {
 	 * @return	{@code ArrayList<JsonObject>} lista di array jsonj di articoli
 	 */
 	private ArrayList<JsonObject> Jsonify(ArrayList<CatalogoBean> catalogo) {
+		
 		ArrayList<JsonObject> listaJson = new ArrayList<>();
 		if (catalogo == null || catalogo.size() == 0)	return listaJson;
 		

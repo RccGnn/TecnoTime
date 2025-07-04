@@ -9,6 +9,7 @@ public class ContieneBean implements BeanMarker, Serializable{
 	private String Account_username;
 	private String Articolo_codiceIdentificativo;
 	private int quantità;
+	
 	public String getAccount_username() {
 		return Account_username;
 	}

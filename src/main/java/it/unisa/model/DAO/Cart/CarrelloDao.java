@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 
-	private static final String[] whitelist = {"username"};
+	private static final String[] whitelist = {"usernameCarrello"};
 	
 	private static final String TABLE_NAME = "Carrello";
 
@@ -26,7 +26,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO " + CarrelloDao.TABLE_NAME
-				+ " (username) "
+				+ " (usernameCarrello) "
 				+ " VALUES (?)";
 
 		try {
@@ -57,7 +57,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 
 		CarrelloBean carrello = new CarrelloBean();
 
-		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE username = ?";
+		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -67,7 +67,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				carrello.setAccount_username(rs.getString("username"));
+				carrello.setAccount_username(rs.getString("usernameCarrello"));
 			} else {
 				carrello = null;
 			}
@@ -92,7 +92,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + CarrelloDao.TABLE_NAME + " WHERE username = ?";
+		String deleteSQL = "DELETE FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -136,7 +136,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 				do{
 					CarrelloBean carrello = new CarrelloBean();
 
-					carrello.setAccount_username((rs.getString("username")) );
+					carrello.setAccount_username((rs.getString("usernameCarrello")) );
 					
 					carrelli.add(carrello);
 				} while (rs.next());
