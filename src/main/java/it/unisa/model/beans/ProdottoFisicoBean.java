@@ -2,7 +2,7 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 
-public class ProdottoFisicoBean implements Serializable, BeanMarker{
+public class ProdottoFisicoBean extends ArticoloBean implements Serializable, BeanMarker, BeanProductItem{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -55,7 +55,7 @@ public class ProdottoFisicoBean implements Serializable, BeanMarker{
 	
 	@Override
 	public String toString() {
-		return "ProdottoFisicoBean [seriale=" + seriale + ", isPreassemblato=" + isPreassemblato
+		return super.toString() + "ProdottoFisicoBean [seriale=" + seriale + ", isPreassemblato=" + isPreassemblato
 				+ ", quantitaMagazzino=" + quantitaMagazzino + ", Articolo_codiceIdentificativo="
 				+ Articolo_codiceIdentificativo + ", prezzo=" + prezzo + ", descrizione=" + descrizione + "]";
 	}

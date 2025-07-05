@@ -3,27 +3,29 @@ package it.unisa.model.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CatalogoBean implements Serializable, BeanMarker{
+public class ArticoloCompletoBean implements Serializable, BeanMarker{
 	
 	private static final long serialVersionUID = 1L;
-
-	private ArticoloBean articolo;
+	
+	private String codiceIdentificativo;
+	private String nome;
+	
 	private ProdottoFisicoBean pdFisico;
 	private ProdottoDigitaleBean pdDigitale;
 	private ServizioBean servizio;
 	private ArrayList<ImmagineBean> immagini;
 	
-	public CatalogoBean() {
-		articolo = new ArticoloBean();
-		pdFisico = new ProdottoFisicoBean();
-		pdDigitale = new ProdottoDigitaleBean();
+	public String getCodiceIdentificativo() {
+		return codiceIdentificativo;
 	}
-	
-	public ArticoloBean getArticolo() {
-		return articolo;
+	public void setCodiceIdentificativo(String codiceIdentificativo) {
+		this.codiceIdentificativo = codiceIdentificativo;
 	}
-	public void setArticolo(ArticoloBean articolo) {
-		this.articolo = articolo;
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	public ProdottoFisicoBean getPdFisico() {
 		return pdFisico;
@@ -53,11 +55,12 @@ public class CatalogoBean implements Serializable, BeanMarker{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 	@Override
 	public String toString() {
-		return "CatalogoBean [articolo=" + articolo + ", pdFisico=" + pdFisico + ", pdDigitale=" + pdDigitale
-				+ ", servizio=" + servizio + ", immagini=" + immagini + "]";
+		return super.toString()+"ArticoloCompletoBean [codiceIdentificativo=" + codiceIdentificativo + ", nome=" + nome + ", pdFisico="
+				+ pdFisico + ", pdDigitale=" + pdDigitale + ", servizio=" + servizio + ", immagini=" + immagini + "]";
 	}
+	
+	
 	
 }

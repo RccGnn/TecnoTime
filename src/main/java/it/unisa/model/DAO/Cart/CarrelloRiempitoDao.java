@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unisa.model.DAO.DaoUtils;
-import it.unisa.model.DAO.Articoli.CatalogoDao;
+import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
 
@@ -50,7 +50,6 @@ public class CarrelloRiempitoDao{
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-
 		String createViewSQL  = "USE tecnotimedb; " +
                 "CREATE OR REsPLACE VIEW CarrelloRiempito AS " +
                 "SELECT " +
@@ -81,11 +80,11 @@ public class CarrelloRiempitoDao{
 	 */
 	public synchronized void doSave(CarrelloRiempitoBean carrelloRiempito) throws SQLException {
 
-		ArrayList<CatalogoBean> catalogo = carrelloRiempito.getListaArticoli();
+		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
 		if (catalogo != null && !catalogo.isEmpty()) {
 			
-			CatalogoDao catDao = new CatalogoDao();
-			for (CatalogoBean c : catalogo)
+			ArticoloCompletoDao catDao = new ArticoloCompletoDao();
+			for (ArticoloCompletoBean c : catalogo)
 				catDao.doSave(c);
 		} 
 		
@@ -131,8 +130,8 @@ public class CarrelloRiempitoDao{
 				ContieneDao conDao = new ContieneDao();
 				ArrayList<ContieneBean> contiene = conDao.doRetrieveByCart(rs.getString("usernameCarrello"), "");
 				// Utilizzo l'entità Contiene recuperando tutti i prodotti appartenent ad un deteminato carrello (username carrello = username account)
-				CatalogoDao catDao = new CatalogoDao();
-				ArrayList<CatalogoBean> catalogo = null;
+				ArticoloCompletoDao catDao = new ArticoloCompletoDao();
+				ArrayList<ArticoloCompletoBean> catalogo = null;
 				
 				if (contiene != null && !contiene.isEmpty()) {
 
@@ -203,8 +202,8 @@ public class CarrelloRiempitoDao{
 					ContieneDao conDao = new ContieneDao();
 					ArrayList<ContieneBean> contiene = conDao.doRetrieveByCart(rs.getString("usernameCarrello"), "");
 					// Utilizzo l'entità Contiene recuperando tutti i prodotti appartenent ad un deteminato carrello (username carrello = username account)
-					CatalogoDao catDao = new CatalogoDao();
-					ArrayList<CatalogoBean> catalogo = null;
+					ArticoloCompletoDao catDao = new ArticoloCompletoDao();
+					ArrayList<ArticoloCompletoBean> catalogo = null;
 					
 					if (contiene != null && !contiene.isEmpty()) {
 						for (ContieneBean c : contiene) {
@@ -246,4 +245,5 @@ public class CarrelloRiempitoDao{
 		c.setAccount_username(carrelloRiempito.getAccount_username());
 		return c;
 	}
+	
 }

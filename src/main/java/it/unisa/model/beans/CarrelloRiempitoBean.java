@@ -9,12 +9,12 @@ public class CarrelloRiempitoBean implements BeanMarker, Serializable{
 	
 	private String  Account_username;
 	private ArrayList<ContieneBean> quantitaArticoli;
-	private ArrayList<CatalogoBean> listaArticoli;
+	private ArrayList<ArticoloCompletoBean> listaArticoli;
 	
 	public CarrelloRiempitoBean() {
 		this.Account_username = null;
 		this.quantitaArticoli = new ArrayList<ContieneBean>();
-		this.listaArticoli = new ArrayList<CatalogoBean>();
+		this.listaArticoli = new ArrayList<ArticoloCompletoBean>();
 	}
 	
 	public String getAccount_username() {
@@ -29,10 +29,10 @@ public class CarrelloRiempitoBean implements BeanMarker, Serializable{
 	public void setQuantitaArticoli(ArrayList<ContieneBean> quantitaArticoli) {
 		this.quantitaArticoli = quantitaArticoli;
 	}
-	public ArrayList<CatalogoBean> getListaArticoli() {
+	public ArrayList<ArticoloCompletoBean> getListaArticoli() {
 		return listaArticoli;
 	}
-	public void setListaArticoli(ArrayList<CatalogoBean> listaArticoli) {
+	public void setListaArticoli(ArrayList<ArticoloCompletoBean> listaArticoli) {
 		this.listaArticoli = listaArticoli;
 	}
 	public static long getSerialversionuid() {

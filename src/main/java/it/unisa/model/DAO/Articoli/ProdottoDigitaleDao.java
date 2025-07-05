@@ -5,27 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.DAO.DaoUtils;
+import it.unisa.model.beans.ArticoloBean;
 import it.unisa.model.beans.ProdottoDigitaleBean;
 import it.unisa.model.connections.*;
 
-
 import java.util.ArrayList;
 
-public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigitaleBean> {
+public class ProdottoDigitaleDao extends ArticoloDao{
 
 	private static final String TABLE_NAME = "Prodotto_Digitale";
 
 	private static final String[] whitelist = 
 		{"codiceSoftware", "descrizione", "prezzo", "chiaviDisponibili", "codiceIdentificativo"};
 	
-	@Override
 	public synchronized void doSave(ProdottoDigitaleBean prodottoDigitale) throws SQLException {
 
+		super.doSave(prodottoDigitale);
+		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		
+
 		String insertSQL = "INSERT INTO "+ ProdottoDigitaleDao.TABLE_NAME
 				+ "(codiceSoftware, descrizione, prezzo, chiaviDisponibili, codiceIdentificativo) "
 				+ "VALUES (?, ?, ?, ?, ?)";
@@ -53,12 +54,11 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 					connection.close();
 			}
 		}
-		
 	}
 
-	@Override
+
 	/**
-	 * Key = ({@code String}: codiceSoftware, {@code String}: Articolo.codiceIdentificativo)
+	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: codiceSoftware)
 	 */
 	public synchronized ProdottoDigitaleBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
@@ -100,40 +100,15 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 	}
 	
 	
-	@Override
 	/**
-	 * Key = ({@code String}: codiceSoftware, {@code String}: Articolo.codiceIdentificativo)
+	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: codiceSoftware)
 	 */
 	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
-		Connection connection = null;
-		PreparedStatement ps = null;
-
-		int result = 0;
-
-		String deleteSQL = "DELETE FROM " + ProdottoDigitaleDao.TABLE_NAME + " WHERE codiceSoftware = ? AND codiceIdentificativo = ?";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			ps = connection.prepareStatement(deleteSQL);
-			ps.setObject(1, key.get(0));
-			ps.setObject(2, key.get(1));
-
-			result = ps.executeUpdate();
-
-		} finally {
-			try {
-				if (ps != null)
-					ps.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return (result != 0);
+		return super.doDelete((String) key.get(0));
 	}
 
-	@Override
-	public synchronized ArrayList<ProdottoDigitaleBean> doRetrieveAll(String order) throws SQLException {
+	
+	public synchronized ArrayList doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
@@ -154,6 +129,17 @@ public class ProdottoDigitaleDao implements BeanDaoInterfaceArray<ProdottoDigita
 			if (rs.next()) {
 				do {
 					ProdottoDigitaleBean prodottoDigitale = new ProdottoDigitaleBean();
+
+					String chiave = rs.getString("codiceIdentificativo");
+					// Si sfrutta il fatto che ad ogni articolo corrisponde una sola sottoclasse
+					ArticoloBean art = super.doRetrieveByKey(chiave);
+
+					prodottoDigitale.setCodiceIdentificativo(art.getCodiceIdentificativo());
+					prodottoDigitale.setCategoria(art.getCategoria());
+					prodottoDigitale.setNome(art.getNome());
+					prodottoDigitale.setDataUltimaPromozione(art.getDataUltimaPromozione());
+					prodottoDigitale.setEnteErogatore(art.getEnteErogatore());
+					prodottoDigitale.setDisponibilita(art.isDisponibilita());
 
 					prodottoDigitale.setCodiceSoftware(rs.getString("codiceSoftware"));
 					prodottoDigitale.setNumeroChiavi(rs.getInt("chiaviDisponibili"));

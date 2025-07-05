@@ -12,7 +12,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import it.unisa.control.Decoder;
-import it.unisa.model.DAO.Articoli.CatalogoDao;
+import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.beans.*;
 
 import com.google.gson.*;
@@ -33,12 +33,12 @@ public class ProductFilter extends HttpServlet {
         String contesto = (req.getParameter("contex") != null && !req.getParameter("contex").equals("")) ? req.getParameter("contex") : null;
         double durata = (req.getParameter("duration") != null && !req.getParameter("duration").equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
         		
-        CatalogoDao dao = new CatalogoDao();
+        ArticoloCompletoDao dao = new ArticoloCompletoDao();
         System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {
-	        ArrayList<CatalogoBean> catalogo = dao.doRetrieveAll(sort); 
+	        ArrayList<ArticoloCompletoBean> catalogo = dao.doRetrieveAll(sort); 
 	        
 	        // Filtra per il contesto
 	        Filters.contexFilter(catalogo, contesto);
@@ -86,15 +86,15 @@ public class ProductFilter extends HttpServlet {
 	
 	/**
 	 * Restituisce un'array di letterali (anch'essi array) json del tipo [immagine, nome, prezzo, descrizione]
-	 * @param 	catalogo	lista di articoli
+	 * @param 	catalogo {@code ArrayList<ArticoloCompletoBean>} - lista di articoli
 	 * @return	{@code ArrayList<JsonObject>} lista di array jsonj di articoli
 	 */
-	private ArrayList<JsonObject> Jsonify(ArrayList<CatalogoBean> catalogo) {
+	private ArrayList<JsonObject> Jsonify(ArrayList<ArticoloCompletoBean> catalogo) {
 		
 		ArrayList<JsonObject> listaJson = new ArrayList<>();
 		if (catalogo == null || catalogo.size() == 0)	return listaJson;
 		
-		for (CatalogoBean c : catalogo) {
+		for (ArticoloCompletoBean c : catalogo) {
 			
 			double price = 0;
 			String descrizione = null;
@@ -112,8 +112,8 @@ public class ProductFilter extends HttpServlet {
 			}
 			
 			JsonObject obj = new JsonObject();
-			obj.addProperty("codiceIdentificativo", c.getArticolo().getCodiceIdentificativo());
-			obj.addProperty("nome", c.getArticolo().getNome());
+			obj.addProperty("codiceIdentificativo", c.getCodiceIdentificativo());
+			obj.addProperty("nome", c.getNome());
 			obj.addProperty("descrizione", descrizione);
 			obj.addProperty("prezzo", df.format(price));
 			ArrayList<ImmagineBean> imgs = c.getImmagini();

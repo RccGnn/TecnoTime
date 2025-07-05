@@ -2,7 +2,7 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 
-public class ServizioBean implements Serializable, BeanMarker{
+public class ServizioBean extends ArticoloBean implements Serializable, BeanMarker, BeanProductItem{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -47,7 +47,7 @@ public class ServizioBean implements Serializable, BeanMarker{
 	}
 	@Override
 	public String toString() {
-		return "ServizioBean [codiceServizio=" + codiceServizio + ", durata=" + durata
+		return super.toString() + "ServizioBean [codiceServizio=" + codiceServizio + ", durata=" + durata
 				+ ", Articolo_codiceIdentificativo=" + Articolo_codiceIdentificativo + ", prezzo=" + prezzo
 				+ ", descrizione=" + descrizione + "]";
 	}

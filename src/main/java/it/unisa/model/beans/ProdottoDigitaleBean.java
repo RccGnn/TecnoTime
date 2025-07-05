@@ -2,7 +2,7 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 
-public class ProdottoDigitaleBean implements Serializable, BeanMarker{
+public class ProdottoDigitaleBean extends ArticoloBean implements Serializable, BeanMarker, BeanProductItem{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -11,6 +11,7 @@ public class ProdottoDigitaleBean implements Serializable, BeanMarker{
 	private String Articolo_codiceIdentificativo;
 	private float prezzo;
 	private String descrizione;
+		
 	public String getCodiceSoftware() {
 		return codiceSoftware;
 	}
@@ -44,9 +45,10 @@ public class ProdottoDigitaleBean implements Serializable, BeanMarker{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	@Override
 	public String toString() {
-		return "ProdottoDigitaleBean [codiceSoftware=" + codiceSoftware + ", numeroChiavi=" + numeroChiavi
+		return super.toString() + "ProdottoDigitaleBean [codiceSoftware=" + codiceSoftware + ", numeroChiavi=" + numeroChiavi
 				+ ", Articolo_codiceIdentificativo=" + Articolo_codiceIdentificativo + ", prezzo=" + prezzo
 				+ ", descrizione=" + descrizione + "]";
 	}

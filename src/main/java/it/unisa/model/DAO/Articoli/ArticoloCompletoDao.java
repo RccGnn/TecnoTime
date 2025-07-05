@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 /**
  * Il meccanismo di funzionamento della classe è il seguente:
- * - CatalogoBean è semplicemente un insieme dei quattro bean di Articolo, ProdottoFisico, ProdottoDigitale e Servizio
+ * - ArticoloCompletoBean è semplicemente un insieme dei quattro bean di Articolo, ProdottoFisico, ProdottoDigitale e Servizio
  * - Articolo (entità superclasse nel EER) non è mai null
- * - Solo uno tra gli ultimi tre bean elencati prima può essere non nullo per un'istanza di CatalogoBean 
+ * - Solo uno tra gli ultimi tre bean elencati prima può essere non nullo per un'istanza di ArticoloCompletoBean 
  * 	 (Ne discerne che le possibili combinazioni sono: 
  * 		
  * 		Articolo | ProdottoFisico | ProdottoDigitale | Servizio
@@ -26,7 +26,7 @@ import java.util.ArrayList;
  *	  )
  * - Vengono eseguiti i metodo forniti dalla classe solo sui campi che non sono null
  */
-public class CatalogoDao{
+public class ArticoloCompletoDao{
 
 	private static final String[] whitelist = 
 		{
@@ -55,7 +55,7 @@ public class CatalogoDao{
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		String createViewSQL = "CREATE OR REPLACE VIEW "+ CatalogoDao.TABLE_NAME +" AS "
+		String createViewSQL = "CREATE OR REPLACE VIEW "+ ArticoloCompletoDao.TABLE_NAME +" AS "
 				+ "SELECT  "
 				+ "	a.*, "
 				+ "    COALESCE ( "
@@ -94,12 +94,7 @@ public class CatalogoDao{
 		}
 	}
 	
-	public synchronized void doSave(CatalogoBean articoloCatalogo) throws SQLException {
-
-		
-		ArticoloDao artDao = new ArticoloDao();
-		// Il doSave di articolo è obbligatorio
-		artDao.doSave(articoloCatalogo.getArticolo());
+	public synchronized void doSave(ArticoloCompletoBean articoloCatalogo) throws SQLException {
 					
 		try {
 			
@@ -126,21 +121,22 @@ public class CatalogoDao{
 			
 		} catch (SQLException e) { // ATOMICITA'
 			// L'inserimento della sottoclasse o delle immagini è fallito, quindi si deve eliminare anche l'Articolo inserito precedentemente
-			artDao.doDelete(articoloCatalogo.getArticolo().getCodiceIdentificativo());
+			ArticoloDao artDao = new ArticoloDao();
+			artDao.doDelete(articoloCatalogo.getCodiceIdentificativo());
 			throw e; 
 		}
 	}
 	
-	public synchronized CatalogoBean doRetrieveByKey(String key) throws SQLException {
+	public synchronized ArticoloCompletoBean doRetrieveByKey(String key) throws SQLException {
 
 		createView();
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		CatalogoBean articoloCatalogo = new CatalogoBean();
+		ArticoloCompletoBean articoloCatalogo = new ArticoloCompletoBean();
 
-		String selectSQL = "SELECT * FROM " + CatalogoDao.TABLE_NAME + " WHERE codiceIdentificativo = ?";
+		String selectSQL = "SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE codiceIdentificativo = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -150,10 +146,6 @@ public class CatalogoDao{
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				// Articolo è la superclasse, è sempre presente
-				ArticoloDao artDao = new ArticoloDao();
-				ArticoloBean artBean = artDao.doRetrieveByKey(key);
-				articoloCatalogo.setArticolo(artBean);
 				
 				// Verifica se sono presenti immagini per l'articolo
 				ImmagineDao imgDao = new ImmagineDao();
@@ -163,7 +155,7 @@ public class CatalogoDao{
 				else
 					articoloCatalogo.setImmagini(null);
 				
-				// Verifica ora se le sottoclassi sono presenti; se non lo sono, imposto null
+				// Verifica ora se le sottoclassi sono presenti osservando la view Catalogo; se non lo sono, imposto null
 			
 				String seriale = rs.getString("seriale");
 				if (seriale != null && !seriale.trim().equals("")) {
@@ -198,6 +190,9 @@ public class CatalogoDao{
 					articoloCatalogo.setServizio(null);
 				}
 				
+				articoloCatalogo.setCodiceIdentificativo(key);
+				articoloCatalogo.setNome(rs.getString("nome"));
+				
 			} else {
 				articoloCatalogo = null;
 			}
@@ -225,16 +220,16 @@ public class CatalogoDao{
 	}
 	
 	
-	public synchronized ArrayList<CatalogoBean> doRetrieveAll(String order) throws SQLException {
+	public synchronized ArrayList<ArticoloCompletoBean> doRetrieveAll(String order) throws SQLException {
 		createView();
 		Connection connection = null;
 		PreparedStatement ps = null;
 
-		ArrayList<CatalogoBean> catalogo = new ArrayList<>();
+		ArrayList<ArticoloCompletoBean> catalogo = new ArrayList<>();
 
-		String selectSQL = "SELECT * FROM " + CatalogoDao.TABLE_NAME;
+		String selectSQL = "SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME;
 
-		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(CatalogoDao.whitelist, order)) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(ArticoloCompletoDao.whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 
@@ -246,13 +241,12 @@ public class CatalogoDao{
 
 			if (rs.next()) {
 				do {
-					CatalogoBean articoloCatalogo = new CatalogoBean();
+					ArticoloCompletoBean articoloCatalogo = new ArticoloCompletoBean();
 
-					// Articolo è la superclasse, è sempre presente
+					// Per primo recupero il codiceIdentificativo, la chiave primaria
 					String key = rs.getString("codiceIdentificativo");
-					ArticoloDao artDao = new ArticoloDao();
-					ArticoloBean artBean = artDao.doRetrieveByKey(key);
-					articoloCatalogo.setArticolo(artBean);
+					articoloCatalogo.setCodiceIdentificativo(key);
+					articoloCatalogo.setNome(rs.getString("nome"));
 					
 					// Verifica se sono presenti immagini per l'articolo
 					ImmagineDao imgDao = new ImmagineDao();
