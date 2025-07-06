@@ -941,6 +941,15 @@ footer p.copy {
   	.cart-summary {
     	text-align: center;
   	}
+  	
+  	.productsingle-page {
+    	flex-direction: column;
+    	padding: 1rem;
+    }
+    
+    .productsingle-main-image-wrapper {
+    	margin-bottom: 1rem;
+    }
 }
 
 /* --- errori blocchi registrazione ---*/
@@ -1182,6 +1191,122 @@ footer p.copy {
 .checkout-btn:hover {
   background-color: #011140;
 }
+
+
+
+/* ===================================== */
+/* Pagina Singola Prodotto               */
+/* ===================================== */
+.productsingle-page {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.productsingle-gallery {
+  flex: 1 1 400px;
+}
+
+.productsingle-main-image-wrapper {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.productsingle-main-image-wrapper img {
+  width: 100%;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+}
+
+.productsingle-thumbs {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.productsingle-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.productsingle-details {
+  flex: 1 1 300px;
+}
+
+.productsingle-title {
+  font-size: 2rem;
+  color: #021859;
+  margin-bottom: 0.5rem;
+}
+
+.productsingle-price {
+  font-size: 1.6rem;
+  color: #F2762E;
+  margin-bottom: 1rem;
+}
+
+.productsingle-description {
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+#productsingle-add-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#productsingle-add-form input[type="number"] {
+  width: 4rem;
+  padding: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#productsingle-add-btn {
+  background-color: #021859;
+  color: #F2D230;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#productsingle-add-btn:hover {
+  background-color: #011140;
+}
+
+.productsingle-reviews {
+  padding: 2rem;
+  background: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+}
+
+.productsingle-reviews h2 {
+  margin-bottom: 1rem;
+  color: #021859;
+}
+
+.productsingle-review {
+  margin-bottom: 1.5rem;
+}
+
+.productsingle-review h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+}
+
+.productsingle-review p {
+  margin: 0.2rem 0;
+}
+
+
 
 /* --------------------
    RESPONSIVE
