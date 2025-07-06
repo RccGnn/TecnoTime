@@ -59,6 +59,7 @@
             <li>
                 <a href="../articoliProdotti.jsp">PRODOTTI</a>
                 <ul class="dropdown">
+                	<li class="mobile-only"><a href="../articoliProdotti.jsp">Tutti i Prodotti</a></li>
                     <li><a href="#product1">Processori</a></li>
                     <li><a href="#product2">Schede Video</a></li>
                     <li><a href="#product3">Schede Madri</a></li>
@@ -69,6 +70,7 @@
             <li>
                 <a href="../articoliLicenze.jsp">LICENZE</a>
                 <ul class="dropdown">
+                	<li class="mobile-only"><a href="../articoliLicenze.jsp">Tutte le Licenze</a></li>
                     <li><a href="#license1">Windows 11 Home</a></li>
                     <li><a href="#license2">Windows 11 Pro</a></li>
                     <li><a href="#license3">Windows 10 Home</a></li>
