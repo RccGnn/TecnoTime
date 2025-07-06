@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
@@ -40,7 +39,7 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 			ps.setString(1, articolo.getCodiceIdentificativo());
 		    ps.setString(2, articolo.getCategoria());
 		    ps.setString(3, articolo.getNome());
-		    ps.setDate(4, Date.valueOf(articolo.getDataUltimaPromozione()));
+		    ps.setDate(4, articolo.getDataUltimaPromozione());
 		    ps.setString(5, articolo.getEnteErogatore());
 		    ps.setBoolean(6, articolo.isDisponibilita());
 			ps.executeUpdate();
@@ -78,7 +77,7 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 				articolo.setCodiceIdentificativo(rs.getString("codiceIdentificativo"));
 				articolo.setCategoria(rs.getString("categoria"));
 				articolo.setNome(rs.getString("nome"));
-				articolo.setDataUltimaPromozione(rs.getDate("dataUltimaPromozione").toLocalDate());
+				articolo.setDataUltimaPromozione(rs.getDate("dataUltimaPromozione"));
 				articolo.setEnteErogatore(rs.getString("enteErogatore"));
 				articolo.setDisponibilita(rs.getBoolean("disponibilita"));
 			} else {
@@ -152,7 +151,7 @@ public class ArticoloDao implements BeanDaoInterface<ArticoloBean> {
 					articolo.setCodiceIdentificativo(rs.getString("codiceIdentificativo"));
 					articolo.setCategoria(rs.getString("categoria"));
 					articolo.setNome(rs.getString("nome"));
-					articolo.setDataUltimaPromozione(rs.getDate("dataUltimaPromozione").toLocalDate());
+					articolo.setDataUltimaPromozione(rs.getDate("dataUltimaPromozione"));
 					articolo.setEnteErogatore(rs.getString("enteErogatore"));
 					articolo.setDisponibilita(rs.getBoolean("disponibilita"));
 					

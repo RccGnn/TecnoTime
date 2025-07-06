@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
+//import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import it.unisa.control.Decoder;
@@ -23,7 +23,7 @@ import com.google.gson.*;
 @WebServlet("/ProductFilter")
 public class ProductFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private DecimalFormat df = new DecimalFormat("#.00");
+	//private DecimalFormat df = new DecimalFormat("#.00");
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double min = (req.getParameter("min") != null && !req.getParameter("min").equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
@@ -57,15 +57,25 @@ public class ProductFilter extends HttpServlet {
 	         Filters.durationFilter(catalogo, durata);
 	        //System.out.println(catalogo.toString());
 	        
-	        ArrayList<JsonObject> listaJson = Jsonify(catalogo);
+	        for (ArticoloCompletoBean c : catalogo) {
+				// Modifica le immagini in un formato visibile
+	        	ArrayList<ImmagineBean> imgs = c.getImmagini();
+	        	if (imgs != null) {
+					imgs.forEach(img -> img.setUrl(Decoder.DecoderDropboxUrl(img.getUrl())) );
+					c.setImmagini(imgs);
+				} else {
+					c.setImmagini(new ArrayList<ImmagineBean>(0));
+				}
+			}
 	        
-	        System.out.println(listaJson.toString());
-	        
-	        resp.setContentType("application/json");
-			resp.setCharacterEncoding("UTF-8");
-			PrintWriter out = resp.getWriter();
-			out.print(listaJson.toString());
-			
+	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	        // Serializza l'intera lista di ArticoloCompletoBean in una singola stringa JSON
+            String jsonOutput = gson.toJson(catalogo);
+
+	        System.out.println("JSON Output finale inviato:\n" + jsonOutput);
+
+	        PrintWriter out = resp.getWriter();
+			out.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
 			out.flush();
 			
         } catch (SQLException e) {
@@ -83,50 +93,6 @@ public class ProductFilter extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
-	/**
-	 * Restituisce un'array di letterali (anch'essi array) json del tipo [immagine, nome, prezzo, descrizione]
-	 * @param 	catalogo {@code ArrayList<ArticoloCompletoBean>} - lista di articoli
-	 * @return	{@code ArrayList<JsonObject>} lista di array jsonj di articoli
-	 */
-	private ArrayList<JsonObject> Jsonify(ArrayList<ArticoloCompletoBean> catalogo) {
-		
-		ArrayList<JsonObject> listaJson = new ArrayList<>();
-		if (catalogo == null || catalogo.size() == 0)	return listaJson;
-		
-		for (ArticoloCompletoBean c : catalogo) {
-			
-			double price = 0;
-			String descrizione = null;
-			if (c.getPdDigitale() != null) {
-				price = c.getPdDigitale().getPrezzo();
-				descrizione = c.getPdDigitale().getDescrizione();
-			}
-			else if (c.getPdFisico() != null) {
-				price = c.getPdFisico().getPrezzo();
-				descrizione = c.getPdFisico().getDescrizione();
-			}
-			else if (c.getServizio() != null) {
-				price = c.getServizio().getPrezzo();
-				descrizione = c.getServizio().getDescrizione();
-			}
-			
-			JsonObject obj = new JsonObject();
-			obj.addProperty("codiceIdentificativo", c.getCodiceIdentificativo());
-			obj.addProperty("nome", c.getNome());
-			obj.addProperty("descrizione", descrizione);
-			obj.addProperty("prezzo", df.format(price));
-			ArrayList<ImmagineBean> imgs = c.getImmagini();
-			if(imgs == null || imgs.isEmpty())
-				obj.addProperty("immagine", "");
-			else
-				obj.addProperty("immagine", Decoder.DecoderDropboxUrl(imgs.get(0).getUrl()));
-			
-			listaJson.add(obj);
-		}
-		
-		return listaJson;
-	}
 	
 	 /* GET:
 	  * 	- min (prezzo) - float 

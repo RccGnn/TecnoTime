@@ -106,6 +106,20 @@ function contexEnum(contex) {
 	return flag;		
 }
 
+// Funzione per determinare le classi dei articoli 
+function articoloEnum(articolo) {
+	let subClass;
+	
+	if (articolo.pdFisico != null) 
+		subClass = articolo.pdFisico;
+	if (articolo.pdDigitale != null)  
+		subClass = articolo.pdDigitale;
+	if (articolo.servizio != null)  
+		subClass = articolo.servizio;
+
+	return subClass;		
+}
+
 // Funzione di parsing dell'input dei filtri
 function sortedProducts() {
 	const minInput = parseFloat(document.getElementById("min").value);
@@ -145,7 +159,6 @@ function cleanSection() {
 // Funzione di gestione della visualizzazione degli articoli
 function handleFilter(xhr) {
 	let response = JSON.parse(xhr.responseText);
-		
 	// Si ripuliscono gli articoli già presenti
 	cleanSection();
 	
@@ -163,11 +176,18 @@ function handleFilter(xhr) {
 	// Itera per ogni prodotto della lista response
 	response.forEach(art => {
 		let articolo = document.createElement("div");
+		let subClass = articoloEnum(art);
+		
 		articolo.className = "product-card";
 		
 		let img = document.createElement("img");
-		img.src = art.immagine;
-		img.alt = "Immagine articolo"+art.nome;
+		let immagini = art.immagini;
+		if (immagini.lenght != 0)
+			img.src = immagini[0].url;
+		else
+		    img.src = '/TecnoTime/images/alt-prodotti.png';
+		
+		img.alt = "Immagine articolo: "+art.nome;
 		img.className = "product-image";
 		img.onerror = function() {
 			// rimuovi onerror per evitare loop se anche il sostituto manca
@@ -183,20 +203,20 @@ function handleFilter(xhr) {
 		articolo.appendChild(title);
 		
 		let price = document.createElement("p");
-		price.innerHTML = art.prezzo+"€";
+		price.innerHTML = subClass.prezzo+" €";
 		price.className = "product-price";
 		articolo.appendChild(price);
 
 		let descr = document.createElement("p");
-		descr.innerHTML = art.descrizione;
+		descr.innerHTML = subClass.descrizione;
 		descr.className = "product-description";
 		articolo.appendChild(descr);
 		
 		let btn = document.createElement('button');
 		btn.className = 'add-to-cart-btn';
 		btn.innerHTML = 'Aggiungi al carrello';
-		btn.onclick = function () {
-			
+		btn.onclick = function (art) {
+			loadAjaxDoc("CartServlet", "POST", art, null);
 		}
 		articolo.appendChild(btn);
 		

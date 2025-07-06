@@ -1,7 +1,7 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class ArticoloBean implements Serializable, BeanMarker{
 
@@ -10,7 +10,7 @@ public class ArticoloBean implements Serializable, BeanMarker{
 	private String codiceIdentificativo;
 	private String categoria;
 	private String nome;
-	private LocalDate dataUltimaPromozione;
+	private Date dataUltimaPromozione;
 	private String enteErogatore;
 	private boolean disponibilita;
 	
@@ -39,11 +39,11 @@ public class ArticoloBean implements Serializable, BeanMarker{
 		this.nome = nome;
 	}
 		
-	public LocalDate getDataUltimaPromozione() {
+	public Date getDataUltimaPromozione() {
 		return dataUltimaPromozione;
 	}
 	
-	public void setDataUltimaPromozione(LocalDate dataUltimaPromozione) {
+	public void setDataUltimaPromozione(Date dataUltimaPromozione) {
 		this.dataUltimaPromozione = dataUltimaPromozione;
 	}
 	
