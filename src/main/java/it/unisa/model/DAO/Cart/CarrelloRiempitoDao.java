@@ -43,10 +43,11 @@ public class CarrelloRiempitoDao extends CarrelloDao{
                 "CREATE OR REPLACE VIEW CarrelloRiempito AS " +
                 "SELECT " +
                 "car.usernameCarrello, " +
+                "car.Carrello_id, " +
                 "con.codiceIdentificativo, " +
                 "con.quantita " +
                 "FROM Contiene AS con " +
-                "LEFT JOIN Carrello AS car USING (usernameCarrello) ";
+                "LEFT JOIN Carrello AS car USING (usernameCarrello,Carrello_id ) ";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -73,7 +74,8 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
 		
 		String username = carrelloRiempito.getAccount_username();
-		if (catalogo == null || catalogo.isEmpty() || username == null)
+		int Carrello_id = carrelloRiempito.getCarrello_id();
+		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_id <=0)
 			return;
 		
 		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
@@ -96,6 +98,7 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 				// Costruisco il bean da memorizzare
 				ContieneBean conBean = new ContieneBean();
 				conBean.setAccount_username(username);
+				conBean.setCarrello_id(Carrello_id);
 				conBean.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
 				conBean.setQuantità(occorrenze);
 				conDao.doSave(conBean);

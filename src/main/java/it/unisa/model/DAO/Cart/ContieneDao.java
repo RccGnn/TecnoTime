@@ -29,8 +29,8 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO " + ContieneDao.TABLE_NAME
-				+ " (codiceIdentificativo, usernameCarrello, quantita) "
-				+ " VALUES (?, ?, ?)";
+				+ " (codiceIdentificativo, usernameCarrello,Carrello_id, quantita) "
+				+ " VALUES (?, ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -39,7 +39,8 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 
 			ps.setString(1, contiene.getArticolo_codiceIdentificativo());
 			ps.setString(2, contiene.getAccount_username());
-			ps.setInt(3, contiene.getQuantità());
+			ps.setInt(3, contiene.getCarrello_id());	
+			ps.setInt(4, contiene.getQuantità());
 			ps.executeUpdate();
 
 		} finally {
@@ -57,7 +58,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 
 	@Override
 	/**
-	 * key = (Articolo.codiceIdentificativo, Carrello.usernameCarrello)
+	 * key = (Articolo.codiceIdentificativo, Carrello.usernameCarrello, Carrello_id )
 	 */
 	public synchronized ContieneBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
@@ -65,7 +66,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 
 		ContieneBean contiene = new ContieneBean();
 
-		String selectSQL = "SELECT * FROM " + ContieneDao.TABLE_NAME + " WHERE codiceIdentificativo = ? AND usernameCarrello = ?";
+		String selectSQL = "SELECT * FROM " + ContieneDao.TABLE_NAME + " WHERE codiceIdentificativo = ? AND usernameCarrello = ? AND Carrello_id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -73,6 +74,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 			
 			ps.setObject(1, key.get(0));
 			ps.setObject(2, key.get(1));
+			ps.setObject(3, key.get(2));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -80,6 +82,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 				contiene.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
 				contiene.setAccount_username(rs.getString("usernameCarrello"));
 				contiene.setQuantità(rs.getInt("quantita"));
+				contiene.setCarrello_id(rs.getInt("Carrello_id"));
 			} else {
 				contiene = null;
 			}
@@ -99,7 +102,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 	
 	@Override
 	/**
-	 * key = (Articolo.codiceIdentificativo, Carrello.usernameCarrello)
+	 * key = (Articolo.codiceIdentificativo, Carrello.usernameCarrello, Carrello_id )
 	 */
 	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
@@ -107,7 +110,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + ContieneDao.TABLE_NAME + " WHERE codiceIdentificativo = ? AND usernameCarrello = ?";
+		String deleteSQL = "DELETE FROM " + ContieneDao.TABLE_NAME + " WHERE codiceIdentificativo = ? AND usernameCarrello = ? AND Carrello_id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -115,6 +118,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 			
 			ps.setObject(1, key.get(0));
 			ps.setObject(2, key.get(1));
+			ps.setObject(3, key.get(2));
 			
 			result = ps.executeUpdate();
 
@@ -156,6 +160,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 					contiene.setArticolo_codiceIdentificativo(rs.getString("usernameCarrello"));
 					contiene.setAccount_username((rs.getString("usernameCarrello")) );
 					contiene.setQuantità(rs.getInt("quantita"));
+					contiene.setCarrello_id(rs.getInt("Carrello_id"));
 					
 					contieneList.add(contiene);
 				} while (rs.next());
@@ -189,7 +194,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 
 		ArrayList<ContieneBean> contieneList = new ArrayList<>();
 
-		String selectSQL = "SELECT * FROM " + ContieneDao.TABLE_NAME + " WHERE usernameCarrello = ? ";
+		String selectSQL = "SELECT * FROM " + ContieneDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
 
 		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
@@ -208,6 +213,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 					contiene.setArticolo_codiceIdentificativo(rs.getString("usernameCarrello"));
 					contiene.setAccount_username((rs.getString("usernameCarrello")) );
 					contiene.setQuantità(rs.getInt("quantita"));
+					contiene.setCarrello_id(rs.getInt("Carrello_id"));
 					
 					contieneList.add(contiene);
 				} while (rs.next());

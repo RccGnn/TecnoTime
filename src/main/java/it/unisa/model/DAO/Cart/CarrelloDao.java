@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.beans.BeanMarker;
 import it.unisa.model.beans.CarrelloBean;
 import it.unisa.model.connections.*;
 import it.unisa.model.DAO.*;
@@ -13,7 +14,7 @@ import it.unisa.model.DAO.*;
 import java.util.ArrayList;
 
 
-public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
+public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 
 	private static final String[] whitelist = {"usernameCarrello"};
 	
@@ -26,8 +27,8 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO " + CarrelloDao.TABLE_NAME
-				+ " (usernameCarrello) "
-				+ " VALUES (?)";
+				+ " (usernameCarrello, Carrello_id) " 
+				+ " VALUES (?,?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -35,6 +36,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 			ps = connection.prepareStatement(insertSQL);	
 
 			ps.setString(1, carrello.getAccount_username());
+			ps.setInt(2, carrello.getCarrello_id());
 			ps.executeUpdate();
 
 		} finally {
@@ -51,23 +53,27 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 	}
 
 	@Override
-	public synchronized CarrelloBean doRetrieveByKey(String key) throws SQLException {
+	/**
+	 * @param key 0 = usernameCarrello key 1 = Carrello_id
+	 */
+	public synchronized CarrelloBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
-
+			
 		CarrelloBean carrello = new CarrelloBean();
-
-		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ?";
+		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0)); 
+			ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
 				carrello.setAccount_username(rs.getString("usernameCarrello"));
+				carrello.setCarrello_id(rs.getInt("Carrello_id"));
 			} else {
 				carrello = null;
 			}
@@ -86,18 +92,19 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 	
 	
 	@Override
-	public synchronized boolean doDelete(String key) throws SQLException {
+	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ?";
+		String deleteSQL = "DELETE FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			result = ps.executeUpdate();
 
@@ -137,6 +144,7 @@ public class CarrelloDao implements BeanDaoInterface<CarrelloBean> {
 					CarrelloBean carrello = new CarrelloBean();
 
 					carrello.setAccount_username((rs.getString("usernameCarrello")) );
+					carrello.setCarrello_id(rs.getInt("Carrello_id"));
 					
 					carrelli.add(carrello);
 				} while (rs.next());

@@ -10,6 +10,12 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+
+import it.unisa.model.beans.ArticoloCompletoBean;
+import it.unisa.model.beans.CarrelloRiempitoBean;
 
 import com.google.gson.Gson;
 
@@ -35,30 +41,17 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-        response.setContentType("application/json"); // Respond with JSON
-        response.setCharacterEncoding("UTF-8");
 
-        // 1. Set character encoding for the request body
-        request.setCharacterEncoding("UTF-8");
-
-        // 2. Read the entire JSON payload from the request body
-        String jsonBuffer = "";
-        try (BufferedReader reader = request.getReader()) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                jsonBuffer += line;
-                System.out.println(1);
-            }
-        }
-        String jsonPayload = jsonBuffer.toString();
-
-        System.out.println("Received JSON payload: " + jsonPayload); // For debugging
-        Gson gson = new Gson();
-        ArticoloCompletoBean artCompleto = gson.fromJson(jsonPayload, ArticoloCompletoBean.class);
-        System.out.println(artCompleto.toString());
-        
-
+		BufferedReader reader = request.getReader();
+	    Gson gson = new Gson();
+	    ArticoloCompletoBean articolo = gson.fromJson(reader,ArticoloCompletoBean.class);
+	    CarrelloRiempitoBean cart = new CarrelloRiempitoBean();
+	    ArrayList<ArticoloCompletoBean> listaProdotti= new ArrayList<>();
+	    listaProdotti.add(articolo);
+	    cart.setListaArticoli(listaProdotti);
+	    
+		HttpSession session = request.getSession(); //session anonima 
+		 Cookie cartcookie = new Cookie("cartcookie", "cart");
 	}
 
 	/**
