@@ -38,7 +38,7 @@
         </div>
         <div class="filter-group">
           <label for="duration">Durata minima licenza (giorni):</label>
-          <input  onchange="displaySlider(); sortedProducts();" type="range" min="0" id="duration"
+          <input  onchange="displaySlider(); sortedProducts();" type="range" min="0" max = 366 id="duration"
           value = 0>
           <output id="slider"> </output>
         </div>
