@@ -79,7 +79,7 @@
                 </ul>
             </li>
             <li><a href="../articoliServizi.jsp">SERVIZI</a></li>
-            <li><a href="#AssemPort">PREASSEMBLATI e PORTATILI</a></li>
+            <li><a href="../articoliPreassemblati.jsp">PREASSEMBLATI e PORTATILI</a></li>
             <li><a href="../guide.jsp" class="icon-link">GUIDE</a></li>
         </ul>
     </nav>
