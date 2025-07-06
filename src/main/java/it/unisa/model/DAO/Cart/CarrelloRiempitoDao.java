@@ -166,13 +166,9 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 	
 	/*
 	 * L'attributo usernameCarrello usato come chiave esterna per l'entità Contiene e Carrello è vincolato 
-	 * dalla proprietà ON DELETE (UPDATE) CASCADE, quindi basta eliminare Carrello per eliminare
+	 * dalla proprietà ON DELETE (UPDATE) CASCADE, quindi basta eliminare Carrello (doDelete) per eliminare
 	 * anche tutti i prodotti al suo interno
-	 */
-	public synchronized boolean doDelete(String key) throws SQLException {
-		CarrelloDao carDao = new CarrelloDao();
-		return carDao.doDelete(key);
-	}
+	*/
 	
 	/**
 	 * Svuota un carrello, eliminandone i prodotti
