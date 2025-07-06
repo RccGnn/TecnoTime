@@ -52,8 +52,6 @@ public class test extends HttpServlet {
 		    arr.forEach(c -> System.out.println(c.toString()));
 			*/
 			CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
-			CarrelloBean carBean = new CarrelloBean();
-			carBean.setAccount_username("mrossi");
 			ArrayList<ArticoloCompletoBean> artBean = new ArrayList<>();
 			ArticoloCompletoDao aDao = new ArticoloCompletoDao();
 			
@@ -63,10 +61,10 @@ public class test extends HttpServlet {
 			
 			
 			CarrelloRiempitoBean bean = new CarrelloRiempitoBean();
-		    bean.setCarrello(carBean);
+		    bean.setAccount_username("mrossi");
 		    bean.setListaArticoli(artBean);
-		    
 		    dao.doSave(bean);
+			
 			
 			/*
 			ArrayList<String> a = new ArrayList<>();

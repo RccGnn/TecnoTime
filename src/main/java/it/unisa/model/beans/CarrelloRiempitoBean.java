@@ -3,19 +3,12 @@ package it.unisa.model.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CarrelloRiempitoBean implements BeanMarker, Serializable{
+public class CarrelloRiempitoBean extends CarrelloBean implements BeanMarker, Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<ArticoloCompletoBean> listaArticoli;
-	private CarrelloBean carrello;
 	
-	public CarrelloBean getCarrello() {
-		return carrello;
-	}
-	public void setCarrello(CarrelloBean carrello) {
-		this.carrello = carrello;
-	}
 	public ArrayList<ArticoloCompletoBean> getListaArticoli() {
 		return listaArticoli;
 	}
@@ -28,7 +21,7 @@ public class CarrelloRiempitoBean implements BeanMarker, Serializable{
 
 	@Override
 	public String toString() {
-		return "CarrelloRiempitoBean [listaArticoli=" + listaArticoli + ", carrello=" + carrello + "]";
+		return super.toString() + "CarrelloRiempitoBean [listaArticoli=" + listaArticoli + "]";
 	}
 
 }

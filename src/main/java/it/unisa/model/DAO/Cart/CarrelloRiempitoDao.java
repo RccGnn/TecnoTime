@@ -25,13 +25,13 @@ import java.util.Collections;
  * 	 
  * 	 (Le possibili combinazioni sono: 
  * 		
- * 		Account_username | listaArticoli | carrello
- * 		   	  ok			    ok		      ok
- * 		      ok			   null			 null
+ * 		Account_username | listaArticoli
+ * 		   	  ok			    ok	
+ * 		      ok			   null	
  *	  )
  * - Vengono eseguiti i metodo forniti dalla classe solo sui campi che non sono null
  */
-public class CarrelloRiempitoDao{
+public class CarrelloRiempitoDao extends CarrelloDao{
 	
 	private static final String TABLE_NAME = "CarrelloRiempito";
 
@@ -68,10 +68,12 @@ public class CarrelloRiempitoDao{
 	 */
 	public synchronized void doSave(CarrelloRiempitoBean carrelloRiempito) throws SQLException {
 
+		// Non si deve fare super.doSave(carrelloRiempito)
 		// Gli articoli memorizzati nel carrello sono già salvati nel database, non si devono salvare a loro volta
 		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
-		CarrelloBean carrello = carrelloRiempito.getCarrello();
-		if (catalogo == null || catalogo.isEmpty() || carrello == null)
+		
+		String username = carrelloRiempito.getAccount_username();
+		if (catalogo == null || catalogo.isEmpty() || username == null)
 			return;
 		
 		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
@@ -93,7 +95,7 @@ public class CarrelloRiempitoDao{
 				occorrenze = Collections.frequency(catalogo, articolo);
 				// Costruisco il bean da memorizzare
 				ContieneBean conBean = new ContieneBean();
-				conBean.setAccount_username(carrello.getAccount_username());
+				conBean.setAccount_username(username);
 				conBean.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
 				conBean.setQuantità(occorrenze);
 				conDao.doSave(conBean);
@@ -129,9 +131,7 @@ public class CarrelloRiempitoDao{
 			if (rs.next()) {
 				
 				// Il carrello viene letto una volta
-				CarrelloBean carBean = new CarrelloBean();
-				carBean.setAccount_username(rs.getString("usernameCarrello"));
-				carrelloRiempito.setCarrello(carBean); // Si imposta il carrello
+				carrelloRiempito.setAccount_username(rs.getString("usernameCarrello")); // Si imposta il carrello
 				
 				// Si devono leggere (pontenzialmente) più righe del rs per la lista di Articoli
 				ArrayList<ArticoloCompletoBean> catalogo = new ArrayList<>();
@@ -202,10 +202,8 @@ createView();
 			if (rs.next()) {
 				
 				// Il carrello viene letto una volta
-				CarrelloBean carBean = new CarrelloBean();
 				String username = rs.getString("usernameCarrello"); // Si memorizza la chiave primaria del carrello
-				carBean.setAccount_username(username);
-				carrelloRiempito.setCarrello(carBean); // Si imposta il carrello
+				carrelloRiempito.setAccount_username(username); // Si imposta il carrello
 				
 				// Si devono leggere (pontenzialmente) più righe del rs per la lista di Articoli
 				ContieneDao conDao = new ContieneDao();
