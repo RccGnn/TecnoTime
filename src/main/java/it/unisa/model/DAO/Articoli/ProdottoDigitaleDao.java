@@ -58,7 +58,7 @@ public class ProdottoDigitaleDao extends ArticoloDao{
 
 
 	/**
-	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: codiceSoftware)
+	 * Key = ({@code String}: codiceSoftware, {@code String}: Articolo.codiceIdentificativo)
 	 */
 	public synchronized ProdottoDigitaleBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
@@ -77,6 +77,17 @@ public class ProdottoDigitaleDao extends ArticoloDao{
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
+				String chiave = rs.getString("codiceIdentificativo");
+				// Si sfrutto il fatto che ad ogni articolo corrisponde una sola sottoclasse
+				ArticoloBean art = super.doRetrieveByKey(chiave);
+
+				prodottoDigitale.setCodiceIdentificativo(art.getCodiceIdentificativo());
+				prodottoDigitale.setCategoria(art.getCategoria());
+				prodottoDigitale.setNome(art.getNome());
+				prodottoDigitale.setDataUltimaPromozione(art.getDataUltimaPromozione());
+				prodottoDigitale.setEnteErogatore(art.getEnteErogatore());
+				prodottoDigitale.setDisponibilita(art.isDisponibilita());
+				
 				prodottoDigitale.setCodiceSoftware(rs.getString("codiceSoftware"));
 				prodottoDigitale.setNumeroChiavi(rs.getInt("chiaviDisponibili"));
 				prodottoDigitale.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
@@ -101,10 +112,10 @@ public class ProdottoDigitaleDao extends ArticoloDao{
 	
 	
 	/**
-	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: codiceSoftware)
+	 * Key = ({@code String}: Articolo.codiceIdentificativo)
 	 */
-	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
-		return super.doDelete((String) key.get(0));
+	public synchronized boolean doDelete(String key) throws SQLException {
+		return super.doDelete(key);
 	}
 
 	

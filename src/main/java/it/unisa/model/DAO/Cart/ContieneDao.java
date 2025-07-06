@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.beans.ContieneBean;
 import it.unisa.model.connections.*;
 import it.unisa.model.DAO.*;
@@ -57,6 +56,9 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 	}
 
 	@Override
+	/**
+	 * key = (Articolo.codiceIdentificativo, Carrello.usernameCarrello)
+	 */
 	public synchronized ContieneBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -96,6 +98,9 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 	
 	
 	@Override
+	/**
+	 * key = (Articolo.codiceIdentificativo, Carrello.usernameCarrello)
+	 */
 	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;

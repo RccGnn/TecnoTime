@@ -224,8 +224,6 @@ USE tecnotimedb;
 CREATE OR REPLACE VIEW CarrelloRiempito AS
 SELECT
 	car.usernameCarrello,
-    con.quantita,
-	a.*
+    con.quantita
 FROM Contiene AS con
 	LEFT JOIN Carrello AS car USING (usernameCarrello)
-    LEFT JOIN Articolo AS a USING (codiceIdentificativo);

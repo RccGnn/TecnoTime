@@ -7,27 +7,14 @@ public class CarrelloRiempitoBean implements BeanMarker, Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private String  Account_username;
-	private ArrayList<ContieneBean> quantitaArticoli;
 	private ArrayList<ArticoloCompletoBean> listaArticoli;
+	private CarrelloBean carrello;
 	
-	public CarrelloRiempitoBean() {
-		this.Account_username = null;
-		this.quantitaArticoli = new ArrayList<ContieneBean>();
-		this.listaArticoli = new ArrayList<ArticoloCompletoBean>();
+	public CarrelloBean getCarrello() {
+		return carrello;
 	}
-	
-	public String getAccount_username() {
-		return Account_username;
-	}
-	public void setAccount_username(String account_username) {
-		Account_username = account_username;
-	}
-	public ArrayList<ContieneBean> getQuantitaArticoli() {
-		return quantitaArticoli;
-	}
-	public void setQuantitaArticoli(ArrayList<ContieneBean> quantitaArticoli) {
-		this.quantitaArticoli = quantitaArticoli;
+	public void setCarrello(CarrelloBean carrello) {
+		this.carrello = carrello;
 	}
 	public ArrayList<ArticoloCompletoBean> getListaArticoli() {
 		return listaArticoli;
@@ -38,11 +25,10 @@ public class CarrelloRiempitoBean implements BeanMarker, Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "CarrelloRiempitoBean [Account_username=" + Account_username + ", quantitaArticoli=" + quantitaArticoli
-				+ ", listaArticoli=" + listaArticoli + "]";
+		return "CarrelloRiempitoBean [listaArticoli=" + listaArticoli + ", carrello=" + carrello + "]";
 	}
-	
+
 }

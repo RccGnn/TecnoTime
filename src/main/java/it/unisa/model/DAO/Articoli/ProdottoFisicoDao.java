@@ -60,7 +60,7 @@ public class ProdottoFisicoDao extends ArticoloDao {
 	}
 
 	/**
-	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: seriale)
+	 * Key = ({@code String}: seriale, {@code String}: Articolo.codiceIdentificativo)
 	 */
 	public synchronized ProdottoFisicoBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		
@@ -92,7 +92,7 @@ public class ProdottoFisicoDao extends ArticoloDao {
 				prodottoFisico.setEnteErogatore(art.getEnteErogatore());
 				prodottoFisico.setDisponibilita(art.isDisponibilita());
 				
-				prodottoFisico.setSeriale(rs.getString("Seriale"));
+				prodottoFisico.setSeriale(rs.getString("seriale"));
 				prodottoFisico.setPreassemblato(rs.getBoolean("isPreassemblato"));
 				prodottoFisico.setQuantitaMagazzino(rs.getInt("quantitaMagazzino"));
 				prodottoFisico.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
@@ -117,10 +117,10 @@ public class ProdottoFisicoDao extends ArticoloDao {
 	
 	
 	/**
-	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: seriale)
+	 * Key = ({@code String}: Articolo.codiceIdentificativo)
 	 */
-	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
-		return super.doDelete((String) key.get(0));
+	public synchronized boolean doDelete(String key) throws SQLException {
+		return super.doDelete(key);
 	}
 
 
@@ -157,7 +157,7 @@ public class ProdottoFisicoDao extends ArticoloDao {
 					prodottoFisico.setEnteErogatore(art.getEnteErogatore());
 					prodottoFisico.setDisponibilita(art.isDisponibilita());
 					
-					prodottoFisico.setSeriale(rs.getString("Seriale"));
+					prodottoFisico.setSeriale(rs.getString("seriale"));
 					prodottoFisico.setPreassemblato(rs.getBoolean("isPreassemblato"));
 					prodottoFisico.setQuantitaMagazzino(rs.getInt("quantitaMagazzino"));
 					prodottoFisico.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));

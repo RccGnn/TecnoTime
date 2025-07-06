@@ -11,10 +11,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
+import it.unisa.model.DAO.Articoli.ArticoloDao;
 import it.unisa.model.DAO.Articoli.ProdottoDigitaleDao;
 import it.unisa.model.DAO.Articoli.ProdottoFisicoDao;
+import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.ArticoloBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
+import it.unisa.model.beans.CarrelloBean;
+import it.unisa.model.beans.CarrelloRiempitoBean;
 import it.unisa.model.beans.ProdottoDigitaleBean;
 import it.unisa.model.beans.ProdottoFisicoBean;
 import it.unisa.model.beans.ServizioBean;
@@ -37,28 +41,33 @@ public class test extends HttpServlet {
 		// TODO Auto-generated method stub
 		ProdottoFisicoDao pf = new ProdottoFisicoDao();
 		try {
+			/*
+			CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
+			CarrelloRiempitoBean bean = dao.doRetrieveByKey("mrossi");
+		    ArrayList<ArticoloCompletoBean> arr = bean.getListaArticoli();
+		    arr.forEach(c -> System.out.println(c.toString()));
 			
-			 ProdottoFisicoBean prodottoFisico = new ProdottoFisicoBean();
-		        prodottoFisico.setCodiceIdentificativo(TEST_CODICE_IDENTIFICATIVO); // From ArticoloBean
-		        prodottoFisico.setCategoria("Electronics"); // From ArticoloBean
-		        prodottoFisico.setNome("Test Gadget"); // From ArticoloBean
-		        prodottoFisico.setDataUltimaPromozione(Date.valueOf("2024-01-01").toLocalDate()); // From ArticoloBean
-		        prodottoFisico.setEnteErogatore("Test Manufacturer"); // From ArticoloBean
-		        prodottoFisico.setDisponibilita(true); // From ArticoloBean
-
-		        prodottoFisico.setSeriale(TEST_SERIALE);
-		        prodottoFisico.setPreassemblato(true);
-		        prodottoFisico.setQuantitaMagazzino(100);
-		        prodottoFisico.setArticolo_codiceIdentificativo(TEST_CODICE_IDENTIFICATIVO);
-		        prodottoFisico.setPrezzo(99.99f);
-		        prodottoFisico.setDescrizione("A test physical product.");
-
-		        // 1. Call doSave
-		        ArrayList<String> a = new ArrayList<String>();
-		        a.add(TEST_CODICE_IDENTIFICATIVO);
-		        a.add("");
-		        pf.doDelete(a);
-		        
+			bean = dao.doEmpty("mrossi");
+			arr = bean.getListaArticoli();
+		    arr.forEach(c -> System.out.println(c.toString()));
+			*/
+			CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
+			CarrelloBean carBean = new CarrelloBean();
+			carBean.setAccount_username("mrossi");
+			ArrayList<ArticoloCompletoBean> artBean = new ArrayList<>();
+			ArticoloCompletoDao aDao = new ArticoloCompletoDao();
+			
+			ArticoloCompletoBean art = aDao.doRetrieveByKey("ART100");
+			
+			artBean.add(art);
+			
+			
+			CarrelloRiempitoBean bean = new CarrelloRiempitoBean();
+		    bean.setCarrello(carBean);
+		    bean.setListaArticoli(artBean);
+		    
+		    dao.doSave(bean);
+			
 			/*
 			ArrayList<String> a = new ArrayList<>();
 			a.add("ART400");

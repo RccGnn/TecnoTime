@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.ArticoloBean;
 import it.unisa.model.beans.ServizioBean;
@@ -61,7 +60,7 @@ public class ServizioDao extends ArticoloDao {
 
 
 	/**
-	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: codiceServizio)
+	 * Key = ({@code String}: codiceServizio, {@code String}: Articolo.codiceIdentificativo)
 	 */
 	public synchronized ServizioBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
@@ -116,10 +115,10 @@ public class ServizioDao extends ArticoloDao {
 	
 	
 	/**
-	 * Key = ({@code String}: Articolo.codiceIdentificativo, {@code String}: codiceServizio)
+	 * Key = ({@code String}: Articolo.codiceIdentificativo)
 	 */
-	public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
-		return super.doDelete((String) key.get(0));
+	public synchronized boolean doDelete(String key) throws SQLException {
+		return super.doDelete(key);
 	}
 
 	public synchronized ArrayList doRetrieveAll(String order) throws SQLException {
