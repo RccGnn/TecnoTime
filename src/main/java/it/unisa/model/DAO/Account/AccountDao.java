@@ -22,50 +22,136 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		 "nazione", "provincia", "citta", "via", "numeroCivico", "CAP", "ruolo", "dataNascita", "asc", "disc"};
 	
 	private static final String TABLE_NAME = "Account";
+	
+
+	public String UpdateandRetrieve_AccountId() {
+	    Connection connection = null;
+	    PreparedStatement ps = null;
+	    String newGuestUsername = "";
+
+	    String getLastGuestNumberSQL = "SELECT MAX(CAST(SUBSTRING_INDEX(username, '#', -1) AS UNSIGNED)) "
+	            + "AS lastNum FROM " + AccountDao.TABLE_NAME + " WHERE username LIKE 'GUEST#%'";
+
+	    int nextGuestNumber = 1;
+
+		    try {
+		        connection = DriverManagerConnectionPool.getConnection();
+		        ps = connection.prepareStatement(getLastGuestNumberSQL);
+		        ResultSet rs = ps.executeQuery();
+	
+		        if (rs.next()) {
+		            nextGuestNumber = rs.getInt("lastNum") + 1;
+		        }
+		        newGuestUsername = "GUEST#" + nextGuestNumber;
+	
+		    } catch (Exception e) {
+		        return null;
+		    } finally {
+		        try {
+		            if (ps != null)
+		                ps.close();
+		        } catch (Exception e) {
+		        	return null;
+		        }
+		        try {
+		            if (connection != null)
+		                connection.close();
+		        } catch (Exception e) {
+		        	return null;
+		        }
+		    }
+		    
+	    return newGuestUsername;
+	}
+	
+	
 
 	@Override
 	public synchronized void doSave(AccountBean account) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement ps = null;
+		String insertSQL="";
 		
-		String insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
-				+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
+		if(account.getAccountId()==null) {
+			 insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
+					+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita, Id) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			 
+				 try {
+						connection = DriverManagerConnectionPool.getConnection();
+						
+						ps = connection.prepareStatement(insertSQL);	
 			
-			ps = connection.prepareStatement(insertSQL);	
-
-			ps.setString(1, account.getUsername());
-		    ps.setString(2, account.gethashedPassword());
-		    ps.setString(3, account.getNome());
-		    ps.setString(4, account.getCognome());
-		    ps.setString(5, Character.toString(account.getSesso()));
-		    ps.setString(6, account.getEmail());
-		    ps.setString(7, account.getNumeroTelefono());
-		    ps.setString(8, account.getNazione());
-		    ps.setString(9, account.getProvincia());
-		    ps.setString(10, account.getCitta());
-		    ps.setString(11, account.getVia());
-		    ps.setString(12, account.getNumeroCivico());
-		    ps.setString(13, account.getCAP());
-		    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
-		    ps.setDate(15, Date.valueOf(account.getDataNascita()));
-			ps.executeUpdate();
-
-		} finally {
+						ps.setString(1, account.getUsername());
+					    ps.setString(2, account.gethashedPassword());
+					    ps.setString(3, account.getNome());
+					    ps.setString(4, account.getCognome());
+					    ps.setString(5, Character.toString(account.getSesso()));
+					    ps.setString(6, account.getEmail());
+					    ps.setString(7, account.getNumeroTelefono());
+					    ps.setString(8, account.getNazione());
+					    ps.setString(9, account.getProvincia());
+					    ps.setString(10, account.getCitta());
+					    ps.setString(11, account.getVia());
+					    ps.setString(12, account.getNumeroCivico());
+					    ps.setString(13, account.getCAP());
+					    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
+					    ps.setDate(15, Date.valueOf(account.getDataNascita()));
+					    ps.setString(16, account.getAccountId());
+						ps.executeUpdate();
 			
+					} finally {
+						
+						try {
+							if (ps != null)
+								ps.close();
+						} finally {
+							if (connection != null)
+								connection.close();
+						}
+					}
+				}
+		
+		else {
+			insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
+					+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
-				if (ps != null)
-					ps.close();
+				connection = DriverManagerConnectionPool.getConnection();
+				
+				ps = connection.prepareStatement(insertSQL);	
+				
+				account.setUsername(UpdateandRetrieve_AccountId());
+				
+				ps.setString(1, account.getUsername());
+			    ps.setString(2, account.gethashedPassword());
+			    ps.setString(3, account.getNome());
+			    ps.setString(4, account.getCognome());
+			    ps.setString(5, Character.toString(account.getSesso()));
+			    ps.setString(6, account.getEmail());
+			    ps.setString(7, account.getNumeroTelefono());
+			    ps.setString(8, account.getNazione());
+			    ps.setString(9, account.getProvincia());
+			    ps.setString(10, account.getCitta());
+			    ps.setString(11, account.getVia());
+			    ps.setString(12, account.getNumeroCivico());
+			    ps.setString(13, account.getCAP());
+			    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
+			    ps.setDate(15, Date.valueOf(account.getDataNascita()));
+				ps.executeUpdate();
+	
 			} finally {
-				if (connection != null)
-					connection.close();
+				
+				try {
+					if (ps != null)
+						ps.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
 			}
 		}
-		
 	}
 
 	@Override

@@ -22,6 +22,7 @@ public class AccountBean implements Serializable, BeanMarker {
 	private String CAP;
 	private LocalDate dataNascita;
 	private Ruoli ruolo;
+	private String AccountId;
 	
 	public AccountBean() {}
 
@@ -44,6 +45,13 @@ public class AccountBean implements Serializable, BeanMarker {
 		this.dataNascita = birthDate;
 		this.ruolo = rule;
 	
+	}
+	
+	public void setAccountId(String accountid) {
+		AccountId=accountid;
+	}
+	public String getAccountId() {
+		return AccountId;
 	}
 
 	public String gethashedPassword() {
@@ -169,7 +177,7 @@ public class AccountBean implements Serializable, BeanMarker {
 	@Override
 	public String toString() {
 		return "AccountBean [hashedPassword=" + hashedPassword + ", username=" + username + ", nome=" + nome
-				+ ", cognome=" + cognome + ", sesso=" + sesso +", email=" + email + ", numeroTelefono=" + numeroTelefono + ", nazione="
+				+ ", cognome=" + cognome + ",AccountId="+AccountId+", sesso=" + sesso +", email=" + email + ", numeroTelefono=" + numeroTelefono + ", nazione="
 				+ nazione + ", provincia=" + provincia + ", citta=" + citta + ", via=" + via + ", numeroCivico="
 				+ numeroCivico + ", CAP=" + CAP + ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + "]";
 	}

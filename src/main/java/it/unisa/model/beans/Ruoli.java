@@ -2,5 +2,6 @@ package it.unisa.model.beans;
 
 public enum Ruoli {
     amministratore,
-    utente_registrato
+    utente_registrato,
+    guest    
 }
