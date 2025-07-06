@@ -5,7 +5,7 @@
 
 <%
     // Supponiamo che la servlet o il controller abbiano messo in request un bean ArticoloBean chiamato "articolo"
-    ArticoloBean art = (ArticoloBean) request.getAttribute("articolo");
+    ArticoloCompletoBean art = (ArticoloCompletoBean) request.getAttribute("articolo");
     if (art == null) {
         art = new ArticoloBean(); // placeholder
     }
@@ -58,7 +58,7 @@
       <p>Ottimo prodotto, spedizione rapida!</p>
     </article>
     <article class="productsingle-review">
-      <h3>Laura B.</h3>
+      <h3>Stefanini B.</h3>
       <p>⭐⭐⭐⭐⭐</p>
       <p>Funziona esattamente come descritto.</p>
     </article>

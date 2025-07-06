@@ -47,7 +47,7 @@ function createXMLHttpRequest() {
 }
 
 
-function loadAjaxDoc(url, method, params, cFuction) {
+function loadAjaxDoc(url, method, params, cFuction, reqHeader) {
 	var request = createXMLHttpRequest();
 	
 	if(request){
@@ -86,7 +86,7 @@ function loadAjaxDoc(url, method, params, cFuction) {
 			
 				// Se i parametri sono presenti
 				request.open("POST", url, true);
-				request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				request.setRequestHeader("Content-Type", reqHeader);
 				request.send(params);
 		}
 		
@@ -144,7 +144,7 @@ function sortedProducts() {
 					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput)
 					+"&contex="+ encodeURIComponent(contestoInput) +"&duration="+ encodeURIComponent(durataInput);
 	
-	loadAjaxDoc("ProductFilter", "GET", params, handleFilter);
+	loadAjaxDoc("ProductFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }
 
 
@@ -180,13 +180,16 @@ function handleFilter(xhr) {
 		
 		articolo.className = "product-card";
 		
+		let linkImg = document.createElement("a");
 		let img = document.createElement("img");
+
 		let immagini = art.immagini;
-		if (immagini.lenght != 0)
+		if (immagini.length != 0) {
 			img.src = immagini[0].url;
-		else
+		} else {
 		    img.src = '/TecnoTime/images/alt-prodotti.png';
-		
+		}
+		linkImg.href = 'articolo-single.jsp';
 		img.alt = "Immagine articolo: "+art.nome;
 		img.className = "product-image";
 		img.onerror = function() {
@@ -194,8 +197,9 @@ function handleFilter(xhr) {
 			img.onerror = null;
 			// punto al placeholder
 			img.src = '/TecnoTime/images/alt-prodotti.png';
-		};	
-		articolo.appendChild(img);
+		};
+		linkImg.appendChild(img); // Aggiungi l'immagine come figlio del link 
+		articolo.appendChild(linkImg);
 		
 		let title = document.createElement("h3");
 		title.innerHTML = art.nome;
@@ -206,17 +210,21 @@ function handleFilter(xhr) {
 		price.innerHTML = subClass.prezzo+" €";
 		price.className = "product-price";
 		articolo.appendChild(price);
-
+		
+		let linkDesc = document.createElement("a");
 		let descr = document.createElement("p");
 		descr.innerHTML = subClass.descrizione;
 		descr.className = "product-description";
-		articolo.appendChild(descr);
+		linkDesc.href = 'articolo-single.jsp';
+		linkDesc.innerHTML = descr.innerHTML;
+		articolo.appendChild(linkDesc);
 		
 		let btn = document.createElement('button');
 		btn.className = 'add-to-cart-btn';
 		btn.innerHTML = 'Aggiungi al carrello';
-		btn.onclick = function (art) {
-			loadAjaxDoc("CartServlet", "POST", art, null);
+		btn.onclick = function () {
+			let articolo = JSON.stringify(art);
+			loadAjaxDoc("CartServlet", "POST", articolo, null, "application/json");
 		}
 		articolo.appendChild(btn);
 		

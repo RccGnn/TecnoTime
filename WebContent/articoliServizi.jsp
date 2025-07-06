@@ -23,18 +23,15 @@
       <h2>Filtra Prodotti</h2>
         <div class="filter-group">
           <label  for="min">Prezzo min (€):<br></label>
-          <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0" max = "9999"
-                 value="${param.min != null ? param.min : 0}">
+          <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0" max = "9999">
         </div>
         <div class="filter-group">
           <label  for="max">Prezzo max (€):<br></label>
-          <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0" max = "9999"
-                 value="${param.max != null ? param.max : 10000}">
+          <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0" max = "9999">
         </div>
         <div class="filter-group">
           <label  for="name">Cerca per nome:<br></label>
-          <input   onchange="sortedProducts()" type="text" id="name" name="name"
-                 value="${param.nome != null ? param.nome : ''}">
+          <input   onchange="sortedProducts()" type="text" id="name" name="name">
         </div>
         <div class="filter-group">
           <label for="duration">Durata minima licenza (giorni):</label>
@@ -46,10 +43,10 @@
         <div class="filter-group">
           <label for="sort">Ordina per:</label>
           <select  onchange="sortedProducts()" id="sort" name="sort">
-            <option value="prezzo asc"  ${param.sort=='price asc' ? 'selected':''}>Prezzo ↑</option>
-            <option value="prezzo desc" ${param.sort=='price desc' ? 'selected':''}>Prezzo ↓</option>
-            <option value="nome asc"   ${param.sort=='name asc' ? 'selected':''}>Nome A→Z</option>
-            <option value="nome desc"  ${param.sort=='name desc' ? 'selected':''}>Nome Z→A</option>
+            <option value="prezzo asc"> Prezzo ↑ </option>
+            <option value="prezzo desc"> Prezzo ↓ </option>
+            <option value="nome asc"> Nome A→Z </option>
+            <option value="nome desc"> Nome Z→A </option>
           </select>
         </div>
     </aside>

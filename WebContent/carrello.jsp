@@ -23,6 +23,7 @@
             <c:when test="${empty sessionScope.cartItems}">
                 <p class="empty-cart-msg">Il carrello è vuoto.</p>
             </c:when>
+            
             <c:otherwise>
                 <table class="cart-table">
                     <thead>
@@ -34,21 +35,23 @@
                             <th></th>
                         </tr>
                     </thead>
+                    
                     <tbody>
                         <c:forEach var="item" items="${sessionScope.cartItems}">
 					        <tr>
-					            <td>
+					        
+					        -1    <td>
 					                <div class="cart-product-info">
 					                    <img src="${item.product.imageUrl}" alt="${item.product.name}" class="cart-product-img">
 					                    <span class="cart-product-name">${item.product.name}</span>
 					                </div>
 					            </td>
 					
-					            <td>
+					          2  <td>
 					                <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
 					            </td>
 					
-					            <td>
+					          3  <td>
 					                <form method="post" action="CartServlet" class="quantity-form">
 					                    <input type="hidden" name="action" value="update">
 					                    <input type="hidden" name="productId" value="${item.product.id}">
@@ -56,11 +59,11 @@
 					                </form>
 					            </td>
 					
-					            <td>
+					          4  <td>
 					                <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" currencySymbol="€"/>
 					            </td>
 					
-					            <td>
+					          5  <td>
 					                <form method="post" action="CartServlet">
 					                    <input type="hidden" name="action" value="remove">
 					                    <input type="hidden" name="productId" value="${item.product.id}">
