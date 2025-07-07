@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.BeanDaoInterface;
-import it.unisa.model.beans.BeanMarker;
 import it.unisa.model.beans.CarrelloBean;
 import it.unisa.model.connections.*;
 import it.unisa.model.DAO.*;

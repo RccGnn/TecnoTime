@@ -14,8 +14,11 @@ import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
+import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
+import it.unisa.model.beans.Ruoli;
 
 import com.google.gson.Gson;
 
@@ -43,16 +46,25 @@ public class CartServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		BufferedReader reader = request.getReader();
-	    Gson gson = new Gson();
-	    ArticoloCompletoBean articolo = gson.fromJson(reader,ArticoloCompletoBean.class);
-	    CarrelloRiempitoBean cart = new CarrelloRiempitoBean();
-	    ArrayList<ArticoloCompletoBean> listaProdotti= new ArrayList<>();
-	    listaProdotti.add(articolo);
-	    cart.setListaArticoli(listaProdotti);
-	    
-		HttpSession session = request.getSession(); //session anonima 
-		 Cookie cartcookie = new Cookie("cartcookie", "cart");
-	}
+        Gson gson = new Gson();
+        ArticoloCompletoBean articolo = gson.fromJson(reader, ArticoloCompletoBean.class);
+        CarrelloRiempitoBean cart = new CarrelloRiempitoBean();
+        ArrayList<ArticoloCompletoBean> listaProdotti= new ArrayList<>();
+        listaProdotti.add(articolo);
+        cart.setListaArticoli(listaProdotti);
+
+        HttpSession session = request.getSession(); //session anonima 
+        AccountBean guest= new AccountBean("GUEST");
+        System.out.println(guest.toString());
+        AccountDao dao = new AccountDao();
+        try {
+            dao.doSave(guest);
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        Cookie cartcookie = new Cookie("cartcookie", "cart");
+    }
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

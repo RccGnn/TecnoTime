@@ -29,7 +29,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO " + ContieneDao.TABLE_NAME
-				+ " (codiceIdentificativo, usernameCarrello,Carrello_id, quantita) "
+				+ " (codiceIdentificativo, usernameCarrello, Carrello_id, quantita) "
 				+ " VALUES (?, ?, ?, ?)";
 
 		try {

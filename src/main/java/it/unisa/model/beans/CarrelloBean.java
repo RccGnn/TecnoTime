@@ -7,7 +7,7 @@ public class CarrelloBean implements BeanMarker, Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String  Account_username;
-	private int  Carrello_id;
+	private int Carrello_id;
 
 	public int getCarrello_id() {
 		return Carrello_id;

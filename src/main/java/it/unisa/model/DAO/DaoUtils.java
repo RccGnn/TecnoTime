@@ -22,6 +22,7 @@ public class DaoUtils {
 		Matcher match = pattern.matcher(email);
 		
 		Ruoli ruolo = null;
+
 		if(match.find())
 			ruolo = Ruoli.amministratore;
 		else
