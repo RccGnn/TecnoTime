@@ -18,6 +18,7 @@
     <!-- Mobile: bottone hamburger per filtri -->
     <button id="filter-toggle-btn" class="filter-toggle-btn">Filtri ☰</button>
 
+	<div id="notification" class="notification"> Articolo aggiunto al carrello! </div>
     <!-- SIDEBAR FILTRI -->
     <aside id="filters-sidebar" class="filters-sidebar">
       <h2>Filtra Prodotti</h2>

@@ -1101,6 +1101,15 @@ footer p.copy {
   cursor: pointer;
 }
 
+.out-of-stock-cart-btn {
+  background: #808080;
+  color: #021859;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 #slider {
     font-size: 14px;
 }
@@ -1314,6 +1323,31 @@ footer p.copy {
   margin: 0.2rem 0;
 }
 
+/* --------------------
+	NOTIFICA
+   --------------------  */
+.notification {
+  position: fixed; 
+  top: 20px;       /* bordo superiore */
+  left: 50%;       /* bordo sinistro (metà schermo) */
+  transform: translateX(-50%); 
+  z-index: 9999;   /* priorità per metterlo in primo piano */
+
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.notification.show { /*Quando l'oggetto è visibie*/
+  opacity: 1;
+  visibility: visible;
+}
 
 
 /* --------------------
