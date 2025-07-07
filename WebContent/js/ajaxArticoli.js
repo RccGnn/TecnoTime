@@ -189,7 +189,8 @@ function handleFilter(xhr) {
 		} else {
 		    img.src = '/TecnoTime/images/alt-prodotti.png';
 		}
-		linkImg.href = 'articolo-single.jsp';
+		
+		linkImg.href = 'DisplayProductPage?id='+encodeURIComponent(art.codiceIdentificativo);
 		img.alt = "Immagine articolo: "+art.nome;
 		img.className = "product-image";
 		img.onerror = function() {
@@ -240,6 +241,9 @@ function displaySlider() {
 	let slider = document.getElementById("slider");
 	let sliderValue = document.getElementById("duration");
 	
-	slider.innerHTML = sliderValue.value + " giorni";
+	if(sliderValue.value == 1)
+		slider.innerHTML = sliderValue.value + " giorno";
+	else
+		slider.innerHTML = sliderValue.value + " giorni";
 }
 

@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="it.unisa.model.beans.ArticoloBean" %>
 
+<%@page import="it.unisa.model.beans.ArticoloCompletoBean"%>
 <%
-    // Supponiamo che la servlet o il controller abbiano messo in request un bean ArticoloBean chiamato "articolo"
+    // "La servlet DisplayProductPage invia l'articolo nella request"
     ArticoloCompletoBean art = (ArticoloCompletoBean) request.getAttribute("articolo");
     if (art == null) {
-        art = new ArticoloBean(); // placeholder
+        art = new ArticoloCompletoBean(); // placeholder
     }
 %>
 
@@ -26,10 +26,10 @@
   <main class="productsingle-page">
     <div class="productsingle-gallery">
       <div class="productsingle-main-image-wrapper">
-        <img id="productsingle-main-image" src="${art.getImageUrl()}" alt="${art.getNome()}">
+        <img id="productsingle-main-image" src="${art.getImmagini().get(0).getUrl}" alt="${art.getNome()}">
       </div>
       <div class="productsingle-thumbs">
-        <c:forEach var="imgUrl" items="${art.getAdditionalImages()}">
+        <c:forEach var="imgUrl" items="${art.getImmagini()}">
           <img class="productsingle-thumb" src="${imgUrl}" alt="Foto aggiuntiva">  <!--  aggiugere la sorgente delle foto o eventuali foto aggiuntive dal DB -->
         </c:forEach>
       </div>

@@ -72,8 +72,9 @@ public class ProductFilter extends HttpServlet {
 	        // Serializza l'intera lista di ArticoloCompletoBean in una singola stringa JSON
             String jsonOutput = gson.toJson(catalogo);
 
-	        System.out.println("JSON Output finale inviato:\n" + jsonOutput);
+	        //System.out.println("JSON Output finale inviato:\n" + jsonOutput);
 
+	        resp.setContentType("application/json");
 	        PrintWriter out = resp.getWriter();
 			out.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
 			out.flush();
