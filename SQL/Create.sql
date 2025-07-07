@@ -17,13 +17,15 @@ CREATE TABLE Account (
   via      			VARCHAR(100)   	NOT NULL,
   numeroCivico		VARCHAR(10)		NOT NULL,
   CAP         		VARCHAR(5)    	NOT NULL,
-  ruolo			  	ENUM('amministratore','utente_registrato'),
-  dataNascita		DATE			NOT NULL
+  ruolo			  	ENUM('amministratore','utente_registrato','guest'),
+  dataNascita		DATE			NOT NULL,
+  AccountId			INT 			UNIQUE AUTO_INCREMENT
 );
 
 CREATE TABLE Carrello (
+  Carrello_id				INT 			UNIQUE NOT NULL, -- Un carrello non può appartenere a più utenti
   usernameCarrello          VARCHAR(50)		NOT NULL,
-  CONSTRAINT PRIMARY KEY (usernameCarrello),
+  CONSTRAINT PRIMARY KEY (usernameCarrello, Carrello_id),
   CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -137,11 +139,12 @@ CREATE TABLE Elemento_Ordine (
 CREATE TABLE Contiene (
   codiceIdentificativo 	VARCHAR(20)		NOT NULL,
   usernameCarrello      VARCHAR(50)		NOT NULL,
+  Carrello_Id			INT 			NOT NULL,
   quantita           	INT       		NOT NULL,
-  CONSTRAINT PRIMARY KEY (codiceIdentificativo, usernameCarrello),
+  CONSTRAINT PRIMARY KEY (codiceIdentificativo, usernameCarrello, Carrello_Id),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
     ON UPDATE CASCADE, -- Un articolo viene cancellato, viene settato isDisponibile=false: nessun motivo per cancellare contiene
-  CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Carrello(usernameCarrello)
+  CONSTRAINT FOREIGN KEY (usernameCarrello, Carrello_Id) REFERENCES Carrello(usernameCarrello, Carrello_Id)
     ON DELETE CASCADE -- Se l'username viene cancellato, allora si devono cancellare tutti gli elementi del carrello (e poi il carrello stesso)
     ON UPDATE CASCADE
 );
@@ -213,7 +216,6 @@ SELECT
     pd.codiceSoftware,
     pd.descrizione AS descrizione_prodotto_digitale,
     pd.chiaviDisponibili
-	
 FROM Articolo AS a
 	LEFT JOIN Prodotto_Fisico AS pf USING (codiceIdentificativo)
     LEFT JOIN Servizio AS s USING (codiceIdentificativo)
@@ -224,6 +226,8 @@ USE tecnotimedb;
 CREATE OR REPLACE VIEW CarrelloRiempito AS
 SELECT
 	car.usernameCarrello,
+    car.Carrello_Id,
+    con.codiceIdentificativo,
     con.quantita
 FROM Contiene AS con
-	LEFT JOIN Carrello AS car USING (usernameCarrello)
+	LEFT JOIN Carrello AS car USING (usernameCarrello, Carrello_Id)

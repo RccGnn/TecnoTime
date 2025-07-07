@@ -44,7 +44,7 @@ VALUES
   'Giovanni', 
   'Verdi', 
   'M', 
-  'giovanni.verdi@example.com',
+  'giovanni.verdi@example.com', 
   '+393334445556', 
   'Italia', 
   'Napoli', 
@@ -81,6 +81,7 @@ INSERT INTO Prodotto_Fisico (seriale, prezzo, descrizione, isPreassemblato, quan
 -- Inserisco immagini per prodotti
 INSERT INTO Immagine (url, codiceIdentificativo) VALUES 
 ( "https://www.dropbox.com/scl/fi/t6h8nzgtila0vqyzbcrsy/prova1.jpeg?rlkey=9euu5tm8rntz3td09cjq4dsx4&st=u5kas2lw&dl=0", "ART100"),
+( "https://www.dropbox.com/scl/fi/t6h8nzgtila0vqyzbcrsy/prova1.jpeg?rlkey=9euu5tm8rntz3td09cjq4dsx4&st=u5kas2lw&dl=0", "ART200"),
 ( "https://www.dropbox.com/scl/fi/x7c9tbqvxg1yof0keohkr/prova2.jpeg?rlkey=eryqlx9mtyax4ujhqibgd6lf3&st=4xgo5ez7&dl=0", "ART200"),
 ( "https://www.dropbox.com/scl/fi/obhqwh5ykppawn1i7l2pp/prova3.jpeg?rlkey=35ay786sq5r2p9mqysd5qpjox&st=6effh8o8&dl=0", "ART300");
 
@@ -94,3 +95,31 @@ INSERT INTO Prodotto_Digitale (codiceSoftware, descrizione, prezzo, codiceIdenti
   ('SW-OFF365', 'Licenza annuale per Office 365, versione personal e business', 69.99, 'ART700'),
   ('SW-PSCC', 'Adobe Photoshop Creative Cloud, licenza mensile', 22.99, 'ART800'),
   ('SW-ACAD', 'AutoCAD 2025 per studenti e professionisti', 159.00, 'ART900');
+  
+  USE tecnotimedb;
+
+-- Creazione dei carrelli per i tre utenti
+INSERT INTO Carrello (usernameCarrello, Carrello_Id) VALUES
+('mrossi', 1),
+('lbianchi', 2),
+('gverdi', 3);
+
+USE tecnotimedb;
+
+-- Aggiunta di 3 articoli al carrello di 'mrossi'
+INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quantita) VALUES
+('mrossi', 1, 'ART100', 2),
+('mrossi', 1, 'ART400', 1),
+('mrossi', 1, 'ART700', 3);
+
+-- Aggiunta di 2 articoli al carrello di 'lbianchi'
+INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quantita) VALUES
+('lbianchi', 2, 'ART200', 2),
+('lbianchi', 2, 'ART800', 1);
+
+-- Aggiunta di 4 articoli al carrello di 'gverdi'
+INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quantita) VALUES
+('gverdi', 3, 'ART300', 1),
+('gverdi', 3, 'ART600', 1),
+('gverdi', 3, 'ART500', 3),
+('gverdi', 3, 'ART900', 1);
