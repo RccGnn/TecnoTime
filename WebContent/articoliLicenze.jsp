@@ -18,28 +18,32 @@
     <!-- Mobile: bottone hamburger per filtri -->
     <button id="filter-toggle-btn" class="filter-toggle-btn">Filtri ☰</button>
 
+	<div id="notification" class="notification"> Articolo aggiunto al carrello! </div>
     <!-- SIDEBAR FILTRI -->
     <aside id="filters-sidebar" class="filters-sidebar">
       <h2>Filtra Prodotti</h2>
         <div class="filter-group">
-          <label  for="min">Prezzo min (€):<br></label>
-          <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0" max = "9999">
+          <label for="min">Prezzo min (€):</label>
+          <input  onchange="sortedProducts()" type="number" id="min" name="min" min="0"
+                 value="${param.min != null ? param.min : 0}">
         </div>
         <div class="filter-group">
-          <label  for="max">Prezzo max (€):<br></label>
-          <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0" max = "9999">
+          <label for="max">Prezzo max (€):</label>
+          <input  onchange="sortedProducts()" type="number" id="max" name="max" min="0"
+                 value="${param.max != null ? param.max : 10000}">
         </div>
         <div class="filter-group">
-          <label  for="name">Cerca per nome:<br></label>
-          <input   onchange="sortedProducts()" type="text" id="name" name="name">
+          <label for="name">Cerca per nome:</label>
+          <input  onchange="sortedProducts()" type="text" id="name" name="name"
+                 value="${param.nome != null ? param.nome : ''}">
         </div>
         <div class="filter-group">
           <label for="sort">Ordina per:</label>
           <select  onchange="sortedProducts()" id="sort" name="sort">
-            <option value="prezzo asc"> Prezzo ↑ </option>
-            <option value="prezzo desc"> Prezzo ↓ </option>
-            <option value="nome asc"> Nome A→Z </option>
-            <option value="nome desc"> Nome Z→A </option>
+            <option value="prezzo asc"  ${param.sort=='price asc' ? 'selected':''}> Prezzo ↑</option>
+            <option value="prezzo desc" ${param.sort=='price desc' ? 'selected':''}> Prezzo ↓</option>
+            <option value="nome asc"   ${param.sort=='name asc' ? 'selected':''}> Nome A→Z</option>
+            <option value="nome desc"  ${param.sort=='name desc' ? 'selected':''}> Nome Z→A</option>
           </select>
         </div>
     </aside>

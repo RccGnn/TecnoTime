@@ -11,6 +11,14 @@ public class Filters {
 	/*
 	 * FILTRI PER TUTTI GLI ARTICOLI
 	 */
+	public static ArrayList<ArticoloCompletoBean> disponibilitaFilter(ArrayList<ArticoloCompletoBean> catalogo) {
+		if (catalogo == null)	return catalogo;
+
+		catalogo.removeIf(art -> art.getPdFisico() != null && !art.getPdFisico().isDisponibilita());
+		catalogo.removeIf(art -> art.getPdDigitale() != null && !art.getPdDigitale().isDisponibilita());
+		return catalogo;
+	}
+	
 	public static ArrayList<ArticoloCompletoBean> nameFilter(ArrayList<ArticoloCompletoBean> catalogo, String nomeComparator) {
 
 		if (nomeComparator == null || nomeComparator.trim().isEmpty() || catalogo == null) return catalogo;

@@ -189,7 +189,8 @@ function handleFilter(xhr) {
 		} else {
 		    img.src = '/TecnoTime/images/alt-prodotti.png';
 		}
-		linkImg.href = 'articolo-single.jsp';
+		
+		linkImg.href = 'DisplayProductPage?id='+encodeURIComponent(art.codiceIdentificativo);
 		img.alt = "Immagine articolo: "+art.nome;
 		img.className = "product-image";
 		img.onerror = function() {
@@ -211,26 +212,22 @@ function handleFilter(xhr) {
 		price.className = "product-price";
 		articolo.appendChild(price);
 		
-		let linkDesc = document.createElement("a");
-		let descr = document.createElement("p");
-		descr.innerHTML = subClass.descrizione;
-		descr.className = "product-description";
-		linkDesc.href = 'articolo-single.jsp';
-		linkDesc.innerHTML = descr.innerHTML;
-		articolo.appendChild(linkDesc);
-		
-		let btn = document.createElement('button');
-		btn.className = 'add-to-cart-btn';
-		btn.innerHTML = 'Aggiungi al carrello';
-		btn.onclick = function () {
-			let articolo = JSON.stringify(art);
-			loadAjaxDoc("CartServlet", "POST", articolo, null, "application/json");
+		let btn = document.createElement('button');		
+		if(subClass.disponibilita) {
+			btn.className = 'add-to-cart-btn';
+			btn.innerHTML = 'Aggiungi al carrello';
+			btn.onclick = function () {
+				let articolo = JSON.stringify(art);
+				loadAjaxDoc("CartServlet", "POST", articolo, showNotification, "application/json");
+			}
+		} else {
+			btn.className = 'out-of-stock-cart-btn';
+			btn.innerHTML = 'Scorte esaurite';			
 		}
 		articolo.appendChild(btn);
 		
 		element.appendChild(articolo);
 	});
-	
 }
 
 window.onload = sortedProducts;
@@ -240,6 +237,21 @@ function displaySlider() {
 	let slider = document.getElementById("slider");
 	let sliderValue = document.getElementById("duration");
 	
-	slider.innerHTML = sliderValue.value + " giorni";
+	if(sliderValue.value == 1)
+		slider.innerHTML = sliderValue.value + " giorno";
+	else
+		slider.innerHTML = sliderValue.value + " giorni";
 }
 
+
+function showNotification(message) {
+	let notifica = document.getElementById('notification');
+  	if (notifica) {
+    	notifica.innerHTML = "Aggiunto al carrello con successo";
+    	notifica.classList.add('show'); // Aggiungi più classi
+		
+    	setTimeout(() => { // Imposta il tempo di visualizzazione
+      		notifica.classList.remove('show');
+    	}, 3000); // 3000 ms 
+  	}
+}
