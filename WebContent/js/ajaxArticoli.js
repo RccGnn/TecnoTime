@@ -212,14 +212,6 @@ function handleFilter(xhr) {
 		price.className = "product-price";
 		articolo.appendChild(price);
 		
-		let linkDesc = document.createElement("a");
-		let descr = document.createElement("p");
-		descr.innerHTML = subClass.descrizione;
-		descr.className = "product-description";
-		linkDesc.href = 'articolo-single.jsp';
-		linkDesc.innerHTML = descr.innerHTML;
-		articolo.appendChild(linkDesc);
-		
 		let btn = document.createElement('button');
 		btn.className = 'add-to-cart-btn';
 		btn.innerHTML = 'Aggiungi al carrello';

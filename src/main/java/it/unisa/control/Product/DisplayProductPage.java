@@ -34,9 +34,8 @@ public class DisplayProductPage extends HttpServlet {
 			if (artBean.getImmagini() != null) { // Immagini di dropbox
 				artBean.getImmagini().forEach(img -> img.setUrl(Decoder.DecoderDropboxUrl(img.getUrl())));
 			}
-			request.setAttribute("articolo", artBean);
-			
-			request.setCharacterEncoding("UTF-8");
+
+			request.setAttribute("articolo", artBean);			
 			RequestDispatcher rd = request.getRequestDispatcher("/articolo-single.jsp");
 			rd.forward(request, response);
 
