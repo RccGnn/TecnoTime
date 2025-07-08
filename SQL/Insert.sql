@@ -100,26 +100,26 @@ INSERT INTO Prodotto_Digitale (codiceSoftware, descrizione, prezzo, codiceIdenti
 
 -- Creazione dei carrelli per i tre utenti
 INSERT INTO Carrello (usernameCarrello, Carrello_Id) VALUES
-('mrossi', 1),
-('lbianchi', 2),
-('gverdi', 3);
+('mrossi', "CAR1"),
+('lbianchi', "CAR2"),
+('gverdi', "CAR3");
 
 USE tecnotimedb;
 
 -- Aggiunta di 3 articoli al carrello di 'mrossi'
 INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quantita) VALUES
-('mrossi', 1, 'ART100', 2),
-('mrossi', 1, 'ART400', 1),
-('mrossi', 1, 'ART700', 3);
+('mrossi', "CAR1", 'ART100', 2),
+('mrossi', "CAR1", 'ART400', 1),
+('mrossi', "CAR1", 'ART700', 3);
 
 -- Aggiunta di 2 articoli al carrello di 'lbianchi'
 INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quantita) VALUES
-('lbianchi', 2, 'ART200', 2),
-('lbianchi', 2, 'ART800', 1);
+('lbianchi', "CAR2", 'ART200', 2),
+('lbianchi', "CAR2", 'ART800', 1);
 
 -- Aggiunta di 4 articoli al carrello di 'gverdi'
 INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quantita) VALUES
-('gverdi', 3, 'ART300', 1),
-('gverdi', 3, 'ART600', 1),
-('gverdi', 3, 'ART500', 3),
-('gverdi', 3, 'ART900', 1);
+('gverdi', "CAR3", 'ART300', 1),
+('gverdi', "CAR3", 'ART600', 1),
+('gverdi', "CAR3", 'ART500', 3),
+('gverdi', "CAR3", 'ART900', 1);

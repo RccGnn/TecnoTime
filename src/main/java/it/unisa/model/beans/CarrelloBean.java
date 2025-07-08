@@ -7,14 +7,14 @@ public class CarrelloBean implements BeanMarker, Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String  Account_username;
-	private String Carrello_id;
+	private String Carrello_Id;
 
-	public String getCarrello_id() {
-		return Carrello_id;
+	public String getCarrello_Id() {
+		return Carrello_Id;
 	}
 	
-	public void setCarrello_id(String carrelloid) {
-		Carrello_id=carrelloid;
+	public void setCarrello_Id(String carrelloid) {
+		Carrello_Id=carrelloid;
 	}
 	
 	public String getAccount_username() {
@@ -31,7 +31,7 @@ public class CarrelloBean implements BeanMarker, Serializable{
 
 	@Override
 	public String toString() {
-		return "CarrelloBean [Account_username=" + Account_username + ",Carrello_id=" + Carrello_id + "]";
+		return "CarrelloBean [Account_username=" + Account_username + ",Carrello_Id=" + Carrello_Id + "]";
 	}
 	
 }

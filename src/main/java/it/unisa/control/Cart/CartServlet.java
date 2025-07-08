@@ -53,78 +53,126 @@ public class CartServlet extends HttpServlet {
 			
 		// * Assumendo di lavorare solo con guests
 		Cookie[] cookies = request.getCookies();
-		if (cookies == null) {
+		System.out.println(cookies);
+		
+		String username = null;
+		String carrelloId = null;
+		
+		if (cookies != null) {
+			String nome = "";
+			for (Cookie c : cookies) {
+				nome = c.getName();
+				if (nome.toLowerCase().equals("username".toLowerCase()))
+					username = c.getValue();
+				else if (nome.toLowerCase().equals("carrello_id".toLowerCase()))
+					carrelloId = c.getValue();
+			}
+		}
+		
+		System.out.println("User: "+username+"\nID: "+carrelloId);
+		if (username == null || carrelloId == null) {
 			// Se il client corrente non possiede cookie, allora vuol dire che si tratta di
 			// un guest NON registrato che aggiunge un prodotto al carrello per la prima volta
 			AccountBean guest = new AccountBean("GUEST");
 	        AccountDao accDao = new AccountDao();
-	        CarrelloDao carDao = new CarrelloDao();
-	        CarrelloBean carrello = new CarrelloBean();
+	        CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
+	        CarrelloRiempitoBean carrello = new CarrelloRiempitoBean();
 
 	        String usernameGuest = accDao.UpdateandRetrieve_AccountId(); // Si ottiene l'username del guest
 	        
 	        try {
 	        	Cookie userCookie = new Cookie("username", usernameGuest);
 	        	accDao.doSave(guest); // Salva il nuovo guest sul db
-				response.addCookie(userCookie); // Imposta il cookie con l'username guest
+	        	userCookie.setPath("/");
+	        	userCookie.setMaxAge(60*60*24); // ss*mm*hh
+	        	response.addCookie(userCookie); // Imposta il cookie con l'username guest
 				
 				carrello.setAccount_username(guest.getUsername()); // Associa l'username di guest al carrello appena creato
-				String carrelloId = UUID.randomUUID().toString();
-				carrello.setCarrello_id(carrelloId); 
-				carDao.doSave(carrello); // Salva il carrello associato al guest
-				// Poichè l'id del carrello è AUTO_INCREMENT si deve recuperare il carrello dopo averlo salvato
-				Cookie cartCookie = new Cookie("carrello_id", carrelloId); // Imposta il cookie con l'id del carrello guest
+				String carrelloIdGuest = UUID.randomUUID().toString().substring(0, 10);
+				carrello.setCarrello_Id(carrelloIdGuest);
+				Cookie cartCookie = new Cookie("carrello_id", carrelloIdGuest); // Imposta il cookie con l'id del carrello guest
+				cartCookie.setPath("/");
+				cartCookie.setMaxAge(60*60*24); // ss*mm*hh
+				response.addCookie(cartCookie); // Imposta il cookie con l'username guest
 				
+				
+				System.out.println("Username111: "+usernameGuest+"\nCarrelloID: "+carrelloIdGuest);
+				// Recupera il prodotto da inserire nel carrello
+				BufferedReader reader = request.getReader();
+		        Gson gson = new Gson();
+		        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
+		        System.out.println("CArrello: "+articoloDaAggiungere);
+				
+				
+				try {
+					
+				    ArrayList<ArticoloCompletoBean> lista = carrello.getListaArticoli();
+				    if (lista == null)
+					    lista = new ArrayList<ArticoloCompletoBean>();
+				    
+				    System.out.println("Lista: "+lista);
+				    lista.add(articoloDaAggiungere);
+				    
+				    carrello.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
+				    carDao.doSave(carrello, true); // Salva il carrello
+				
+				    
+				    String cartjson = gson.toJson(carrello);
+			        response.setContentType("application/json");
+			        response.getWriter().println(cartjson);
+			        
+				} catch (Exception e) {
+					e.printStackTrace();
+					response.sendError(500);
+				}
+
 	        } catch (Exception e) {
 	        	e.printStackTrace();
 	        	response.sendError(500);
-	        }	        
-		}
-		// Se invece il client ha dei cookie, recupero il carrello
-		
-		// Leggi username ed Id del carrello del guest
-		String username = cookies[0].getAttribute("username");
-		String carrello_id = cookies[0].getAttribute("carrello_id");
-
-		// Recupera il prodotto da inserire nel carrello
-		BufferedReader reader = request.getReader();
-        Gson gson = new Gson();
-        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
-
-		// Recupera il carrello
-		CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
-		
-		try {
-			ArrayList key = new ArrayList<>(2);
-			key.add(username);
-			key.add(carrello_id);
-		    CarrelloRiempitoBean cart = carDao.doRetrieveByKey(key); // Recupera il carrello del guest
-		    ArrayList<ArticoloCompletoBean> lista = cart.getListaArticoli();
-		    lista.add(articoloDaAggiungere);
-		    
-		    cart.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
-		    carDao.doSave(cart);
-		
-		    String cartjson = gson.toJson(cart);
-	        response.setContentType("application/json");
-	        response.getWriter().println(cartjson);
+	        }
 	        
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.sendError(500);
-		}
- 
-        /*HttpSession session = request.getSession(false); //session anonima 
-        if (session == null || (session.getAttribute("user") == null && session.getAttribute("admin")==null)) {
+	        
+	        
+	        
+		} else {
+			// Se invece il client ha dei cookie, recupero il carrello
+			cookies = request.getCookies();
+			
+			// Usa username ed Id del carrello del guest
+			
+			System.out.println("Username: "+username+"\nCarrelloID: "+carrelloId);
+			// Recupera il prodotto da inserire nel carrello
+			BufferedReader reader = request.getReader();
+	        Gson gson = new Gson();
+	        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
+	        System.out.println("CArrello: "+articoloDaAggiungere);
+			
+			// Recupera il carrello
+			CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
+			
+			try {
+				ArrayList key = new ArrayList<>(2);
+				key.add(username);
+				key.add(carrelloId);
+			    CarrelloRiempitoBean cart = carDao.doRetrieveByKey(key); // Recupera il carrello del guest
+			    
+			    ArrayList<ArticoloCompletoBean> lista = cart.getListaArticoli();
+			    if (lista == null)
+				    lista = new ArrayList<ArticoloCompletoBean>();
+			    
+			    cart.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
+			    carDao.doSave(cart);
+			
+			    String cartjson = gson.toJson(cart);
+		        response.setContentType("application/json");
+		        response.getWriter().println(cartjson);
 		        
-		        System.out.println(guest.toString());
-		            
-		        Cookie [] Allcookie =request.getCookies();
-		        for(Cookie c : Allcookie) {
-		        	c.getName()==;
-		       } 
-		        response.addCookie(cartcookie);
-        }*/
+			} catch (Exception e) {
+				e.printStackTrace();
+				response.sendError(500);
+			}
+		}
+      
 	}
 
 	/**

@@ -43,11 +43,11 @@ public class CarrelloRiempitoDao extends CarrelloDao{
                 "CREATE OR REPLACE VIEW CarrelloRiempito AS " +
                 "SELECT " +
                 "car.usernameCarrello, " +
-                "car.Carrello_id, " +
+                "car.Carrello_Id, " +
                 "con.codiceIdentificativo, " +
                 "con.quantita " +
                 "FROM Contiene AS con " +
-                "LEFT JOIN Carrello AS car USING (usernameCarrello,Carrello_id ) ";
+                "LEFT JOIN Carrello AS car USING (usernameCarrello,Carrello_Id ) ";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -74,8 +74,8 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
 		
 		String username = carrelloRiempito.getAccount_username();
-		String Carrello_id = carrelloRiempito.getCarrello_id();
-		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_id == null)
+		String Carrello_Id = carrelloRiempito.getCarrello_Id();
+		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_Id == null)
 			return;
 		
 		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
@@ -89,7 +89,7 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		
 		ArrayList<Object> key = new ArrayList<>();
 		key.add(carrelloRiempito.getAccount_username());
-		key.add(carrelloRiempito.getCarrello_id());
+		key.add(carrelloRiempito.getCarrello_Id());
 		doEmpty(key);
 		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
 		for (ArticoloCompletoBean articolo : catalogo) {
@@ -102,7 +102,55 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 				// Costruisco il bean da memorizzare
 				ContieneBean conBean = new ContieneBean();
 				conBean.setAccount_username(username);
-				conBean.setCarrello_id(Carrello_id);
+				conBean.setCarrello_Id(Carrello_Id);
+				conBean.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
+				conBean.setQuantità(occorrenze);
+				conDao.doSave(conBean);
+			}
+		}
+	}
+	
+	// OVERLOAD Metodo doSave - Serve per salvare anche il carrello
+	/*
+	 * 	Account_username viene mantenuta a parte per comodità, non va salvata sul database
+	 */
+	public synchronized void doSave(CarrelloRiempitoBean carrelloRiempito, boolean flag) throws SQLException {
+
+		if (flag)
+			super.doSave(carrelloRiempito);
+		// Gli articoli memorizzati nel carrello sono già salvati nel database, non si devono salvare a loro volta
+		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
+		
+		String username = carrelloRiempito.getAccount_username();
+		String Carrello_Id = carrelloRiempito.getCarrello_Id();
+		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_Id == null)
+			return;
+		
+		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
+
+		// Si usa una lista d'appoggio per contare gli elementi distinti
+		ArrayList<ArticoloCompletoBean> temp = new ArrayList<>(); 
+		
+		// Inizializzo il Dao per salvare le occorrenze di Contiene
+		ContieneDao conDao = new ContieneDao();
+		int occorrenze = 0;
+		
+		ArrayList<Object> key = new ArrayList<>();
+		key.add(carrelloRiempito.getAccount_username());
+		key.add(carrelloRiempito.getCarrello_Id());
+		doEmpty(key);
+		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
+		for (ArticoloCompletoBean articolo : catalogo) {
+
+			// Se è la prima volta che articolo viene incontrato, allora si inserisce in temp.
+			// In questo modo non sarà più considerato per memorizzare un'entità contiene
+			if (!temp.contains(articolo)) {
+				temp.add(articolo);
+				occorrenze = Collections.frequency(catalogo, articolo);
+				// Costruisco il bean da memorizzare
+				ContieneBean conBean = new ContieneBean();
+				conBean.setAccount_username(username);
+				conBean.setCarrello_Id(Carrello_Id);
 				conBean.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
 				conBean.setQuantità(occorrenze);
 				conDao.doSave(conBean);
@@ -128,7 +176,7 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		CarrelloRiempitoBean carrelloRiempito = new CarrelloRiempitoBean();
 
 		// Ottengo tutti i prodotti e le loro quantità contenute in un carrello (rs può avere da 0 a più righe)
-		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
+		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -142,7 +190,7 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 				
 				// Il carrello viene letto una volta
 				carrelloRiempito.setAccount_username(rs.getString("usernameCarrello")); // Si imposta il carrello
-				carrelloRiempito.setCarrello_id(rs.getString("Carrello_Id"));
+				carrelloRiempito.setCarrello_Id(rs.getString("Carrello_Id"));
 				
 				// Si devono leggere (pontenzialmente) più righe del rs per la lista di Articoli
 				ArrayList<ArticoloCompletoBean> catalogo = new ArrayList<>();
@@ -199,7 +247,7 @@ createView();
 		CarrelloRiempitoBean carrelloRiempito = new CarrelloRiempitoBean();
 
 		// Ottengo tutti i prodotti e le loro quantità contenute in un carrello (rs può avere da 0 a più righe)
-		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ?";
+		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -213,9 +261,9 @@ createView();
 				
 				// Il carrello viene letto una volta
 				String username = rs.getString("usernameCarrello"); // Si memorizza la chiave primaria del carrello
-				String carrello_id = rs.getString("Carrello_id");
+				String carrello_id = rs.getString("Carrello_Id");
 				carrelloRiempito.setAccount_username(username); // Si imposta il carrello
-				carrelloRiempito.setCarrello_id(carrello_id); // Si imposta il carrello				
+				carrelloRiempito.setCarrello_Id(carrello_id); // Si imposta il carrello				
 				
 				// Si devono leggere (pontenzialmente) più righe del rs per la lista di Articoli
 				ContieneDao conDao = new ContieneDao();

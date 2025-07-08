@@ -25,7 +25,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO " + CarrelloDao.TABLE_NAME
-				+ " (usernameCarrello, Carrello_id) " 
+				+ " (usernameCarrello, Carrello_Id) " 
 				+ " VALUES (?,?)";
 
 		try {
@@ -34,7 +34,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 			ps = connection.prepareStatement(insertSQL);	
 
 			ps.setString(1, carrello.getAccount_username());
-			ps.setString(2, carrello.getCarrello_id());
+			ps.setString(2, carrello.getCarrello_Id());
 			ps.executeUpdate();
 
 		} finally {
@@ -52,14 +52,14 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 
 	@Override
 	/**
-	 * @param key 0 = usernameCarrello key 1 = Carrello_id
+	 * @param key 0 = usernameCarrello key 1 = Carrello_Id
 	 */
 	public synchronized CarrelloBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 			
 		CarrelloBean carrello = new CarrelloBean();
-		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
+		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -71,7 +71,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 
 			if (rs.next()) {
 				carrello.setAccount_username(rs.getString("usernameCarrello"));
-				carrello.setCarrello_id(rs.getString("Carrello_id"));
+				carrello.setCarrello_Id(rs.getString("Carrello_Id"));
 			} else {
 				carrello = null;
 			}
@@ -96,7 +96,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
+		String deleteSQL = "DELETE FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -142,7 +142,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 					CarrelloBean carrello = new CarrelloBean();
 
 					carrello.setAccount_username((rs.getString("usernameCarrello")) );
-					carrello.setCarrello_id(rs.getString("Carrello_id"));
+					carrello.setCarrello_Id(rs.getString("Carrello_Id"));
 					
 					carrelli.add(carrello);
 				} while (rs.next());

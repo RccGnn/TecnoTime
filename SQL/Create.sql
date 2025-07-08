@@ -23,9 +23,9 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE Carrello (
-  Carrello_id				VARCHAR(10) 	UNIQUE NOT NULL, -- Un carrello non può appartenere a più utenti
+  Carrello_Id				VARCHAR(10) 	UNIQUE NOT NULL, -- Un carrello non può appartenere a più utenti
   usernameCarrello          VARCHAR(50)		NOT NULL,
-  CONSTRAINT PRIMARY KEY (usernameCarrello, Carrello_id),
+  CONSTRAINT PRIMARY KEY (usernameCarrello, Carrello_Id),
   CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -139,7 +139,7 @@ CREATE TABLE Elemento_Ordine (
 CREATE TABLE Contiene (
   codiceIdentificativo 	VARCHAR(20)		NOT NULL,
   usernameCarrello      VARCHAR(50)		NOT NULL,
-  Carrello_Id			INT 			NOT NULL,
+  Carrello_Id			VARCHAR(10) 	NOT NULL,
   quantita           	INT       		NOT NULL,
   CONSTRAINT PRIMARY KEY (codiceIdentificativo, usernameCarrello, Carrello_Id),
   CONSTRAINT FOREIGN KEY (codiceIdentificativo) REFERENCES Articolo(codiceIdentificativo)
