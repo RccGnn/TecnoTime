@@ -1,91 +1,122 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="it.unisa.model.beans.*" %>
+<%@ page import="it.unisa.model.beans.CartItem"%>
 
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
-    <title>Carrello - TecnoTime</title>
-    <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
+  <title>Carrello - TecnoTime</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <jsp:include page="header.jsp" />
+  <jsp:include page="header.jsp"/>
 
-	<main class="cart-container">
-        <h1>Il tuo carrello</h1>
+  <div class="cart-page-container">
+    <c:choose>
+      <c:when test="${empty sessionScope.cartItems}">
+        <div class="empty-cart-container">
+            <i class="fas fa-shopping-cart empty-cart-icon"></i>
+            <h1>Il tuo carrello è vuoto</h1>
+            <p>Aggiungi prodotti per vederli qui.</p>
+            <a href="ProductServlet" class="btn-primary">Vai ai Prodotti</a>
+        </div>
+      </c:when>
+      <c:otherwise>
+        <div class="cart-layout">
+          <div class="cart-items-section">
+            <div class="cart-header">
+              <h1>IL TUO CARRELLO (${sessionScope.cartItems.size()})</h1>
+              <form method="post" action="CartServlet">
+                  <input type="hidden" name="action" value="clear"/>
+                  <button type="submit" class="remove-all-btn">RIMUOVI TUTTO</button>
+              </form>
+            </div>
 
-        <c:choose>
-            <c:when test="${empty sessionScope.cartItems}">
-                <p class="empty-cart-msg">Il carrello è vuoto.</p>
-            </c:when>
-            
-            <c:otherwise>
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th>Prodotto</th>
-                            <th>Prezzo unitario</th>
-                            <th>Quantità</th>
-                            <th>Totale</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody>
-                        <c:forEach var="item" items="${sessionScope.cartItems}">
-					        <tr>
-					        
-					        -1    <td>
-					                <div class="cart-product-info">
-					                    <img src="${item.product.imageUrl}" alt="${item.product.name}" class="cart-product-img">
-					                    <span class="cart-product-name">${item.product.name}</span>
-					                </div>
-					            </td>
-					
-					          2  <td>
-					                <fmt:formatNumber value="${item.product.price}" type="currency" currencySymbol="€"/>
-					            </td>
-					
-					          3  <td>
-					                <form method="post" action="CartServlet" class="quantity-form">
-					                    <input type="hidden" name="action" value="update">
-					                    <input type="hidden" name="productId" value="${item.product.id}">
-					                    <input type="number" name="quantity" value="${item.quantity}" min="1" class="quantity-input">
-					                </form>
-					            </td>
-					
-					          4  <td>
-					                <fmt:formatNumber value="${item.product.price * item.quantity}" type="currency" currencySymbol="€"/>
-					            </td>
-					
-					          5  <td>
-					                <form method="post" action="CartServlet">
-					                    <input type="hidden" name="action" value="remove">
-					                    <input type="hidden" name="productId" value="${item.product.id}">
-					                    <button type="submit" class="remove-btn">Rimuovi</button>
-					                </form>
-					            </td>
-					        </tr>
-					    </c:forEach>
-                    </tbody>
-                </table>
-                <div class="cart-summary">
-                    <p><strong>Totale Carrello:</strong> € <c:out value="${sessionScope.cartTotal}"/></p>
-                    <form action="CheckoutServlet" method="get">
-    				<button type="submit" class="checkout-btn">Procedi al Checkout</button>
-					</form>
+            <c:forEach var="item" items="${sessionScope.cartItems}">
+              <div class="cart-item-card">
+                <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-img"/>
+                <div class="cart-item-details">
+                  <span class="cart-item-name">${item.name}</span>
+                  <form method="post" action="CartServlet" class="quantity-form">
+                    <input type="hidden" name="action" value="update"/>
+                    <input type="hidden" name="productId" value="${item.productId}"/>
+                    <label for="quantity-${item.productId}">Qtà</label>
+                    <select name="quantity" id="quantity-${item.productId}" class="quantity-select" onchange="this.form.submit()">
+                        <c:forEach var="i" begin="1" end="10">
+                            <option value="${i}" ${i == item.quantity ? 'selected' : ''}>${i}</option>
+                        </c:forEach>
+                    </select>
+                  </form>
+                  <form method="post" action="CartServlet" class="remove-form">
+                    <input type="hidden" name="action" value="remove"/>
+                    <input type="hidden" name="productId" value="${item.productId}"/>
+                    <button type="submit" class="remove-item-btn">RIMUOVI</button>
+                  </form>
                 </div>
-            </c:otherwise>
-        </c:choose>
-    </main>
-	
-	<jsp:include page="footer.jsp" />
-	<script src="js/cart.js" defer></script>
-    <script src="js/navbar.js" defer></script>
+                <div class="cart-item-price">
+                  <%-- sezione per aggiungere il prezzo --%>
+                  <%-- <span class="original-price"><fmt:formatNumber value="${item.originalPrice}" type="currency" currencySymbol="€"/></span> --%>
+                  <span class="current-price"><fmt:formatNumber value="${item.price}" type="currency" currencySymbol="€"/></span>
+                </div>
+              </div>
+            </c:forEach>
+          </div>
+
+          <div class="order-summary-section">
+            <h2>RIEPILOGO ORDINE</h2>
+            <div class="summary-line">
+              <span>Subtotale</span>
+              <span><fmt:formatNumber value="${sessionScope.cartTotal}" type="currency" currencySymbol="€"/></span>
+            </div>
+            <div class="summary-line">
+              <span>Sconto Indicativo</span>
+              <span class="discount-color">-€0,00</span>
+            </div>
+            <div class="summary-line">
+              <span>Spedizione</span>
+              <span>calcolata al checkout</span>
+            </div>
+            <div class="summary-line">
+              <span>Imposte</span>
+              <span>calcolata al checkout</span>
+            </div>
+            <hr class="summary-divider"/>
+            <div class="summary-line total">
+              <span>Totale</span>
+              <span><fmt:formatNumber value="${sessionScope.cartTotal}" type="currency" currencySymbol="€"/></span>
+            </div>
+            <form action="CheckoutServlet" method="get">
+              <button type="submit" class="checkout-btn">CHECKOUT</button>
+            </form>
+            <div class="account-links">
+              <span>Hai già un account? <a href="LoginPage.jsp">Accedi</a></span>
+              <span>Non hai ancora un account? <a href="Registration.jsp">Unisciti a noi</a></span>
+            </div>
+            <div class="extra-info">
+              <i class="fas fa-shield-alt"></i>
+              <span>RESI SENZA RISCHI ENTRO 60 GIORNI</span>
+            </div>
+            <div class="payment-methods">
+              <i class="fab fa-cc-amex"></i>
+              <i class="fab fa-cc-visa"></i>
+              <i class="fab fa-cc-discover"></i>
+              <i class="fab fa-cc-paypal"></i>
+              <i class="fab fa-google-pay"></i>
+              <i class="fab fa-apple-pay"></i>
+            </div>
+          </div>
+        </div>
+      </c:otherwise>
+    </c:choose>
+  </div>
+
+  <jsp:include page="footer.jsp"/>
+  <script src="js/cart.js" defer></script>
+  <script src="js/navbar.js" defer></script>
 </body>
 </html>
