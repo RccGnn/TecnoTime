@@ -23,7 +23,7 @@ CREATE TABLE Account (
 );
 
 CREATE TABLE Carrello (
-  Carrello_id				INT 			UNIQUE NOT NULL, -- Un carrello non può appartenere a più utenti
+  Carrello_id				VARCHAR(10) 	UNIQUE NOT NULL, -- Un carrello non può appartenere a più utenti
   usernameCarrello          VARCHAR(50)		NOT NULL,
   CONSTRAINT PRIMARY KEY (usernameCarrello, Carrello_id),
   CONSTRAINT FOREIGN KEY (usernameCarrello) REFERENCES Account(username)

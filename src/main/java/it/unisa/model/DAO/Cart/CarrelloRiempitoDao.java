@@ -74,8 +74,8 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
 		
 		String username = carrelloRiempito.getAccount_username();
-		int Carrello_id = carrelloRiempito.getCarrello_id();
-		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_id <=0)
+		String Carrello_id = carrelloRiempito.getCarrello_id();
+		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_id == null)
 			return;
 		
 		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
@@ -87,6 +87,10 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		ContieneDao conDao = new ContieneDao();
 		int occorrenze = 0;
 		
+		ArrayList<Object> key = new ArrayList<>();
+		key.add(carrelloRiempito.getAccount_username());
+		key.add(carrelloRiempito.getCarrello_id());
+		doEmpty(key);
 		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
 		for (ArticoloCompletoBean articolo : catalogo) {
 
@@ -108,11 +112,13 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 	
 	/**
 	 * Permette di recuperare il carrello di un'utente
-	 * @param key {@code String} - Username dell'utente di cui si vuole recuperare il carrello
+	 * @param key {@code ArrayList<?>} - 
+	 * 		1. Username dell'utente di cui si vuole recuperare il carrello
+	 * 		2. ID del Carrello
 	 * @return {@code CarrelloRiempitoBean} carrello (può anche essere vuoto)
 	 * @throws SQLException
 	 */
-	public synchronized CarrelloRiempitoBean doRetrieveByKey(String key) throws SQLException {
+	public synchronized CarrelloRiempitoBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 
 		createView();
 		
@@ -122,12 +128,13 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		CarrelloRiempitoBean carrelloRiempito = new CarrelloRiempitoBean();
 
 		// Ottengo tutti i prodotti e le loro quantità contenute in un carrello (rs può avere da 0 a più righe)
-		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ?";
+		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_id = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -135,6 +142,7 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 				
 				// Il carrello viene letto una volta
 				carrelloRiempito.setAccount_username(rs.getString("usernameCarrello")); // Si imposta il carrello
+				carrelloRiempito.setCarrello_id(rs.getString("Carrello_Id"));
 				
 				// Si devono leggere (pontenzialmente) più righe del rs per la lista di Articoli
 				ArrayList<ArticoloCompletoBean> catalogo = new ArrayList<>();
@@ -175,11 +183,13 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 	
 	/**
 	 * Svuota un carrello, eliminandone i prodotti
-	 * @param key {@code String} - username dell'entità Carrello che si intende svuotare
+	 * @param key {@code ArrayList<?>} - 
+	 * 		1. Username dell'utente di cui si vuole recuperare il carrello
+	 * 		2. ID del Carrello
 	 * @return {@code CarrelloRiempitoBean} - carrello vuoto
 	 * @throws SQLException
 	 */
-	public synchronized CarrelloRiempitoBean doEmpty(String key) throws SQLException {
+	public synchronized CarrelloRiempitoBean doEmpty(ArrayList<?> key) throws SQLException {
 		
 createView();
 		
@@ -194,7 +204,8 @@ createView();
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, key);
+			ps.setObject(1, key.get(0));
+			ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -202,16 +213,20 @@ createView();
 				
 				// Il carrello viene letto una volta
 				String username = rs.getString("usernameCarrello"); // Si memorizza la chiave primaria del carrello
+				String carrello_id = rs.getString("Carrello_id");
 				carrelloRiempito.setAccount_username(username); // Si imposta il carrello
+				carrelloRiempito.setCarrello_id(carrello_id); // Si imposta il carrello				
 				
 				// Si devono leggere (pontenzialmente) più righe del rs per la lista di Articoli
 				ContieneDao conDao = new ContieneDao();
 				
 				do { // In pratica: per ogni prodotto nel carrello, si elimina la relativa istanza dell'entità Contiene corrispondente
 					String codiceIdentificativo = rs.getString("codiceIdentificativo");
-					ArrayList<String> keyContiene = new ArrayList<>(2);
+					ArrayList keyContiene = new ArrayList<>(3);
 					keyContiene.add(codiceIdentificativo);
 					keyContiene.add(username);
+					keyContiene.add(carrello_id);
+					
 					conDao.doDelete(keyContiene);
 
 				} while(rs.next());

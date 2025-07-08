@@ -244,7 +244,9 @@ function displaySlider() {
 }
 
 
-function showNotification(message) {
+function showNotification(xhr) {
+	let response = xhr.responseText;
+	console.log(response);
 	let notifica = document.getElementById('notification');
   	if (notifica) {
     	notifica.innerHTML = "Aggiunto al carrello con successo";

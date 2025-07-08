@@ -39,7 +39,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 
 			ps.setString(1, contiene.getArticolo_codiceIdentificativo());
 			ps.setString(2, contiene.getAccount_username());
-			ps.setInt(3, contiene.getCarrello_id());	
+			ps.setString(3, contiene.getCarrello_id());	
 			ps.setInt(4, contiene.getQuantità());
 			ps.executeUpdate();
 
@@ -82,7 +82,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 				contiene.setArticolo_codiceIdentificativo(rs.getString("codiceIdentificativo"));
 				contiene.setAccount_username(rs.getString("usernameCarrello"));
 				contiene.setQuantità(rs.getInt("quantita"));
-				contiene.setCarrello_id(rs.getInt("Carrello_id"));
+				contiene.setCarrello_id(rs.getString("Carrello_id"));
 			} else {
 				contiene = null;
 			}
@@ -160,7 +160,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 					contiene.setArticolo_codiceIdentificativo(rs.getString("usernameCarrello"));
 					contiene.setAccount_username((rs.getString("usernameCarrello")) );
 					contiene.setQuantità(rs.getInt("quantita"));
-					contiene.setCarrello_id(rs.getInt("Carrello_id"));
+					contiene.setCarrello_id(rs.getString("Carrello_id"));
 					
 					contieneList.add(contiene);
 				} while (rs.next());
@@ -213,7 +213,7 @@ public class ContieneDao implements BeanDaoInterfaceArray<ContieneBean> {
 					contiene.setArticolo_codiceIdentificativo(rs.getString("usernameCarrello"));
 					contiene.setAccount_username((rs.getString("usernameCarrello")) );
 					contiene.setQuantità(rs.getInt("quantita"));
-					contiene.setCarrello_id(rs.getInt("Carrello_id"));
+					contiene.setCarrello_id(rs.getString("Carrello_id"));
 					
 					contieneList.add(contiene);
 				} while (rs.next());
