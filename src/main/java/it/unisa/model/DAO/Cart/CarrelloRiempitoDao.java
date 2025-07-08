@@ -65,53 +65,6 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		}
 	}
 	
-	/*
-	 * 	Account_username viene mantenuta a parte per comodità, non va salvata sul database
-	 */
-	public synchronized void doSave(CarrelloRiempitoBean carrelloRiempito) throws SQLException {
-
-		// Non si deve fare super.doSave(carrelloRiempito)
-		// Gli articoli memorizzati nel carrello sono già salvati nel database, non si devono salvare a loro volta
-		ArrayList<ArticoloCompletoBean> catalogo = carrelloRiempito.getListaArticoli();
-		
-		String username = carrelloRiempito.getAccount_username();
-		String Carrello_Id = carrelloRiempito.getCarrello_Id();
-		if (catalogo == null || catalogo.isEmpty() || username == null || Carrello_Id == null)
-			return;
-		
-		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
-
-		// Si usa una lista d'appoggio per contare gli elementi distinti
-		ArrayList<String> temp = new ArrayList<>(); 
-		
-		// Inizializzo il Dao per salvare le occorrenze di Contiene
-		ContieneDao conDao = new ContieneDao();
-		int occorrenze = 0;
-		
-		ArrayList key = new ArrayList<>();
-		key.add(carrelloRiempito.getAccount_username());
-		key.add(carrelloRiempito.getCarrello_Id());
-		doEmpty(key);
-		int i = 1;
-		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
-		for (ArticoloCompletoBean articolo : catalogo) {
-			
-			// Se è la prima volta che articolo viene incontrato, allora si inserisce in temp.
-			// In questo modo non sarà più considerato per memorizzare un'entità contiene
-			if (!temp.contains(articolo.getCodiceIdentificativo())) {
-				temp.add(articolo.getCodiceIdentificativo());
-				occorrenze = Collections.frequency(catalogo, articolo);
-				System.out.println("Articolo: "+articolo.toString()+"\nOccorrenze: "+occorrenze);
-				// Costruisco il bean da memorizzare
-				ContieneBean conBean = new ContieneBean();
-				conBean.setAccount_username(username);
-				conBean.setCarrello_Id(Carrello_Id);
-				conBean.setArticolo_codiceIdentificativo(articolo.getCodiceIdentificativo());
-				conBean.setQuantità(occorrenze);
-				conDao.doSave(conBean);
-			}
-		}
-	}
 	
 	// OVERLOAD Metodo doSave - Serve per salvare anche il carrello
 	/*

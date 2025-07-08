@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
  *	  )
  * - Vengono eseguiti i metodo forniti dalla classe solo sui campi che non sono null
  */
-public class ArticoloCompletoDao{
+public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBean>{
 
 	private static final String[] whitelist = 
 		{

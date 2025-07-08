@@ -55,7 +55,7 @@ public class CartServlet extends HttpServlet {
 				nome = c.getName();
 				if (nome.toLowerCase().equals("username".toLowerCase()))
 					username = c.getValue();
-				else if (nome.toLowerCase().equals("carrello_id".toLowerCase()))
+				if (nome.toLowerCase().equals("carrello_id".toLowerCase()))
 					carrelloId = c.getValue();
 			}
 		}
@@ -92,30 +92,20 @@ public class CartServlet extends HttpServlet {
 				BufferedReader reader = request.getReader();
 		        Gson gson = new Gson();
 		        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
-				
-				
-				try {
 					
-				    ArrayList<ArticoloCompletoBean> lista = carrello.getListaArticoli();
-				    if (lista == null)
-					    lista = new ArrayList<ArticoloCompletoBean>();
+		        ArrayList<ArticoloCompletoBean> lista = new ArrayList<ArticoloCompletoBean>();
 				    
-				    System.out.println("Lista: "+lista);
-				    lista.add(articoloDaAggiungere);
+				System.out.println("Lista: "+lista);
+				lista.add(articoloDaAggiungere);
 				    
-				    carrello.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
-				    carDao.doSave(carrello, true); // Salva il carrello
+				carrello.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
+				carDao.doSave(carrello, true); // Salva il carrello
 				
-				    // Invia il carrello
-				    String cartjson = gson.toJson(carrello);
-			        response.setContentType("application/json");
-			        response.getWriter().println(cartjson);
-			        
-				} catch (Exception e) {
-					e.printStackTrace();
-					response.sendError(500);
-				}
-
+				// Invia il carrello
+				String cartjson = gson.toJson(carrello);
+				response.setContentType("application/json");
+				response.getWriter().println(cartjson);
+			  
 	        } catch (Exception e) {
 	        	e.printStackTrace();
 	        	response.sendError(500);
@@ -123,11 +113,8 @@ public class CartServlet extends HttpServlet {
 	        
 	        
 	        
-	        
 		} else {
-			// Se invece il client ha dei cookie, recupero il carrello
-			cookies = request.getCookies();
-			
+			// Se invece il client ha dei cookie, recupero il carrello			
 			// Usa username ed Id del carrello del guest
 			
 			System.out.println("Username: "+username+"\nCarrelloID: "+carrelloId);
@@ -153,7 +140,7 @@ public class CartServlet extends HttpServlet {
 			    lista.add(articoloDaAggiungere); // Aggiungi il prodotto appena aggiunto al carrello
 			    cart.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
 			    System.out.println("ListaAggiornata: " + lista.size());
-			    carDao.doSave(cart);
+			    carDao.doSave(cart, false);
 			
 			    // Invia il carrello
 			    String cartjson = gson.toJson(cart);
