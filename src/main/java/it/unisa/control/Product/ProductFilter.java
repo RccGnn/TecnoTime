@@ -34,7 +34,7 @@ public class ProductFilter extends HttpServlet {
         double durata = (req.getParameter("duration") != null && !req.getParameter("duration").equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
         		
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
-        System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
+        //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {
@@ -54,7 +54,7 @@ public class ProductFilter extends HttpServlet {
 	        // Se si tratta di un servizio, filtra per durata del servizio
 	        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
 	        if (durata != -1)
-	         Filters.durationFilter(catalogo, durata);
+	        	Filters.durationFilter(catalogo, durata);
 	        //System.out.println(catalogo.toString());
 	        
 	        for (ArticoloCompletoBean c : catalogo) {

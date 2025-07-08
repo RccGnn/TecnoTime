@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import it.unisa.model.DAO.*;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
@@ -81,24 +82,26 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
 
 		// Si usa una lista d'appoggio per contare gli elementi distinti
-		ArrayList<ArticoloCompletoBean> temp = new ArrayList<>(); 
+		ArrayList<String> temp = new ArrayList<>(); 
 		
 		// Inizializzo il Dao per salvare le occorrenze di Contiene
 		ContieneDao conDao = new ContieneDao();
 		int occorrenze = 0;
 		
-		ArrayList<Object> key = new ArrayList<>();
+		ArrayList key = new ArrayList<>();
 		key.add(carrelloRiempito.getAccount_username());
 		key.add(carrelloRiempito.getCarrello_Id());
 		doEmpty(key);
+		int i = 1;
 		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
 		for (ArticoloCompletoBean articolo : catalogo) {
-
+			
 			// Se è la prima volta che articolo viene incontrato, allora si inserisce in temp.
 			// In questo modo non sarà più considerato per memorizzare un'entità contiene
-			if (!temp.contains(articolo)) {
-				temp.add(articolo);
+			if (!temp.contains(articolo.getCodiceIdentificativo())) {
+				temp.add(articolo.getCodiceIdentificativo());
 				occorrenze = Collections.frequency(catalogo, articolo);
+				System.out.println("Articolo: "+articolo.toString()+"\nOccorrenze: "+occorrenze);
 				// Costruisco il bean da memorizzare
 				ContieneBean conBean = new ContieneBean();
 				conBean.setAccount_username(username);
@@ -129,24 +132,26 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		// Ciò che si memorizza sono le quantità: le entità contiene della lista quantità Articoli
 
 		// Si usa una lista d'appoggio per contare gli elementi distinti
-		ArrayList<ArticoloCompletoBean> temp = new ArrayList<>(); 
+		ArrayList<String> temp = new ArrayList<>(); 
 		
 		// Inizializzo il Dao per salvare le occorrenze di Contiene
 		ContieneDao conDao = new ContieneDao();
 		int occorrenze = 0;
 		
-		ArrayList<Object> key = new ArrayList<>();
+		ArrayList key = new ArrayList<>();
 		key.add(carrelloRiempito.getAccount_username());
 		key.add(carrelloRiempito.getCarrello_Id());
 		doEmpty(key);
 		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
+		int i = 1;
 		for (ArticoloCompletoBean articolo : catalogo) {
-
+			
 			// Se è la prima volta che articolo viene incontrato, allora si inserisce in temp.
 			// In questo modo non sarà più considerato per memorizzare un'entità contiene
-			if (!temp.contains(articolo)) {
-				temp.add(articolo);
+			if (!temp.contains(articolo.getCodiceIdentificativo())) {
+				temp.add(articolo.getCodiceIdentificativo());
 				occorrenze = Collections.frequency(catalogo, articolo);
+				System.out.println("Articolo: "+articolo.toString()+"\nOccorrenze: "+occorrenze);
 				// Costruisco il bean da memorizzare
 				ContieneBean conBean = new ContieneBean();
 				conBean.setAccount_username(username);

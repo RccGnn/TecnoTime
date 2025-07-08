@@ -1,6 +1,7 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ProdottoFisicoBean extends ArticoloBean implements Serializable, BeanMarker, BeanProductItem{
 	
@@ -59,4 +60,28 @@ public class ProdottoFisicoBean extends ArticoloBean implements Serializable, Be
 				+ ", quantitaMagazzino=" + quantitaMagazzino + ", Articolo_codiceIdentificativo="
 				+ Articolo_codiceIdentificativo + ", prezzo=" + prezzo + ", descrizione=" + descrizione + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(Articolo_codiceIdentificativo, descrizione, isPreassemblato, prezzo,
+				quantitaMagazzino, seriale);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProdottoFisicoBean other = (ProdottoFisicoBean) obj;
+		return Objects.equals(Articolo_codiceIdentificativo, other.Articolo_codiceIdentificativo)
+				&& Objects.equals(descrizione, other.descrizione) && isPreassemblato == other.isPreassemblato
+				&& Float.floatToIntBits(prezzo) == Float.floatToIntBits(other.prezzo)
+				&& quantitaMagazzino == other.quantitaMagazzino && Objects.equals(seriale, other.seriale);
+	}
+	
+	
 }

@@ -75,9 +75,9 @@ function loadAjaxDoc(url, method, params, cFuction, reqHeader) {
         	}
     	}, 15000/*ms*/); 
 		
-		// Metodo usato: GET
+		
 		if (method.toLowerCase() === "get") {
-		  request.open("GET", params ? `${url}?${params}` : url, false); // Simile alle fString di pyhton
+		  request.open("GET", params ? `${url}?${params}` : url, true); // Simile alle fString di pyhton
 		  request.send(null);
 		}
 
@@ -85,7 +85,7 @@ function loadAjaxDoc(url, method, params, cFuction, reqHeader) {
 		 else {
 			
 				// Se i parametri sono presenti
-				request.open("POST", url, false);
+				request.open("POST", url, true);
 				request.setRequestHeader("Content-Type", reqHeader);
 				request.send(params);
 		}

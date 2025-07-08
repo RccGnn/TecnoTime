@@ -1,6 +1,7 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ImmagineBean implements Serializable, BeanMarker{
 	
@@ -45,4 +46,22 @@ public class ImmagineBean implements Serializable, BeanMarker{
 				+ Articolo_codiceIdentificativo + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(Articolo_codiceIdentificativo, indice, url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ImmagineBean other = (ImmagineBean) obj;
+		return Objects.equals(Articolo_codiceIdentificativo, other.Articolo_codiceIdentificativo)
+				&& indice == other.indice && Objects.equals(url, other.url);
+	}
+	
 }

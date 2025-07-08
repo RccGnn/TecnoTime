@@ -1,8 +1,10 @@
 package it.unisa.model.DAO;
 
+import java.util.ArrayList;
 import java.util.regex.*;
 
 import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.Ruoli;
 
 public class DaoUtils {
@@ -101,8 +103,13 @@ public class DaoUtils {
 		return flag;
 	}
 	
+	public static <T> int countOccurencies(ArrayList<T> array, T oggetto) {
+		int count = 0;
+		for (T a : array) {
+			if (a.equals(array))
+				count++;
+		}
+		
+		return count;
+	}
 }
-
-
-
-

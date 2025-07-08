@@ -1,6 +1,7 @@
 package it.unisa.model.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ServizioBean extends ArticoloBean implements Serializable, BeanMarker, BeanProductItem{
 	
@@ -50,6 +51,29 @@ public class ServizioBean extends ArticoloBean implements Serializable, BeanMark
 		return super.toString() + "ServizioBean [codiceServizio=" + codiceServizio + ", durata=" + durata
 				+ ", Articolo_codiceIdentificativo=" + Articolo_codiceIdentificativo + ", prezzo=" + prezzo
 				+ ", descrizione=" + descrizione + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ Objects.hash(Articolo_codiceIdentificativo, codiceServizio, descrizione, durata, prezzo);
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ServizioBean other = (ServizioBean) obj;
+		return Objects.equals(Articolo_codiceIdentificativo, other.Articolo_codiceIdentificativo)
+				&& Objects.equals(codiceServizio, other.codiceServizio)
+				&& Objects.equals(descrizione, other.descrizione)
+				&& Double.doubleToLongBits(durata) == Double.doubleToLongBits(other.durata)
+				&& Double.doubleToLongBits(prezzo) == Double.doubleToLongBits(other.prezzo);
 	}
 	
 }

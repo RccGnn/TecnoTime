@@ -1,6 +1,5 @@
 package it.unisa.control.Cart;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -13,22 +12,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.random.RandomGenerator;
 
 import com.google.gson.Gson;
 
 import it.unisa.model.DAO.Account.AccountDao;
-import it.unisa.model.DAO.Cart.CarrelloDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
-import it.unisa.model.beans.CarrelloBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
-import it.unisa.model.beans.Ruoli;
 
-import com.google.gson.Gson;
-
-import it.unisa.model.beans.ArticoloCompletoBean;
 
 /**
  * Servlet implementation class CartServlet
@@ -53,7 +45,6 @@ public class CartServlet extends HttpServlet {
 			
 		// * Assumendo di lavorare solo con guests
 		Cookie[] cookies = request.getCookies();
-		System.out.println(cookies);
 		
 		String username = null;
 		String carrelloId = null;
@@ -96,12 +87,11 @@ public class CartServlet extends HttpServlet {
 				response.addCookie(cartCookie); // Imposta il cookie con l'username guest
 				
 				
-				System.out.println("Username111: "+usernameGuest+"\nCarrelloID: "+carrelloIdGuest);
+				System.out.println("UsernameGuest: "+usernameGuest+"\nCarrelloIDGuest: "+carrelloIdGuest);
 				// Recupera il prodotto da inserire nel carrello
 				BufferedReader reader = request.getReader();
 		        Gson gson = new Gson();
 		        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
-		        System.out.println("CArrello: "+articoloDaAggiungere);
 				
 				
 				try {
@@ -116,7 +106,7 @@ public class CartServlet extends HttpServlet {
 				    carrello.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
 				    carDao.doSave(carrello, true); // Salva il carrello
 				
-				    
+				    // Invia il carrello
 				    String cartjson = gson.toJson(carrello);
 			        response.setContentType("application/json");
 			        response.getWriter().println(cartjson);
@@ -145,7 +135,6 @@ public class CartServlet extends HttpServlet {
 			BufferedReader reader = request.getReader();
 	        Gson gson = new Gson();
 	        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
-	        System.out.println("CArrello: "+articoloDaAggiungere);
 			
 			// Recupera il carrello
 			CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
@@ -156,13 +145,17 @@ public class CartServlet extends HttpServlet {
 				key.add(carrelloId);
 			    CarrelloRiempitoBean cart = carDao.doRetrieveByKey(key); // Recupera il carrello del guest
 			    
-			    ArrayList<ArticoloCompletoBean> lista = cart.getListaArticoli();
+			    System.out.println("CarrelloAggiornato: " + cart.toString());
+			    ArrayList<ArticoloCompletoBean> lista = cart.getListaArticoli(); // Recupera la lista di articoli del guest
 			    if (lista == null)
 				    lista = new ArrayList<ArticoloCompletoBean>();
 			    
+			    lista.add(articoloDaAggiungere); // Aggiungi il prodotto appena aggiunto al carrello
 			    cart.setListaArticoli(lista); // Aggiungi la nuova lista dei prodotti
+			    System.out.println("ListaAggiornata: " + lista.size());
 			    carDao.doSave(cart);
 			
+			    // Invia il carrello
 			    String cartjson = gson.toJson(cart);
 		        response.setContentType("application/json");
 		        response.getWriter().println(cartjson);

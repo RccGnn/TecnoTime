@@ -2,6 +2,7 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ArticoloCompletoBean implements Serializable, BeanMarker{
 	
@@ -59,6 +60,24 @@ public class ArticoloCompletoBean implements Serializable, BeanMarker{
 	public String toString() {
 		return super.toString()+"ArticoloCompletoBean [codiceIdentificativo=" + codiceIdentificativo + ", nome=" + nome + ", pdFisico="
 				+ pdFisico + ", pdDigitale=" + pdDigitale + ", servizio=" + servizio + ", immagini=" + immagini + "]";
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(codiceIdentificativo, immagini, nome, pdDigitale, pdFisico, servizio);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ArticoloCompletoBean other = (ArticoloCompletoBean) obj;
+		return Objects.equals(codiceIdentificativo, other.codiceIdentificativo)
+				/*&& Objects.equals(immagini, other.immagini)*/ && Objects.equals(nome, other.nome)
+				&& Objects.equals(pdDigitale, other.pdDigitale) && Objects.equals(pdFisico, other.pdFisico)
+				&& Objects.equals(servizio, other.servizio);
 	}
 	
 	
