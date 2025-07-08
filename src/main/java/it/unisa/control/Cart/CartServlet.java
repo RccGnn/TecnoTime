@@ -180,7 +180,56 @@ public class CartServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+				AccountBean guest= new AccountBean("GUEST");
+		        AccountDao dao = new AccountDao();
+		        
+		        try {
+		            dao.doSave(guest);
+		        }catch(Exception e) {
+		            System.out.println(e.getMessage());
+		        }  
+		        
+		RandomGenerator rand= RandomGenerator.getDefault();
+		int id=rand.nextInt(800);
+		BufferedReader reader = request.getReader();
+		Gson gson = new Gson();
+		ArticoloCompletoBean articolo = gson.fromJson(reader, ArticoloCompletoBean.class);
+		CarrelloRiempitoBean cart = new CarrelloRiempitoBean();
+		CarrelloBean carrello= new CarrelloBean();
+		
+		carrello.setAccount_username(guest.getUsername());
+		carrello.setCarrello_id(id);
+		cart.setAccount_username(guest.getUsername());
+		cart.setCarrello_id(id);
+		ArrayList<ArticoloCompletoBean> listaProdotti= new ArrayList<>();
+		listaProdotti.add(articolo);
+		cart.setListaArticoli(listaProdotti);
+		CarrelloDao carrelDao= new CarrelloDao();
+		CarrelloRiempitoDao riempitoDao = new CarrelloRiempitoDao();
+		
+		try {
+			carrelDao.doSave(carrello);
+			riempitoDao.doSave(cart);
+		}  catch(Exception e) {
+			e.getMessage();
+		}
+		
+		response.setContentType("application/json");
+		String cartjson= gson.toJson(cart);
+		response.getWriter().write(cartjson);
+		
+		
+		
+		/*HttpSession session = request.getSession(false); //session anonima 
+		if (session == null || (session.getAttribute("user") == null && session.getAttribute("admin")==null)) {
+		        
+		        System.out.println(guest.toString());
+		            
+		        Cookie [] Allcookie =request.getCookies();
+		        for(Cookie c : Allcookie) {
+		        	c.getName()==;
+		       } 
+		        response.addCookie(cartcookie);
+		}*/
+		}
 	}
-
-}
