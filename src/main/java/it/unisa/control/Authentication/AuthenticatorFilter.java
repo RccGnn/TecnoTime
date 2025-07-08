@@ -51,7 +51,7 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 		    res.sendRedirect(req.getContextPath()+"/LoginPage.jsp");
 		    // messagio d'errore
 		    return;
-		}else {
+		} else {
 				Boolean user= (Boolean) session.getAttribute("user");
 				Boolean admin= (Boolean) session.getAttribute("admin");
 				String path = req.getServletPath();

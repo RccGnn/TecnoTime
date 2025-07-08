@@ -7,7 +7,7 @@ public class ContieneBean implements BeanMarker, Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private String Account_username;
-	private int Carrello_id;
+	private String Carrello_id;
 	private String Articolo_codiceIdentificativo;
 	private int quantità;
 	
@@ -17,10 +17,10 @@ public class ContieneBean implements BeanMarker, Serializable{
 	public void setAccount_username(String account_username) {
 		Account_username = account_username;
 	}
-	public void setCarrello_id(int carrelloid) {
+	public void setCarrello_id(String carrelloid) {
 		Carrello_id=carrelloid;
 	}
-	public int getCarrello_id() {
+	public String getCarrello_id() {
 		return Carrello_id;
 	}
 	

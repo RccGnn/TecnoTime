@@ -23,7 +23,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 	
 	private static final String TABLE_NAME = "Account";
 
-	public String UpdateandRetrieve_AccountId() {
+	public synchronized String UpdateandRetrieve_AccountId() {
 	    Connection connection = null;
 	    PreparedStatement ps = null;
 	    String newGuestUsername = "";

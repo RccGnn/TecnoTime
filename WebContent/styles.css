@@ -55,7 +55,7 @@ body {
 
 .search-container {
     position: relative;
-    width: 50%;
+    width: 60%;
     max-width: 400px;
 }
 
@@ -824,7 +824,7 @@ footer p.copy {
     }
 
     .search-bar {
-        width: 80%;
+        width: 100%;
     }
 
     /* --- Navigazione & Menu Hamburger --- */
@@ -1333,7 +1333,7 @@ footer p.copy {
   transform: translateX(-50%); 
   z-index: 9999;   /* priorità per metterlo in primo piano */
 
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(242, 118, 46, 1);
   color: white;
   padding: 10px 20px;
   border-radius: 5px;

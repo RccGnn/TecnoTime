@@ -34,7 +34,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 			ps = connection.prepareStatement(insertSQL);	
 
 			ps.setString(1, carrello.getAccount_username());
-			ps.setInt(2, carrello.getCarrello_id());
+			ps.setString(2, carrello.getCarrello_id());
 			ps.executeUpdate();
 
 		} finally {
@@ -71,7 +71,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 
 			if (rs.next()) {
 				carrello.setAccount_username(rs.getString("usernameCarrello"));
-				carrello.setCarrello_id(rs.getInt("Carrello_id"));
+				carrello.setCarrello_id(rs.getString("Carrello_id"));
 			} else {
 				carrello = null;
 			}
@@ -142,7 +142,7 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 					CarrelloBean carrello = new CarrelloBean();
 
 					carrello.setAccount_username((rs.getString("usernameCarrello")) );
-					carrello.setCarrello_id(rs.getInt("Carrello_id"));
+					carrello.setCarrello_id(rs.getString("Carrello_id"));
 					
 					carrelli.add(carrello);
 				} while (rs.next());
