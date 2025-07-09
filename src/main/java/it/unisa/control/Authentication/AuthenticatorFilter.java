@@ -47,7 +47,7 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
 		
-		if (session == null || (session.getAttribute("user") == null && session.getAttribute("admin")==null)) {
+		if (session == null || session.getAttribute("user") == null || session.getAttribute("admin")==null) {
 		    res.sendRedirect(req.getContextPath()+"/LoginPage.jsp");
 		    // messagio d'errore
 		    return;

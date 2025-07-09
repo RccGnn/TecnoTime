@@ -57,34 +57,39 @@ public class CarrelloDao implements BeanDaoInterfaceArray<CarrelloBean>  {
 	public synchronized CarrelloBean doRetrieveByKey(ArrayList<?> key) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
+		String selectSQL="";
 			
 		CarrelloBean carrello = new CarrelloBean();
-		String selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			ps = connection.prepareStatement(selectSQL);
-			ps.setObject(1, key.get(0)); 
-			ps.setObject(2, key.get(1));
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				carrello.setAccount_username(rs.getString("usernameCarrello"));
-				carrello.setCarrello_Id(rs.getString("Carrello_Id"));
-			} else {
-				carrello = null;
-			}
-
-		} finally {
-			try {
-				if (ps != null)
-					ps.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
+		if(key.size()==1) {
+			selectSQL="SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ?";
+		}else if(key.size()==2){
+			selectSQL = "SELECT * FROM " + CarrelloDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
 		}
+				try {
+					connection = DriverManagerConnectionPool.getConnection();
+					ps = connection.prepareStatement(selectSQL);
+					ps.setObject(1, key.get(0)); 
+					if(key.size()==2) 
+						ps.setObject(2, key.get(1));
+		
+					ResultSet rs = ps.executeQuery();
+		
+					if (rs.next()) {
+						carrello.setAccount_username(rs.getString("usernameCarrello"));
+						carrello.setCarrello_Id(rs.getString("Carrello_Id"));
+					} else {
+						carrello = null;
+					}
+		
+				} finally {
+					try {
+						if (ps != null)
+							ps.close();
+					} finally {
+						if (connection != null)
+							connection.close();
+					}
+				}
 		return carrello;
 	}
 	
