@@ -1361,6 +1361,7 @@ footer p.copy {
     font-size: 4rem;
     color: #F2D230;
     margin-bottom: 1rem;
+    transform: rotate(180deg);
 }
 .empty-cart-container h1 {
     color: #021859;

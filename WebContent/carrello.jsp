@@ -26,7 +26,7 @@
   <jsp:include page="header.jsp"/>
 
   <div class="cart-page-container">
-
+	<form method="GET" action="CheckoutServlet">
       <% ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
       	 double totale = 0;
       	 DecimalFormat df = new DecimalFormat("0.00 €");
@@ -44,13 +44,13 @@
 	          <div class="cart-items-section">
 	            <div class="cart-header">
 	              <h1>IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
-	              <form method="post" action="GET">
-	                  <input type="hidden" name="action" value="clear"/>
-	                  <button type="submit" class="remove-all-btn">RIMUOVI TUTTO</button>
-	              </form>
+	              <div>
+	                  <button type="button" class="remove-all-btn">RIMUOVI TUTTO</button>
+	              </div>
 	            </div>
 	
 				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>(); 
+				  int i = 1;
 				  for(ArticoloCompletoBean articolo : listaCarrello) {
 	              	if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
 	               		continue;
@@ -70,11 +70,12 @@
 	                <div class="cart-item-details">
 	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
 	                  
-	                  <form method="post" action="CartServlet"class="quantity-form">
+	                  <div class="quantity-form">
 	                    <input type="hidden" name="action" value="update"/>
-	                    <input type="hidden" name="productId" value="<%= aID %>"/>
+	                    <input type="hidden" name="productId<%=i%>" value="<%= aID %>"/>
 	                    <input type="hidden" name="cartId" value="<%= cID %>"/>
 	                    <input type="hidden" name="username" value="<%= username %>"/>
+	                    <input type="hidden" name="quantity<%=i%>" value="<%= count %>"/>
 	                    <label for="quantity-<%= aID %>"> Qtà: </label>
 	                    <div class="quantity-control">
     					  <button type="button" class="quantity-select" onclick="decrease(this)" id="decrement<%= aID %> ">-</button>
@@ -83,13 +84,13 @@
 						  </output>
 					      <button type="button" class="quantity-select" onclick="increase(this)" id="increment<%= aID %>">+</button>
 						</div>
-	                  </form>
+	                  </div>
 	                  
-	                  <form method="post" action="CartServlet" class="remove-form">
+	                  <div class="remove-form">
 	                    <input type="hidden" name="action" value="remove"/>
 	                    <input type="hidden" name="productId" value="<%= aID %>"/>
-	                    <button type="submit" class="remove-item-btn">RIMUOVI</button>
-	                  </form>
+	                    <button type="button" class="remove-item-btn">RIMUOVI</button>
+	                  </div>
 	                </div>
 	                <div class="cart-item-price">
 	                  
@@ -133,9 +134,9 @@
 	              <span>Totale</span>
 	              <span> <%= df.format(totale) %></span>
 	            </div>
-	            <form action="CheckoutServlet" method="get">
+	            <div>
 	              <button type="submit" class="checkout-btn">CHECKOUT</button>
-	            </form>
+	            </div>
 	            <div class="account-links">
 	              <span>Hai già un account? <a href="LoginPage.jsp">Accedi</a></span>
 	              <span>Non hai ancora un account? <a href="Registration.jsp">Unisciti a noi</a></span>
@@ -156,7 +157,10 @@
 	          
 	        </div>
 
-		<%} %>
+		<% 	 i++;
+		   } 
+		%>
+		</form>
   </div>
 
   <jsp:include page="footer.jsp"/>
