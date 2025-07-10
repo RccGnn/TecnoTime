@@ -77,14 +77,13 @@ public class test extends HttpServlet {
 			ProdottoFisicoBean pfb =  pf.doRetrieveByKey(a);
 			System.out.println(pfb.toString());
 			 */
-	/*
-			ArrayList<ProdottoFisicoBean> pfb =  pf.doRetrieveAll("");
-			System.out.println("LALALA");
 			
-			pfb.forEach(c -> {
-				System.out.println(c.toString());			
-			});
-	*/
+			AccountDao accDao = new AccountDao();
+			try {
+				accDao.doDelete("5646548/wwqbyuy");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		/*	
 			AccountDao dao = new AccountDao();

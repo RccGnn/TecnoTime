@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import com.google.gson.Gson;
 
+import it.unisa.control.Cart.CookieUtils;
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.AccountBean;
@@ -64,6 +65,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 						String username = null;
 						String carrelloId = null;
 						
+						CookieUtils.SvuotaCookie(req, res);
 						if (cookies != null) {
 							String nome = "";
 							for (Cookie c : cookies) {
@@ -106,7 +108,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 									// Recupera il prodotto da inserire nel carrello
 									
 									carDao.doSave(carrello, true); // Salva il carrello
-									
+									chain.doFilter(request, response);
 						        } catch (Exception e) {
 						        	e.printStackTrace();
 						        	res.sendError(500);
@@ -114,7 +116,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 						        
 					        
 						 } else {
-					            // ✅ Se i cookie ci sono già, prosegui la richiesta
+					            // Se i cookie ci sono già, prosegui la richiesta
 					            System.out.println("Username esistente: " + username + ", CarrelloID: " + carrelloId);
 					            chain.doFilter(request, response);
 					            return;

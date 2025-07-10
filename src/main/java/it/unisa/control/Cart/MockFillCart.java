@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
-import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
 
 /**

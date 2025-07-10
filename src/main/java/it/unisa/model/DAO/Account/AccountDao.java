@@ -216,7 +216,9 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			ps.setString(1, key);
 
 			result = ps.executeUpdate();
-
+			if (result == 0)
+				throw new SQLException("No element deleted");
+			
 		} finally {
 			try {
 				if (ps != null)
