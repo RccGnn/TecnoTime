@@ -42,7 +42,7 @@
 	          <div class="cart-items-section">
 	            <div class="cart-header">
 	              <h1>IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
-	              <form method="post" action="CartServlet">
+	              <form method="post" action="CarrelloDefinitivo">
 	                  <input type="hidden" name="action" value="clear"/>
 	                  <button type="submit" class="remove-all-btn">RIMUOVI TUTTO</button>
 	              </form>

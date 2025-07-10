@@ -74,8 +74,8 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		
 		if(!account.getUsername().toLowerCase().equals("guest")) {
 			 insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
-					+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita, AccountId) "
-					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+					+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			 
 				 try {
 						connection = DriverManagerConnectionPool.getConnection();
@@ -97,7 +97,6 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 					    ps.setString(13, account.getCAP());
 					    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
 					    ps.setDate(15, Date.valueOf(account.getDataNascita()));
-					    ps.setInt(16, account.getAccountId());
 						ps.executeUpdate();
 			
 					} finally {
@@ -118,7 +117,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
 				connection = DriverManagerConnectionPool.getConnection();
-				
+				System.out.println("se vai qui seii un coglione");
 				ps = connection.prepareStatement(insertSQL);	
 				
 				account.setUsername(UpdateandRetrieve_AccountId());

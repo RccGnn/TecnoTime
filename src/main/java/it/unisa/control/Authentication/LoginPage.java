@@ -10,12 +10,16 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import it.unisa.control.PasswordUtils;
 import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.DAO.Cart.CarrelloDao;
 import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.CarrelloBean;
 
 /**
  * Servlet implementation class LoginPage
@@ -51,14 +55,16 @@ public class LoginPage extends HttpServlet {
         String pwd = request.getParameter("password");
         
         username.trim();
-        pwd.trim();
-        BeanDaoInterface<AccountBean> dao= new AccountDao();
-        AccountBean account = new AccountBean();
+        pwd.trim(); 
+        AccountBean account = new AccountBean(); 
+        BeanDaoInterface<AccountBean> dao= new AccountDao();   
+        BeanDaoInterfaceArray<CarrelloBean> daoCarrello = new CarrelloDao();  //creo il dao per memorizzare il carrello nella sessione
+        ArrayList<String> key =new ArrayList<>(); //creo un arraylist per memorizzare la chiave del dao
+        CarrelloBean carrello= new CarrelloBean();
         
         try {
         	 account = dao.doRetrieveByKey(username);
-        	 if(account != null && username.equals(account.getUsername())) {
-        		
+        	 if(account != null) { 
         		 if(PasswordUtils.checkPasswordHashed(pwd, account.gethashedPassword())==true) {
         			 request.setAttribute("flag","passok");
         		 }else {
@@ -67,6 +73,8 @@ public class LoginPage extends HttpServlet {
         	         dispatcher.forward(request, response);      
         	         return;
         		 }
+        		key.add(username);   
+        		carrello=daoCarrello.doRetrieveByKey(key);  //recupera il carrello associato all username nel db
              }
         }catch (SQLException e) {
         	request.setAttribute("serverError", "Errore d'accesso: Login Fallito. Riprova"); //eventuale pagina errore
@@ -80,11 +88,15 @@ public class LoginPage extends HttpServlet {
         if(DaoUtils.getRuoloAccountString(account)=="amministratore") {
         	//creazione sessione admin
             session.setAttribute("admin", Boolean.TRUE);
+            session.setAttribute("username", account.getUsername());
+            session.setAttribute("carrelloid", carrello.getCarrello_Id());
             response.sendRedirect(request.getContextPath() + "/amministratore/index-amministratore.jsp");	// Redirect a pagina protetta
         }
         else if(DaoUtils.getRuoloAccountString(account)=="utente_registrato") {
         	 //creazione sessione utente 
             session.setAttribute("user", Boolean.TRUE);  
+            session.setAttribute("username", account.getUsername());
+            session.setAttribute("carrelloid", carrello.getCarrello_Id());
             response.sendRedirect(request.getContextPath() + "/utente/index-utente.jsp");	// Redirect a pagina protetta
         
         }        

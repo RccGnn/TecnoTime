@@ -3,6 +3,7 @@ package it.unisa.control.Cart;
 import it.unisa.model.beans.AccountBean;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public final class CookieUtils {
 	public static Cookie FirstTime(AccountBean guestAccount ) {
@@ -26,4 +27,24 @@ public final class CookieUtils {
 			
 		return "";
 	}
+	
+	public static void SvuotaCookie(HttpServletRequest request,HttpServletResponse response ) {
+		Cookie[] cookies = request.getCookies();	
+		
+		if (cookies != null) {
+			for (Cookie c : cookies) {
+				 c.setValue("");
+			     c.setMaxAge(0);
+			     c.setPath(c.getPath() != null ? c.getPath() : "/");
+			     response.addCookie(c);
+			     System.out.println("Cancellando cookie: " + c.getName() + " con path: " + c.getPath());
+			}
+		}
+		
+	}
+	
+	
+	
 }
+
+
