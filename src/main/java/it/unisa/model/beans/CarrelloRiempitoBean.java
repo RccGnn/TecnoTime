@@ -13,7 +13,7 @@ public class CarrelloRiempitoBean extends CarrelloBean implements BeanMarker, Se
 	
 	private static final long serialVersionUID = 1L;
 	
-	private ArrayList<ArticoloCompletoBean> listaArticoli;
+	private ArrayList<ArticoloCompletoBean> listaArticoli = new ArrayList<ArticoloCompletoBean>();
 	
 	public ArrayList<ArticoloCompletoBean> getListaArticoli() {
 		return listaArticoli;

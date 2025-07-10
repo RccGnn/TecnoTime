@@ -29,7 +29,7 @@ import it.unisa.model.beans.CarrelloRiempitoBean;
 /**
  * Servlet Filter implementation class GuestFilter
  */
-@WebFilter("/GuestFilter")
+@WebFilter("/index.jsp")
 public class GuestFilter extends HttpFilter implements Filter {
        
     /**
@@ -113,19 +113,20 @@ public class GuestFilter extends HttpFilter implements Filter {
 						        }
 						        
 					        
-					  } else {
-								System.out.println("Username: "+username+"\nCarrelloID: "+carrelloId);
-					 			return ;
-					 		}
-						
-		}else {
-			
-			
-		}
-			
-		
-		chain.doFilter(request, response);
+						 } else {
+					            // ✅ Se i cookie ci sono già, prosegui la richiesta
+					            System.out.println("Username esistente: " + username + ", CarrelloID: " + carrelloId);
+					            chain.doFilter(request, response);
+					            return;
+					        }
+
+					    } else {
+					        // Utente già loggato
+					        System.out.println("Utente autenticato");
+					        chain.doFilter(request, response);
+					    }
 }
+
 
 	/**
 	 * @see Filter#init(FilterConfig)
