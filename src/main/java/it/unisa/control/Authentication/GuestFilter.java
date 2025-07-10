@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import com.google.gson.Gson;
 
+import it.unisa.control.Cart.CookieUtils;
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.AccountBean;
@@ -56,9 +57,14 @@ public class GuestFilter extends HttpFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		String path = req.getServletPath();
 		
+		//CookieUtils.SvuotaCookie(req, res);
+		 
+	     		
 			//utente non registrato
 		if (session == null || session.getAttribute("user") == null || session.getAttribute("admin")==null) {
 		
+			
+
 						Cookie[] cookies = req.getCookies();
 						
 						String username = null;
@@ -76,6 +82,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 						}
 						
 						System.out.println("User: "+username+"\nID: "+carrelloId);
+						System.out.println(username == null || carrelloId == null);
 						if (username == null || carrelloId == null) {
 								// Se il client corrente non possiede cookie, allora vuol dire che si tratta di
 								// un guest NON registrato che aggiunge un prodotto al carrello per la prima volta
@@ -114,17 +121,19 @@ public class GuestFilter extends HttpFilter implements Filter {
 						        
 					        
 						 } else {
-					            // ✅ Se i cookie ci sono già, prosegui la richiesta
+					            //  Se i cookie ci sono già, prosegui la richiesta
 					            System.out.println("Username esistente: " + username + ", CarrelloID: " + carrelloId);
 					            chain.doFilter(request, response);
 					            return;
 					        }
 
-					    } else {
-					        // Utente già loggato
-					        System.out.println("Utente autenticato");
-					        chain.doFilter(request, response);
-					    }
+			    } else {
+			        // Utente già loggato
+			        System.out.println("Utente autenticato");
+			        chain.doFilter(request, response);
+			        return;
+			    }
+		 chain.doFilter(request, response);
 }
 
 

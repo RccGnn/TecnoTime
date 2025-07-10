@@ -1,5 +1,6 @@
 package it.unisa.control.Cart;
 
+import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.beans.AccountBean;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,18 +34,25 @@ public final class CookieUtils {
 		
 		if (cookies != null) {
 			for (Cookie c : cookies) {
+				if(c.getName().equals("JSESSIONID")) {
 				 c.setValue("");
 			     c.setMaxAge(0);
 			     c.setPath(c.getPath() != null ? c.getPath() : "/");
+			     AccountDao dao = new AccountDao();
+			     if (c.getName().equals("username"))
+			     		try {
+			     			dao.doDelete(c.getValue());
+			     		} catch (Exception e) {
+				        	e.printStackTrace();
+				        }
 			     response.addCookie(c);
 			     System.out.println("Cancellando cookie: " + c.getName() + " con path: " + c.getPath());
+				}
 			}
-		}
 		
+		}	
 	}
-	
-	
-	
+
 }
 
 

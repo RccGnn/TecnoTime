@@ -69,9 +69,6 @@ public class CartServlet extends HttpServlet {
 			    CarrelloRiempitoBean carrello = carDao.doRetrieveByKey(keys);
 			    lista=carrello.getListaArticoli();
 			    lista.add(articoloDaAggiungere);
-				if(lista==null) {
-					carrello.setListaArticoli(lista);
-				}
 				System.out.println("Lista: "+lista); //TO DO cambiare la logica della servlet sovrascrive sempre il carrello non aggiunge
 				// Invia il carrello
 				String cartjson = gson.toJson(carrello);
