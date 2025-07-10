@@ -8,7 +8,9 @@
 <%@ page import="it.unisa.model.beans.CarrelloRiempitoBean" %>
 <%@ page import="java.util.ArrayList" %>
 
-<% CarrelloRiempitoBean carrello = (CarrelloRiempitoBean) request.getAttribute("carrello"); %>
+<% 	CarrelloRiempitoBean carrello = (CarrelloRiempitoBean) request.getAttribute("carrello"); 
+	String cID = carrello.getCarrello_Id();
+	String username = carrello.getAccount_username(); %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -42,7 +44,7 @@
 	          <div class="cart-items-section">
 	            <div class="cart-header">
 	              <h1>IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
-	              <form method="post" action="CarrelloDefinitivo">
+	              <form method="post" action="GET">
 	                  <input type="hidden" name="action" value="clear"/>
 	                  <button type="submit" class="remove-all-btn">RIMUOVI TUTTO</button>
 	              </form>
@@ -50,12 +52,12 @@
 	
 				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>(); 
 				  for(ArticoloCompletoBean articolo : listaCarrello) {
-	              	if (occorrenze.contains(articolo))  {
+	              	if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
 	               		continue;
 	            	}
 	            	occorrenze.add(articolo);
 	            	int count = Collections.frequency(listaCarrello, articolo);
-	            	String cID = articolo.getCodiceIdentificativo();  
+	            	String aID = articolo.getCodiceIdentificativo();  
 	            %>
 	              <div class="cart-item-card">
 	              <% String url = "";
@@ -68,20 +70,24 @@
 	                <div class="cart-item-details">
 	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
 	                  
-	                  <form method="post" action="CartServlet" class="quantity-form">
+	                  <form method="post" action="CartServlet"class="quantity-form">
 	                    <input type="hidden" name="action" value="update"/>
-	                    <input type="hidden" name="productId" value="<%= cID %>"/>
-	                    <label for="quantity-<%= cID %>"> Qtà </label>
-	                    <select name="quantity" id="quantity-<%= cID %>" class="quantity-select" onchange="this.form.submit()">
-							<% for(int i = 1; i < 11; i++) {%>
-								<option value="<%=i%>"> <%=i%> </option>
-							<%} %>
-	                    </select>
+	                    <input type="hidden" name="productId" value="<%= aID %>"/>
+	                    <input type="hidden" name="cartId" value="<%= cID %>"/>
+	                    <input type="hidden" name="username" value="<%= username %>"/>
+	                    <label for="quantity-<%= aID %>"> Qtà: </label>
+	                    <div class="quantity-control">
+    					  <button type="button" class="quantity-select" onclick="decrease(this)" id="decrement<%= aID %> ">-</button>
+						  <output id="current-quantity-<%= aID %>" class="quantity-display"> 
+						    <%= count %>
+						  </output>
+					      <button type="button" class="quantity-select" onclick="increase(this)" id="increment<%= aID %>">+</button>
+						</div>
 	                  </form>
 	                  
 	                  <form method="post" action="CartServlet" class="remove-form">
 	                    <input type="hidden" name="action" value="remove"/>
-	                    <input type="hidden" name="productId" value="<%= cID %>"/>
+	                    <input type="hidden" name="productId" value="<%= aID %>"/>
 	                    <button type="submit" class="remove-item-btn">RIMUOVI</button>
 	                  </form>
 	                </div>

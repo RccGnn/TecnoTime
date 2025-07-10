@@ -78,9 +78,14 @@ public class test extends HttpServlet {
 			System.out.println(pfb.toString());
 			 */
 			
-			AccountDao accDao = new AccountDao();
+			CarrelloRiempitoBean carBean = new CarrelloRiempitoBean();
+			CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
 			try {
-				accDao.doDelete("5646548/wwqbyuy");
+				ArrayList<String> array = new ArrayList<String>(2);
+				array.add("mrossi");
+				array.add("CAR1");
+				carBean = carDao.doRetrieveByKey(array);
+				System.out.println(carBean.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

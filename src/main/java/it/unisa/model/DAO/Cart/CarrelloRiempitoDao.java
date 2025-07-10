@@ -47,8 +47,8 @@ public class CarrelloRiempitoDao extends CarrelloDao{
                 "car.Carrello_Id, " +
                 "con.codiceIdentificativo, " +
                 "con.quantita " +
-                "FROM Contiene AS con " +
-                "LEFT JOIN Carrello AS car USING (usernameCarrello,Carrello_Id ) ";
+                "FROM Carrello AS car " +
+                "LEFT JOIN Contiene AS con USING (usernameCarrello, Carrello_Id) ";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();

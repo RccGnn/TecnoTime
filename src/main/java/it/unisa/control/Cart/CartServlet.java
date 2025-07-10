@@ -2,7 +2,6 @@ package it.unisa.control.Cart;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,29 +43,26 @@ public class CartServlet extends HttpServlet {
 		        Gson gson = new Gson();
 		        ArticoloCompletoBean articoloDaAggiungere = gson.fromJson(reader, ArticoloCompletoBean.class);
 					
-		        ArrayList<ArticoloCompletoBean> lista = new ArrayList<ArticoloCompletoBean>();
-				    
-				System.out.println("Lista: "+lista);
+		        // Costruisci la chiave da usare per il doRetrieve
+		        ArrayList<ArticoloCompletoBean> lista = new ArrayList<ArticoloCompletoBean>();				
+				ArrayList<String> keys= new ArrayList<String>(2);
+				String values[] = CookieUtils.getUsernameCartIdfromCookies(request);
+				keys.add(values[0]);
+				keys.add(values[1]);
 				
-				ArrayList<String> keys= new ArrayList<String>();
-				
-				Cookie[] cookies = request.getCookies();
-			        if (cookies != null) {
-			            for (Cookie c : cookies) {
-			                if ("username".equals(c.getName())) {
-			                	keys.add(c.getValue());
-			                }else if("carrello_id".equals(c.getName())) {
-			                	keys.add(c.getValue());
-			                }
-			            }
-			        }
 			try {
 				
-				CarrelloRiempitoDao carDao= new CarrelloRiempitoDao();
+				System.out.println("Username: "+keys.get(0)+"-ID: "+keys.get(1));
+				CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
 			    CarrelloRiempitoBean carrello = carDao.doRetrieveByKey(keys);
+			    
+			    // Aggiungi l'articolo
 			    lista = carrello.getListaArticoli();
 			    lista.add(articoloDaAggiungere);
+			    carrello.setListaArticoli(lista);
 				System.out.println("Lista: "+lista); //TO DO cambiare la logica della servlet sovrascrive sempre il carrello non aggiunge
+				carDao.doSave(carrello, false); // Aggiorna il carrello ma NON salvare di nuovo il carrello Stesso
+				
 				// Invia il carrello
 				String cartjson = gson.toJson(carrello);
 				response.setContentType("application/json");

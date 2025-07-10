@@ -36,18 +36,21 @@ public class MockFillCart extends HttpServlet {
 		CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
 		CarrelloRiempitoBean bean = new CarrelloRiempitoBean();
 		ArrayList<String> key = new ArrayList<>();
-		key.add("gverdi");
-		key.add("CAR3");
+		
+		String[] tupla = CookieUtils.getUsernameCartIdfromCookies(request); // Ottieni username e carrello_id
+		
+		key.add(tupla[0]);
+		key.add(tupla[1]);
 		try {
 			bean = dao.doRetrieveByKey(key);				
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	
+		//System.out.println("Carrello: "+bean.toString()+"\nSize: "+bean.getListaArticoli().size());
         bean.setListaArticoli(DaoUtils.dropboxImagesDecoderUrl(bean.getListaArticoli()));
         
-		request.setAttribute("carrello", bean);
-			
+		request.setAttribute("carrello", bean);	
 		RequestDispatcher rd = request.getRequestDispatcher("/carrello.jsp");
 		rd.forward(request, response);
 	}

@@ -63,14 +63,11 @@ public class GuestFilter extends HttpFilter implements Filter {
 			//utente non registrato
 		if (session == null || session.getAttribute("user") == null || session.getAttribute("admin")==null) {
 		
-			
-
 						Cookie[] cookies = req.getCookies();
 						
 						String username = null;
 						String carrelloId = null;
 						
-						CookieUtils.SvuotaCookie(req, res);
 						if (cookies != null) {
 							String nome = "";
 							for (Cookie c : cookies) {
@@ -128,7 +125,7 @@ public class GuestFilter extends HttpFilter implements Filter {
 					            System.out.println("Username esistente: " + username + ", CarrelloID: " + carrelloId);
 					            chain.doFilter(request, response);
 					            return;
-					        }
+					     }
 
 			    } else {
 			        // Utente già loggato
