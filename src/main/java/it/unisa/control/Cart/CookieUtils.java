@@ -35,6 +35,8 @@ public final class CookieUtils {
 		if (cookies != null) {
 			for (Cookie c : cookies) {
 				if(c.getName().equals("JSESSIONID")) {
+					continue;
+				}
 				 c.setValue("");
 			     c.setMaxAge(0);
 			     c.setPath(c.getPath() != null ? c.getPath() : "/");
@@ -53,6 +55,6 @@ public final class CookieUtils {
 		}	
 	}
 
-}
+
 
 
