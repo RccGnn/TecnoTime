@@ -79,7 +79,7 @@ public class CartServlet extends HttpServlet {
 	        	response.addCookie(userCookie); // Imposta il cookie con l'username guest
 				
 				carrello.setAccount_username(guest.getUsername()); // Associa l'username di guest al carrello appena creato
-				String carrelloIdGuest = UUID.randomUUID().toString().substring(0, 10);
+				String carrelloIdGuest = UUID.randomUUID().toString().substring(0, 36);
 				carrello.setCarrello_Id(carrelloIdGuest);
 				Cookie cartCookie = new Cookie("carrello_id", carrelloIdGuest); // Imposta il cookie con l'id del carrello guest
 				cartCookie.setPath("/");

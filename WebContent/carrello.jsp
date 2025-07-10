@@ -1,6 +1,14 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Collections"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ page import="it.unisa.model.beans.ArticoloCompletoBean" %>
+<%@ page import="it.unisa.model.beans.CarrelloRiempitoBean" %>
+<%@ page import="java.util.ArrayList" %>
+
+<% CarrelloRiempitoBean carrello = (CarrelloRiempitoBean) request.getAttribute("carrello"); %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -16,102 +24,133 @@
   <jsp:include page="header.jsp"/>
 
   <div class="cart-page-container">
-    <c:choose>
-      <c:when test="${empty sessionScope.cartItems}">
-        <div class="empty-cart-container">
-            <i class="fas fa-shopping-cart empty-cart-icon"></i>
-            <h1>Il tuo carrello è vuoto</h1>
-            <p>Aggiungi prodotti per vederli qui.</p>
-            <a href="ProductServlet" class="btn-primary">Vai ai Prodotti</a>
-        </div>
-      </c:when>
-      <c:otherwise>
-        <div class="cart-layout">
-          <div class="cart-items-section">
-            <div class="cart-header">
-              <h1>IL TUO CARRELLO (${sessionScope.cartItems.size()})</h1>
-              <form method="post" action="CartServlet">
-                  <input type="hidden" name="action" value="clear"/>
-                  <button type="submit" class="remove-all-btn">RIMUOVI TUTTO</button>
-              </form>
-            </div>
 
-            <c:forEach var="item" items="${sessionScope.cartItems}">
-              <div class="cart-item-card">
-                <img src="${item.imageUrl}" alt="${item.name}" class="cart-item-img"/>
-                <div class="cart-item-details">
-                  <span class="cart-item-name">${item.name}</span>
-                  <form method="post" action="CartServlet" class="quantity-form">
-                    <input type="hidden" name="action" value="update"/>
-                    <input type="hidden" name="productId" value="${item.productId}"/>
-                    <label for="quantity-${item.productId}">Qtà</label>
-                    <select name="quantity" id="quantity-${item.productId}" class="quantity-select" onchange="this.form.submit()">
-                        <c:forEach var="i" begin="1" end="10">
-                            <option value="${i}" ${i == item.quantity ? 'selected' : ''}>${i}</option>
-                        </c:forEach>
-                    </select>
-                  </form>
-                  <form method="post" action="CartServlet" class="remove-form">
-                    <input type="hidden" name="action" value="remove"/>
-                    <input type="hidden" name="productId" value="${item.productId}"/>
-                    <button type="submit" class="remove-item-btn">RIMUOVI</button>
-                  </form>
-                </div>
-                <div class="cart-item-price">
-                  <%-- sezione per aggiungere il prezzo --%>
-                  <%-- <span class="original-price"><fmt:formatNumber value="${item.originalPrice}" type="currency" currencySymbol="€"/></span> --%>
-                  <span class="current-price"><fmt:formatNumber value="${item.price}" type="currency" currencySymbol="€"/></span>
-                </div>
-              </div>
-            </c:forEach>
-          </div>
+      <% ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
+      	 double totale = 0;
+      	 DecimalFormat df = new DecimalFormat("0.00 €");
+      	 if(carrello == null || listaCarrello == null || listaCarrello.isEmpty()) { %>
+	        <div class="empty-cart-container">
+	            <i class="fas fa-shopping-cart empty-cart-icon"></i>
+	            <h1>Il tuo carrello è vuoto</h1>
+	            <p>Aggiungi prodotti per vederli qui.</p>
+	            <a href="ProductServlet" class="btn-primary">Vai ai Prodotti</a>
+	        </div>    	  
+      <% } else { %>
+      
+	        <div class="cart-layout">
+	        
+	          <div class="cart-items-section">
+	            <div class="cart-header">
+	              <h1>IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
+	              <form method="post" action="CartServlet">
+	                  <input type="hidden" name="action" value="clear"/>
+	                  <button type="submit" class="remove-all-btn">RIMUOVI TUTTO</button>
+	              </form>
+	            </div>
+	
+				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>(); 
+				  for(ArticoloCompletoBean articolo : listaCarrello) {
+	              	if (occorrenze.contains(articolo))  {
+	               		continue;
+	            	}
+	            	occorrenze.add(articolo);
+	            	int count = Collections.frequency(listaCarrello, articolo);
+	            	String cID = articolo.getCodiceIdentificativo();  
+	            %>
+	              <div class="cart-item-card">
+	              <% String url = "";
+	              	 if (articolo.getImmagini() == null || articolo.getImmagini().isEmpty())
+	              		 url = "images/alt-prodotti.png";
+	              	 else
+	              		 url = articolo.getImmagini().get(0).getUrl();
+	              %>
+	                <img src="<%= url %>" alt="<%= articolo.getNome() %>" class="cart-item-img"/>
+	                <div class="cart-item-details">
+	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
+	                  
+	                  <form method="post" action="CartServlet" class="quantity-form">
+	                    <input type="hidden" name="action" value="update"/>
+	                    <input type="hidden" name="productId" value="<%= cID %>"/>
+	                    <label for="quantity-<%= cID %>"> Qtà </label>
+	                    <select name="quantity" id="quantity-<%= cID %>" class="quantity-select" onchange="this.form.submit()">
+							<% for(int i = 1; i < 11; i++) {%>
+								<option value="<%=i%>"> <%=i%> </option>
+							<%} %>
+	                    </select>
+	                  </form>
+	                  
+	                  <form method="post" action="CartServlet" class="remove-form">
+	                    <input type="hidden" name="action" value="remove"/>
+	                    <input type="hidden" name="productId" value="<%= cID %>"/>
+	                    <button type="submit" class="remove-item-btn">RIMUOVI</button>
+	                  </form>
+	                </div>
+	                <div class="cart-item-price">
+	                  
+	                <%	double prezzo = 0;
+	                  	if (articolo.getPdDigitale() != null)
+	                  		prezzo = articolo.getPdDigitale().getPrezzo();
+	                  	else if (articolo.getPdFisico() != null)
+	                  		prezzo = articolo.getPdFisico().getPrezzo();
+	                  	else 
+	                  		prezzo = articolo.getServizio().getPrezzo();
+	                  	totale += prezzo * count;
+	                %>
+	                  <span class="current-price"> <%= df.format(prezzo) %> </span>
+	               	    
+	                </div>
+	              </div>
+	            <% } %>
+	            
+	          </div>
+	
+	          <div class="order-summary-section">
+	            <h2>RIEPILOGO ORDINE</h2>
+	            <div class="summary-line">
+	              <span>Subtotale</span> 
+	              <span> <%= df.format(totale) %> </span>
+	            </div>
+	            <div class="summary-line">
+	              <span>Sconto Indicativo</span>
+	              <span class="discount-color">-€0,00</span>
+	            </div>
+	            <div class="summary-line">
+	              <span>Spedizione</span>
+	              <span>calcolata al checkout</span>
+	            </div>
+	            <div class="summary-line">
+	              <span>Imposte</span>
+	              <span>calcolata al checkout</span>
+	            </div>
+	            <hr class="summary-divider"/>
+	            <div class="summary-line total">
+	              <span>Totale</span>
+	              <span> <%= df.format(totale) %></span>
+	            </div>
+	            <form action="CheckoutServlet" method="get">
+	              <button type="submit" class="checkout-btn">CHECKOUT</button>
+	            </form>
+	            <div class="account-links">
+	              <span>Hai già un account? <a href="LoginPage.jsp">Accedi</a></span>
+	              <span>Non hai ancora un account? <a href="Registration.jsp">Unisciti a noi</a></span>
+	            </div>
+	            <div class="extra-info">
+	              <i class="fas fa-shield-alt"></i>
+	              <span>RESI SENZA RISCHI ENTRO 60 GIORNI</span>
+	            </div>
+	            <div class="payment-methods">
+	              <i class="fab fa-cc-amex"></i>
+	              <i class="fab fa-cc-visa"></i>
+	              <i class="fab fa-cc-discover"></i>
+	              <i class="fab fa-cc-paypal"></i>
+	              <i class="fab fa-google-pay"></i>
+	              <i class="fab fa-apple-pay"></i>
+	            </div>
+	          </div>
+	          
+	        </div>
 
-          <div class="order-summary-section">
-            <h2>RIEPILOGO ORDINE</h2>
-            <div class="summary-line">
-              <span>Subtotale</span>
-              <span><fmt:formatNumber value="${sessionScope.cartTotal}" type="currency" currencySymbol="€"/></span>
-            </div>
-            <div class="summary-line">
-              <span>Sconto Indicativo</span>
-              <span class="discount-color">-€0,00</span>
-            </div>
-            <div class="summary-line">
-              <span>Spedizione</span>
-              <span>calcolata al checkout</span>
-            </div>
-            <div class="summary-line">
-              <span>Imposte</span>
-              <span>calcolata al checkout</span>
-            </div>
-            <hr class="summary-divider"/>
-            <div class="summary-line total">
-              <span>Totale</span>
-              <span><fmt:formatNumber value="${sessionScope.cartTotal}" type="currency" currencySymbol="€"/></span>
-            </div>
-            <form action="CheckoutServlet" method="get">
-              <button type="submit" class="checkout-btn">CHECKOUT</button>
-            </form>
-            <div class="account-links">
-              <span>Hai già un account? <a href="LoginPage.jsp">Accedi</a></span>
-              <span>Non hai ancora un account? <a href="Registration.jsp">Unisciti a noi</a></span>
-            </div>
-            <div class="extra-info">
-              <i class="fas fa-shield-alt"></i>
-              <span>RESI SENZA RISCHI ENTRO 60 GIORNI</span>
-            </div>
-            <div class="payment-methods">
-              <i class="fab fa-cc-amex"></i>
-              <i class="fab fa-cc-visa"></i>
-              <i class="fab fa-cc-discover"></i>
-              <i class="fab fa-cc-paypal"></i>
-              <i class="fab fa-google-pay"></i>
-              <i class="fab fa-apple-pay"></i>
-            </div>
-          </div>
-        </div>
-      </c:otherwise>
-    </c:choose>
+		<%} %>
   </div>
 
   <jsp:include page="footer.jsp"/>

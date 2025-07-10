@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.unisa.control.Decoder;
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.beans.*;
 
@@ -57,16 +58,7 @@ public class ProductFilter extends HttpServlet {
 	        	Filters.durationFilter(catalogo, durata);
 	        //System.out.println(catalogo.toString());
 	        
-	        for (ArticoloCompletoBean c : catalogo) {
-				// Modifica le immagini in un formato visibile
-	        	ArrayList<ImmagineBean> imgs = c.getImmagini();
-	        	if (imgs != null) {
-					imgs.forEach(img -> img.setUrl(Decoder.DecoderDropboxUrl(img.getUrl())) );
-					c.setImmagini(imgs);
-				} else {
-					c.setImmagini(new ArrayList<ImmagineBean>(0));
-				}
-			}
+	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
 	        
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	        // Serializza l'intera lista di ArticoloCompletoBean in una singola stringa JSON

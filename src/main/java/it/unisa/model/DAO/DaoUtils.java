@@ -3,8 +3,10 @@ package it.unisa.model.DAO;
 import java.util.ArrayList;
 import java.util.regex.*;
 
+import it.unisa.control.Decoder;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
+import it.unisa.model.beans.ImmagineBean;
 import it.unisa.model.beans.Ruoli;
 
 public class DaoUtils {
@@ -111,5 +113,27 @@ public class DaoUtils {
 		}
 		
 		return count;
+	}
+	
+	/**
+	 * Questo metodo permette di impostare correttamente l'url delle immagini derivanti da DropBox.
+	 * @param catalogo {@code ArrayList<ArticoloCompletoBean>} - lista di articoli 
+	 * @return catalogo con gli url opportunamente modificati (solo quelli di dropbox)
+	 */
+	public static ArrayList<ArticoloCompletoBean> dropboxImagesDecoderUrl(ArrayList<ArticoloCompletoBean> catalogo) {
+		
+		ArrayList<ImmagineBean> imgs;
+		for (ArticoloCompletoBean c : catalogo) {
+			// Modifica le immagini in un formato visibile
+        	imgs = c.getImmagini();
+        	if (imgs != null) {
+				imgs.forEach(img -> img.setUrl(Decoder.DecoderDropboxUrl(img.getUrl())) );
+				c.setImmagini(imgs);
+			} else {
+				c.setImmagini(new ArrayList<ImmagineBean>(0));
+			}
+		}
+		
+		return catalogo;
 	}
 }
