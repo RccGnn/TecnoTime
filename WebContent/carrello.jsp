@@ -165,7 +165,7 @@
   </div>
 
   <jsp:include page="footer.jsp"/>
-  <script src="js/cart.js" defer></script>
+  <script src="js/ajaxCarrello.js" defer></script>
   <script src="js/navbar.js" defer></script>
 </body>
 </html>
