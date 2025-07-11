@@ -73,14 +73,10 @@
 	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
 	                  
 	                  <div class="quantity-form">
-<<<<<<< HEAD
-	  
-	                    <input type="hidden" name="productId[]" value="<%= aID %>"/>                
-	                    <input type="hidden" name="quantity[]" value="<%= count %>"/>
-=======
+
 	                    <input type="hidden" name="productId<%=i%>" value="<%= aID %>"/>
 	                    <input type="hidden" name="quantity<%=i%>" value="<%= count %>"/>
->>>>>>> 8e0e5546e6d8227976a2311ca5eebe2d2c2fcc70
+
 	                    <label for="quantity-<%= aID %>"> Qtà: </label>
 	                    <div class="quantity-control">
     					  <button type="button" class="quantity-select" onclick="decrease(this)" id="decrement<%= aID %> ">-</button>
