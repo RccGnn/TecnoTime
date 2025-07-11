@@ -27,6 +27,8 @@
 
   <div class="cart-page-container">
 	<form method="GET" action="CheckoutServlet">
+		<input type="hidden" name="cartId" value="<%= cID %>"/>
+		<input type="hidden" name="username" value="<%= username %>"/>
       <% ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
       	 double totale = 0;
       	 DecimalFormat df = new DecimalFormat("0.00 €");
@@ -50,7 +52,6 @@
 	            </div>
 	
 				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>(); 
-				  int i = 1;
 				  for(ArticoloCompletoBean articolo : listaCarrello) {
 	              	if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
 	               		continue;
@@ -71,11 +72,9 @@
 	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
 	                  
 	                  <div class="quantity-form">
-	                    <input type="hidden" name="action" value="update"/>
-	                    <input type="hidden" name="productId<%=i%>" value="<%= aID %>"/>
-	                    <input type="hidden" name="cartId" value="<%= cID %>"/>
-	                    <input type="hidden" name="username" value="<%= username %>"/>
-	                    <input type="hidden" name="quantity<%=i%>" value="<%= count %>"/>
+	  
+	                    <input type="hidden" name="productId[]" value="<%= aID %>"/>                
+	                    <input type="hidden" name="quantity[]" value="<%= count %>"/>
 	                    <label for="quantity-<%= aID %>"> Qtà: </label>
 	                    <div class="quantity-control">
     					  <button type="button" class="quantity-select" onclick="decrease(this)" id="decrement<%= aID %> ">-</button>
@@ -135,7 +134,7 @@
 	              <span> <%= df.format(totale) %></span>
 	            </div>
 	            <div>
-	              <button type="submit" class="checkout-btn">CHECKOUT</button>
+	             <a href="utente/Ordine.jsp" class="checkout-btn">CHECKOUT</a>
 	            </div>
 	            <div class="account-links">
 	              <span>Hai già un account? <a href="LoginPage.jsp">Accedi</a></span>
@@ -157,7 +156,7 @@
 	          
 	        </div>
 
-		<% 	 i++;
+		<% 	 
 		   } 
 		%>
 		</form>

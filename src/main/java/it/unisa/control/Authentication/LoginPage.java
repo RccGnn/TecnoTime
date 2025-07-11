@@ -69,6 +69,7 @@ public class LoginPage extends HttpServlet {
         			 request.setAttribute("flag","passok");
         		 }else {
         			 request.setAttribute("error", "username o password errati"); 
+        			 System.out.println("password errate");
         	         RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
         	         dispatcher.forward(request, response);      
         	         return;
