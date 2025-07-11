@@ -52,7 +52,8 @@
 	              </div>
 	            </div>
 	
-				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>(); 
+				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
+				  int i=1;
 				  for(ArticoloCompletoBean articolo : listaCarrello) {
 	              	if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
 	               		continue;
