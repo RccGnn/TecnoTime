@@ -29,6 +29,7 @@
 	<form method="GET" action="CheckoutServlet">
 		<input type="hidden" name="cartId" value="<%= cID %>"/>
 		<input type="hidden" name="username" value="<%= username %>"/>
+
       <% ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
       	 double totale = 0;
       	 DecimalFormat df = new DecimalFormat("0.00 €");
@@ -47,7 +48,7 @@
 	            <div class="cart-header">
 	              <h1>IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
 	              <div>
-	                  <button type="button" class="remove-all-btn">RIMUOVI TUTTO</button>
+	                  <button type="button" id="remove-all-btn" class="remove-all-btn" onclick="removeAll()">RIMUOVI TUTTO</button>
 	              </div>
 	            </div>
 	
@@ -72,9 +73,14 @@
 	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
 	                  
 	                  <div class="quantity-form">
+<<<<<<< HEAD
 	  
 	                    <input type="hidden" name="productId[]" value="<%= aID %>"/>                
 	                    <input type="hidden" name="quantity[]" value="<%= count %>"/>
+=======
+	                    <input type="hidden" name="productId<%=i%>" value="<%= aID %>"/>
+	                    <input type="hidden" name="quantity<%=i%>" value="<%= count %>"/>
+>>>>>>> 8e0e5546e6d8227976a2311ca5eebe2d2c2fcc70
 	                    <label for="quantity-<%= aID %>"> Qtà: </label>
 	                    <div class="quantity-control">
     					  <button type="button" class="quantity-select" onclick="decrease(this)" id="decrement<%= aID %> ">-</button>

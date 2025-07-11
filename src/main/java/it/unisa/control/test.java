@@ -78,6 +78,15 @@ public class test extends HttpServlet {
 			System.out.println(pfb.toString());
 			 */
 			
+			String s = "productId1";
+			String value = "";
+
+			for(int i = 2; (value=request.getParameter(s)) != null; i++) {
+				s.replace(Integer.toString(i), Integer.toString(i+1));
+			}
+			
+			
+			/*
 			CarrelloRiempitoBean carBean = new CarrelloRiempitoBean();
 			CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
 			try {
@@ -88,7 +97,7 @@ public class test extends HttpServlet {
 				System.out.println(carBean.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 			
 		/*	
 			AccountDao dao = new AccountDao();

@@ -72,9 +72,57 @@ function loadAjaxDoc(url, method, params, cFuction, reqHeader) {
 				request.setRequestHeader("Content-Type", reqHeader);
 				request.send(params);
 		}
-		
 	}
 }
 
 
+function removeAll() {
+	
+	let userId = document.getElementById("usernameId").value;	
+	let carrelloId = document.getElementById("cartId").value;
 
+	const params = "username="+encodeURIComponent(userId)+"&carrelloId="+encodeURIComponent(carrelloId);
+	const url = "EmptyCart";
+	loadAjaxDoc(url, "GET", params, handleClean);
+}
+
+function handleClean(xhr) {
+	let result = Boolean(xhr.responseText);
+	console.log(result);
+	if(!result)
+		return; // Messaggio d'errore
+
+	let root = document.getElementsByClassName("cart-layout")[0];		
+	//let articoli = document.querySelector('.products-container');
+
+	while (root.firstChild) {
+		root.removeChild(root.firstChild);
+	}
+	
+	// Recupera il riferimento al contenitore principale
+	let cartConteiner = document.getElementsByClassName("cart-page-container")[0];
+	
+	// crea il cart vuoto
+	let emptyCart = document.createElement("div");
+	emptyCart.className = "empty-cart-container";
+	
+	let i = document.createElement("p");
+	i.className = "fas fa-shopping-cart empty-cart-icon";
+	emptyCart.appendChild(i);
+	
+	let h1 = document.createElement("h1"); 
+	h1.innerHTML = "Il tuo carrello è vuoto";
+	emptyCart.appendChild(h1);
+	
+	let p = document.createElement("p");
+	p.innerHTML = "Aggiungi prodotti per vederli qui.";
+	emptyCart.appendChild(p);
+	
+	let a = document.createElement("a");
+	a.innerHTML = "Vai ai prodotti";
+	a.href = "ProductServlet";
+	a.className = "btn-primary";
+	emptyCart.appendChild(a);
+	
+	cartConteiner.appendChild(emptyCart);
+}
