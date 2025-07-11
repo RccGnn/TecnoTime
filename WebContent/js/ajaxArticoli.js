@@ -254,6 +254,6 @@ function showNotification(xhr) {
 		
     	setTimeout(() => { // Imposta il tempo di visualizzazione
       		notifica.classList.remove('show');
-    	}, 3000); // 3000 ms 
+    	}, 1000); // 3000 ms 
   	}
 }

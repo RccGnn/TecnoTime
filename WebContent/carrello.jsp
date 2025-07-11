@@ -47,7 +47,7 @@
 	        
 	          <div class="cart-items-section">
 	            <div class="cart-header">
-	              <h1>IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
+	              <h1 id="your-cart">IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
 	              <div>
 	                  <button type="button" id="remove-all-btn" class="remove-all-btn" onclick="removeAll()">RIMUOVI TUTTO</button>
 	              </div>
@@ -63,7 +63,7 @@
 	            	int count = Collections.frequency(listaCarrello, articolo);
 	            	String aID = articolo.getCodiceIdentificativo();  
 	            %>
-	              <div class="cart-item-card">
+	              <div class="cart-item-card" id="cart-item<%=aID%>">
 	              <% String url = "";
 	              	 if (articolo.getImmagini() == null || articolo.getImmagini().isEmpty())
 	              		 url = "images/alt-prodotti.png";
@@ -79,18 +79,18 @@
 	                    <input type="hidden" name="quantity<%=i%>" value="<%= count %>"/>
 	                    <label for="quantity-<%= aID %>"> Qtà: </label>
 	                    <div class="quantity-control">
-    					  <button type="button" class="quantity-select" onclick="decrease(this)" id="decrement<%= aID %> ">-</button>
+    					  <button type="button" class="quantity-select" onclick="varyAmount(this)" id="decrement<%= aID %>">-</button>
 						  <output id="current-quantity-<%= aID %>" class="quantity-display"> 
 						    <%= count %>
 						  </output>
-					      <button type="button" class="quantity-select" onclick="increase(this)" id="increment<%= aID %>">+</button>
+					      <button type="button" class="quantity-select" onclick="varyAmount(this)" id="increment<%= aID %>">+</button>
 						</div>
 	                  </div>
 	                  
 	                  <div class="remove-form">
 	                    <input type="hidden" name="action" value="remove"/>
 	                    <input type="hidden" name="productId" value="<%= aID %>"/>
-	                    <button type="button" class="remove-item-btn">RIMUOVI</button>
+	                    <button type="button" class="remove-item-btn" onclick="varyAmount(this)" id="remove<%= aID %>">RIMUOVI</button>
 	                  </div>
 	                </div>
 	                <div class="cart-item-price">
@@ -116,7 +116,7 @@
 	            <h2>RIEPILOGO ORDINE</h2>
 	            <div class="summary-line">
 	              <span>Subtotale</span> 
-	              <span> <%= df.format(totale) %> </span>
+	              <span id="subtotal" > <%= df.format(totale) %> </span>
 	            </div>
 	            <div class="summary-line">
 	              <span>Sconto Indicativo</span>
@@ -133,7 +133,7 @@
 	            <hr class="summary-divider"/>
 	            <div class="summary-line total">
 	              <span>Totale</span>
-	              <span> <%= df.format(totale) %></span>
+	              <span id="total"> <%= df.format(totale) %></span>
 	            </div>
 	            <div>
 	              <button type="submit" class="checkout-btn">CHECKOUT</button>
