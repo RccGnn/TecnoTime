@@ -21,8 +21,11 @@
     </div>
     <div class="header-center">
         <div class="search-container">
-            <img src="images/magnifying_glass.png" alt="Ricerca" class="search-icon">
-            <input type="text" class="search-bar" placeholder="Cerca...">
+	        <img src="images/magnifying_glass.png" alt="Ricerca" class="search-icon">
+    	    <input type="text" class="search-bar" id="search-bar" oninput="search()" onchange="search()" placeholder="Cerca...">
+        	<!-- Spazio per mostrare i risultati della ricerca -->
+        	<div id="search-results" class="search-results-dropdown">
+        	</div> 
         </div>
     </div>
     <div class="header-right">
@@ -74,5 +77,6 @@
         </ul>
     </nav>
     <script src="js/navbar.js" defer></script>
+    <script src="js/ajaxRicerca.js" defer></script>
     </body>
     </html>

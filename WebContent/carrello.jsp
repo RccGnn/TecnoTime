@@ -103,6 +103,7 @@
 	                  	else 
 	                  		prezzo = articolo.getServizio().getPrezzo();
 	                  	totale += prezzo * count;
+	                  	i++;
 	                %>
 	                  <span class="current-price"> <%= df.format(prezzo) %> </span>
 	               	    

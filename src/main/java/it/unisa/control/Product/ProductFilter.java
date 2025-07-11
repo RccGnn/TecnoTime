@@ -11,7 +11,6 @@ import java.sql.SQLException;
 //import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import it.unisa.control.Decoder;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.beans.*;
@@ -27,36 +26,41 @@ public class ProductFilter extends HttpServlet {
 	//private DecimalFormat df = new DecimalFormat("#.00");
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        double min = (req.getParameter("min") != null && !req.getParameter("min").equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
-        double max = (req.getParameter("max") != null && !req.getParameter("max").equals("")) ? Double.parseDouble(req.getParameter("max")) : Double.MAX_VALUE;
-        String nome = (req.getParameter("name") != null && !req.getParameter("name").equals("")) ? req.getParameter("name") : null; 
+        double min = (req.getParameter("min") != null && !req.getParameter("min").trim().equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
+        double max = (req.getParameter("max") != null && !req.getParameter("max").trim().equals("")) ? Double.parseDouble(req.getParameter("max")) : Double.MAX_VALUE;
+        String nome = (req.getParameter("name") != null && !req.getParameter("name").trim().equals("")) ? req.getParameter("name") : null; 
         String sort = req.getParameter("sort");
-        String contesto = (req.getParameter("contex") != null && !req.getParameter("contex").equals("")) ? req.getParameter("contex") : null;
-        double durata = (req.getParameter("duration") != null && !req.getParameter("duration").equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
-        		
+        String contesto = (req.getParameter("contex") != null && !req.getParameter("contex").trim().equals("")) ? req.getParameter("contex") : null;
+        double durata = (req.getParameter("duration") != null && !req.getParameter("duration").trim().equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
+        boolean searchBar = Boolean.parseBoolean(req.getParameter("fromSearchBar")); // parseBoolean interpreta come false qualsiasi stringa diversa da true (case insensitive)
+        
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
         //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {
 	        ArrayList<ArticoloCompletoBean> catalogo = dao.doRetrieveAll(sort); 
-	        
-	        // Filtra per il contesto
-	        Filters.contexFilter(catalogo, contesto);
 
-	        // Filtra per il prezzo
-	        Filters.priceFilter(catalogo, min, max);
-	        //System.out.println(catalogo.toString());
-	        
-	        // Filtra facendo un match sul nome
-	        if (nome != null)
-	        Filters.nameFilter(catalogo, nome);
-	     
-	        // Se si tratta di un servizio, filtra per durata del servizio
-	        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
-	        if (durata != -1)
-	        	Filters.durationFilter(catalogo, durata);
-	        //System.out.println(catalogo.toString());
+	        // Ricerca effettuata dalla barra di navigazione centrale
+        	if(searchBar) { 
+		        Filters.nameFilter(catalogo, nome);	 // Filtra solo sul nome (input utente)
+	        // Ricerca effettuata dalle altre pagine dei prodotti
+        	} else {
+		        // Filtra per il contesto
+		        Filters.contexFilter(catalogo, contesto);
+
+		        // Filtra per il prezzo
+		        Filters.priceFilter(catalogo, min, max);
+		        
+		        // Filtra facendo un match sul nome
+		        if (nome != null)
+		        Filters.nameFilter(catalogo, nome);
+		     
+		        // Se si tratta di un servizio, filtra per durata del servizio
+		        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
+		        if (durata != -1)
+		        	Filters.durationFilter(catalogo, durata);	        	
+	        }
 	        
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
 	        
