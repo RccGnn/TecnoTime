@@ -27,8 +27,8 @@
 
   <div class="cart-page-container">
 	<form method="GET" action="CheckoutServlet">
-		<input type="hidden" name="cartId" value="<%= cID %>"/>
-		<input type="hidden" name="username" value="<%= username %>"/>
+		<input type="hidden" name="cartId" id="cartId" value="<%= cID %>"/>
+		<input type="hidden" name="username" id="usernameId" value="<%= username %>"/>
 
       <% ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
       	 double totale = 0;
@@ -74,9 +74,6 @@
 	                  <span class="cart-item-name"><%= articolo.getNome() %></span>
 	                  
 	                  <div class="quantity-form">
-
-	                    <input type="hidden" name="productId<%=i%>" value="<%= aID %>"/>
-	                    <input type="hidden" name="quantity<%=i%>" value="<%= count %>"/>
 
 	                    <label for="quantity-<%= aID %>"> Qtà: </label>
 	                    <div class="quantity-control">

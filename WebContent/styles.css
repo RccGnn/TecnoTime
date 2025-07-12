@@ -1416,6 +1416,7 @@ footer p.copy {
   margin-top: 1rem;
   transition: transform 0.2s ease;
 }
+
 .checkout-btn:hover {
     transform: scale(1.02);
 }

@@ -84,10 +84,12 @@ public class ModifyCart extends HttpServlet {
 			// RIMUOVI ARTICOLO
 			if (choice.equals("rem")) {
 				while(temp.remove(articolo)); // rimuovi tutte le istanze di articolo da temp
-				System.out.println(temp.toString());
 				carrello.setListaArticoli(temp);
 				try {
-					cdao.doSave(carrello, false);
+					if (temp.isEmpty())
+						cdao.doEmpty(keys);
+					else
+						cdao.doSave(carrello, false);
 				} catch (Exception e) {
 					response.sendError(500, "Errore nella rimozione dell'articolo dal carrello");
 				}
@@ -96,7 +98,6 @@ public class ModifyCart extends HttpServlet {
 				result.add(quantitaCorrente);
 				String product = gson.toJson(result);
 				response.getWriter().println(product);
-				System.out.print(product);
 				return;
 			}
 			

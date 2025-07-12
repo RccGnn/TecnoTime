@@ -162,9 +162,7 @@ function varyAmount(clickedElement) {
 }
 
 function handleVary(xhr) {
-	console.log("AAA");
 	let product = JSON.parse(xhr.responseText);
-	console.log("AAA");
 	const choice = product[0];
 	const remQuantity = product[2];
 	
@@ -198,6 +196,7 @@ function handleVary(xhr) {
 		output.innerHTML = value1 + 1;
 		subtotal.innerHTML = (value2 + subClass.prezzo).toFixed(2);
 	} else if (choice == "rem") {
+		console.log("numElements: " + numElements+"\nremQuantity" + remQuantity);
 		if(numElements - remQuantity <= 0) // Caso: sono stati eliminati tutti gli articoli
 			setEmptyCart();
 		else {
