@@ -668,6 +668,64 @@ footer p.copy {
     opacity: 0.9;
 }
 
+/* --- Configuratore PC --- */
+.form-container fieldset {
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 6px;
+}
+
+.form-container legend {
+  font-weight: bold;
+  color: #F2762E;
+  padding: 0 0.5rem;
+}
+
+.form-container textarea {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 100%;       
+  min-height: 150px;          
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;       
+}
+
+.input-with-icon {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.input-with-icon label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+  color: #011140;
+}
+
+.input-icon-container {
+  position: absolute;
+  top: 2.3rem;
+  left: 0.75rem;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;  /* icona non cliccabile */
+}
+
+.input-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Spazio per l'input*/
+.input-with-icon input[type="text"] {
+  padding-left: 2.75rem; 
+}
+
 /* --- Messaggi di stato --- */
 .error-message {
     color: red;
@@ -1045,6 +1103,16 @@ footer p.copy {
     
     .yt-play-button-overlay {
     font-size: 44px;
+  }
+  
+  /*sezione icon per configurazione pc*/
+  .input-icon-container {
+    top: 2.1rem;
+    width: 20px;
+    height: 20px;
+  }
+  .input-with-icon input[type="text"] {
+    padding-left: 2.5rem;
   }
 }
 
@@ -1590,6 +1658,19 @@ footer p.copy {
   .products-container {
     /* su mobile la griglia scende a 1 colonna */
     grid-template-columns: 1fr;
+  }
+}
+
+/*form registrazione*/
+@media (max-width: 600px) {
+  .form-container fieldset {
+    padding: 0.75rem;
+  }
+  .form-container legend {
+    font-size: 1rem;
+  }
+  .form-container textarea {
+    min-height: 120px;
   }
 }
 

@@ -69,6 +69,7 @@ public class LoginPage extends HttpServlet {
         			 request.setAttribute("flag","passok");
         		 }else {
         			 request.setAttribute("error", "username o password errati"); 
+        			 System.out.println("password errate");
         	         RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
         	         dispatcher.forward(request, response);      
         	         return;
@@ -88,6 +89,7 @@ public class LoginPage extends HttpServlet {
         
         HttpSession session = request.getSession();
         if(DaoUtils.getRuoloAccountString(account)=="amministratore") {
+        	System.out.println("amministratore");
         	//creazione sessione admin
             session.setAttribute("admin", Boolean.TRUE);
             session.setAttribute("username", account.getUsername());
@@ -95,12 +97,13 @@ public class LoginPage extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/amministratore/index-amministratore.jsp");	// Redirect a pagina protetta
         }
         else if(DaoUtils.getRuoloAccountString(account)=="utente_registrato") {
+        	System.out.println("utente");
         	 //creazione sessione utente 
             session.setAttribute("user", Boolean.TRUE);  
             session.setAttribute("username", account.getUsername());
             session.setAttribute("carrelloid", carrello.getCarrello_Id());
             response.sendRedirect(request.getContextPath() + "/utente/index-utente.jsp");	// Redirect a pagina protetta
-        
+            System.out.println(request.getContextPath() + "/utente/index-utente.jsp");
         }        
 	}
 

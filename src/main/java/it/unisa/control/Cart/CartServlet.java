@@ -60,7 +60,7 @@ public class CartServlet extends HttpServlet {
 			    lista = carrello.getListaArticoli();
 			    lista.add(articoloDaAggiungere);
 			    carrello.setListaArticoli(lista);
-				System.out.println("Lista: "+lista); //TO DO cambiare la logica della servlet sovrascrive sempre il carrello non aggiunge
+				System.out.println("Lista: "+lista); 
 				carDao.doSave(carrello, false); // Aggiorna il carrello ma NON salvare di nuovo il carrello Stesso
 				
 				// Invia il carrello
