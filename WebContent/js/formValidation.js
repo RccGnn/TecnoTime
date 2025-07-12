@@ -54,10 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Creo due oggetti Date per farne il confronto
 			let currentDate = new Date();
 			let inputDate = new Date(val);
+			let minDate=new Date();
 			
 			const y = currentDate.getFullYear() - 13;
 			const m = currentDate.getMonth();
 			const d = currentDate.getDay();
+			minDate.setFullYear(currentDate.getFullYear() - 100);
+			minDate.setHours(0, 0, 0, 0);
 			
 			currentDate.setFullYear(y, m, d);
 			// Voglio confrontare solo il giorno, non l'ora
@@ -66,6 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			if (inputDate >= currentDate) {
 				showError(field, 'Devi avere almeno 13 anni per poterti registrare al sito');
+				return false;
+			}else
+			if(inputDate <= minDate){
+				showError(field, 'Chiamo i Ghostbuster');
 				return false;
 			}
 			clearError(field);
