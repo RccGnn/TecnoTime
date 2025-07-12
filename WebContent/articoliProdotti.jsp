@@ -18,8 +18,7 @@
 	  %><jsp:include page="amministratore/header-amministratore.jsp"/>
 <% }else{ 
 	  %> <jsp:include page="header.jsp"/><%
-   }%>
-	 	
+   }%> 	
 
   <main class="products-page">
     <!-- ↑ Contenitore flessibile principale -->

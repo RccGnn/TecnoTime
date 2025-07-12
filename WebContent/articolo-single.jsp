@@ -17,7 +17,13 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <jsp:include page="header.jsp"/>
+  <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
+	  %><jsp:include page="utente/header-utente.jsp"/>
+<% }else if ((Boolean)session.getAttribute("admin") !=null &&(Boolean)session.getAttribute("admin")) {
+	  %><jsp:include page="amministratore/header-amministratore.jsp"/>
+<% }else{ 
+	  %> <jsp:include page="header.jsp"/><%
+   }%>
 
   <main class="productsingle-page">
     <div class="productsingle-gallery">
