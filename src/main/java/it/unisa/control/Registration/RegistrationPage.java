@@ -10,14 +10,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.UUID;
 
 import it.unisa.control.Decoder;
 import it.unisa.control.PasswordUtils;
 import it.unisa.control.Validator;
 import it.unisa.model.DAO.BeanDaoInterface;
+import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.DAO.Cart.CarrelloDao;
 import it.unisa.model.beans.AccountBean;
+import it.unisa.model.beans.CarrelloBean;
 
 /**
  * Servlet implementation class RegistrationPage
@@ -253,8 +257,13 @@ public class RegistrationPage extends HttpServlet {
 		
 
 		BeanDaoInterface<AccountBean> dao = new AccountDao();
+		BeanDaoInterfaceArray<CarrelloBean> cartdao = new CarrelloDao();
+		CarrelloBean cart = new CarrelloBean();
+		cart.setAccount_username(account.getUsername()); // Associa l'username di guest al carrello appena creato
+		cart.setCarrello_Id( UUID.randomUUID().toString().substring(0, 10));
 		try {
 		    dao.doSave(account);
+		    cartdao.doSave(cart);
 		} catch (SQLException e) {
 			String msg = e.getMessage().toLowerCase();
 			
