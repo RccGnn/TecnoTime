@@ -75,41 +75,28 @@ function search() {
 	loadAjaxDoc(url, "GET", params, handleDisplaySearch);  
 }
 
-function clearSearchBar() {
+function hideSearchBar() {
 	let root = document.getElementById("search-results");
-	// Cancella i risultati precedenti prima di mostrare quelli nuovi
-	while(root.firstChild)
-		root.removeChild(root.firstChild);		
+	root.style.display = "none";
 }
 
 function handleDisplaySearch(xhr) {
 	let searchResults = JSON.parse(xhr.responseText);
 	console.log(typeof(searchResults)+"\nLenght: "+searchResults.lenght);
 	// Recupera il display per gli articoli
-	let root = document.getElementById("search-results");
-	
-	// Se la ricerca non ha portato a risultati, nascondi l'elemento root
-	if (!searchResults || searchResults.lenght == 0) {
-		root.style.display = "none";
-		return;
-	} else { // Altrimenti rendilo visibile
-		root.style.display = "block";
-	}
-	
+	let res = document.getElementById("search-results");
+		
 	// Cancella i risultati precedenti prima di mostrare quelli nuovi
-	while(root.firstChild)
-		root.removeChild(root.firstChild);
+	while(res.firstChild)
+		res.removeChild(res.firstChild);
 
 	searchResults.forEach(result => {
 		let suggItem = document.createElement("div");
 		suggItem.className = "suggestion-item";
 		suggItem.innerHTML = result.nome;
 		
-		root.appendChild(suggItem);
+		res.appendChild(suggItem);
 	});
+	
+	res.style.display = "block";
 }
-
-
-
-
-

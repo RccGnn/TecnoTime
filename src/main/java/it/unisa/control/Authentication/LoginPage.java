@@ -73,8 +73,10 @@ public class LoginPage extends HttpServlet {
         	         dispatcher.forward(request, response);      
         	         return;
         		 }
-        		key.add(username);   
-        		carrello=daoCarrello.doRetrieveByKey(key);  //recupera il carrello associato all username nel db
+        		 
+        		 System.out.println("UsernameAAAAAAAAA: " + username);
+        		 key.add(username);   
+        		 carrello=daoCarrello.doRetrieveByKey(key);  //recupera il carrello associato all username nel db
              }
         }catch (SQLException e) {
         	request.setAttribute("serverError", "Errore d'accesso: Login Fallito. Riprova"); //eventuale pagina errore
