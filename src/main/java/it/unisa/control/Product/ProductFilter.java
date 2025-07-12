@@ -42,9 +42,12 @@ public class ProductFilter extends HttpServlet {
 	        ArrayList<ArticoloCompletoBean> catalogo = dao.doRetrieveAll(sort); 
 
 	        // Ricerca effettuata dalla barra di navigazione centrale
-        	if(searchBar) { 
-		        Filters.nameFilter(catalogo, nome);	 // Filtra solo sul nome (input utente)
-	        // Ricerca effettuata dalle altre pagine dei prodotti
+        	if(searchBar) {
+        		if (nome != null)
+        			Filters.nameFilter(catalogo, nome);	 // Filtra solo sul nome (input utente)
+        		else
+        			catalogo = new ArrayList<ArticoloCompletoBean>(0);
+        	// Ricerca effettuata dalle altre pagine dei prodotti
         	} else {
 		        // Filtra per il contesto
 		        Filters.contexFilter(catalogo, contesto);
@@ -54,7 +57,7 @@ public class ProductFilter extends HttpServlet {
 		        
 		        // Filtra facendo un match sul nome
 		        if (nome != null)
-		        Filters.nameFilter(catalogo, nome);
+		        	Filters.nameFilter(catalogo, nome);
 		     
 		        // Se si tratta di un servizio, filtra per durata del servizio
 		        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"

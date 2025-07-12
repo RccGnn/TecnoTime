@@ -75,6 +75,12 @@ function search() {
 	loadAjaxDoc(url, "GET", params, handleDisplaySearch);  
 }
 
+function clearSearchBar() {
+	let root = document.getElementById("search-results");
+	// Cancella i risultati precedenti prima di mostrare quelli nuovi
+	while(root.firstChild)
+		root.removeChild(root.firstChild);		
+}
 
 function handleDisplaySearch(xhr) {
 	let searchResults = JSON.parse(xhr.responseText);
