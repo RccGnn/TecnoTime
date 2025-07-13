@@ -28,6 +28,10 @@
             </div>
             <button type="submit">Accedi</button>
         </form>
+        
+        <div class="forgot-password">
+        <a href="forgotpassword.jsp">Hai dimenticato la password?</a>
+        </div>
 
         <div class="register-link">
             <span>Non hai un account?</span><br>
