@@ -17,51 +17,168 @@ import java.sql.Date;
 
 public class AccountDao implements BeanDaoInterface<AccountBean> {
 
+	private static final String[] whitelist = 
+		{"username", "hashedPassword", "nome", "cognome", "sesso", "email", "numeroTelefono", 
+		 "nazione", "provincia", "citta", "via", "numeroCivico", "CAP", "ruolo", "dataNascita", "asc", "disc"};
+	
 	private static final String TABLE_NAME = "Account";
+
+	public synchronized String UpdateandRetrieve_AccountId() {
+	    Connection connection = null;
+	    PreparedStatement ps = null;
+	    String newGuestUsername = "";
+
+	    String getLastGuestNumberSQL = "SELECT MAX(CAST(SUBSTRING_INDEX(username, '#', -1) AS UNSIGNED)) "
+	            + "AS lastNum FROM " + AccountDao.TABLE_NAME + " WHERE username LIKE 'GUEST#%'";
+
+	    int nextGuestNumber = 1;
+
+		    try {
+		        connection = DriverManagerConnectionPool.getConnection();
+		        ps = connection.prepareStatement(getLastGuestNumberSQL);
+		        ResultSet rs = ps.executeQuery();
+	
+		        if (rs.next()) {
+		            nextGuestNumber = rs.getInt("lastNum") + 1;
+		        }
+		        newGuestUsername = "GUEST#" + nextGuestNumber;
+	
+		    } catch (Exception e) {
+		        return null;
+		    } finally {
+		        try {
+		            if (ps != null)
+		                ps.close();
+		        } catch (Exception e) {
+		        	return null;
+		        }
+		        try {
+		            if (connection != null)
+		                connection.close();
+		        } catch (Exception e) {
+		        	return null;
+		        }
+		    }
+		    
+	    return newGuestUsername;
+	}
+	
+	public synchronized Boolean UpdateAccountpwd(AccountBean account) throws SQLException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String insertSQL= "UPDATE " + AccountDao.TABLE_NAME + " SET hashedPassword = ? " + "WHERE username = ? ";
+		int result;	
+		
+			try {
+				connection = DriverManagerConnectionPool.getConnection();
+				ps = connection.prepareStatement(insertSQL);	
+				ps.setString(1, account.gethashedPassword());
+				ps.setString(2, account.getUsername());
+				result=ps.executeUpdate();
+				
+			} finally {
+				
+				try {
+					if (ps != null)
+						ps.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+			if(result<1) {
+				return false;
+			}else {
+				return true;
+			}
+		}
+	
 
 	@Override
 	public synchronized void doSave(AccountBean account) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement ps = null;
+		String insertSQL="";
 		
-		String insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
-				+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
-				+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
+		if(!account.getUsername().toLowerCase().equals("guest")) {
+			 insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
+					+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			 
+				 try {
+						connection = DriverManagerConnectionPool.getConnection();
+						
+						ps = connection.prepareStatement(insertSQL);	
 			
-			ps = connection.prepareStatement(insertSQL);	
-
-			ps.setString(1, account.getUsername());
-		    ps.setString(2, account.gethashedPassword());
-		    ps.setString(3, account.getNome());
-		    ps.setString(4, account.getCognome());
-		    ps.setString(5, Character.toString(account.getSesso()));
-		    ps.setString(6, account.getEmail());
-		    ps.setString(7, account.getNumeroTelefono());
-		    ps.setString(8, account.getNazione());
-		    ps.setString(9, account.getProvincia());
-		    ps.setString(10, account.getCitta());
-		    ps.setString(11, account.getVia());
-		    ps.setString(12, account.getNumeroCivico());
-		    ps.setString(13, account.getCAP());
-		    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
-		    ps.setDate(15, Date.valueOf(account.getDataNascita()));
-			ps.executeUpdate();
-
-		} finally {
+						ps.setString(1, account.getUsername());
+					    ps.setString(2, account.gethashedPassword());
+					    ps.setString(3, account.getNome());
+					    ps.setString(4, account.getCognome());
+					    ps.setString(5, Character.toString(account.getSesso()));
+					    ps.setString(6, account.getEmail());
+					    ps.setString(7, account.getNumeroTelefono());
+					    ps.setString(8, account.getNazione());
+					    ps.setString(9, account.getProvincia());
+					    ps.setString(10, account.getCitta());
+					    ps.setString(11, account.getVia());
+					    ps.setString(12, account.getNumeroCivico());
+					    ps.setString(13, account.getCAP());
+					    ps.setString(14, DaoUtils.getRuoloAccountString(account)); // Ruolo scelto in base all'email dell'account
+					    ps.setDate(15, Date.valueOf(account.getDataNascita()));
+						ps.executeUpdate();
 			
+					} finally {
+						
+						try {
+							if (ps != null)
+								ps.close();
+						} finally {
+							if (connection != null)
+								connection.close();
+						}
+					}
+				}
+		
+		else {
+			insertSQL = "INSERT INTO " + AccountDao.TABLE_NAME
+					+ " (username, hashedPassword, nome, cognome, sesso, email, numeroTelefono, nazione, provincia, citta, via, numeroCivico, CAP, ruolo, dataNascita) "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
-				if (ps != null)
-					ps.close();
+				connection = DriverManagerConnectionPool.getConnection();
+				System.out.println("se vai qui seii un coglione");
+				ps = connection.prepareStatement(insertSQL);	
+				
+				account.setUsername(UpdateandRetrieve_AccountId());
+				
+				ps.setString(1, account.getUsername());
+			    ps.setString(2, account.gethashedPassword());
+			    ps.setString(3, account.getNome());
+			    ps.setString(4, account.getCognome());
+			    ps.setString(5, Character.toString(account.getSesso()));
+			    ps.setString(6, account.getEmail());
+			    ps.setString(7, account.getNumeroTelefono());
+			    ps.setString(8, account.getNazione());
+			    ps.setString(9, account.getProvincia());
+			    ps.setString(10, account.getCitta());
+			    ps.setString(11, account.getVia());
+			    ps.setString(12, account.getNumeroCivico());
+			    ps.setString(13, account.getCAP());
+			    ps.setString(14, Ruoli.guest.name()); // Ruolo scelto in base all'email dell'account
+			    ps.setDate(15, Date.valueOf(account.getDataNascita()));
+				ps.executeUpdate();
+	
 			} finally {
-				if (connection != null)
-					connection.close();
+				
+				try {
+					if (ps != null)
+						ps.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
 			}
 		}
-		
 	}
 
 	@Override
@@ -128,7 +245,9 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			ps.setString(1, key);
 
 			result = ps.executeUpdate();
-
+			if (result == 0)
+				throw new SQLException("No element deleted");
+			
 		} finally {
 			try {
 				if (ps != null)
@@ -150,7 +269,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 
 		String selectSQL = "SELECT * FROM " + AccountDao.TABLE_NAME;
 
-		if (order != null && !order.equals("")) {
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
 
@@ -161,7 +280,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				while (rs.next()) {
+				do{
 					AccountBean account = new AccountBean();
 
 					account.setUsername(rs.getString("username"));
@@ -181,7 +300,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 					account.setDataNascita(rs.getDate("dataNascita").toLocalDate());
 					
 					accounts.add(account);
-				}
+				} while (rs.next());
 			} else {
 				accounts = null;
 			}

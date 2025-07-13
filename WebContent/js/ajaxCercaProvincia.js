@@ -118,7 +118,7 @@ var allProvincesSigles = [
     }
 
     allProvincesSigles.forEach(function(item) { 	// Funzione che un'opzione per ogni provincia nel datalist (primo avvio)
-        var option = document.createElement("option");
+        let option = document.createElement("option");
         option.value = item.provincia; // usa il nome della provincia come valore
         dataList.appendChild(option);
     });
@@ -129,14 +129,14 @@ var allProvincesSigles = [
  * Vengono mostrati solo i nomi delle province che iniziano con il testo digitato (case-insensitive).
  */
 function cercaProvincia() {
-    var inputElem = document.getElementById("province");
-    var filter = inputElem.value.trim().toLowerCase(); // Per uniformare la stringa
-    var dataList = document.getElementById("provinceList");
+    let inputElem = document.getElementById("province");
+    let filter = inputElem.value.trim().toLowerCase(); // Per uniformare la stringa
+    let dataList = document.getElementById("provinceList");
     dataList.innerHTML = "";
     // Ricerca tra tutte le province
     allProvincesSigles.forEach(function(item) { // Funzione per il confronto: si verifica se il nome della provincia inizia col testo inserito dall'utente
         if (item.provincia.toLowerCase().startsWith(filter)) {
-            var option = document.createElement("option");
+            let option = document.createElement("option");
             option.value = item.provincia; // aggiunge come opzione il nome della provincia
             dataList.appendChild(option); // aggiunge opzione alla lista
         }

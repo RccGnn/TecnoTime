@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<% 
+	String message = null;
+	if (request.getAttribute("confirmMessage") != null)
+		message = (String) request.getAttribute("confirmMessage");
+%>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -9,13 +15,16 @@
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>Login - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />
 
     <main>
     <div class="login-container">
+    	<% if (message != null) {%>
+    	<span class="success-message"> <%= message %></span>
+    	<% } %>
         <h2>Effettua il Login</h2>
         <form action="LoginPage" method="post">
             <div>
@@ -28,6 +37,10 @@
             </div>
             <button type="submit">Accedi</button>
         </form>
+        
+        <div class="forgot-password">
+        <a href="forgotpassword.jsp">Hai dimenticato la password?</a>
+        </div>
 
         <div class="register-link">
             <span>Non hai un account?</span><br>
@@ -38,6 +51,6 @@
    
   	<jsp:include page="footer.jsp" />
    
-    <script src="js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>

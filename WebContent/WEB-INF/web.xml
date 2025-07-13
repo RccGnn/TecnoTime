@@ -31,6 +31,11 @@
     <url-pattern>/LogoutServlet</url-pattern>
 </filter-mapping>
 
+<filter-mapping>
+    <filter-name>AuthenticatorFilter</filter-name>
+    <url-pattern>/CheckoutServlet</url-pattern>
+</filter-mapping>
+
  <session-config>
     <session-timeout>5</session-timeout> <!-- 5 minuti -->
  </session-config>

@@ -3,7 +3,9 @@ package it.unisa.model.DAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface BeanDaoInterface<T> {
+import it.unisa.model.beans.BeanMarker;
+
+public interface BeanDaoInterface<T extends BeanMarker> {
 	public void doSave(T entity) throws SQLException;
 
 	public boolean doDelete(String key) throws SQLException;

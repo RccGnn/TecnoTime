@@ -18,7 +18,7 @@
     <!-- Contenuto principale -->
     
 		<main style="padding: 4rem; text-align: center; background-color: #F2F2F2; min-height: 70vh;">
-	  <h1 style="font-size: 5rem; color: #021859; margin-bottom: 1rem;">
+	  <h1 class="error-title">
 	    <c:choose>
 	      <c:when test="${pageContext.errorData.statusCode == 404}">
 	        404
@@ -29,13 +29,13 @@
 	    </c:choose>
 	  </h1>
 	
-	  <h2 style="color: #011140; font-size: 1.5rem; margin-bottom: 1.5rem;">
+	  <h2 class="error-subtitle">
 	    <c:choose>
 	      <c:when test="${pageContext.errorData.statusCode == 404}">
-	        La pagina non è stata trovata
+	        La pagina non è stata trovata <br>
 	      </c:when>
 	      <c:otherwise>
-	        Si è verificato un errore interno al server
+	        Si è verificato un errore interno al server <br>
 	      </c:otherwise>
 	    </c:choose>
 	  </h2>

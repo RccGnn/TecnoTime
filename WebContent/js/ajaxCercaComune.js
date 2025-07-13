@@ -181,15 +181,15 @@ var allProvincesSigles = [
  * Se la provincia non è valida, disabilita il campo select dei comuni.
  */
 function cercaComune() {
-    var provName      = document.getElementById("province").value.trim();
-    var selectComuni  = document.getElementById("city");
+    let provName      = document.getElementById("province").value.trim();
+    let selectComuni  = document.getElementById("city");
 
     // Disabilità campo City fintanto che non viene inserita una città valida
     selectComuni.innerHTML = '<option value="">Seleziona città…</option>';
     selectComuni.disabled  = true;
 
     // Trova la sigla associata alla provincia 
-    var provinceSigle = allProvincesSigles.find(function(item) { // Funzione di 'find'
+    let provinceSigle = allProvincesSigles.find(function(item) { // Funzione di 'find'
         return item.provincia.toLowerCase() === provName.toLowerCase();
     });
     if (!provinceSigle) {
@@ -198,8 +198,8 @@ function cercaComune() {
         return;
     }
 
-    var sigla  = provinceSigle.sigla;
-    var apiUrl = "https://comuni-istat-api.belicedigital.com/api/provincia/"
+    let sigla  = provinceSigle.sigla;
+    let apiUrl = "https://comuni-istat-api.belicedigital.com/api/provincia/"
                + encodeURIComponent(sigla)
                + "/comuni";
 
@@ -210,7 +210,7 @@ function cercaComune() {
         // console.log("Status comuni:", xhr.status);
         // console.log("ResponseText comuni:", xhr.responseText);
 
-        var arr;
+        let arr;
         try {
 			// Conversione JSON --> OBJECT
             arr = JSON.parse(xhr.responseText);
@@ -221,7 +221,7 @@ function cercaComune() {
 
         // Popolamento select di City
         arr.forEach(function(c) { // Funzione appliacata ad ogni elemento di arr
-            var o = document.createElement("option");
+            let o = document.createElement("option");
 			o.text  = (typeof c === "string" ? c : (c.nome || c.comune || c.denominazione));
 			o.value = o.text;
             selectComuni.add(o);

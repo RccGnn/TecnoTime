@@ -6,10 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
+    <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Registrazione - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />
@@ -94,10 +94,10 @@
     </div>
 	<jsp:include page="footer.jsp" />
     
-    <script src="js/navbar.js" defer></script>
-    <script src="js/ajaxCercaProvincia.js" defer></script>
-    <script src="js/formValidation.js" defer></script>
-    <script src="js/ajaxCercaComune.js" defer></script>
-    <script src="js/fieldValidator.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/ajaxCercaProvincia.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/formValidation.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/ajaxCercaComune.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/fieldValidator.js" defer></script>
 </body>
 </html>

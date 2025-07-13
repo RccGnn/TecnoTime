@@ -10,10 +10,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
+    <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
     <jsp:include page="header-utente.jsp" />
@@ -25,9 +25,9 @@
             <div class="hero-content">
                 <div class="hero-animation">
                     <video autoplay loop muted playsinline class="hero-img" aria-label="Animazione hero">
-  					<source src="../video/hero_animation.mp4" type="video/mp4">
-					<source src="../video/hero_animation.webm" type="video/webm">
-  					<source src="../video/hero_animation.ogv" type="video/ogg">
+  					<source src="<%= request.getContextPath() %>/video/hero_animation.mp4" type="video/mp4">
+					<source src="<%= request.getContextPath() %>/video/hero_animation.webm" type="video/webm">
+  					<source src="<%= request.getContextPath() %>/video/hero_animation.ogv" type="video/ogg">
 					</video>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <p>Gaming Mouse RGB a metà prezzo!</p>
                     </div>
                     <div class="product-right">
-                        <img src="../images/mouse-hyperx.png" alt="Mouse" class="product-image">
+                        <img src="<%= request.getContextPath() %>/images/mouse-hyperx.png" alt="Mouse" class="product-image">
                         <p class="product-name">Mouse HyperX RGB</p>
                     </div>
                 </div>
@@ -57,15 +57,35 @@
             <div class="build-scroll">
                 <div class="build-card">
                     <h3>AMD Ryzen + NVIDIA RTX</h3>
-                    <p>Ryzen 7 5800X, RTX 4070, 32GB RAM</p>
+                    <p>Ryzen 7 5800X, RTX 4070, 32GB DDR4 RAM, 1TB SSD NVME, 75OW</p>
                 </div>
                 <div class="build-card">
                     <h3>Intel i7 + NVIDIA RTX</h3>
-                    <p>Intel i7-12700K, RTX 4080, 32GB DDR5</p>
+                    <p>Intel i7-12700K, RTX 4080, 32GB DDR5, 2TB SSD NVME, 850W</p>
                 </div>
                 <div class="build-card">
                     <h3>AMD Ryzen + Radeon</h3>
-                    <p>Ryzen 5 7600X, RX 7800 XT, 32GB RAM</p>
+                    <p>Ryzen 5 7600X, RX 7800 XT, 32GB DDR5 RAM, 1TB SSD NVME, 750W</p>
+                </div>
+                <div class="build-card">
+                    <h3>AMD Ryzen + NVIDIA RTX</h3>
+                    <p>Ryzen 9 9950x3d, RTX 5090, 128GB DDR5 RAM, 4TB SSD NVME, 1000W</p>
+                </div>
+                <div class="build-card">
+                    <h3>Intel i7 + NVIDIA RTX</h3>
+                    <p>Intel i7-14700K, RTX 5080, 64GB DDR5 RAM, 2TB SSD NVME, 850W</p>
+                </div>
+                <div class="build-card">
+                    <h3>AMD Ryzen + Radeon</h3>
+                    <p>Ryzen 7 9800x3d, RX 9070 XT, 32GB DDR5 RAM, 2TB SSD NVME, 850W</p>
+                </div>
+                <div class="build-card">
+                    <h3>Intel i5 + Radeon</h3>
+                    <p>Intel i5-13600K, RX 7900 XTX, 64GB DDR5 RAM, 2TB SSD NVME, 850W</p>
+                </div>
+                <div class="build-card">
+                    <h3>Intel Ultra 9 + NVIDIA RTX</h3>
+                    <p>Intel Core Ultra 9 285K, RTX 5090, 128GB DDR5 RAM, 4TB SSD NVME, 1000W</p>
                 </div>
             </div>
         </section>
@@ -73,6 +93,6 @@
     
     <jsp:include page="footer-utente-registrato.jsp" />
     
-	<script src="../js/navbar.js" defer></script>
+	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>

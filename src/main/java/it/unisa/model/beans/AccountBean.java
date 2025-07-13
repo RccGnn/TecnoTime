@@ -2,8 +2,9 @@ package it.unisa.model.beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.UUID;
 
-public class AccountBean implements Serializable {
+public class AccountBean implements Serializable, BeanMarker {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -22,6 +23,7 @@ public class AccountBean implements Serializable {
 	private String CAP;
 	private LocalDate dataNascita;
 	private Ruoli ruolo;
+	private Integer AccountId; // -1 se l'utente è un utente registrato, n > 0 altrimenti
 	
 	public AccountBean() {}
 
@@ -43,7 +45,33 @@ public class AccountBean implements Serializable {
 		this.CAP =postalCode ;
 		this.dataNascita = birthDate;
 		this.ruolo = rule;
+		this.AccountId = -1;
+	}
 	
+	public AccountBean(String username) {
+		this.hashedPassword = "";
+		this.username = username;
+		this.nome = "";
+		this.cognome = "";
+		this.sesso = 'x';
+		this.email = UUID.randomUUID().toString(); // Stringa casuale, diversa per ogni guest
+		this.numeroTelefono = "";
+		this.nazione = "";
+		this.provincia = "";
+		this.citta = "";
+		this.via = "";
+		this.numeroCivico = "";
+		this.CAP = "";
+		this.dataNascita = LocalDate.now();
+		this.ruolo = Ruoli.guest;
+		
+	}
+	
+	public void setAccountId(Integer accountid) {
+		AccountId=accountid;
+	}
+	public Integer getAccountId() {
+		return AccountId;
 	}
 
 	public String gethashedPassword() {
@@ -169,9 +197,9 @@ public class AccountBean implements Serializable {
 	@Override
 	public String toString() {
 		return "AccountBean [hashedPassword=" + hashedPassword + ", username=" + username + ", nome=" + nome
-				+ ", cognome=" + cognome + ", sesso=" + sesso +", email=" + email + ", numeroTelefono=" + numeroTelefono + ", nazione="
-				+ nazione + ", provincia=" + provincia + ", citta=" + citta + ", via=" + via + ", numeroCivico="
-				+ numeroCivico + ", CAP=" + CAP + ", dataNascita=" + dataNascita + ", ruolo=" + ruolo + "]";
+				+ ", cognome=" + cognome + ", sesso=" + sesso + ", email=" + email + ", numeroTelefono="
+				+ numeroTelefono + ", nazione=" + nazione + ", provincia=" + provincia + ", citta=" + citta + ", via="
+				+ via + ", numeroCivico=" + numeroCivico + ", CAP=" + CAP + ", dataNascita=" + dataNascita + ", ruolo="
+				+ ruolo + ", AccountId=" + AccountId + "]";
 	}
-
 }
