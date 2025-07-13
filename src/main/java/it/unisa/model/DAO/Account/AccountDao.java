@@ -63,6 +63,35 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 	    return newGuestUsername;
 	}
 	
+	public synchronized Boolean UpdateAccountpwd(AccountBean account) throws SQLException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String insertSQL= "UPDATE " + AccountDao.TABLE_NAME + " SET hashedPassword = ? " + "WHERE username = ? ";
+		int result;	
+		
+			try {
+				connection = DriverManagerConnectionPool.getConnection();
+				ps = connection.prepareStatement(insertSQL);	
+				ps.setString(1, account.gethashedPassword());
+				ps.setString(2, account.getUsername());
+				result=ps.executeUpdate();
+				
+			} finally {
+				
+				try {
+					if (ps != null)
+						ps.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+			if(result<1) {
+				return false;
+			}else {
+				return true;
+			}
+		}
 	
 
 	@Override
@@ -134,7 +163,7 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 			    ps.setString(10, account.getCitta());
 			    ps.setString(11, account.getVia());
 			    ps.setString(12, account.getNumeroCivico());
-			    ps.setString(13, account.getCAP());;
+			    ps.setString(13, account.getCAP());
 			    ps.setString(14, Ruoli.guest.name()); // Ruolo scelto in base all'email dell'account
 			    ps.setDate(15, Date.valueOf(account.getDataNascita()));
 				ps.executeUpdate();

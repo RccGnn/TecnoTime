@@ -34,22 +34,26 @@ public class ForgotPassword extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String username = (String) request.getAttribute("username");
-		String pwd= (String) request.getAttribute("pwd");
-		PasswordUtils.hashPassword(pwd);
-		BeanDaoInterface<AccountBean> accDao= new AccountDao();
+		String username = (String) request.getParameter("username").trim();
+		String pwd= (String) request.getParameter("pwd");
+		pwd=PasswordUtils.hashPassword(pwd);
+		AccountDao accDao= new AccountDao();
 		AccountBean account = new AccountBean();
-		
+		boolean result;
 		try {
 			account=accDao.doRetrieveByKey(username);
 			if(account!=null) {
 				account.sethashedPassword(pwd);
+				result=accDao.UpdateAccountpwd(account);
 			}
 			else {
 				request.setAttribute("error", Boolean.TRUE);	
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/forgotpassword.jsp");
+				dispatcher.forward(request, response);
+				return;
 			}
 		}catch(Exception e){
-			e.getMessage();
+			e.printStackTrace();
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
 		dispatcher.forward(request, response);
