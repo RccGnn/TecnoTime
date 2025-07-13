@@ -21,7 +21,18 @@
 	<form class="recuperopassword" action="ForgotPassword" method="post">
 	<label for="username">Username</label>
 		<input type="text" id="username" name="username" required>
+	 <%
+	    String s = "errore recupero username";
+	    Object attr = request.getAttribute("error");
+	
+	    if (attr != null && Boolean.TRUE.equals(attr)) {
+	%>
+	    <span><%= s %></span>
+	<%
+	    }
+	%>
 
+      
 	<label for="newPassword">Nuova Password</label>
         <input type="password" id="newPassword" name="pwd" 
           placeholder="Almeno 9 caratteri, 1 maiuscola, 1 minuscola, 1 numero, 1 simbolo" 
@@ -34,15 +45,7 @@
           
 		<button type="submit" id="resetBtn">Conferma</button>
       </form>
-      
-      	<%	String s = "errore recupero username";
-			if((Boolean)request.getAttribute("error") != null && (Boolean)request.getAttribute("error") == true){
-				%> 
-				<%=s %> 
-				<%
-				}
-				%>
-      
+     
       </div>
       
 	</main>
