@@ -1,9 +1,9 @@
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="java.util.Collections"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%@ page import="java.text.DecimalFormat"	%>
+<%@ page import="java.util.Collections"	%>
 <%@ page import="it.unisa.model.beans.ArticoloCompletoBean" %>
 <%@ page import="it.unisa.model.beans.CarrelloRiempitoBean" %>
 <%@ page import="java.util.ArrayList" %>
@@ -141,7 +141,7 @@
 	              <span id="total"> <%= df.format(totale) %></span>
 	            </div>
 	            <div>
-	             <a href="utente/Ordine.jsp" class="checkout-btn">CHECKOUT</a>
+	             <a href="UserFillCart" class="checkout-btn">CHECKOUT</a>
 	            </div>
 	            <div class="account-links">
 	              <span>Hai già un account? <a href="LoginPage.jsp">Accedi</a></span>

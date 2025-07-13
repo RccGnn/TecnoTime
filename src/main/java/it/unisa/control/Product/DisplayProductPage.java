@@ -42,8 +42,7 @@ public class DisplayProductPage extends HttpServlet {
 		} catch (Exception e) {
 			response.sendError(500, "Articolo non trovato");
 		}
-		
-		
+
 	}
 
 	/**

@@ -133,14 +133,19 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 
 		CarrelloRiempitoBean carrelloRiempito = new CarrelloRiempitoBean();
 
-		// Ottengo tutti i prodotti e le loro quantità contenute in un carrello (rs può avere da 0 a più righe)
-		String selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
+		String selectSQL = "";
+		if(key.size()==1) {
+			selectSQL="SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ?";
+		}else if(key.size()==2){
+			selectSQL = "SELECT * FROM " + CarrelloRiempitoDao.TABLE_NAME + " WHERE usernameCarrello = ? AND Carrello_Id = ?";
+		}
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
 			ps.setObject(1, key.get(0));
-			ps.setObject(2, key.get(1));
+			if(key.size() == 2)
+				ps.setObject(2, key.get(1));
 
 			ResultSet rs = ps.executeQuery();
 

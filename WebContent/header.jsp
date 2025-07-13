@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="header-right">
-        <a href="MockFillCart" class="icon-link">
+        <a href="MockFillCart?destination=/carrello.jsp" class="icon-link">
             <img src="images/shopping_cart.png" alt="Carrello" class="icon">
              <span class="Carrello">Carrello</span>
         </a>

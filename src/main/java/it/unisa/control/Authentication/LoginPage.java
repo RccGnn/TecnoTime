@@ -13,13 +13,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.unisa.control.PasswordUtils;
+import it.unisa.control.Cart.CookieUtils;
 import it.unisa.model.DAO.BeanDaoInterface;
-import it.unisa.model.DAO.BeanDaoInterfaceArray;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
-import it.unisa.model.DAO.Cart.CarrelloDao;
+import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.AccountBean;
-import it.unisa.model.beans.CarrelloBean;
+import it.unisa.model.beans.ArticoloCompletoBean;
+import it.unisa.model.beans.CarrelloRiempitoBean;
 
 /**
  * Servlet implementation class LoginPage
@@ -58,9 +59,9 @@ public class LoginPage extends HttpServlet {
         pwd.trim(); 
         AccountBean account = new AccountBean(); 
         BeanDaoInterface<AccountBean> dao= new AccountDao();   
-        BeanDaoInterfaceArray<CarrelloBean> daoCarrello = new CarrelloDao();  //creo il dao per memorizzare il carrello nella sessione
-        ArrayList<String> key =new ArrayList<>(); //creo un arraylist per memorizzare la chiave del dao
-        CarrelloBean carrello= new CarrelloBean();
+        CarrelloRiempitoDao daoCarrello = new CarrelloRiempitoDao();  //creo il dao per memorizzare il carrello nella sessione
+        ArrayList<String> key =new ArrayList<>(2); //creo un arraylist per memorizzare la chiave del dao
+        CarrelloRiempitoBean carrello= new CarrelloRiempitoBean();
         
         try {
         	 account = dao.doRetrieveByKey(username);
@@ -77,7 +78,22 @@ public class LoginPage extends HttpServlet {
         		 
         		 System.out.println("UsernameAAAAAAAAA: " + username);
         		 key.add(username);   
-        		 carrello=daoCarrello.doRetrieveByKey(key);  //recupera il carrello associato all username nel db
+        		 carrello = daoCarrello.doRetrieveByKey(key);  //recupera il carrello associato all username nel db
+        		 
+        		 // Recupera il carrello dell'username appena loggato ed aggiungi gli articoli 
+        		 // presenti nel carrello dell'utente guest (tramite i cookie)
+        		 String values [] = CookieUtils.getUsernameCartIdfromCookies(request);
+        		 key = new ArrayList<String>(2);
+        		 key.add(values[0]);
+        		 key.add(values[1]);
+        		 CarrelloRiempitoBean carrelloGuest = daoCarrello.doRetrieveByKey(key);
+        		 
+        		 ArrayList<ArticoloCompletoBean> nuovaLista = carrello.getListaArticoli();
+        		 nuovaLista.addAll(carrelloGuest.getListaArticoli());
+        		 carrello.setListaArticoli(nuovaLista);
+        		 daoCarrello.doSave(carrello, false);
+        		 
+        		 //
              }
         }catch (SQLException e) {
         	request.setAttribute("serverError", "Errore d'accesso: Login Fallito. Riprova"); //eventuale pagina errore
@@ -93,7 +109,7 @@ public class LoginPage extends HttpServlet {
         	//creazione sessione admin
             session.setAttribute("admin", Boolean.TRUE);
             session.setAttribute("username", account.getUsername());
-            session.setAttribute("carrelloid", carrello.getCarrello_Id());
+            session.setAttribute("carrello_id", carrello.getCarrello_Id());
             response.sendRedirect(request.getContextPath() + "/amministratore/index-amministratore.jsp");	// Redirect a pagina protetta
         }
         else if(DaoUtils.getRuoloAccountString(account)=="utente_registrato") {
@@ -101,7 +117,7 @@ public class LoginPage extends HttpServlet {
         	 //creazione sessione utente 
             session.setAttribute("user", Boolean.TRUE);  
             session.setAttribute("username", account.getUsername());
-            session.setAttribute("carrelloid", carrello.getCarrello_Id());
+            session.setAttribute("carrello_id", carrello.getCarrello_Id());
             response.sendRedirect(request.getContextPath() + "/utente/index-utente.jsp");	// Redirect a pagina protetta
             System.out.println(request.getContextPath() + "/utente/index-utente.jsp");
         }        

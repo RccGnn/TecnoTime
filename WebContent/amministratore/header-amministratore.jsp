@@ -87,6 +87,6 @@
         </ul>
     </nav>
 	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
-    <script src="js/ajaxRicerca.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/ajaxRicerca.js" defer></script>
     </body>
     </html>

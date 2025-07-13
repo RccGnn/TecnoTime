@@ -108,22 +108,6 @@ var allProvincesSigles = [
   { "provincia": "Viterbo", "sigla": "VT" }
 ]
 
-
-// All'avvio, popola il datalist con tutte le province disponibili
-(function() {
-    let dataList = document.getElementById("provinceList");
-    if (!dataList) {
-        // console.error("Elemento datalist 'provinceList' non trovato.");
-        return;
-    }
-
-    allProvincesSigles.forEach(function(item) { 	// Funzione che un'opzione per ogni provincia nel datalist (primo avvio)
-        let option = document.createElement("option");
-        option.value = item.provincia; // usa il nome della provincia come valore
-        dataList.appendChild(option);
-    });
-})();
-
 /**
  * Funzione che filtra le opzioni del datalist in base al testo inserito nell'input provincia.
  * Vengono mostrati solo i nomi delle province che iniziano con il testo digitato (case-insensitive).

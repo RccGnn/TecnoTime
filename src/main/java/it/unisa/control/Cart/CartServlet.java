@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,7 +47,19 @@ public class CartServlet extends HttpServlet {
 		        // Costruisci la chiave da usare per il doRetrieve
 		        ArrayList<ArticoloCompletoBean> lista = new ArrayList<ArticoloCompletoBean>();				
 				ArrayList<String> keys= new ArrayList<String>(2);
-				String values[] = CookieUtils.getUsernameCartIdfromCookies(request);
+
+				String values[] = new String[2];
+				HttpSession s = request.getSession();
+				// Recupera username e carrello_id dalla sessione
+				if (s != null && s.getAttribute("username") != null) {
+					System.out.print("ALAALAL");
+					values[0] = (String) s.getAttribute("username");
+					values[1] = (String) s.getAttribute("carrello_id");
+				} else {
+					// Altrimenti recupera questi dati dai cookies
+					values = CookieUtils.getUsernameCartIdfromCookies(request);
+				}
+
 				keys.add(values[0]);
 				keys.add(values[1]);
 				

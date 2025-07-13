@@ -23,17 +23,10 @@ import it.unisa.model.beans.CarrelloRiempitoBean;
 public class ModifyCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final int MAX_ARTICLES_PURCHASE = 10;
-    
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ModifyCart() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Modifica il carrello di cui ha ricevuto i valori come parametri 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");

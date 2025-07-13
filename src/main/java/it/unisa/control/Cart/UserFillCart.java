@@ -16,22 +16,16 @@ import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.CarrelloRiempitoBean;
 
 /**
- * Servlet implementation class MockFillCart
+ * Servlet implementation class UserFillCart
  */
-@WebServlet("/MockFillCart")
-public class MockFillCart extends HttpServlet {
+@WebServlet("/UserFillCart")
+public class UserFillCart extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String destination = "";
-		if (request.getParameter("destination") == null)
-			response.sendError(500, "Destinazione del carrello ignota");
-		
-		destination = (String) request.getParameter("destination");
 		
 		CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
 		CarrelloRiempitoBean bean = new CarrelloRiempitoBean();
@@ -60,7 +54,7 @@ public class MockFillCart extends HttpServlet {
         bean.setListaArticoli(DaoUtils.dropboxImagesDecoderUrl(bean.getListaArticoli()));
         
 		request.setAttribute("carrello", bean);	
-		RequestDispatcher rd = request.getRequestDispatcher(destination);
+		RequestDispatcher rd = request.getRequestDispatcher("/utente/Ordine.jsp");
 		rd.forward(request, response);
 	}
 

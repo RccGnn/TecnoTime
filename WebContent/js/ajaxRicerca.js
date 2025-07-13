@@ -90,11 +90,19 @@ function handleDisplaySearch(xhr) {
 	while(res.firstChild)
 		res.removeChild(res.firstChild);
 
-	searchResults.forEach(result => {
+	searchResults.forEach(result => { // Per ogni articolo trovato
+		// Crea il risultato della ricerca
 		let suggItem = document.createElement("div");
 		suggItem.className = "suggestion-item";
-		suggItem.innerHTML = result.nome;
 		
+		// Crea il link per caricare la pagina dei prodotti singoli
+		let linkToDisplayPage = document.createElement("a");
+		linkToDisplayPage.href = 'DisplayProductPage?id='+encodeURIComponent(result.codiceIdentificativo);
+		linkToDisplayPage.innerHTML = result.nome;
+		
+		// Collega link <-- risultato
+		suggItem.appendChild(linkToDisplayPage);
+		// Collega risultato <-- display risultati
 		res.appendChild(suggItem);
 	});
 	
