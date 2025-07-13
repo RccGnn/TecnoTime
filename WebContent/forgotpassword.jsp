@@ -22,16 +22,20 @@
 	<label for="username">Username</label>
 		<input type="text" id="username" name="username" required>
 
-	<label for="newPassword">Nuova Password</label>
-        <input type="password" id="newPassword" name="pwd" 
+	<div id="password-form">
+		<label for="newPassword">Nuova Password</label>
+        <input type="password" id="newPassword" name="pwd" oninput="passwordCheck()"
           placeholder="Almeno 9 caratteri, 1 maiuscola, 1 minuscola, 1 numero, 1 simbolo" 
           required/>
-          
-	<label for="confirmPassword">Conferma Password</label>
+	</div> 
+	
+	<div id="confirm-form">
+		<label for="confirmPassword">Conferma Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" 
-          placeholder="Riscrivi la nuova password" 
+          placeholder="Riscrivi la nuova password" oninput="passwordControl()"
           required/>
-          
+	</div>
+	 
 		<button type="submit" id="resetBtn">Conferma</button>
       </form>
       
@@ -49,5 +53,7 @@
       
 	<jsp:include page="footer.jsp" />
     <script src="js/navbar.js" defer></script>
+    <script src="js/ajaxConfermaPassword.js" defer></script>
+    
 </body>
 </html>

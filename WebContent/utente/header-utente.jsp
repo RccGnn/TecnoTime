@@ -19,10 +19,12 @@
         <span class="brand-name">TECNOTIME</span>
     </div>
     <div class="header-center">
-        <div class="search-container">
-            <img src="<%= request.getContextPath() %>/images/magnifying_glass.png" alt="Ricerca" class="search-icon">
-            <input type="text" class="search-bar" placeholder="Cerca...">
-        </div>
+		<div class="search-container">
+	        <img src="<%= request.getContextPath() %>/images/magnifying_glass.png" alt="Ricerca" class="search-icon">
+    	    <input type="text" class="search-bar" id="search-bar" oninput="search()" placeholder="Cerca...">
+        	<!-- Spazio per mostrare i risultati della ricerca -->
+        	<div id="search-results" class="search-results-dropdown"></div> 
+        </div>    
     </div>
     <div class="header-right">
         <a href="<%= request.getContextPath() %>/carrello.jsp" class="icon-link">
@@ -74,5 +76,6 @@
         </ul>
     </nav>
     <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/ajaxRicerca.js" defer></script>
     </body>
     </html>
