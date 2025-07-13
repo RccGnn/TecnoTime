@@ -106,17 +106,18 @@ CREATE TABLE Promozione (
 );
 
 CREATE TABLE Ordine (
-  numeroTransazione  INT            PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  totale           	 DECIMAL(9,2)  	NOT NULL,
-  dataTransazione    DATE           NOT NULL,
-  oraTransazione     TIME           NOT NULL,
-  username           VARCHAR(50)    NOT NULL,
-  nazione       VARCHAR(50)     NOT NULL,
-  provincia		VARCHAR(50)    	NOT NULL,
-  citta			  VARCHAR(50)    	NOT NULL,
-  via      		VARCHAR(100)   	NOT NULL,
-  numeroCivico	VARCHAR(10)		NOT NULL,
-  CAP         VARCHAR(5)    NOT NULL,
+  numeroTransazione INT            	NOT NULL AUTO_INCREMENT,
+  totale           	DECIMAL(9,2)  	NOT NULL,
+  dataTransazione   DATE           	NOT NULL,
+  oraTransazione    TIME           	NOT NULL,
+  username         	VARCHAR(50)    	NOT NULL,
+  nazione       	VARCHAR(50)     NOT NULL,
+  provincia			VARCHAR(50)    	NOT NULL,
+  citta			  	VARCHAR(50)    	NOT NULL,
+  via      			VARCHAR(100)   	NOT NULL,
+  numeroCivico		VARCHAR(10)		NOT NULL,
+  CAP         		VARCHAR(5)    	NOT NULL,
+  CONSTRAINT PRIMARY KEY (numeroTransazione, username), 
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -133,7 +134,8 @@ CREATE TABLE Elemento_Ordine (
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT FOREIGN KEY (codiceArticolo) REFERENCES Articolo(codiceIdentificativo)
-	ON UPDATE CASCADE
+	ON UPDATE CASCADE 	-- Se cambia il codice di un articolo cambia, allora modifica.
+						-- Se un articolo viene eliminato, non eliminare l'elemento dall'ordine
 );
 
 CREATE TABLE Contiene (

@@ -107,7 +107,7 @@ public class ModifyCart extends HttpServlet {
 			// Non scendere sotto 1 prodotto
 			if (choice.equals("giu") && quantitaCorrente == 1) {
 				result.add("err");
-				result.add(null);
+				result.add(articolo);
 				String product = gson.toJson(result);
 				response.getWriter().println(product);
 				return;
@@ -127,7 +127,7 @@ public class ModifyCart extends HttpServlet {
 			
 			if (choice.equals("su") && quantitaCorrente + 1 > maxQuantita) { // Non alire sopra MAX_ARTICLES_PURCHASE
 				result.add("err");
-				result.add(null);
+				result.add(articolo);
 				String product = gson.toJson(result);
 				response.getWriter().println(product);
 				return;

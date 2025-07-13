@@ -99,36 +99,36 @@ function setEmptyCart (){
 	let root = document.getElementsByClassName("cart-layout")[0];		
 		//let articoli = document.querySelector('.products-container');
 
-		while (root.firstChild) {
-			root.removeChild(root.firstChild);
-		}
+	while (root.firstChild) {
+		root.removeChild(root.firstChild);
+	}
 		
-		// Recupera il riferimento al contenitore principale
-		let cartConteiner = document.getElementsByClassName("cart-page-container")[0];
+	// Recupera il riferimento al contenitore principale
+	let cartConteiner = document.getElementsByClassName("cart-page-container")[0];
 		
-		// crea il cart vuoto
-		let emptyCart = document.createElement("div");
-		emptyCart.className = "empty-cart-container";
+	// crea il cart vuoto
+	let emptyCart = document.createElement("div");
+	emptyCart.className = "empty-cart-container";
+	
+	let i = document.createElement("p");
+	i.className = "fas fa-shopping-cart empty-cart-icon";
+	emptyCart.appendChild(i);
+
+	let h1 = document.createElement("h1"); 
+	h1.innerHTML = "Il tuo carrello è vuoto";
+	emptyCart.appendChild(h1);
+	
+	let p = document.createElement("p");
+	p.innerHTML = "Aggiungi prodotti per vederli qui.";
+	emptyCart.appendChild(p);
 		
-		let i = document.createElement("p");
-		i.className = "fas fa-shopping-cart empty-cart-icon";
-		emptyCart.appendChild(i);
+	let a = document.createElement("a");
+	a.innerHTML = "Vai ai prodotti";
+	a.href = "ProductServlet";
+	a.className = "btn-primary";
+	emptyCart.appendChild(a);
 		
-		let h1 = document.createElement("h1"); 
-		h1.innerHTML = "Il tuo carrello è vuoto";
-		emptyCart.appendChild(h1);
-		
-		let p = document.createElement("p");
-		p.innerHTML = "Aggiungi prodotti per vederli qui.";
-		emptyCart.appendChild(p);
-		
-		let a = document.createElement("a");
-		a.innerHTML = "Vai ai prodotti";
-		a.href = "ProductServlet";
-		a.className = "btn-primary";
-		emptyCart.appendChild(a);
-		
-		cartConteiner.appendChild(emptyCart);
+	cartConteiner.appendChild(emptyCart);
 }
 
 // PULSANTI + E -
@@ -161,20 +161,32 @@ function varyAmount(clickedElement) {
 	loadAjaxDoc(url, "GET", params, handleVary);
 }
 
+
 function handleVary(xhr) {
 	let product = JSON.parse(xhr.responseText);
 	const choice = product[0];
+	const article = product[1];
 	const remQuantity = product[2];
 	
-	if(choice == "err")
+	let output = document.getElementById("current-quantity-"+article.codiceIdentificativo);
+	
+	if(choice == "err") { // notifica l'utente dell'errore
+		output.style.color = 'red';
+		output.style.fontWeight = 'bold';
+		setTimeout(function() {
+			output.style.color = '';		//
+			output.style.fontWeight = ''; 	// default
+		}, 500/*ms*/);
+		
 		return;
+	}	
 	
 	// Modifica il numero di elementi nel carrello
 	let cartSize = document.getElementById("your-cart");
 	let numElements = parseInt(cartSize.innerHTML.replace("IL TUO CARRELLO ( ", "").replace(" )", ""));
 	
 	// Modfica il numero che mostra la quantità
-    let output = document.getElementById("current-quantity-"+product[1].codiceIdentificativo);
+    // let output = document.getElementById("current-quantity-"+article.codiceIdentificativo);
 	let value1 = parseInt(output.innerHTML);
 	
 	// Modifica il numero che mostra il subtotale
@@ -185,7 +197,7 @@ function handleVary(xhr) {
 	// Modifica il totale
 	let total = document.getElementById("total");
 	
-	let subClass = articoloEnum(product[1]);
+	let subClass = articoloEnum(article);
 
 	if (choice == "down") {
 		cartSize.innerHTML = numElements - 1;

@@ -208,7 +208,7 @@ function handleFilter(xhr) {
 		articolo.appendChild(title);
 		
 		let price = document.createElement("p");
-		price.innerHTML = subClass.prezzo+" €";
+		price.innerHTML = subClass.prezzo.toFixed(2) +" €";
 		price.className = "product-price";
 		articolo.appendChild(price);
 		
