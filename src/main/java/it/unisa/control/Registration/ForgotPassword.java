@@ -7,13 +7,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import it.unisa.control.PasswordUtils;
-import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.beans.AccountBean;
-import it.unisa.model.beans.BeanMarker;
 
 /**
  * Servlet implementation class ForgotPassword
@@ -39,12 +36,13 @@ public class ForgotPassword extends HttpServlet {
 		pwd=PasswordUtils.hashPassword(pwd);
 		AccountDao accDao= new AccountDao();
 		AccountBean account = new AccountBean();
-		boolean result;
+
+		boolean result = false;
 		try {
 			account=accDao.doRetrieveByKey(username);
 			if(account!=null) {
 				account.sethashedPassword(pwd);
-				result=accDao.UpdateAccountpwd(account);
+				result = accDao.UpdateAccountpwd(account);
 			}
 			else {
 				request.setAttribute("error", Boolean.TRUE);	
@@ -55,6 +53,9 @@ public class ForgotPassword extends HttpServlet {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+		
+		if (result)
+			request.setAttribute("confirmMessage", "Password modificata con successo!");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
 		dispatcher.forward(request, response);
 		
