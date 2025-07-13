@@ -34,16 +34,9 @@ public class ForgotPassword extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub	
 		String username = (String) request.getAttribute("username");
 		String pwd= (String) request.getAttribute("pwd");
-		
 		PasswordUtils.hashPassword(pwd);
 		BeanDaoInterface<AccountBean> accDao= new AccountDao();
 		AccountBean account = new AccountBean();
@@ -62,6 +55,13 @@ public class ForgotPassword extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperapassword.jsp");
 		dispatcher.forward(request, response);
 		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		doGet(request, response);
 	}
 
 }
