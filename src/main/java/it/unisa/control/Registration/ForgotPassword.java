@@ -34,13 +34,8 @@ public class ForgotPassword extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		String username = (String) request.getAttribute("username");
 		String pwd= (String) request.getAttribute("pwd");
 		
@@ -59,9 +54,17 @@ public class ForgotPassword extends HttpServlet {
 		}catch(Exception e){
 			e.getMessage();
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperapassword.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
 		dispatcher.forward(request, response);
 		
 	}
+	
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+	}
 }
