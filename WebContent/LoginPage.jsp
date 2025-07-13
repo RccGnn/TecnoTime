@@ -9,7 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>Login - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />
@@ -42,6 +42,6 @@
    
   	<jsp:include page="footer.jsp" />
    
-    <script src="js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>

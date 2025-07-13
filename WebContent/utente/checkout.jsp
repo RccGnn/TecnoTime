@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="../images/TecnoTimeIcon.svg">
+  <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
   <title>TecnoTime: Checkout</title>
-  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
   <jsp:include page="header-utente.jsp"/>
@@ -21,6 +21,6 @@
   </main>
 
   <jsp:include page="footer-utente-registrato.jsp"/>
-  <script src="../js/navbar.js" defer></script>
+  <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>

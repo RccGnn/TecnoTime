@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/images/TecnoTimeIcon.svg">
   <title>${articolo.nome} – TecnoTime</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
   <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
@@ -80,6 +80,6 @@
   </section>
 
   <jsp:include page="footer.jsp"/>
-  <script src="js/articolo-single.js" defer></script>
+  <script src="<%= request.getContextPath() %>/js/articolo-single.js" defer></script>
 </body>
 </html>

@@ -6,9 +6,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
+  <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
   <title>Prodotti - TecnoTime</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>styles.css">
 </head>
 <body>
 
@@ -71,7 +71,7 @@
 
   <jsp:include page="footer.jsp"/>
 
-  <script src="js/navbar.js" defer></script>
-  <script src="js/ajaxArticoli.js" defer></script>
+  <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+  <script src="<%= request.getContextPath() %>/js/ajaxArticoli.js" defer></script>
 </body>
 </html>

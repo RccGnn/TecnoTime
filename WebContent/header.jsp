@@ -8,7 +8,7 @@
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
     <!-- Header con logo, ricerca, icone -->

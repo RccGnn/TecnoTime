@@ -11,35 +11,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="../images/TecnoTimeIcon.svg">
+    <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
 <!-- Footer -->
     <div class="footer-social">
         <a title="X" href="https://x.com/TecnoTime" target="_blank" rel="noreferrer">
-            <img src="../images/x.svg" alt="X" class="social-icon">
+            <img src="<%= request.getContextPath() %>/images/x.svg" alt="X" class="social-icon">
         </a>
         <a title="Instagram" href="https://www.instagram.com/TecnoTime" target="_blank" rel="noreferrer">
-            <img src="../images/instagram.svg" alt="Instagram" class="social-icon">
+            <img src="<%= request.getContextPath() %>/images/instagram.svg" alt="Instagram" class="social-icon">
         </a>
         <a title="Facebook" href="https://www.facebook.com/TecnoTime" target="_blank" rel="noreferrer">
-            <img src="../images/facebook.svg" alt="Facebook" class="social-icon">
+            <img src="<%= request.getContextPath() %>/images/facebook.svg" alt="Facebook" class="social-icon">
         </a>
         <a title="YouTube" href="https://www.youtube.com/TecnoTime" target="_blank" rel="noreferrer">
-            <img src="../images/youtube.svg" alt="YouTube" class="social-icon">
+            <img src="<%= request.getContextPath() %>/images/youtube.svg" alt="YouTube" class="social-icon">
         </a>
         <a title="TikTok" href="https://www.tiktok.com/@TecnoTime" target="_blank" rel="noreferrer">
-            <img src="../images/tiktok.svg" alt="TikTok" class="social-icon">
+            <img src="<%= request.getContextPath() %>/images/tiktok.svg" alt="TikTok" class="social-icon">
         </a>
     </div>
     
     <!-- Pre-footer -->
 	<div class="pre-footer">
 	    <div class="banner-container">
-	        <img src="../images/banner_pubblicitario.png" alt="Banner Pubblicitario" class="banner-png">
+	        <img src="<%= request.getContextPath() %>/images/banner_pubblicitario.png" alt="Banner Pubblicitario" class="banner-png">
 	    </div>
 	    <button class="config-btn" onclick="window.location.href='configuratore.html'">Configura il tuo PC</button>
 	</div>
@@ -52,7 +52,7 @@
                    offrirti il miglior rapporto qualità-prezzo per ogni configurazione.</p>
             </section>
             <div class="footer-logo">
-                <img src="../images/TecnoTime.png" alt="Logo Footer">
+                <img src="<%= request.getContextPath() %>/images/TecnoTime.png" alt="Logo Footer">
             </div>
             <section class="footer-right">
                 <h2>Contatti</h2>
@@ -64,6 +64,6 @@
         </div>
         <p class="copy">&copy; <%= currentYear %> TecnoTime. Tutti i diritti riservati.</p>
     </footer>
-    <script src="../js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>

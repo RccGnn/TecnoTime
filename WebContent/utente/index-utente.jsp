@@ -10,10 +10,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="../images/TecnoTimeIcon.svg">
+    <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
     <jsp:include page="header-utente.jsp" />
@@ -25,9 +25,9 @@
             <div class="hero-content">
                 <div class="hero-animation">
                     <video autoplay loop muted playsinline class="hero-img" aria-label="Animazione hero">
-  					<source src="../video/hero_animation.mp4" type="video/mp4">
-					<source src="../video/hero_animation.webm" type="video/webm">
-  					<source src="../video/hero_animation.ogv" type="video/ogg">
+  					<source src="<%= request.getContextPath() %>/video/hero_animation.mp4" type="video/mp4">
+					<source src="<%= request.getContextPath() %>/video/hero_animation.webm" type="video/webm">
+  					<source src="<%= request.getContextPath() %>/video/hero_animation.ogv" type="video/ogg">
 					</video>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <p>Gaming Mouse RGB a metà prezzo!</p>
                     </div>
                     <div class="product-right">
-                        <img src="../images/mouse-hyperx.png" alt="Mouse" class="product-image">
+                        <img src="<%= request.getContextPath() %>/images/mouse-hyperx.png" alt="Mouse" class="product-image">
                         <p class="product-name">Mouse HyperX RGB</p>
                     </div>
                 </div>
@@ -93,6 +93,6 @@
     
     <jsp:include page="footer-utente-registrato.jsp" />
     
-	<script src="../js/navbar.js" defer></script>
+	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>

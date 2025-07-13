@@ -19,11 +19,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
   <title>Carrello - TecnoTime</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <jsp:include page="header.jsp"/>
+    <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
+	  %><jsp:include page="utente/header-utente.jsp"/>
+	<% }else if ((Boolean)session.getAttribute("admin") !=null &&(Boolean)session.getAttribute("admin")) {
+	  %><jsp:include page="amministratore/header-amministratore.jsp"/>
+	<% }else{ 
+	  %> <jsp:include page="header.jsp"/><%
+   }%>
 
   <div class="cart-page-container">
 	<form method="GET" action="CheckoutServlet">
@@ -164,7 +170,7 @@
   </div>
 
   <jsp:include page="footer.jsp"/>
-  <script src="js/ajaxCarrello.js" defer></script>
-  <script src="js/navbar.js" defer></script>
+  <script src="<%= request.getContextPath() %>/js/ajaxCarrello.js" defer></script>
+  <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>
 </html>
