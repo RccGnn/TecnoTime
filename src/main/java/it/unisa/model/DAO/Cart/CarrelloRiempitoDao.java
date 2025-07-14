@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.DAO.*;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
@@ -19,9 +18,9 @@ import java.util.Collections;
  * - CarrelloRiempitoBean è un'astrazione che permette di visualizzare gli articoli nel carrello di un account,
  *   compreso il numero dei singoli articoli ed l'username dell'account a cui il carrello fa riferimento
  * - Account_username è l'unico campo che non è mai null (rappresenta l'account a cui il carrello fa riferimento)
- * - quantitaArticoli e listaArticoli sono legati nel seguente modo: in listaArticoli vengono memorizzate tutte le
- *   informazioni dell'articolo in questione mentre in quantità articolo viene memorizzate il numero di volte che
- *   un cliente intende acquistare l'articolo
+ * - in listaArticoli vengono memorizzate tutti gli articoli acquistati da un utente (è possibile che siano 
+ * 	 presenti più istanze dello stesso articolo; questa caretteristica viene sfruttata per memorizzare il 
+ * 	numero di volte che un cliente intende acquistare l'articolo).
  * - LA CLASSE NON SI OCCUPA DI CONTROLLARE SE UN CLIENTE ACQUISTA PIU' ARTICOLI DI QUANTI NE SIANO DISPONIBILI
  * 	 
  * 	 (Le possibili combinazioni sono: 
@@ -66,7 +65,7 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 	}
 	
 	
-	// OVERLOAD Metodo doSave - Serve per salvare anche il carrello
+	// OVERRIDE Metodo doSave - Serve per salvare anche il carrello
 	/*
 	 * 	Account_username viene mantenuta a parte per comodità, non va salvata sul database
 	 */

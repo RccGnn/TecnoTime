@@ -131,7 +131,7 @@ CREATE TABLE Elemento_Ordine (
   urlImmagineArticolo	VARCHAR(400)	NOT NULL,
   quantitaArticolo      INT            	NOT NULL,
   prezzoUnitario   	 	DECIMAL(9,2)  	NOT NULL,
-  CONSTRAINT PRIMARY KEY (numeroTransazione, numero),
+  CONSTRAINT PRIMARY KEY (numeroTransazione, numero, codiceArticolo),
   CONSTRAINT FOREIGN KEY (numeroTransazione) REFERENCES Ordine(numeroTransazione)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -234,4 +234,19 @@ SELECT
     con.codiceIdentificativo,
     con.quantita
 FROM Carrello AS car
-	LEFT JOIN Contiene AS con USING (usernameCarrello, Carrello_Id)
+	LEFT JOIN Contiene AS con USING (usernameCarrello, Carrello_Id);
+
+USE tecnotimedb;
+CREATE or REPLACE VIEW OrdineCompleto AS 
+SELECT
+	ord.*,
+    elem.numero,
+    elem.codiceArticolo,
+    elem.nomeArticolo,
+    elem.urlImmagineArticolo,
+    elem.quantitaArticolo,
+    elem.prezzoUnitario
+FROM
+	Ordine as ord
+LEFT JOIN Elemento_Ordine as elem USING (numeroTransazione);
+	

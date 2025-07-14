@@ -217,7 +217,7 @@ function handleFilter(xhr) {
 			btn.className = 'add-to-cart-btn';
 			btn.innerHTML = 'Aggiungi al carrello';
 			btn.onclick = function () {
-				let articolo = JSON.stringify(art);
+				let articolo = JSON.stringify(art); // Chiama la servlet per aggiungere l'elemento al carrello
 				loadAjaxDoc("CartServlet", "POST", articolo, showNotification, "application/json");
 			}
 		} else {

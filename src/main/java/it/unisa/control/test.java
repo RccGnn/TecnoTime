@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import it.unisa.model.DAO.Articoli.ProdottoDigitaleDao;
 import it.unisa.model.DAO.Articoli.ProdottoFisicoDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.DAO.Order.ElementoOrdineDao;
+import it.unisa.model.DAO.Order.OrdineCompletoDao;
 import it.unisa.model.DAO.Order.OrdineDao;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloBean;
@@ -27,6 +29,7 @@ import it.unisa.model.beans.CarrelloBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
 import it.unisa.model.beans.ElementoOrdineBean;
 import it.unisa.model.beans.OrdineBean;
+import it.unisa.model.beans.OrdineCompletoBean;
 import it.unisa.model.beans.ProdottoDigitaleBean;
 import it.unisa.model.beans.ProdottoFisicoBean;
 import it.unisa.model.beans.Ruoli;
@@ -50,29 +53,17 @@ public class test extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			
-			ElementoOrdineDao elementoOrdineDao = new ElementoOrdineDao();
+			OrdineCompletoDao dao = new OrdineCompletoDao();
+			OrdineCompletoBean ord = dao.doRetrieveByKey(51516);
+			
+			ord.setNumeroTransazione(8888);
+			ord.setUsername("gverdi");
+			System.out.println(ord.toString());
+			dao.doSave(ord);
 
-	        // Create a new ElementoOrdineBean instance
-	        ElementoOrdineBean elementoOrdine = new ElementoOrdineBean();
-
-	        // Manually set the fields for the ElementoOrdineBean
-	        // These values are hardcoded for demonstration.
-	        elementoOrdine.setNumero(1); // Example element number within an order
-	        elementoOrdine.setNumeroTransazione(51516); // Must match an existing numeroTransazione from Ordine
-	        elementoOrdine.setCodiceArticolo("ART600"); // Example article code
-	        elementoOrdine.setNomeArticolo("Smartphone X"); // Example article name
-	        elementoOrdine.setUrlImmagineArticolo("http://example.com/images/smartphone_x.jpg"); // Example image URL
-	        elementoOrdine.setPrezzoUnitario(499.99); // Example unit price
-	        elementoOrdine.setQuantitaArticolo(2); // Example quantity
-	        
-	        //elementoOrdineDao.doSave(elementoOrdine);
-	        
-	        ArrayList<ElementoOrdineBean> array = elementoOrdineDao.doRetrieveAll("");
-	        System.out.println(array.toString());
-		} catch (Exception e) {
-			System.err.append(e.getMessage());
+		} catch(SQLException e) {
+			e.printStackTrace();
 		}
-
 	}
 
 	/**
