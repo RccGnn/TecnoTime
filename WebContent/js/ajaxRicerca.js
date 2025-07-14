@@ -67,9 +67,10 @@ function loadAjaxDoc(url, method, params, cFuction) {
 }
 
 function search() {
+	const context= document.getElementById("ContextPath").value;
 	const input = document.getElementById("search-bar").value.trim();
 	const search = true;
-	const url = "ProductFilter";
+	const url = context+"/ProductFilter";
 	let params = "name=" + encodeURIComponent(input) + "&fromSearchBar=" + encodeURIComponent(search);
 	
 	loadAjaxDoc(url, "GET", params, handleDisplaySearch);  
