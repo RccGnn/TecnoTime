@@ -49,26 +49,6 @@ public class CheckoutServlet extends HttpServlet {
 		}catch(SQLException e){
 			e.getMessage();
 		}
-		String [] cookieValues = CookieUtils.getUsernameCartIdfromCookies(request);
-		key.clear();
-		key.add(cookieValues[0]);
-		key.add(cookieValues[1]);
-		CarrelloRiempitoBean cartcookie = new CarrelloRiempitoBean();
-		try {
-			cartcookie=dao.doRetrieveByKey(key);
-		}catch(SQLException e){
-			e.getMessage();
-		}
-		
-		ArrayList<ArticoloCompletoBean> lista=  cart.getListaArticoli();
-		lista.addAll(cartcookie.getListaArticoli());
-		cart.setListaArticoli(lista);
-		try {
-			dao.doSave(cart, false);
-			dao.doEmpty(key);
-		}catch(SQLException e){
-			e.getMessage();
-		}
 		
 		CookieUtils.SvuotaCookie(request, response);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/index-utente.jsp");

@@ -27,12 +27,6 @@ public class MockFillCart extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String destination = "";
-		if (request.getParameter("destination") == null)
-			response.sendError(500, "Destinazione del carrello ignota");
-		
-		destination = (String) request.getParameter("destination");
-		
 		CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
 		CarrelloRiempitoBean bean = new CarrelloRiempitoBean();
 		ArrayList<String> key = new ArrayList<>();
@@ -60,7 +54,7 @@ public class MockFillCart extends HttpServlet {
         bean.setListaArticoli(DaoUtils.dropboxImagesDecoderUrl(bean.getListaArticoli()));
         
 		request.setAttribute("carrello", bean);	
-		RequestDispatcher rd = request.getRequestDispatcher(destination);
+		RequestDispatcher rd = request.getRequestDispatcher("/carrello.jsp");
 		rd.forward(request, response);
 	}
 
