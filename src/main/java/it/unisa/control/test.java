@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
@@ -16,11 +18,15 @@ import it.unisa.model.DAO.Articoli.ArticoloDao;
 import it.unisa.model.DAO.Articoli.ProdottoDigitaleDao;
 import it.unisa.model.DAO.Articoli.ProdottoFisicoDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
+import it.unisa.model.DAO.Order.ElementoOrdineDao;
+import it.unisa.model.DAO.Order.OrdineDao;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.CarrelloBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
+import it.unisa.model.beans.ElementoOrdineBean;
+import it.unisa.model.beans.OrdineBean;
 import it.unisa.model.beans.ProdottoDigitaleBean;
 import it.unisa.model.beans.ProdottoFisicoBean;
 import it.unisa.model.beans.Ruoli;
@@ -42,86 +48,27 @@ public class test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ProdottoFisicoDao pf = new ProdottoFisicoDao();
 		try {
-			/*
-			CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
-			CarrelloRiempitoBean bean = dao.doRetrieveByKey("mrossi");
-		    ArrayList<ArticoloCompletoBean> arr = bean.getListaArticoli();
-		    arr.forEach(c -> System.out.println(c.toString()));
 			
-			bean = dao.doEmpty("mrossi");
-			arr = bean.getListaArticoli();
-		    arr.forEach(c -> System.out.println(c.toString()));
-			*/
-			/*
-			CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
-			ArrayList<ArticoloCompletoBean> artBean = new ArrayList<>();
-			ArticoloCompletoDao aDao = new ArticoloCompletoDao();
-			
-			ArticoloCompletoBean art = aDao.doRetrieveByKey("ART100");
-			
-			artBean.add(art);
-			
-			CarrelloRiempitoBean bean = new CarrelloRiempitoBean();
-		    bean.setAccount_username("mrossi");
-		    bean.setListaArticoli(artBean);
-		    dao.doSave(bean);
-			
+			ElementoOrdineDao elementoOrdineDao = new ElementoOrdineDao();
 
-		    dao.doEmpty("mrossi");*/
-			/*
-			ArrayList<String> a = new ArrayList<>();
-			a.add("ART400");
-			a.add("PF100A");
-			ProdottoFisicoBean pfb =  pf.doRetrieveByKey(a);
-			System.out.println(pfb.toString());
-			 */
-			
-			String s = "productId1";
-			String value = "";
+	        // Create a new ElementoOrdineBean instance
+	        ElementoOrdineBean elementoOrdine = new ElementoOrdineBean();
 
-			for(int i = 2; (value=request.getParameter(s)) != null; i++) {
-				s.replace(Integer.toString(i), Integer.toString(i+1));
-			}
-			
-			
-			/*
-			CarrelloRiempitoBean carBean = new CarrelloRiempitoBean();
-			CarrelloRiempitoDao carDao = new CarrelloRiempitoDao();
-			try {
-				ArrayList<String> array = new ArrayList<String>(2);
-				array.add("mrossi");
-				array.add("CAR1");
-				carBean = carDao.doRetrieveByKey(array);
-				System.out.println(carBean.toString());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
-			
-		/*	
-			AccountDao dao = new AccountDao();
-			AccountBean myAccount = new AccountBean();
-	        myAccount.setAccountId(-1); // L'ID è spesso gestito dal DB, ma lo impostiamo manualmente per l'esempio
-	        myAccount.sethashedPassword("aStrongAndSecureHashValue");
-	        myAccount.setUsername("utente_esemplare");
-	        myAccount.setNome("Chiara");
-	        myAccount.setCognome("Ferrari");
-	        myAccount.setSesso('F');
-	        myAccount.setEmail("chiara.ferrari@example.com");
-	        myAccount.setNumeroTelefono("3201234567");
-	        myAccount.setNazione("Italia");
-	        myAccount.setProvincia("Milano");
-	        myAccount.setCitta("Milano");
-	        myAccount.setVia("Corso Buenos Aires");
-	        myAccount.setNumeroCivico("35");
-	        myAccount.setCAP("20124");
-	        myAccount.setDataNascita(LocalDate.of(1988, 7, 20)); // Anno, Mese, Giorno
+	        // Manually set the fields for the ElementoOrdineBean
+	        // These values are hardcoded for demonstration.
+	        elementoOrdine.setNumero(1); // Example element number within an order
+	        elementoOrdine.setNumeroTransazione(51516); // Must match an existing numeroTransazione from Ordine
+	        elementoOrdine.setCodiceArticolo("ART600"); // Example article code
+	        elementoOrdine.setNomeArticolo("Smartphone X"); // Example article name
+	        elementoOrdine.setUrlImmagineArticolo("http://example.com/images/smartphone_x.jpg"); // Example image URL
+	        elementoOrdine.setPrezzoUnitario(499.99); // Example unit price
+	        elementoOrdine.setQuantitaArticolo(2); // Example quantity
 	        
-	        dao.doSave(myAccount);
-			*/
-		    System.out.println(Ruoli.guest.toString());
-			
+	        //elementoOrdineDao.doSave(elementoOrdine);
+	        
+	        ArrayList<ElementoOrdineBean> array = elementoOrdineDao.doRetrieveAll("");
+	        System.out.println(array.toString());
 		} catch (Exception e) {
 			System.err.append(e.getMessage());
 		}
