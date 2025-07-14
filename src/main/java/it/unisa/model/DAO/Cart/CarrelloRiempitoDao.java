@@ -242,7 +242,7 @@ createView();
 
 				} while(rs.next());
 				
-				carrelloRiempito.setListaArticoli(new ArrayList<>()); // Si imposta la lista di articoli
+				carrelloRiempito.setListaArticoli(new ArrayList<>(1)); // Si imposta la lista di articoli
 			} else {
 				carrelloRiempito = null;
 			}

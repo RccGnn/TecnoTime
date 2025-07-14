@@ -13,8 +13,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
-import it.unisa.model.beans.ArticoloCompletoBean;
-import it.unisa.model.beans.CarrelloRiempitoBean;
 
 /**
  * Servlet implementation class CheckoutServlet
@@ -38,20 +36,20 @@ public class CheckoutServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String user = (String) session.getAttribute("username");
-		String carID= (String) session.getAttribute("carrello_id");
-		ArrayList<String> key = new ArrayList<>();
+		String carID = (String) session.getAttribute("carrello_id");
+		ArrayList<String> key = new ArrayList<>(2);
 		key.add(user);
 		key.add(carID);
 		CarrelloRiempitoDao dao = new CarrelloRiempitoDao();
-		CarrelloRiempitoBean cart = new CarrelloRiempitoBean();
+
 		try {
-			cart=dao.doRetrieveByKey(key);
+			System.out.println(dao.doEmpty(key).toString());
 		}catch(SQLException e){
 			e.getMessage();
 		}
 		
 		CookieUtils.SvuotaCookie(request, response);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/index-utente.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("utente/checkout.jsp");
 		dispatcher.forward(request, response);
     }
 	

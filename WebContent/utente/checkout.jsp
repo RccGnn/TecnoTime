@@ -14,7 +14,7 @@
   <main>
     <div class="form-container" style="text-align:center;">
       <h2>PAGAMENTO COMPLETATO</h2>
-      <form action="index-utente.jsp" method="get">
+      <form action="utente/index-utente.jsp" method="get">
         <button type="submit" class="checkout-btn">TORNA ALLA HOME</button>
       </form>
     </div>
