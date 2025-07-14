@@ -44,7 +44,7 @@ CREATE TABLE Wishlist (
 CREATE TABLE Articolo (
   codiceIdentificativo	VARCHAR(20)		PRIMARY KEY NOT NULL,
   categoria				VARCHAR(50)		NOT NULL,
-  nome                	VARCHAR(100)	NOT NULL,
+  nome                	VARCHAR(200)	NOT NULL,
   dataUltimaPromozione 	DATE          	NOT NULL,
   enteErogatore       	VARCHAR(100)   	NOT NULL,
   disponibilita       	BOOLEAN        	NOT NULL DEFAULT TRUE
@@ -106,7 +106,7 @@ CREATE TABLE Promozione (
 );
 
 CREATE TABLE Ordine (
-  numeroTransazione INT            	NOT NULL AUTO_INCREMENT,
+  numeroTransazione INT            	NOT NULL UNIQUE,
   totale           	DECIMAL(9,2)  	NOT NULL,
   dataTransazione   DATE           	NOT NULL,
   oraTransazione    TIME           	NOT NULL,
@@ -125,9 +125,11 @@ CREATE TABLE Ordine (
 
 CREATE TABLE Elemento_Ordine (
   numero            	INT            	NOT NULL,
-  numeroTransazione 	INT            	NOT NULL,
-  codiceArticolo     	VARCHAR(20)    	NOT NULL,
-  quantita           	INT            	NOT NULL,
+  numeroTransazione 	INT            	NOT NULL,					
+  codiceArticolo     	VARCHAR(20)    	NOT NULL, -- Può capitare che un articolo viene eliminato, in quel caso codice articolo viene mantenuto
+  nomeArticolo			VARCHAR(200)	NOT NULL,
+  urlImmagineArticolo	VARCHAR(400)	NOT NULL,
+  quantitaArticolo      INT            	NOT NULL,
   prezzoUnitario   	 	DECIMAL(9,2)  	NOT NULL,
   CONSTRAINT PRIMARY KEY (numeroTransazione, numero),
   CONSTRAINT FOREIGN KEY (numeroTransazione) REFERENCES Ordine(numeroTransazione)
