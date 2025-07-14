@@ -39,7 +39,7 @@
 		<div class="form-container">
       		<h2>Inserire dati per il pagamento</h2>
 
-      		<form id="checkoutForm" method="GET" action="checkout.jsp">
+      		<form id="checkoutForm" method="GET" action="utente/checkout.jsp">
         		<!-- Numero carta (16 cifre) -->
         		<label for="ncard">Numero carta:</label>
         		<input type="text" id="ncard" name="ncard"
