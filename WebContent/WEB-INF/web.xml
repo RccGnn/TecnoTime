@@ -10,7 +10,15 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
-  
+<filter>
+    <filter-name>NoCacheFilter</filter-name>
+    <filter-class>it.unisa.control.NoCacheFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>NoCacheFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
  <filter>
     <filter-name>AuthenticatorFilter</filter-name>
     <filter-class>it.unisa.control.Authentication.AuthenticatorFilter</filter-class>
@@ -57,5 +65,6 @@
 	<exception-type>java.lang.Exception</exception-type>
 	<location>/common/ErrorPage.jsp</location>
  </error-page>
+ 
  
 </web-app>
