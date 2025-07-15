@@ -106,7 +106,7 @@ public class OrdineCompletoDao extends OrdineDao{
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setObject(1, key);
+			ps.setInt(1, key);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -164,4 +164,53 @@ public class OrdineCompletoDao extends OrdineDao{
 	}
 	
 	
+	/**
+	 * Permette di recuperare l'ordine di un'utente e tutti i suoi elementi
+	 * @param key {@code int} - numeroTransazione
+	 * @return {@code OrdineCompletoBean} ordine
+	 * @throws SQLException
+	 */
+	public synchronized ArrayList<OrdineCompletoBean> doRetrieveAllByUsername(String key) throws SQLException {
+
+		createView();
+		
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<OrdineCompletoBean> listaOrdini = new ArrayList<>();
+
+		// Restituisce tutte le transazioni, divise per numeroTransazione, di un utente
+		String selectSQL = "SELECT numeroTransazione, username FROM " + OrdineCompletoDao.TABLE_NAME + " WHERE username = ? GROUP BY numeroTransazione";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+			ps.setString(1, key);
+			
+			ResultSet rs = ps.executeQuery();
+
+			// Recupera tutte le transazioni dell'utente
+			if (rs.next()) {
+				
+				OrdineCompletoBean ordine = null;
+				do {
+					ordine = doRetrieveByKey(rs.getInt("numeroTransazione"));
+					listaOrdini.add(ordine);
+				} while(rs.next());
+				
+			} else {
+				listaOrdini = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return listaOrdini;
+	}
 }

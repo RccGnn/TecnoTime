@@ -54,12 +54,10 @@ public class test extends HttpServlet {
 		try {
 			
 			OrdineCompletoDao dao = new OrdineCompletoDao();
-			OrdineCompletoBean ord = dao.doRetrieveByKey(51516);
+			ArrayList<OrdineCompletoBean> ord = dao.doRetrieveAllByUsername("username");
 			
-			ord.setNumeroTransazione(8888);
-			ord.setUsername("gverdi");
-			System.out.println(ord.toString());
-			dao.doSave(ord);
+			ord.forEach(o -> System.out.println(o.toString()));
+			
 
 		} catch(SQLException e) {
 			e.printStackTrace();
