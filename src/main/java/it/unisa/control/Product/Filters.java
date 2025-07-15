@@ -61,12 +61,12 @@ public class Filters {
 		if (catalogo == null || catalogo.isEmpty()) return catalogo;
 		
 		// La richiesta è avvenuta dalla pagina dei prodotti fisici
-		if (contex.contains("articoliProdotti.jsp")) {
+		if (contex.contains("articoliProdotti.jsp") || contex.contains("DisplaySubMenu1")) {
 			// espressione lambda per controllare se un parametro è null, in caso affermativo viene eliminato dalla lista dei prodotti
 			catalogo.removeIf(c -> c.getPdFisico() == null); 
 		
 		// La richiesta è avvenuta dalla pagina dei prodotti digitali
-		} else if (contex.contains("articoliLicenze.jsp")) {
+		} else if (contex.contains("articoliLicenze.jsp") || contex.contains("DisplaySubMenu2")) {
 			catalogo.removeIf(c-> c.getPdDigitale() == null); 
 	
 		// La richiesta è avvenuta dalla pagina dei servizi

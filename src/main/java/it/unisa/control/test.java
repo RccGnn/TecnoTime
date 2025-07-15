@@ -52,9 +52,6 @@ public class test extends HttpServlet {
 		request.getAttribute("cpu");
 		request.getAttribute("ram");
 		request.getAttribute("schedavideo");
-		
-		SchedaMadre mb.
-		
 	}
 
 }

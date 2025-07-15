@@ -9,10 +9,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class DisplaySubMenu1
+ * Servlet implementation class DisplaySubMenu2
  */
-@WebServlet("/DisplaySubMenu1")
-public class DisplaySubMenu1 extends HttpServlet {
+@WebServlet("/DisplaySubMenu2")
+public class DisplaySubMenu2 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**
@@ -26,7 +26,7 @@ public class DisplaySubMenu1 extends HttpServlet {
 		
 		RequestDispatcher rd = null;
 		// SubMenù di prodotto fisico
-		rd = request.getRequestDispatcher("articoliProdotti.jsp");
+		rd = request.getRequestDispatcher("articoliLicenze.jsp");
 		rd.forward(request, response);
 	}
 

@@ -1,8 +1,8 @@
 package it.unisa.model.Filters;
 
 public enum Intel_Core_I9_13900K {
-	SchedeMadri(){
-	AsusRogMaximusZ790HERO
+	//SchedeMadri(){
+	//AsusRogMaximusZ790HERO
 	
 	}	
 

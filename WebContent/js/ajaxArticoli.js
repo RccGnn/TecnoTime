@@ -134,9 +134,9 @@ function sortedProducts() {
 	let contexChoice = contexEnum(contestoInput);
 
 	// In base a quale pagina effettua la chiamata ajax, si impostano i parametri da passare nel GET 
-	if (contexChoice === 1) { // Prodotti fisici
+	if (contexChoice === 1 || contexChoice === 4) { // Prodotti fisici
 		categoriaInput = document.getElementById("categoria").value;
-	} else if (contexChoice === 2 || contexChoice === 4) { // Prodotti digitali
+	} else if (contexChoice === 2) { // Prodotti digitali
 	} else if (contexChoice === 3) { // Servizi 
 		durataInput = document.getElementById("duration").value;
 	} 

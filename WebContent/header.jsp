@@ -62,11 +62,11 @@
 				<ul class="dropdown">
 					<% 	destination = "&destination=digitale";%>
 					<li class="mobile-only"><a href="articoliLicenze.jsp">Tutte le Licenze</a></li>
-					<li><a href="DisplaySubMenu1?sub=Windows_11_Home<%=destination%>">Windows 11 Home</a></li>
-					<li><a href="#DisplaySubMenu1?sub=Windows_11_Pro<%=destination%>">Windows 11 Pro</a></li>
-					<li><a href="#DisplaySubMenu1?sub=Windows_10_Home<%=destination%>">Windows 10 Home</a></li>
-					<li><a href="#DisplaySubMenu1?sub=Windows_10_Pro<%=destination%>">Windows 10 Pro</a></li>
-					<li><a href="#DisplaySubMenu1?sub=Office_Package<%=destination%>">Office Package</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_11_Home<%=destination%>">Windows 11 Home</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_11_Pro<%=destination%>">Windows 11 Pro</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_10_Home<%=destination%>">Windows 10 Home</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_10_Pro<%=destination%>">Windows 10 Pro</a></li>
+					<li><a href="DisplaySubMenu2?sub=Office_Package<%=destination%>">Office Package</a></li>
 				</ul></li>
 			<li><a href="articoliServizi.jsp">SERVIZI</a></li>
 			<li><a href="articoliPreassemblati.jsp">PREASSEMBLATI E PORTATILI</a></li>

@@ -36,7 +36,7 @@ public class ProductFilter extends HttpServlet {
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
-        //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
+        System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {

@@ -41,8 +41,13 @@
         </div>
         <div class="filter-group">
           <label for="name">Cerca per nome:</label>
-          <input  onchange="sortedProducts()" type="text" id="name" name="name"
+          <% if(request.getAttribute("subField") != null) {%>
+          	<input readonly onchange="sortedProducts()" type="text" id="name" name="name"
+                 value="<%=request.getAttribute("subField")%>">
+          <% } else { %>
+       		<input  onchange="sortedProducts()" type="text" id="name" name="name"
                  value="${param.nome != null ? param.nome : ''}">
+		  <%} %>
         </div>
         <div class="filter-group">
           <label for="sort">Ordina per:</label>
