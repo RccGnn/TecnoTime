@@ -32,7 +32,6 @@
    }%>
 
   <div class="cart-page-container">
-  <div id="notification" class="notification"> </div>
 	<form method="GET" action="CheckoutServlet">
 		<input type="hidden" name="cartId" id="cartId" value="<%= cID %>"/>
 		<input type="hidden" name="username" id="usernameId" value="<%= username %>"/>
@@ -56,10 +55,12 @@
 	              <h1 id="your-cart">IL TUO CARRELLO ( <%=carrello.getListaArticoli().size()%> )</h1>
 	              <div>
 	                  <button type="button" id="remove-all-btn" class="remove-all-btn" onclick="removeAll()">RIMUOVI TUTTO</button>
-	              </div>
+	              </div> 
 	            </div>
-	
-				<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
+					<div id="notification" class="notification-inline">
+					   <a href="#"></a>
+					</div>
+					<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
 				  int i=1;
 				  for(ArticoloCompletoBean articolo : listaCarrello) {
 	              	if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato

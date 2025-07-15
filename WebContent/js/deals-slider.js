@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const slides = Array.from(document.querySelectorAll('.mobile-slider .slide'));
   let current = 0;
 
+  //dichiarazione 
   function updateSlides() {
     slides.forEach((s, i) => {
       s.classList.remove('prev', 'active', 'next');
