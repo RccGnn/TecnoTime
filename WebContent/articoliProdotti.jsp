@@ -45,6 +45,16 @@
                  value="${param.nome != null ? param.nome : ''}">
         </div>
         <div class="filter-group">
+        	<label for="max">Categoria :</label>
+        	<% if(request.getAttribute("subField") != null) {%>
+        	<input readonly onchange="sortedProducts()" type="text" id="categoria" name="categoria"
+                 value="<%=request.getAttribute("subField")%>">
+        	<% } else { %>
+        	<input  onchange="sortedProducts()" type="text" id="categoria" name="categoria"
+                 value="${param.categoria != null ? param.categoria : ''}">
+        	<%} %>
+        </div>
+        <div class="filter-group">
           <label for="sort">Ordina per:</label>
           <select  onchange="sortedProducts()" id="sort" name="sort">
             <option value="prezzo asc"  ${param.sort=='price asc' ? 'selected':''}>Prezzo ↑</option>

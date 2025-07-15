@@ -49,21 +49,24 @@
 			<li><a href="#about">CHI SIAMO</a></li>
 			<li><a href="articoliProdotti.jsp">PRODOTTI</a>
 				<ul class="dropdown">
+					<% 	String destination;
+						destination = "&destination=fisico";%>
 					<li class="mobile-only"><a href="articoliProdotti.jsp">Tutti i Prodotti</a></li>
-					<li><a href="#product1">Processori</a></li>
-					<li><a href="#product2">Schede Video</a></li>
-					<li><a href="#product3">Schede Madri</a></li>
-					<li><a href="#product4">Memorie</a></li>
-					<li><a href="#product5">Archiviazione</a></li>
+					<li><a href="DisplaySubMenu1?sub=Processore<%=destination%>">Processori</a></li>
+					<li><a href="DisplaySubMenu1?sub=Scheda_Video<%=destination%>">Schede Video</a></li>
+					<li><a href="DisplaySubMenu1?sub=Scheda_Madre<%=destination%>">Schede Madri</a></li>
+					<li><a href="DisplaySubMenu1?sub=RAM<%=destination%>">Memorie</a></li>
+					<li><a href="DisplaySubMenu1?sub=Archiviazione<%=destination%>">Archiviazione</a></li>
 				</ul></li>
 			<li><a href="articoliLicenze.jsp">LICENZE</a>
 				<ul class="dropdown">
+					<% 	destination = "&destination=digitale";%>
 					<li class="mobile-only"><a href="articoliLicenze.jsp">Tutte le Licenze</a></li>
-					<li><a href="#license1">Windows 11 Home</a></li>
-					<li><a href="#license2">Windows 11 Pro</a></li>
-					<li><a href="#license3">Windows 10 Home</a></li>
-					<li><a href="#license4">Windows 10 Pro</a></li>
-					<li><a href="#license5">Office Package</a></li>
+					<li><a href="DisplaySubMenu1?sub=Windows_11_Home<%=destination%>">Windows 11 Home</a></li>
+					<li><a href="#DisplaySubMenu1?sub=Windows_11_Pro<%=destination%>">Windows 11 Pro</a></li>
+					<li><a href="#DisplaySubMenu1?sub=Windows_10_Home<%=destination%>">Windows 10 Home</a></li>
+					<li><a href="#DisplaySubMenu1?sub=Windows_10_Pro<%=destination%>">Windows 10 Pro</a></li>
+					<li><a href="#DisplaySubMenu1?sub=Office_Package<%=destination%>">Office Package</a></li>
 				</ul></li>
 			<li><a href="articoliServizi.jsp">SERVIZI</a></li>
 			<li><a href="articoliPreassemblati.jsp">PREASSEMBLATI E PORTATILI</a></li>
