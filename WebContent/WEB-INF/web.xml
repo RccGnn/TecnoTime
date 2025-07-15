@@ -14,9 +14,20 @@
     <filter-name>NoCacheFilter</filter-name>
     <filter-class>it.unisa.control.NoCacheFilter</filter-class>
 </filter>
+
 <filter-mapping>
     <filter-name>NoCacheFilter</filter-name>
     <url-pattern>/*</url-pattern>
+</filter-mapping>
+	
+<filter-mapping>
+    <filter-name>NoCacheFilter</filter-name>
+    <url-pattern>/MockFillCart</url-pattern>
+</filter-mapping>
+
+<filter-mapping>
+    <filter-name>NoCacheFilter</filter-name>
+    <url-pattern>/UserFillCart</url-pattern>
 </filter-mapping>
 
  <filter>

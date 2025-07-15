@@ -41,7 +41,7 @@
 	    <div class="banner-container">
 	        <img src="images/banner_pubblicitario.png" alt="Banner Pubblicitario" class="banner-png">
 	    </div>
-	    <button class="config-btn" onclick="window.location.href='configuratore.html'">Configura il tuo PC</button>
+	    <button class="config-btn" onclick="window.location.href='configuratore.jsp'">Configura il tuo PC</button>
 	</div>
 
     <footer>

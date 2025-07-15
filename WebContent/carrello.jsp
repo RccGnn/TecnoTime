@@ -44,7 +44,7 @@
 	            <i class="fas fa-shopping-cart empty-cart-icon"></i>
 	            <h1>Il tuo carrello è vuoto</h1>
 	            <p>Aggiungi prodotti per vederli qui.</p>
-	            <a href="ProductServlet" class="btn-primary">Vai ai Prodotti</a>
+	            <a href="articoliProdotti.jsp" class="btn-primary">Vai ai Prodotti</a>
 	        </div>    	  
       <% } else { %>
       

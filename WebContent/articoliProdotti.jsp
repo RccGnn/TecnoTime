@@ -10,7 +10,7 @@
   <title>Prodotti - TecnoTime</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
-<body data-logged-in="<%= (session.getAttribute("user") != null) ? "true" : "false" %>">>
+<body data-logged-in="<%= (session.getAttribute("user") != null) ? "true" : "false" %>">
 
   <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
 	  %><jsp:include page="utente/header-utente.jsp"/>
