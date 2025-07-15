@@ -17,7 +17,6 @@ import java.util.Collections;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
-import it.unisa.model.DAO.Order.ElementoOrdineDao;
 import it.unisa.model.DAO.Order.OrdineCompletoDao;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
@@ -61,7 +60,6 @@ public class CheckoutServlet extends HttpServlet {
 
 
 		// Addesso si devono impostare gli elementi dell'ordine
-		ElementoOrdineDao ordDao = new ElementoOrdineDao();
 		ElementoOrdineBean ordbean = null;
 		ArrayList<ElementoOrdineBean> listaElementi = new ArrayList<>();
 		ArrayList<ArticoloCompletoBean> listaArticoli = carrello.getListaArticoli();

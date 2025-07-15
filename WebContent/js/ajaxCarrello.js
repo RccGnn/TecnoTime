@@ -124,7 +124,7 @@ function setEmptyCart (){
 		
 	let a = document.createElement("a");
 	a.innerHTML = "Vai ai prodotti";
-	a.href = "ProductServlet";
+	a.href = "articoliProdotti.jsp";
 	a.className = "btn-primary";
 	emptyCart.appendChild(a);
 		

@@ -58,7 +58,7 @@ public class ProdottoFisicoDao extends ArticoloDao {
 		}
 		
 	}
-
+	
 	/**
 	 * Key = ({@code String}: seriale, {@code String}: Articolo.codiceIdentificativo)
 	 */
