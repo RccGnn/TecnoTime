@@ -222,12 +222,15 @@ function handleVary(xhr) {
 			
 		let notifica = document.getElementById('notification');
 		if (notifica) {
-		    notifica.innerHTML = "Articolo \'" + subClass.nome + "\' rimosso dal carrello";
-		    notifica.classList.add('show'); // Aggiungi più classi
-				
+			let link = notifica.querySelector('a');
+			link.textContent = "Articolo \'" + subClass.nome + "\' rimosso dal carrello";
+			link.href = "DisplayProductPage?id=" + encodeURIComponent(subClass.codiceIdentificativo);
+			link.style.color = "inherit"; 
+			link.style.textDecoration = "underline"; 
+				notifica.classList.add("show");
 		    setTimeout(() => { // Imposta il tempo di visualizzazione
 		      	notifica.classList.remove('show');
-		    }, 3000); // 3000 ms 
+		    }, 7000); // 3000 ms 
 		}
 	}
 

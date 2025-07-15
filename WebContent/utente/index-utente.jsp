@@ -42,23 +42,58 @@
 			</div>
 		</section>
 
-		<!-- Sezione Offerte e Prodotti in evidenza -->
-		<section class="product-scroll">
-			<h2>Offerte Lampo e Prodotti in Evidenza</h2>
-			<div class="scroll-container">
-				<div class="product-card">
-					<div class="product-left">
-						<span class="label">Offerta Lampo</span>
-						<p>Gaming Mouse RGB a metà prezzo!</p>
-					</div>
-					<div class="product-right">
-						<img src="<%= request.getContextPath() %>/images/mouse-hyperx.png"
-							alt="Mouse" class="product-image">
-						<p class="product-name">Mouse HyperX RGB</p>
-					</div>
-				</div>
-				<!-- Altri prodotti simili qui -->
-			</div>
+	<!-- Sezione Offerte e Prodotti in evidenza -->
+		<section class="deals-section">
+		  <h2>Offerte Lampo e Prodotti in Evidenza</h2>
+		  <!-- --- Desktop: griglia --- -->
+		  <div class="deals-grid">
+		    <div class="product-card">
+		      <span class="label">Offerta Lampo</span>
+		      <img src="images/mouse-hyperx.png" alt="Mouse HyperX RGB" class="product-image">
+		      <p class="product-name">Mouse HyperX RGB</p>
+		      <p class="product-description">Gaming Mouse RGB a metà prezzo!</p>
+		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		    </div>
+		    <div class="product-card">
+		      <span class="label">OFFERTISSIMA</span>
+		      <img src="images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
+		      <p class="product-name">Ryzen 7 9800x3d</p>
+		      <p class="product-description">King dei Processori</p>
+		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		    </div>
+		    <div class="product-card">
+		      <span class="label">PER BREVE TEMPO</span>
+		      <img src="images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
+		      <p class="product-name">ASUS ROG ASTRAL 5090</p>
+		      <p class="product-description">NVIDIA FLAGSHIP</p>
+		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		    </div>
+		  </div>
+		
+		  <!-- --- Mobile/Tablet: slider “camera roll” --- -->
+		  <div class="mobile-slider">
+		    <div class="slide" data-index="0">
+		      <span class="label">Offerta Lampo</span>
+		      <img src="images/mouse-hyperx.png" alt="Mouse HyperX RGB" class="product-image">
+		      <p class="product-name">Mouse HyperX RGB</p>
+		      <p class="product-description">Gaming Mouse RGB a metà prezzo!</p>
+		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		    </div>
+		    <div class="slide" data-index="1">
+		      <span class="label">OFFERTISSIMA</span>
+		      <img src="images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
+		      <p class="product-name">Ryzen 7 9800x3d</p>
+		      <p class="product-description">King dei Processori</p>
+		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		    </div>
+		    <div class="slide" data-index="2">
+		      <span class="label">PER BREVE TEMPO</span>
+		      <img src="images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
+		      <p class="product-name">ASUS ROG ASTRAL 5090</p>
+		      <p class="product-description">NVIDIA FLAGSHIP</p>
+		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		    </div>
+		  </div>
 		</section>
 
 		<!-- Sezione Build in Evidenza -->
@@ -108,5 +143,6 @@
 	<jsp:include page="footer-utente-registrato.jsp" />
 
 	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+	<script src="<%= request.getContextPath() %>/js/deals-slider.js" defer></script>
 </body>
 </html>

@@ -1764,6 +1764,25 @@ footer p.copy {
 /* --------------------
 	NOTIFICA
    --------------------  */
+ .notification-inline{
+ 
+  background-color: #e6ecf7; /* leggermente più denso per supportare testo chiaro */
+  color: #4d90fe; /* testo bianco */
+  padding: 12px 16px;
+  border-left: 4px solid rgba(2, 24, 89, 0.4);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+  visibility: hidden;
+  opacity: 0;
+ }  
+ .notification-inline.show{
+  opacity:1;
+  visibility: visible;
+ }
+ 
 .notification {
   position: fixed; 
   top: 20px;       /* bordo superiore */
