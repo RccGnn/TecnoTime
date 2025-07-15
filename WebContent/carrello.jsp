@@ -32,6 +32,7 @@
    }%>
 
   <div class="cart-page-container">
+  <div id="notification" class="notification"> </div>
 	<form method="GET" action="CheckoutServlet">
 		<input type="hidden" name="cartId" id="cartId" value="<%= cID %>"/>
 		<input type="hidden" name="username" id="usernameId" value="<%= username %>"/>

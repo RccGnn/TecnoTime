@@ -208,7 +208,7 @@ function handleVary(xhr) {
 		output.innerHTML = value1 + 1;
 		subtotal.innerHTML = (value2 + subClass.prezzo).toFixed(2);
 	} else if (choice == "rem") {
-		console.log("numElements: " + numElements+"\nremQuantity" + remQuantity);
+
 		if(numElements - remQuantity <= 0) // Caso: sono stati eliminati tutti gli articoli
 			setEmptyCart();
 		else {
@@ -218,6 +218,16 @@ function handleVary(xhr) {
 			// Elimimina la entry nel carrello class="cart-item-card<%=aID%>
 			let cartItem = document.getElementById("cart-item"+subClass.codiceIdentificativo);
 			cartItem.remove();
+		}
+			
+		let notifica = document.getElementById('notification');
+		if (notifica) {
+		    notifica.innerHTML = "Articolo \'" + subClass.nome + "\' rimosso dal carrello";
+		    notifica.classList.add('show'); // Aggiungi più classi
+				
+		    setTimeout(() => { // Imposta il tempo di visualizzazione
+		      	notifica.classList.remove('show');
+		    }, 3000); // 3000 ms 
 		}
 	}
 
