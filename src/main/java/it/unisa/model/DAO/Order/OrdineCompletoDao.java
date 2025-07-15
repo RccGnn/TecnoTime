@@ -85,31 +85,7 @@ public class OrdineCompletoDao extends OrdineDao{
 		}
 	}
 	
-	/*
-	 * 		// Salva l'ordine
-		super.doSave(ordineCompleto);
-
-		// Adesso si deve solo salvare ogni elemento dell'ordine
-		ArrayList<ElementoOrdineBean> listaElementi = ordineCompleto.getElementiOrdine();
-		
-		// Recupera il numero della transazione per salvare gli elementi
-		int numeroTransazione = ordineCompleto.getNumeroTransazione();
-		
-		// Inizializzo il Dao per salvare le occorrenze di ElementoOrdine
-		ElementoOrdineDao elemDao = new ElementoOrdineDao();
-		ArrayList<ElementoOrdineBean> elemLista = ordineCompleto.getElementiOrdine();
-		ArrayList<Object> key = null;
-		int i = 1;
-		// Memorizza ogni elemento dell'ordine
-		for (ElementoOrdineBean elemOrd : elemLista) {
-			key = new ArrayList<Object>(3);
-			key.add(i); // Salva gli elementi delle transazioni in ordine
-			key.add(numeroTransazione);
-			key.add(elemOrd.getCodiceArticolo());
-			elemDao.doSave(elemOrd);
-		}
-
-	 */
+	
 	/**
 	 * Permette di recuperare l'ordine di un'utente e tutti i suoi elementi
 	 * @param key {@code int} - numeroTransazione

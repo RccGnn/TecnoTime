@@ -95,7 +95,6 @@ public class CarrelloRiempitoDao extends CarrelloDao{
 		key.add(carrelloRiempito.getCarrello_Id());
 		doEmpty(key);
 		// Per ogni elemento in catalogo, conto le occorrenze e le salvo evitando i duplicati
-		int i = 1;
 		for (ArticoloCompletoBean articolo : catalogo) {
 			
 			// Se è la prima volta che articolo viene incontrato, allora si inserisce in temp.

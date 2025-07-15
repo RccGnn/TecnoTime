@@ -6,6 +6,7 @@ import java.util.regex.*;
 import it.unisa.control.Decoder;
 import it.unisa.model.beans.AccountBean;
 import it.unisa.model.beans.ArticoloCompletoBean;
+import it.unisa.model.beans.CarrelloRiempitoBean;
 import it.unisa.model.beans.ImmagineBean;
 import it.unisa.model.beans.Ruoli;
 
@@ -135,5 +136,22 @@ public class DaoUtils {
 		}
 		
 		return catalogo;
+	}
+	
+	
+	public static double totaleCarrello(CarrelloRiempitoBean carrello) {
+		double totale = 0;
+		ArrayList<ArticoloCompletoBean> listaArticoli = carrello.getListaArticoli();
+
+		for (ArticoloCompletoBean articolo : listaArticoli) {
+			if (articolo.getPdFisico() != null)
+				totale += articolo.getPdFisico().getPrezzo();
+			if (articolo.getPdDigitale() != null)
+				totale += articolo.getPdDigitale().getPrezzo();
+			if (articolo.getServizio() != null)
+				totale += articolo.getPdDigitale().getPrezzo();
+		}
+		
+		return totale;
 	}
 }

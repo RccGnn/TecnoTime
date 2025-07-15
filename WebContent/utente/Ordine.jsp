@@ -37,6 +37,54 @@
      %>
 	<main>
 		<div class="form-container">
+		
+		<h2>Resoconto ordine</h2>
+	        
+	          	<div class="cart-items-section">
+	
+					<%	ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
+				  		for(ArticoloCompletoBean articolo : listaCarrello) {
+	              			if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
+	               				continue;
+	            			}
+	            			occorrenze.add(articolo);
+	            			int count = Collections.frequency(listaCarrello, articolo);
+	            			String aID = articolo.getCodiceIdentificativo();  
+					%>
+	              			<div class="cart-item-card" id="cart-item<%=aID%>">
+			              	<%	String url = "";
+			              	 	if (articolo.getImmagini() == null || articolo.getImmagini().isEmpty())
+			              			url = "images/alt-prodotti.png";
+			              	 	else
+			              			url = articolo.getImmagini().get(0).getUrl();
+			              	%>
+								<img src="<%= url %>" alt="<%= articolo.getNome() %>" class="cart-item-img"/>
+		                		
+		                		<div class="cart-item-details">
+		                  			<div class="cart-item-name"><%= articolo.getNome() %></div>
+		                		</div>
+		                		
+		                		<div class="cart-item-price">
+				                <%	double prezzo = 0;
+				                	int quantita = Collections.frequency(listaCarrello, articolo);
+				                	if (articolo.getPdDigitale() != null) {
+				                		prezzo = articolo.getPdDigitale().getPrezzo();
+				                	} else if (articolo.getPdFisico() != null) {
+				                		prezzo = articolo.getPdFisico().getPrezzo();
+				                	} else {
+				                  		prezzo = articolo.getServizio().getPrezzo();
+				                	}
+				                  	totale += prezzo * count;
+				                %>
+				                
+									Prezzo Unitario: <%= df.format(prezzo) %> <br>
+				                	Qtà: <%= quantita %>
+		                		</div>
+	              			</div>
+	              		<% } %>
+	            	<div> Totale: <%= df.format(totale) %>  </div>
+	          </div>
+	          	 
       		<h2>Inserire dati per il pagamento</h2>
 
       		<form id="checkoutForm" method="GET" action="CheckoutServlet">
@@ -58,50 +106,6 @@
 		               placeholder="___"
 		               maxlength="3" required>
 
-	 			<h2>Resoconto ordine</h2>
-	        
-	          	<div class="cart-items-section">
-	
-					<%	ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
-				  		int i=1;
-				  		for(ArticoloCompletoBean articolo : listaCarrello) {
-	              			if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
-	               				continue;
-	            			}
-	            			occorrenze.add(articolo);
-	            			int count = Collections.frequency(listaCarrello, articolo);
-	            			String aID = articolo.getCodiceIdentificativo();  
-					%>
-	              			<div class="cart-item-card" id="cart-item<%=aID%>">
-			              	<%	String url = "";
-			              	 	if (articolo.getImmagini() == null || articolo.getImmagini().isEmpty())
-			              			url = "images/alt-prodotti.png";
-			              	 	else
-			              			url = articolo.getImmagini().get(0).getUrl();
-			              	%>
-								<img src="<%= url %>" alt="<%= articolo.getNome() %>" class="cart-item-img"/>
-		                		
-		                		<div class="cart-item-details">
-		                  			<span class="cart-item-name"><%= articolo.getNome() %></span>
-		                		</div>
-		                		
-		                		<div class="cart-item-price">
-				                <%	double prezzo = 0;
-				                  	if (articolo.getPdDigitale() != null)
-				                  		prezzo = articolo.getPdDigitale().getPrezzo();
-				                  	else if (articolo.getPdFisico() != null)
-				                  		prezzo = articolo.getPdFisico().getPrezzo();
-				                  	else 
-				                  		prezzo = articolo.getServizio().getPrezzo();
-				                  	totale += prezzo * count;
-				                  	i++;
-				                %>
-			                  		<span class="current-price"> <%= df.format(prezzo) %> </span>
-		                		</div>
-	              			</div>
-	            	<% } %>
-	            
-	          </div>
 	          			 
 				<button type="submit" id="payBtn">PAGAAAH</button>
       		</form>
