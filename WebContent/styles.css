@@ -350,6 +350,160 @@ main {
     margin: 0 auto;
 }
 
+/* =========================================== */
+/* Sezione “Offerte Lampo e Prodotti in Evidenza” */
+/* =========================================== */
+.deals-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* — Desktop: griglia di card — */
+.deals-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.deals-grid .product-card {
+  flex: 0 1 220px;      /* larghezza base 220px, si restringe se serve */
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.deals-grid .product-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.deals-grid .label {
+  background: #F2762E;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.deals-grid .product-name {
+  margin: 0.5rem 0;
+  font-weight: bold;
+  color: #021859;
+}
+.deals-grid .product-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+.deals-grid .btn-secondary {
+  display: inline-block;
+  background: #021859;
+  color: #F2D230;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* — Mobile/Tablet: slider “camera‑roll” — */
+.mobile-slider {
+  display: none;           /* visibile solo ≤992px */
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  margin: 1.5rem 0;
+}
+.mobile-slider .slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 70%;
+  max-width: 280px;
+  left: 50%;
+  transform-origin: center center;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  cursor: pointer;
+}
+.mobile-slider .slide .label {
+  background: #F2762E;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+.mobile-slider .slide .product-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+.mobile-slider .slide .product-name {
+  margin: 0.8rem 0 0.3rem;
+  font-weight: bold;
+  color: #021859;
+  text-align: center;
+}
+.mobile-slider .slide .product-description {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem;
+}
+.mobile-slider .slide .btn-secondary {
+  display: inline-block;
+  background: #021859;
+  color: #F2D230;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* posizionamento prev / active / next */
+.mobile-slider .slide.prev {
+  transform: translateX(-120%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+.mobile-slider .slide.active {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+.mobile-slider .slide.next {
+  transform: translateX(20%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* breakpoint per attivare slider e nascondere griglia */
+@media (max-width: 992px) {
+  .deals-grid {
+    display: none;
+  }
+  .mobile-slider {
+    display: block;
+  }
+}
+
+/*
 .product-scroll {
     background-color: #f3f4f6;
     padding: 2rem;
@@ -390,6 +544,7 @@ main {
     margin-top: 0.5rem;
     font-weight: bold;
 }
+*/
 
 .featured-builds {
     background: #e5e7eb;
