@@ -311,4 +311,108 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 		return catalogo;
 	}
 	
+	
+	/**
+	 * Imposta il numero di elementi in magazzino (chiavi disponibili) di un articolo (fisico / digitale) ed imposta
+	 * la disponibilità a false se il valore {@code quantità} passato è <= 0.
+	 */
+	public synchronized void updateQuantity(ArticoloCompletoBean articolo, int quantita) throws SQLException{
+		// I servizi non sono limitati in quantita
+		if (articolo.getServizio() != null) {
+			return ;
+		}
+		
+		Connection connection = null;
+		PreparedStatement ps = null;
+		
+		final String TABELLA_FISICO = "Prodotto_Fisico";
+		final String TABELLA_DIGITALE = "Prodotto_Digitale";
+		final String TABELLA_ARTICOLO = "Articolo";
+
+		String updateQuery = "";
+		String updateArticleQuery = "UPDATE " + TABELLA_ARTICOLO + " SET disponibilita = false WHERE codiceIdentificativo = ? " ;		
+		
+		// Modifica la quantità di prodotto fisico
+		if (articolo.getPdFisico() != null) {
+
+			try {
+				updateQuery = "UPDATE " + TABELLA_FISICO + " SET quantitaMagazzino = ? WHERE seriale = ?";
+				connection = DriverManagerConnectionPool.getConnection();
+
+				if (quantita <= 0) {
+					// Imposta il numero di elementi in magazzino disponibili
+					ps = connection.prepareStatement(updateQuery);
+					ps.setInt(1, 0);
+					ps.setString(2, articolo.getPdFisico().getSeriale());
+					ps.executeUpdate();
+					
+					// Disabilita il prodotto
+					ps = connection.prepareStatement(updateArticleQuery);
+					ps.setString(1, articolo.getCodiceIdentificativo());
+					ps.executeUpdate();
+					
+				} else {
+					// Imposta il numero di elementi in magazzino disponibili
+					ps = connection.prepareStatement(updateQuery);
+					ps.setInt(1, quantita);
+					ps.setString(2, articolo.getPdFisico().getSeriale());
+					ps.executeUpdate();
+					
+				}
+				
+			} finally {
+				try {
+					if (ps != null)
+						ps.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+			
+		}
+		
+		// Modifica la quantità di prodotto digitale
+		if (articolo.getPdDigitale() != null) {
+
+			try {
+				updateQuery = "UPDATE " + TABELLA_DIGITALE + " SET numeroChiavi = ? WHERE codiceSoftware = ?";
+				connection = DriverManagerConnectionPool.getConnection();
+
+				if (quantita <= 0) {
+					// Imposta il numero di chiavi disponibili
+					ps = connection.prepareStatement(updateQuery);
+					ps.setInt(1, 0);
+					ps.setString(2, articolo.getPdDigitale().getCodiceSoftware());
+					ps.executeUpdate();
+					
+					// Disabilita il prodotto
+					ps = connection.prepareStatement(updateArticleQuery);
+					ps.setString(1, articolo.getCodiceIdentificativo());
+					ps.executeUpdate();
+					
+				} else {
+					// Imposta il numero di chiavi disponibili
+					ps = connection.prepareStatement(updateQuery);
+					ps.setInt(1, quantita);
+					ps.setString(2, articolo.getPdDigitale().getCodiceSoftware());
+					ps.executeUpdate();
+					
+				}
+
+			} finally {
+				try {
+					if (ps != null)
+						ps.close();
+				} finally {
+					if (connection != null)
+						connection.close();
+				}
+			}
+			
+		}
+
+	}
+	
+	
 }

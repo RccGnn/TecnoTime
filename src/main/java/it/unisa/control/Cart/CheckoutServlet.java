@@ -16,6 +16,7 @@ import java.util.Collections;
 
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;
+import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.DAO.Order.OrdineCompletoDao;
 import it.unisa.model.beans.AccountBean;
@@ -81,17 +82,28 @@ public class CheckoutServlet extends HttpServlet {
 			ordbean.setNumeroTransazione(nTransazione);
 			
 			// Quantità e prezzo
-			int quantita = Collections.frequency(listaArticoli, articolo);
+			int quantita = Collections.frequency(listaArticoli, articolo), diff = 0; // Scala i prodotti acquistati dall'utente nel database
 			double prezzo = 0;
 			if(articolo.getPdFisico() != null) {
 				prezzo = articolo.getPdFisico().getPrezzo();
+				diff = articolo.getPdFisico().getQuantitaMagazzino() - quantita;
 			} else if (articolo.getPdDigitale() != null) {
 				prezzo = articolo.getPdDigitale().getPrezzo();
+				diff = articolo.getPdFisico().getQuantitaMagazzino() - quantita;
 			} else if (articolo.getServizio() != null) {
 				prezzo = articolo.getServizio().getPrezzo();
+				diff = -1;
 			}
 			ordbean.setPrezzoUnitario(prezzo);
 			ordbean.setQuantitaArticolo(quantita);
+			if(diff != -1) { // Aggiorna la quantità di articoli
+				ArticoloCompletoDao artDao = new ArticoloCompletoDao();
+				try {
+					artDao.updateQuantity(articolo, diff);					
+				} catch (SQLException e) {
+					return false;
+				}
+			}
 			
 			// Immagine
 			String url = "";
