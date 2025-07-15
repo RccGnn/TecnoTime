@@ -102,7 +102,9 @@ function contexEnum(contex) {
 		flag = 2;
 	if (contex.includes("articoliServizi.jsp"))  
 		flag = 3;
-
+	if (contex.includes("DisplaySubMenu1"))
+		flag = 4;
+	
 	return flag;		
 }
 
@@ -116,7 +118,7 @@ function articoloEnum(articolo) {
 		subClass = articolo.pdDigitale;
 	if (articolo.servizio != null)  
 		subClass = articolo.servizio;
-
+	
 	return subClass;		
 }
 
@@ -127,22 +129,22 @@ function sortedProducts() {
 	const sortInput = document.getElementById("sort").value;	
 	const nomeInput = document.getElementById("name").value;
 	const contestoInput = window.location.pathname;
-	let durataInput;
-	//console.log(contestoInput);	
+	let durataInput = "";
+	let categoriaInput = "";	
 	let contexChoice = contexEnum(contestoInput);
-	
+
 	// In base a quale pagina effettua la chiamata ajax, si impostano i parametri da passare nel GET 
 	if (contexChoice === 1) { // Prodotti fisici
-		durataInput = "";
-	} else if (contexChoice === 2) { // Prodotti digitali
-		durataInput = "";
+		categoriaInput = document.getElementById("categoria").value;
+	} else if (contexChoice === 2 || contexChoice === 4) { // Prodotti digitali
 	} else if (contexChoice === 3) { // Servizi 
 		durataInput = document.getElementById("duration").value;
-	}
+	} 
 	
 	let params = 	"min="+ encodeURIComponent(minInput) +"&max="+ encodeURIComponent(maxInput)
 					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput)
-					+"&contex="+ encodeURIComponent(contestoInput) +"&duration="+ encodeURIComponent(durataInput);
+					+"&contex="+ encodeURIComponent(contestoInput) +"&duration="+ encodeURIComponent(durataInput)
+					+"&categoriaInput="+ encodeURIComponent(categoriaInput);
 	
 	loadAjaxDoc("ProductFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }

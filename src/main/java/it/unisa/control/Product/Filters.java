@@ -80,7 +80,13 @@ public class Filters {
 	/*
 	 * FILTRI PER I PRODOTTI FISICI
 	 */
-		
+	public static ArrayList<ArticoloCompletoBean> categoryFilter(ArrayList<ArticoloCompletoBean> catalogo, String categoria) {
+
+		if (catalogo == null || catalogo.isEmpty()) return catalogo;
+			catalogo.removeIf(c -> !c.getPdFisico().getCategoria().toLowerCase().trim().contains(categoria.toLowerCase().trim()));
+		return catalogo;
+	}
+
 	/*
 	 * FILTRI PER I PRODOTTI DIGITALI
 	 */
@@ -88,7 +94,6 @@ public class Filters {
 	/*
 	 * FILTRI PER I SERVIZI 
 	 */
-
 	public static ArrayList<ArticoloCompletoBean> durationFilter(ArrayList<ArticoloCompletoBean> catalogo, double duration) {
 
 		double lamdaduration = Math.abs(duration);

@@ -33,6 +33,7 @@ public class ProductFilter extends HttpServlet {
         String contesto = (req.getParameter("contex") != null && !req.getParameter("contex").trim().equals("")) ? req.getParameter("contex") : null;
         double durata = (req.getParameter("duration") != null && !req.getParameter("duration").trim().equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
         boolean searchBar = Boolean.parseBoolean(req.getParameter("fromSearchBar")); // parseBoolean interpreta come false qualsiasi stringa diversa da true (case insensitive)
+        String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
         //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
@@ -47,6 +48,7 @@ public class ProductFilter extends HttpServlet {
         			Filters.nameFilter(catalogo, nome);	 // Filtra solo sul nome (input utente)
         		else
         			catalogo = new ArrayList<ArticoloCompletoBean>(0);
+        	
         	// Ricerca effettuata dalle altre pagine dei prodotti
         	} else {
 		        // Filtra per il contesto
@@ -58,7 +60,12 @@ public class ProductFilter extends HttpServlet {
 		        // Filtra facendo un match sul nome
 		        if (nome != null)
 		        	Filters.nameFilter(catalogo, nome);
-		     
+		    
+		        System.out.println("Categoria:" +categoria);
+		        // Filtra per la categoria
+		        if (categoria != null)
+		        	Filters.categoryFilter(catalogo, categoria);
+		        
 		        // Se si tratta di un servizio, filtra per durata del servizio
 		        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
 		        if (durata != -1)
