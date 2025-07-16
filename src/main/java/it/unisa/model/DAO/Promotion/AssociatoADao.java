@@ -97,6 +97,9 @@ public class AssociatoADao implements BeanDaoInterfaceArray<AssociatoABean>{
 		}
 
 		@Override
+		/**
+		 * key (Promozione.IDPromozione, Account.username)
+		 */
 		public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 			Connection connection = null;
 			PreparedStatement ps = null;

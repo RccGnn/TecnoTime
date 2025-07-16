@@ -93,6 +93,9 @@ public class RiguardaDao implements BeanDaoInterfaceArray<RiguardaBean>{
 		}
 
 		@Override
+		/**
+		 * key (Promozione.IDPromozione, Account.codiceIdentificativo)
+		 */
 		public synchronized boolean doDelete(ArrayList<?> key) throws SQLException {
 			Connection connection = null;
 			PreparedStatement ps = null;

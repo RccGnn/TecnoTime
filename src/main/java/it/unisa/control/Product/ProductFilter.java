@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
+import it.unisa.model.DAO.Promotion.AssociatoADao;
 import it.unisa.model.beans.*;
 
 import com.google.gson.*;
@@ -34,6 +35,8 @@ public class ProductFilter extends HttpServlet {
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
+        AssociatoADao assDao = new AssociatoADao();
+        
         System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
@@ -71,17 +74,22 @@ public class ProductFilter extends HttpServlet {
 	        }
 	        
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
+	        ArrayList<AssociatoABean> offerte = assDao.doRetrieveAll("");
 	        
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	        // Serializza l'intera lista di ArticoloCompletoBean in una singola stringa JSON
-            String jsonOutput = gson.toJson(catalogo);
-
-	        //System.out.println("JSON Output finale inviato:\n" + jsonOutput);
+            ArrayList<Object> out = new ArrayList<Object>(2);
+            out.add(catalogo);
+            out.add(offerte);
+	        
+            // Serializza l'intera lista di ArticoloCompletoBean e promozioni in una singola stringa JSON
+            String jsonOutput = gson.toJson(out);
+            
+	        System.out.println("JSON Output finale inviato:\n" + jsonOutput);
 
 	        resp.setContentType("application/json");
-	        PrintWriter out = resp.getWriter();
-			out.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
-			out.flush();
+	        PrintWriter prw = resp.getWriter();
+	        prw.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
+	        prw.flush();
 			
         } catch (SQLException e) {
         	System.err.println(e.getMessage());
