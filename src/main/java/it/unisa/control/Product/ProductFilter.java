@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-//import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import it.unisa.model.DAO.DaoUtils;
@@ -23,7 +22,6 @@ import com.google.gson.*;
 @WebServlet("/ProductFilter")
 public class ProductFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//private DecimalFormat df = new DecimalFormat("#.00");
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double min = (req.getParameter("min") != null && !req.getParameter("min").trim().equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
@@ -99,14 +97,5 @@ public class ProductFilter extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
-	
-	 /* GET:
-	  * 	- min (prezzo) - float 
-	  * 	- max (prezzo) - float
-	  * 	- name (nome articolo) - String
-	  * 	- sort (ordine) prezzo/nome asc/disc - String
-	 */
-	// Sfrutta il fatto che getParameter ritorna il valore null se il parametro non esiste
     
 } 
