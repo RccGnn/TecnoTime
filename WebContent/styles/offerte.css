@@ -1,0 +1,315 @@
+/* Palette:
+    Blu scuro primario: #021859
+    Blu navy secondario: #011140
+    Giallo: #F2D230
+    Arancione: #F2762E
+    Grigio chiaro sfondo: #F2F2F2
+*/
+
+/* =================================== */
+/* Reset e Stili di Base               */
+/* =================================== */
+
+main {
+    padding: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+    color: #011140;
+}
+
+/* --- Messaggi di stato --- */
+.error-message {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-title {
+	font-size: 5rem;
+	color: #021859; 
+	margin-bottom: 1rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+}
+
+.error-subtitle {
+	color: #011140;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 80%; 
+}
+
+/* --- errori blocchi registrazione ---*/
+
+/* inline error style */
+.inline-error {
+  display: block;
+  color: #c00;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.invalid {
+  border-color: #c00;
+  background-color: #fee;
+}
+
+/* ====================================== */
+/* PAGINA OFFERTE – LAYOUT PRINCIPALE     */
+/* ====================================== */
+
+/* Sidebar filtri – Desktop (1/3) */
+.filter-offerte-sidebar {
+  position: fixed;
+  top: 72px;                
+  left: 0;
+  width: 28%;
+  max-width: 280px;
+  background: #fff;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  height: calc(100% - 72px);
+  overflow-y: auto;
+  z-index: 5;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Toggle button (solo mobile) */
+#toggleFilters {
+  display: none;
+}
+
+/* Contenuto prodotti filtrati – Desktop (2/3) */
+.filtered-products {
+  margin-left: 28%;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+}
+
+/* ============================= */
+/* BLOCCO 1: Categorie in Offerta */
+/* ============================= */
+.offers-categories {
+  max-width: calc(72% - 2rem);
+  margin: 2rem auto 1rem auto;
+  padding-left: 28%;
+  box-sizing: border-box;
+}
+
+.category-grid-offerte {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.category-box-offerte {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+  text-align: center;
+}
+
+.category-box-offerte img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.category-box-offerte h3 {
+  margin: 0.75rem 0;
+  font-size: 1rem;
+  color: #021859;
+}
+
+.category-box-offerte a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.category-box-offerte a h3 {
+  background: #F2D230;
+  color: #011140;
+  margin: 0;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.category-box-offerte a:hover h3 {
+  background: #F2762E;
+}
+
+/* ============================= */
+/* BLOCCO 3: Prodotti Filtrati    */
+/* ============================= */
+.filtered-products h2 {
+  font-size: 1.5rem;
+  color: #021859;
+  margin-bottom: 0.75rem;
+}
+
+#searchInput {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Griglia interna di prodotti */
+.filtered-products .products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+  gap: 1.5rem;
+}
+
+/* Riduzione font/immagini in product-item */
+.product-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+.product-item:hover {
+  transform: translateY(-4px);
+}
+.product-item img {
+  max-width: 100%;
+  height: 120px;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+.product-item h4 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #021859;
+}
+.product-item .price {
+  font-weight: bold;
+  color: #F2762E;
+}
+.product-item .old-price {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+
+/* =================================================================== */
+/* STILI RESPONSIVE                                                    */
+/* =================================================================== */
+
+/* --- Tablet e Mobile (fino a 768px) --- */
+@media (max-width: 768px) {
+	.products-page {
+    flex-direction: column;
+  }
+  .filter-toggle-btn {
+    display: block;
+  }
+  .filters-sidebar {
+    position: fixed;
+    top: 150px; /* sotto header */
+    left: -260px;
+    transition: left .3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .filters-sidebar.visible {
+    left: 10px;
+  }
+
+  .products-container {
+    /* su mobile la griglia scende a 1 colonna */
+    grid-template-columns: 1fr;
+  }
+}
+/*form registrazione*/
+@media (max-width: 600px) {
+  .form-container fieldset {
+    padding: 0.75rem;
+  }
+  .form-container legend {
+    font-size: 1rem;
+  }
+  .form-container textarea {
+    min-height: 120px;
+  }
+}
+
+/* ============================= */
+/* MEDIA‐QUERY ≤767px – Mobile   */
+/* ============================= */
+@media (max-width: 767px) {
+  /* Sidebar a scomparsa */
+  .filter-offerte-sidebar {
+    top: 60px;
+    width: 80vw;
+    transform: translateX(-100%);
+  }
+  .filter-offerte-sidebar.active {
+    transform: translateX(0);
+  }
+
+  /* Pulsante per toggle sidebar */
+  #toggleFilters {
+    display: block;
+    position: fixed;
+    top: 12px;
+    left: 16px;
+    z-index: 10;
+    background: #F2762E;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  /* Prodotti full‑width */
+  .filtered-products {
+    margin-left: 0;
+    padding: 80px 1rem 1rem;
+  }
+  
+  /* Categorie full‑width */
+  .offers-categories {
+    padding-left: 0;
+    margin: 1.5rem 1rem;
+  }
+  .category-grid-offerte {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* --- Solo Mobile (fino a 480px) --- */
+@media (max-width: 480px) {
+
+}

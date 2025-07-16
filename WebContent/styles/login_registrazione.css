@@ -1,0 +1,242 @@
+/* Palette:
+    Blu scuro primario: #021859
+    Blu navy secondario: #011140
+    Giallo: #F2D230
+    Arancione: #F2762E
+    Grigio chiaro sfondo: #F2F2F2
+*/
+
+/* =================================== */
+/* Reset e Stili di Base               */
+/* =================================== */
+
+main {
+    padding: 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+    color: #011140;
+}
+
+/* =================================== */
+/* Pagine Form (Login, Registrazione)  */
+/* =================================== */
+
+/* --- Contenitore Login --- */
+.login-container {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 320px;
+    margin: 40px auto;
+    box-sizing: border-box;
+}
+
+.login-container h2 {
+    text-align: center;
+    color: #021859;
+    margin-bottom: 1.5rem;
+}
+
+.login-container form {
+    margin-bottom: 1.5rem;
+}
+
+.login-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #011140;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #F2762E;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.login-container button[type="submit"]:hover {
+    background-color: #d1641f;
+}
+
+.login-container .register-link {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.login-container .register-link a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 8px 16px;
+    background-color: #011140;
+    color: #F2D230;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* --- Contenitore Registrazione --- */
+.form-container {
+    max-width: 600px;
+    background: white;
+    margin: 3rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #021859;
+    margin-bottom: 1.5rem;
+}
+
+.form-container label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.3rem;
+    font-weight: bold;
+    color: #011140;
+}
+
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.form-container button {
+    margin-top: 1.5rem;
+    padding: 12px;
+    background-color: #F2762E;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 48%;
+}
+
+.form-container button[type="reset"] {
+    background-color: #ccc;
+    margin-left: 4%;
+}
+
+.form-container button:hover {
+    opacity: 0.9;
+}
+
+/* --- Messaggi di stato --- */
+.error-message {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-title {
+	font-size: 5rem;
+	color: #021859; 
+	margin-bottom: 1rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+}
+
+.error-subtitle {
+	color: #011140;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 80%; 
+}
+
+/* --- errori blocchi registrazione ---*/
+
+/* inline error style */
+.inline-error {
+  display: block;
+  color: #c00;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.invalid {
+  border-color: #c00;
+  background-color: #fee;
+}
+
+/* =================================================================== */
+/* STILI RESPONSIVE                                                    */
+/* =================================================================== */
+
+/* --- Tablet e Mobile (fino a 768px) --- */
+@media (max-width: 768px) {
+	.products-page {
+    flex-direction: column;
+  }
+  .filter-toggle-btn {
+    display: block;
+  }
+  .filters-sidebar {
+    position: fixed;
+    top: 150px; /* sotto header */
+    left: -260px;
+    transition: left .3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .filters-sidebar.visible {
+    left: 10px;
+  }
+
+  .products-container {
+    /* su mobile la griglia scende a 1 colonna */
+    grid-template-columns: 1fr;
+  }
+	
+}
+
+/*form registrazione*/
+@media (max-width: 600px) {
+  .form-container fieldset {
+    padding: 0.75rem;
+  }
+  .form-container legend {
+    font-size: 1rem;
+  }
+  .form-container textarea {
+    min-height: 120px;
+  }
+}
