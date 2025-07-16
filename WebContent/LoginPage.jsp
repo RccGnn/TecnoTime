@@ -5,6 +5,9 @@
 	String message = null;
 	if (request.getAttribute("confirmMessage") != null)
 		message = (String) request.getAttribute("confirmMessage");
+	String error = null;
+	if(request.getAttribute("error")!=null)
+		error=(String)request.getAttribute("error");
 %>
 
 <!DOCTYPE html>
@@ -25,7 +28,11 @@
     	<% if (message != null) {%>
     	<span class="success-message"> <%= message %></span>
     	<% } %>
+    	
         <h2>Effettua il Login</h2>
+        <% if (error!=null){ %>
+    	<div class="error-message"> <%= error %></div>
+    	<%} %>
         <form action="LoginPage" method="post">
             <div>
                 <label for="username">Username</label>
