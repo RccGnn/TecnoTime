@@ -1,0 +1,416 @@
+/* Palette:
+    Blu scuro primario: #021859
+    Blu navy secondario: #011140
+    Giallo: #F2D230
+    Arancione: #F2762E
+    Grigio chiaro sfondo: #F2F2F2
+*/
+
+/* =================================== */
+/* Reset e Stili di Base               */
+/* =================================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+    color: #011140;
+}
+
+/* =================================== */
+/* Contenuti Principali                */
+/* =================================== */
+main {
+    padding: 20px;
+}
+
+.hero {
+    background: #0f172a;
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.hero-img {
+    max-width: 100%;
+    width: 65%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* =========================================== */
+/* Sezione “Offerte Lampo e Prodotti in Evidenza” */
+/* =========================================== */
+.deals-section {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* — Desktop: griglia di card — */
+.deals-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.deals-grid .product-card {
+  flex: 0 1 220px;      /* larghezza base 220px, si restringe se serve */
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.deals-grid .product-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.deals-grid .label {
+  background: #F2762E;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.deals-grid .product-name {
+  margin: 0.5rem 0;
+  font-weight: bold;
+  color: #021859;
+}
+.deals-grid .product-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+.deals-grid .btn-secondary {
+  display: inline-block;
+  background: #021859;
+  color: #F2D230;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* — Mobile/Tablet: slider “camera‑roll” — */
+.mobile-slider {
+  display: none;           /* visibile solo ≤992px */
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  margin: 1.5rem 0;
+}
+.mobile-slider .slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 70%;
+  max-width: 280px;
+  left: 50%;
+  transform-origin: center center;
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  cursor: pointer;
+}
+.mobile-slider .slide .label {
+  background: #F2762E;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+}
+.mobile-slider .slide .product-image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-top: 2rem;
+}
+.mobile-slider .slide .product-name {
+  margin: 0.8rem 0 0.3rem;
+  font-weight: bold;
+  color: #021859;
+  text-align: center;
+}
+.mobile-slider .slide .product-description {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem;
+}
+.mobile-slider .slide .btn-secondary {
+  display: inline-block;
+  background: #021859;
+  color: #F2D230;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* posizionamento prev / active / next */
+.mobile-slider .slide.prev {
+  transform: translateX(-120%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+.mobile-slider .slide.active {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  z-index: 2;
+}
+.mobile-slider .slide.next {
+  transform: translateX(20%) scale(0.8);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+/* breakpoint per attivare slider e nascondere griglia */
+@media (max-width: 992px) {
+  .deals-grid {
+    display: none;
+  }
+  .mobile-slider {
+    display: block;
+  }
+}
+
+.featured-builds {
+    background: #e5e7eb;
+    padding: 2rem;
+}
+
+.build-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.build-card {
+    min-width: 250px;
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.responsive-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    margin: 20px 0;
+}
+
+.responsive-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* =================================== */
+/* Pre-Footer                          */
+/* =================================== */
+.pre-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F2F2;
+    padding: 20px;
+    flex-wrap: wrap;
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.pre-footer .banner-container {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.pre-footer .banner-png {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.pre-footer .config-btn {
+    padding: 12px 24px;
+    background-color: #F2762E;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pre-footer .config-btn:hover {
+    background-color: #d1641f;
+}
+
+/* --- Messaggi di stato --- */
+.error-message {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-title {
+	font-size: 5rem;
+	color: #021859; 
+	margin-bottom: 1rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+}
+
+.error-subtitle {
+	color: #011140;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 80%; 
+}
+
+/* --- errori blocchi registrazione ---*/
+
+/* inline error style */
+.inline-error {
+  display: block;
+  color: #c00;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.invalid {
+  border-color: #c00;
+  background-color: #fee;
+}
+
+/* =================================================================== */
+/* STILI RESPONSIVE                                                    */
+/* =================================================================== */
+
+/* --- Tablet e Mobile (fino a 768px) --- */
+@media (max-width: 768px) {
+	/* --- Contenuti --- */
+    .hero-slogan {
+        font-size: 1.2rem;
+    }
+    
+    .product-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-left, .product-right {
+        padding: 0;
+    }
+    
+    .build-card {
+        min-width: 80%;
+    }
+
+    /* --- Pre-Footer --- */
+    .pre-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pre-footer .banner-container {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .pre-footer .banner-png {
+        height: 50px;
+    }
+    
+    .products-page {
+    flex-direction: column;
+  }
+  .filter-toggle-btn {
+    display: block;
+  }
+  .filters-sidebar {
+    position: fixed;
+    top: 150px; /* sotto header */
+    left: -260px;
+    transition: left .3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .filters-sidebar.visible {
+    left: 10px;
+  }
+
+  .products-container {
+    /* su mobile la griglia scende a 1 colonna */
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Solo Mobile (fino a 480px) --- */
+@media (max-width: 480px) {
+    .pre-footer .banner-png {
+        height: 40px;
+    }
+
+    .pre-footer .config-btn {
+        width: 100%;
+    }
+}
+
+/*form registrazione*/
+@media (max-width: 600px) {
+  .form-container fieldset {
+    padding: 0.75rem;
+  }
+  .form-container legend {
+    font-size: 1rem;
+  }
+  .form-container textarea {
+    min-height: 120px;
+  }
+}
+

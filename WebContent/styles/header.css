@@ -1,0 +1,488 @@
+/* Palette:
+    Blu scuro primario: #021859
+    Blu navy secondario: #011140
+    Giallo: #F2D230
+    Arancione: #F2762E
+    Grigio chiaro sfondo: #F2F2F2
+*/
+
+/* =================================== */
+/* Reset e Stili di Base               */
+/* =================================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F2F2F2;
+    color: #011140;
+}
+
+/* =================================== */
+/* Header                              */
+/* =================================== */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #021859;
+    border-bottom: 2px solid #011140;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 150px;
+    max-width: 100%;
+    height: auto;
+    margin-right: 10px;
+}
+
+.brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #F2D230;
+}
+
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container {
+    position: relative;
+    width: 60%;
+    max-width: 400px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    filter: brightness(0) saturate(100%) contrast(200%);
+}
+
+.search-bar {
+    width: 100%;
+    padding: 8px 12px 8px 36px;
+    border: 2px solid #F2762E;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #011140;
+    
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-bar:focus {
+    border-color: #021859;
+    box-shadow: 0 0 5px rgba(2, 24, 89, 0.3);
+}
+
+.search-results-dropdown {
+    position: absolute; /*In relazione al search-container*/
+    top: 100%;
+    left: 0;
+    width: 100%;
+    
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 20px;
+    margin: 10px 0px;
+    
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+}
+
+/* Stili per ogni singolo suggerimento */
+.suggestion-item {
+    padding: 12px 18px;
+    cursor: pointer;
+    color: #011140;
+    font-size: 15px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid #eee;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #F2F2F2;
+}
+
+.icon-link .icon {
+    width: 48px;
+    height: 48px;
+    margin-top: 4px;
+    filter: brightness(0) invert(1);
+}
+
+.login-text {
+    font-size: 14px;
+    color: #F2F2F2;
+}
+
+/* =================================== */
+/* Header Admin Menu				   */
+/* =================================== */
+
+/* Contenitore per il pulsante e il menu a tendina */
+.admin-menu {
+    position: relative;
+    display: flex; /* allineamento con gli altri icon-link */
+    align-items: center;
+}
+
+/* Stile del bottone hamburger per l'admin */
+.admin-menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+}
+
+/* Stile delle singole barre */
+.admin-bar {
+    width: 100%;
+    height: 3px;
+    background-color: #F2D230; /* */
+    border-radius: 3px;
+    margin: 2px 0; /* Spaziatura tra le barre */
+}
+
+/* Contenuto del menu a tendina, nascosto di default. */
+.admin-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 120%; /* Posiziona il menu leggermente sotto il pulsante */
+    background-color: #F2F2F2; 
+    min-width: 190px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    border-radius: 6px;
+    overflow: hidden; /* bordi arrotondati si applichino ai link */
+}
+
+/* Stile dei link nel menu a tendina */
+.admin-dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    text-decoration: none;
+    color: #011140;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap; /* Evita che il testo vada a capo */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Effetto hover sui link */
+.admin-dropdown-content a:hover {
+    background-color: #F2762E; /* */
+    color: #fff;
+}
+
+/* Classe aggiunta via JavaScript per mostrare il menu */
+.admin-dropdown-content.show {
+    display: block;
+}
+
+/* =================================== */
+/* Navigazione (Desktop)               */
+/* =================================== */
+.main-nav {
+    background-color: #011140;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul li {
+    position: relative;
+}
+
+.main-nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #F2D230;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Dropdown (Desktop) */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #011140;
+    min-width: 180px;
+    display: none; /* Nascosto di default */
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+/* Comportamento Hover per Desktop */
+.main-nav ul li:hover > .dropdown {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown li a {
+    padding: 10px 20px;
+    color: #F2D230;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.dropdown li a:hover {
+    background-color: #021859;
+}
+
+.dropdown li.mobile-only {
+  display: none;
+}
+
+/* Menu Hamburger (nascosto di default su desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    margin-left: 1rem;
+}
+
+.hamburger .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #F2D230;
+    margin: 3px 0;
+    transition: 0.4s;
+}
+
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* --- Messaggi di stato --- */
+.error-message {
+    color: red;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.success-message {
+    color: green;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-title {
+	font-size: 5rem;
+	color: #021859; 
+	margin-bottom: 1rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 90%;
+}
+
+.error-subtitle {
+	color: #011140;
+	font-size: 1.5rem;
+	margin-bottom: 1.5rem;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 80%; 
+}
+
+/* --- errori blocchi registrazione ---*/
+
+/* inline error style */
+.inline-error {
+  display: block;
+  color: #c00;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+.invalid {
+  border-color: #c00;
+  background-color: #fee;
+}
+
+/* =================================================================== */
+/* STILI RESPONSIVE                                                    */
+/* =================================================================== */
+
+/* --- Tablet e Mobile (fino a 768px) --- */
+@media (max-width: 768px) {
+	
+	/* --- Header --- */
+    .main-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-left,
+    .header-center,
+    .header-right {
+        margin-bottom: 10px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    /* --- Navigazione & Menu Hamburger --- */
+    .main-nav {
+        justify-content: flex-end; /* Allinea l'hamburger a destra */
+        padding: 0 20px; /* Aggiunge spazio laterale */
+    }
+    
+    .dropdown li.mobile-only {
+    display: block;
+  	}
+
+    .hamburger {
+        display: flex; /* Mostra l'hamburger */
+    }
+
+    .main-nav ul {
+        display: none; /* Nasconde la navigazione orizzontale */
+        flex-direction: column;
+        align-items: flex-start;
+        background-color: #011140;
+        padding: 10px 0;
+        width: 100%;
+    }
+
+    .main-nav ul.show {
+        display: flex; /* La classe .show (via JS) la rende visibile */
+    }
+
+    .main-nav ul li {
+        width: 100%;
+    }
+
+    .main-nav ul li a {
+        padding: 12px 20px;
+        width: 100%;
+    }
+
+    /* Dropdown per mobile: diventa parte del flusso */
+    .dropdown {
+        position: relative;
+        box-shadow: none;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        display: none; /* Nascosto finché non viene attivato da JS */
+        background-color: #021859; /* Leggermente diverso per distinguerlo */
+    }
+
+    .dropdown.show {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .dropdown li a {
+        padding-left: 40px; /* Aggiunge indentazione per sottomenu */
+    }
+    
+    .products-page {
+    flex-direction: column;
+  }
+  .filter-toggle-btn {
+    display: block;
+  }
+  .filters-sidebar {
+    position: fixed;
+    top: 150px; /* sotto header */
+    left: -260px;
+    transition: left .3s ease;
+    z-index: 999;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+  .filters-sidebar.visible {
+    left: 10px;
+  }
+
+  .products-container {
+    /* su mobile la griglia scende a 1 colonna */
+    grid-template-columns: 1fr;
+  }
+}
+
+/*form registrazione*/
+@media (max-width: 600px) {
+  .form-container fieldset {
+    padding: 0.75rem;
+  }
+  .form-container legend {
+    font-size: 1rem;
+  }
+  .form-container textarea {
+    min-height: 120px;
+  }
+}
+
