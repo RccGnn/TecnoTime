@@ -95,7 +95,7 @@ public class ArticoloBean implements Serializable, BeanMarker{
 				&& disponibilita == other.disponibilita && Objects.equals(enteErogatore, other.enteErogatore)
 				&& Objects.equals(nome, other.nome);
 	}
-	
+
 	
 	
 }

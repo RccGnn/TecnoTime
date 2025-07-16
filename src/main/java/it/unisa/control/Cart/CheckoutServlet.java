@@ -57,6 +57,7 @@ public class CheckoutServlet extends HttpServlet {
 		int nTransazione = rnd.nextInt(0, 999999999);
 		ordine.setNumeroTransazione(nTransazione);
 		// Dal carrello ricava il totale
+		carrello.setListaArticoli(DaoUtils.discountedItemList(carrello.getListaArticoli()));
 		ordine.setTotale(DaoUtils.totaleCarrello(carrello));
 
 
@@ -89,7 +90,7 @@ public class CheckoutServlet extends HttpServlet {
 				diff = articolo.getPdFisico().getQuantitaMagazzino() - quantita;
 			} else if (articolo.getPdDigitale() != null) {
 				prezzo = articolo.getPdDigitale().getPrezzo();
-				diff = articolo.getPdFisico().getQuantitaMagazzino() - quantita;
+				diff = articolo.getPdDigitale().getNumeroChiavi() - quantita;
 			} else if (articolo.getServizio() != null) {
 				prezzo = articolo.getServizio().getPrezzo();
 				diff = -1;

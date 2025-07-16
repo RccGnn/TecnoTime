@@ -77,4 +77,5 @@ public class ProdottoDigitaleBean extends ArticoloBean implements Serializable, 
 	}
 	
 	
+	
 }

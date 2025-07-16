@@ -1,3 +1,4 @@
+<%@page import="it.unisa.model.DAO.DaoUtils"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -31,7 +32,7 @@
 <body>
 	<jsp:include page="header-utente.jsp"/>
 
-	<%	ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
+	<%	ArrayList<ArticoloCompletoBean> listaCarrello = DaoUtils.discountedItemList(carrello.getListaArticoli());
       	double totale = 0;
       	DecimalFormat df = new DecimalFormat("0.00 €");
      %>

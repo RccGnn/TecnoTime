@@ -1,3 +1,4 @@
+<%@page import="it.unisa.model.DAO.DaoUtils"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -36,10 +37,10 @@
 		<input type="hidden" name="cartId" id="cartId" value="<%= cID %>"/>
 		<input type="hidden" name="username" id="usernameId" value="<%= username %>"/>
 
-      <% ArrayList<ArticoloCompletoBean> listaCarrello = carrello.getListaArticoli();
+      <% ArrayList<ArticoloCompletoBean> listaArticoli = DaoUtils.discountedItemList(carrello.getListaArticoli());
       	 double totale = 0;
       	 DecimalFormat df = new DecimalFormat("0.00 €");
-      	 if(carrello == null || listaCarrello == null || listaCarrello.isEmpty()) { %>
+      	 if(carrello == null || listaArticoli == null || listaArticoli.isEmpty()) { %>
 	        <div class="empty-cart-container">
 	            <i class="fas fa-shopping-cart empty-cart-icon"></i>
 	            <h1>Il tuo carrello è vuoto</h1>
@@ -62,12 +63,12 @@
 					</div>
 					<%ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
 				  int i=1;
-				  for(ArticoloCompletoBean articolo : listaCarrello) {
+				  for(ArticoloCompletoBean articolo : listaArticoli) {
 	              	if (occorrenze.contains(articolo))  { // Se un articolo è nella lista occorrenze allora è già stato mostrato
 	               		continue;
 	            	}
 	            	occorrenze.add(articolo);
-	            	int count = Collections.frequency(listaCarrello, articolo);
+	            	int count = Collections.frequency(listaArticoli, articolo);
 	            	String aID = articolo.getCodiceIdentificativo();  
 	            %>
 	              <div class="cart-item-card" id="cart-item<%=aID%>">
@@ -123,11 +124,11 @@
 	            <h2>RIEPILOGO ORDINE</h2>
 	            <div class="summary-line">
 	              <span>Subtotale</span> 
-	              <span id="subtotal" > <%= df.format(totale) %> </span>
+	              <span id="subtotal" > <%= df.format(DaoUtils.totaleCarrello(carrello)) %> </span>
 	            </div>
 	            <div class="summary-line">
 	              <span>Sconto Indicativo</span>
-	              <span class="discount-color">-€0,00</span>
+	              <span class="discount-color">- <%= df.format(DaoUtils.totaleCarrello(carrello) - totale) %> </span>
 	            </div>
 	            <div class="summary-line">
 	              <span>Spedizione</span>

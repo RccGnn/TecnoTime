@@ -108,6 +108,7 @@ function contexEnum(contex) {
 	return flag;		
 }
 
+
 // Funzione per determinare le classi dei articoli 
 function articoloEnum(articolo) {
 	let subClass;
@@ -250,6 +251,7 @@ function handleFilter(xhr) {
 		if(subClass.disponibilita) {
 			btn.className = 'add-to-cart-btn';
 			btn.innerHTML = 'Aggiungi al carrello';
+			
 			btn.onclick = function () {
 				let articolo = JSON.stringify(art); // Chiama la servlet per aggiungere l'elemento al carrello
 				loadAjaxDoc("CartServlet", "POST", articolo, showNotification, "application/json");

@@ -52,7 +52,6 @@ public class CartServlet extends HttpServlet {
 				HttpSession s = request.getSession();
 				// Recupera username e carrello_id dalla sessione
 				if (s != null && s.getAttribute("username") != null) {
-					System.out.print("ALAALAL");
 					values[0] = (String) s.getAttribute("username");
 					values[1] = (String) s.getAttribute("carrello_id");
 				} else {
@@ -73,7 +72,7 @@ public class CartServlet extends HttpServlet {
 			    lista = carrello.getListaArticoli();
 			    lista.add(articoloDaAggiungere);
 			    carrello.setListaArticoli(lista);
-				System.out.println("Lista: "+lista); 
+				System.out.println("Lista Carrello: " + lista); 
 				carDao.doSave(carrello, false); // Aggiorna il carrello ma NON salvare di nuovo il carrello Stesso
 				
 				// Invia il carrello
