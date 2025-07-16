@@ -1,9 +1,0 @@
-package it.unisa.model.Filters;
-
-public enum Gen13 {
-	ASUS_ROG_MAXIMUS_Z690_HERO_EVA_Edition,
-	MSI_B760_GAMING_PLUS_WIFI,
-	GIGABYTE_Z790_D_AX,
-	MSI_MEG_Z690_UNIFY,
-	MSI_MPG_Z690_CARBON_EK_X
-}

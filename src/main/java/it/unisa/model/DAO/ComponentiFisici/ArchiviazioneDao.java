@@ -5,36 +5,31 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import it.unisa.model.Filters.SchedaMadre;
-import it.unisa.model.Filters.SchedaVideo;
+import it.unisa.model.Filters.Archiviazione;
+import it.unisa.model.Filters.Ram;
 import it.unisa.model.connections.DriverManagerConnectionPool;
 
-public class SchedaMadreDao {
-	
-private static final String TABLE_NAME = "SCHEDA_MADRE";
-	
-	
-	public synchronized void doSave(SchedaMadre mb) throws SQLException {
+public record ArchiviazioneDao() {
+	private static final String TABLE_NAME = "ARCHIVIAZIONE";
+	  
+	public synchronized void doSave(Archiviazione ssd) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		
-		String insertSQL = "INSERT INTO "+ SchedaMadreDao.TABLE_NAME
-				+ "(nomecompleto,marca,socket,wifi,PCI,SupportoRam,Watt)"
-				+ "VALUES (? , ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO "+ ArchiviazioneDao.TABLE_NAME
+				+ "(nomecompleto,marca,PCI,capacita)"
+				+ "VALUES (? , ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			
 			ps = connection.prepareStatement(insertSQL);	
 
-			ps.setString(1, mb.nome());
-		    ps.setString(2, mb.marca());
-		    ps.setString(3, mb.socket());
-		    ps.setString(4, mb.dimensione());
-		    ps.setFloat(5, mb.PCI());
-		    ps.setString(6,mb.tipoRamSupportata());
-		    ps.setInt(7,mb.watt());
+			ps.setString(1, ssd.nome());
+		    ps.setString(2, ssd.marca());
+		    ps.setFloat(3, ssd.PCI());
+		    ps.setInt(4, ssd.capacita());
 			ps.executeUpdate();
 
 		} finally {
@@ -49,12 +44,11 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 		}
 
 	}
-	
-	public synchronized SchedaMadre doRetrieveByKey(String nome) throws SQLException {
+	public synchronized Archiviazione doRetrieveByKey(String nome) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		
-		 String sql = "SELECT * FROM " + SchedaMadreDao.TABLE_NAME +" WHERE nomecompleto = ?";
+		 String sql = "SELECT * FROM " + ArchiviazioneDao.TABLE_NAME +" WHERE nomecompleto = ?";
 
 		    try {	
 		    	connection = DriverManagerConnectionPool.getConnection();
@@ -62,14 +56,11 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 		        ps.setString(1, nome);
 		        ResultSet rs = ps.executeQuery();
 		            if (rs.next()) {
-		                return new SchedaMadre(
+		                return new Archiviazione (
 		                    rs.getString("nomecompleto"),
 		                    rs.getString("marca"),
-		                    rs.getString("socket"),
-		                    rs.getString("dimensione"),
 		                    rs.getFloat("PCI"),
-		                    rs.getString("SupportoRam"),
-		                    rs.getInt("watt")
+		                    rs.getInt("capacita")
 		                );
 		            } else {
 		                return null; // Nessun processore trovato
@@ -82,7 +73,8 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 					if (connection != null)
 						connection.close();
 				}
-			}
+			}	
+		
 	}
-
+	
 }

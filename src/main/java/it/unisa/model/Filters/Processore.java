@@ -5,7 +5,4 @@ import java.sql.Date;
 
 public record Processore (String nome, String marca, String socket, Date datarilascio, int watt){
 	
-	public static boolean isCompatibile(Processore cpu, SchedaMadre mb) {
-    return cpu.socketCompatibili().contains(mb.socket());
-}
 }
