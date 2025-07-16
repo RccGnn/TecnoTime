@@ -40,7 +40,7 @@
 		
 		<h2>Resoconto ordine</h2>
 	        
-	          	<div class="cart-items-section">
+	          	<div class="order-summary-section">
 	
 					<%	ArrayList<ArticoloCompletoBean> occorrenze = new ArrayList<>();
 				  		for(ArticoloCompletoBean articolo : listaCarrello) {
@@ -82,9 +82,12 @@
 		                		</div>
 	              			</div>
 	              		<% } %>
-	            	<div> Totale: <%= df.format(totale) %>  </div>
 	          </div>
 	          	 
+	          <div class="order-summary-section">
+	          
+	          
+	          </div>
       		<h2>Inserire dati per il pagamento</h2>
 
       		<form id="checkoutForm" method="GET" action="CheckoutServlet">
@@ -106,9 +109,11 @@
 		               placeholder="___"
 		               maxlength="3" required>
 
-	          			 
+      				<div class="cart-header"> Totale: <%= df.format(totale) %>  </div>
+      			          			 
 				<button type="submit" id="payBtn">PAGAAAH</button>
       		</form>
+      		
     	</div>
 	</main>
 

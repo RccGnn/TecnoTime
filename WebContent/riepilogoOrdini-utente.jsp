@@ -1,3 +1,9 @@
+<%@page import="it.unisa.model.DAO.Order.OrdineCompletoDao"%>
+<%@ page import="java.text.DecimalFormat"%>
+<%@ page import="it.unisa.model.beans.ElementoOrdineBean"%>
+<%@ page import="it.unisa.model.beans.OrdineCompletoBean"%>
+<%@ page import="java.util.ArrayList"%>
+
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
@@ -16,6 +22,11 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
+<%
+	OrdineCompletoDao ordDao = new OrdineCompletoDao();
+	ArrayList<OrdineCompletoBean> listaOrdini = ordDao.doRetrieveAllByUsername("username"); //(ArrayList<OrdineCompletoBean>) request.getAttribute("listaOrdini");
+	DecimalFormat df = new DecimalFormat("0.00 €");
+%>
    <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
 	  %><jsp:include page="utente/header-utente.jsp"/>
 <% }else if ((Boolean)session.getAttribute("admin") !=null &&(Boolean)session.getAttribute("admin")) {
@@ -25,7 +36,59 @@
    }%>
    
    
-   
+   	<div class="orders-list-page">
+		<h1>I miei ordini</h1>
+	   <% if (listaOrdini == null || listaOrdini.isEmpty()) { %>
+	   		<p class="no-orders-message">Non hai ancora effettuato ordini.</p>
+	   <% } else { %>
+		   <% for(OrdineCompletoBean ordine : listaOrdini) {
+		   		ArrayList<ElementoOrdineBean> listaElementi = ordine.getElementiOrdine(); %>
+				<div class="orders-summary-section">
+					<div class="order-header">
+						<div class="order-details-group">
+							<div class="order-detail-item">
+								<span class="detail-label">Data ordine:</span>
+								<span class="detail-value"><%= new java.text.SimpleDateFormat("dd MMMM yyyy").format(ordine.getDataTransazione()) %></span>
+							</div>
+							<div class="order-detail-item">
+								<span class="detail-label">Totale:</span>
+								<span class="detail-value"><%= df.format(ordine.getTotale()) %></span>
+							</div>
+						</div>
+						<div class="order-details-group">
+							<div class="order-detail-item">
+								<span class="detail-label">ID Ordine:</span>
+								<span class="detail-value"><%= ordine.getNumeroTransazione() %></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="order-items-list">
+						<%	for(ElementoOrdineBean elemento : listaElementi) {		%>
+					        <div class="order-item-card">
+							<%	String url = "";
+								if (elemento.getUrlImmagineArticolo() == null || elemento.getUrlImmagineArticolo().isEmpty())
+							    	url = request.getContextPath() + "/images/alt-prodotti.png";
+								else
+									url = request.getContextPath() + "/" + elemento.getUrlImmagineArticolo(); // Ensure correct path for images
+							%>
+								<img src="<%= url %>" alt="<%= elemento.getNomeArticolo() %>" class="order-item-img"/>
+						                		
+								<div class="order-item-details">
+									<div class="order-item-name"><%= elemento.getNomeArticolo() %></div>
+									<div class="order-item-qty">Qtà: <%= elemento.getQuantitaArticolo() %></div>
+									<div class="order-item-price-per-unit">Prezzo Unitario: <%= df.format(elemento.getPrezzoUnitario()) %></div>
+								</div>
+								<div class="order-item-total-price">
+									<%= df.format(elemento.getPrezzoUnitario() * elemento.getQuantitaArticolo()) %>
+								</div>
+							</div>
+							<% } %>
+					</div>
+				</div>
+			<%} %>
+		<% } %>
+	</div>
 	<jsp:include page="footer.jsp" />
     
 	<script src="js/navbar.js" defer></script>
