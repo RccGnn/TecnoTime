@@ -158,16 +158,27 @@ function cleanSection() {
 	}
 }
 
+function isPromotion(promotionList, codiceIdentificativo) {
+	
+	let flag = false;
+	for (let i = 0; i < promotionList.length; i++) {
+		if(promotionList[i].riguarda.codiceIdentificativo == codiceIdentificativo) {
+			flag = promotionList[i].percentualeSconto;
+			break;
+		}
+	}
+	
+	return flag;
+}
+
 // Funzione di gestione della visualizzazione degli articoli
 function handleFilter(xhr) {
 	let response = JSON.parse(xhr.responseText);
 	// Si ripuliscono gli articoli già presenti
 	cleanSection();
-	
-	let element = document.querySelector(".products-container"); // E' unico
-	
+			
 	// Eventuale errore se non ci sono articoli 
-	if (response && response.length === 0) {
+	if (response[0] == null || (response[0] == null && response[0].length === 0)) {
 		let noResults = document.createElement("p");
 		noResults.textContent = "Nessun articolo trovato \n(._.)";
 		noResults.className = "error-subtitle";
@@ -175,8 +186,13 @@ function handleFilter(xhr) {
 		return; // Termina la funzione se non ci sono prodotti
 	}
 
+	let element = document.querySelector(".products-container"); // E' unico
+	// Ricava la lista di articoli e di promozioni
+	let articoli = response[0];
+	let promozioni = response[1];
+
 	// Itera per ogni prodotto della lista response
-	response.forEach(art => {
+	articoli.forEach(art => {
 		let articolo = document.createElement("div");
 		let subClass = articoloEnum(art);
 		
@@ -209,11 +225,27 @@ function handleFilter(xhr) {
 		title.className = "product-name";
 		articolo.appendChild(title);
 		
-		let price = document.createElement("p");
-		price.innerHTML = subClass.prezzo.toFixed(2) +" €";
-		price.className = "product-price";
-		articolo.appendChild(price);
-		
+		// Se il prodotto è in sconto
+		let perc = isPromotion(promozioni, art.codiceIdentificativo);
+		console.log(perc);
+		if (perc) {
+			let price = document.createElement("p");
+			price.innerHTML = (subClass.prezzo *(1- perc/100)).toFixed(2) +" €";
+			price.className = "price";
+			
+			let oldPrice = document.createElement("span");
+			oldPrice.innerHTML = subClass.prezzo.toFixed(2) + " €";
+			oldPrice.className = "old-price";
+			
+			price.appendChild(oldPrice);
+			articolo.appendChild(price);				
+		} else {
+			let price = document.createElement("p");
+			price.innerHTML = subClass.prezzo.toFixed(2) +" €";
+			price.className = "product-price";
+			articolo.appendChild(price);			
+		}
+			
 		let btn = document.createElement('button');		
 		if(subClass.disponibilita) {
 			btn.className = 'add-to-cart-btn';

@@ -83,15 +83,15 @@ function hideSearchBar() {
 
 function handleDisplaySearch(xhr) {
 	let searchResults = JSON.parse(xhr.responseText);
-	console.log(typeof(searchResults)+"\nLenght: "+searchResults.lenght);
-	// Recupera il display per gli articoli
+
+		// Recupera il display per gli articoli
 	let res = document.getElementById("search-results");
 		
 	// Cancella i risultati precedenti prima di mostrare quelli nuovi
 	while(res.firstChild)
 		res.removeChild(res.firstChild);
 
-	searchResults.forEach(result => { // Per ogni articolo trovato
+	searchResults[0].forEach(result => { // Per ogni articolo trovato
 		// Crea il risultato della ricerca
 		let suggItem = document.createElement("div");
 		suggItem.className = "suggestion-item";

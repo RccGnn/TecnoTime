@@ -8,11 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-//import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
+import it.unisa.model.DAO.Promotion.AssociatoADao;
+import it.unisa.model.DAO.Promotion.PromozioneCompletaDao;
 import it.unisa.model.beans.*;
 
 import com.google.gson.*;
@@ -23,7 +24,6 @@ import com.google.gson.*;
 @WebServlet("/ProductFilter")
 public class ProductFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//private DecimalFormat df = new DecimalFormat("#.00");
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double min = (req.getParameter("min") != null && !req.getParameter("min").trim().equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
@@ -36,7 +36,9 @@ public class ProductFilter extends HttpServlet {
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
-        System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
+        PromozioneCompletaDao promDao = new PromozioneCompletaDao();
+        
+        //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {
@@ -73,17 +75,21 @@ public class ProductFilter extends HttpServlet {
 	        }
 	        
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
+	        ArrayList<PromozioneCompletaBean> promozioni = promDao.doRetrieveByKeyProducts("");
 	        
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	        // Serializza l'intera lista di ArticoloCompletoBean in una singola stringa JSON
-            String jsonOutput = gson.toJson(catalogo);
-
-	        //System.out.println("JSON Output finale inviato:\n" + jsonOutput);
+	        ArrayList<Object> res = new ArrayList<>();
+	        res.add(catalogo);
+	        res.add(promozioni);
+	        
+            // Serializza l'intera lista di ArticoloCompletoBean e promozioni in una singola stringa JSON
+            String jsonOutput = gson.toJson(res);
+	        System.out.println("JSON Output finale inviato:\n" + jsonOutput);
 
 	        resp.setContentType("application/json");
-	        PrintWriter out = resp.getWriter();
-			out.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
-			out.flush();
+	        PrintWriter prw = resp.getWriter();
+	        prw.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
+	        prw.flush();
 			
         } catch (SQLException e) {
         	System.err.println(e.getMessage());
@@ -99,14 +105,5 @@ public class ProductFilter extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
-	
-	 /* GET:
-	  * 	- min (prezzo) - float 
-	  * 	- max (prezzo) - float
-	  * 	- name (nome articolo) - String
-	  * 	- sort (ordine) prezzo/nome asc/disc - String
-	 */
-	// Sfrutta il fatto che getParameter ritorna il valore null se il parametro non esiste
     
 } 
