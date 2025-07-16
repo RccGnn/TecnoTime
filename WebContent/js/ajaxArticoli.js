@@ -158,6 +158,19 @@ function cleanSection() {
 	}
 }
 
+function isPromotion(promotionList, codiceIdentificativo) {
+	
+	let flag = false;
+	for (let i = 0; i < promotionList.length; i++) {
+		if(promotionList[i].riguarda.codiceIdentificativo == codiceIdentificativo) {
+			flag = promotionList[i].percentualeSconto;
+			break;
+		}
+	}
+	
+	return flag;
+}
+
 // Funzione di gestione della visualizzazione degli articoli
 function handleFilter(xhr) {
 	let response = JSON.parse(xhr.responseText);
@@ -165,7 +178,7 @@ function handleFilter(xhr) {
 	cleanSection();
 			
 	// Eventuale errore se non ci sono articoli 
-	if (!response[0] || (response[0] && response[0].length === 0)) {
+	if (response[0] == null || (response[0] == null && response[0].length === 0)) {
 		let noResults = document.createElement("p");
 		noResults.textContent = "Nessun articolo trovato \n(._.)";
 		noResults.className = "error-subtitle";
@@ -212,13 +225,27 @@ function handleFilter(xhr) {
 		title.className = "product-name";
 		articolo.appendChild(title);
 		
-		// <p class="price">€400 <span class="old-price">€450</span></p>
-		
+		// Se il prodotto è in sconto
+		let perc = isPromotion(promozioni, art.codiceIdentificativo);
+		console.log(perc);
+		if (perc) {
+			let price = document.createElement("p");
+			price.innerHTML = (subClass.prezzo *(1- perc/100)).toFixed(2) +" €";
+			price.className = "price";
+			
+			let oldPrice = document.createElement("span");
+			oldPrice.innerHTML = subClass.prezzo.toFixed(2) + " €";
+			oldPrice.className = "old-price";
+			
+			price.appendChild(oldPrice);
+			articolo.appendChild(price);				
+		} else {
 			let price = document.createElement("p");
 			price.innerHTML = subClass.prezzo.toFixed(2) +" €";
 			price.className = "product-price";
-			articolo.appendChild(price);
-		
+			articolo.appendChild(price);			
+		}
+			
 		let btn = document.createElement('button');		
 		if(subClass.disponibilita) {
 			btn.className = 'add-to-cart-btn';

@@ -2063,11 +2063,11 @@ footer p.copy {
   margin: 0.5rem 0;
   color: #021859;
 }
-.product-item .price {
+.price {
   font-weight: bold;
   color: #F2762E;
 }
-.product-item .old-price {
+.old-price {
   text-decoration: line-through;
   color: #888;
   margin-left: 0.5rem;

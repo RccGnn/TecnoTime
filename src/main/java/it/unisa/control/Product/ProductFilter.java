@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.DAO.Promotion.AssociatoADao;
+import it.unisa.model.DAO.Promotion.PromozioneCompletaDao;
 import it.unisa.model.beans.*;
 
 import com.google.gson.*;
@@ -35,9 +36,9 @@ public class ProductFilter extends HttpServlet {
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
-        AssociatoADao assDao = new AssociatoADao();
+        PromozioneCompletaDao promDao = new PromozioneCompletaDao();
         
-        System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
+        //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
         try {
@@ -74,16 +75,15 @@ public class ProductFilter extends HttpServlet {
 	        }
 	        
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
-	        ArrayList<AssociatoABean> offerte = assDao.doRetrieveAll("");
+	        ArrayList<PromozioneCompletaBean> promozioni = promDao.doRetrieveByKeyProducts("");
 	        
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            ArrayList<Object> out = new ArrayList<Object>(2);
-            out.add(catalogo);
-            out.add(offerte);
+	        ArrayList<Object> res = new ArrayList<>();
+	        res.add(catalogo);
+	        res.add(promozioni);
 	        
             // Serializza l'intera lista di ArticoloCompletoBean e promozioni in una singola stringa JSON
-            String jsonOutput = gson.toJson(out);
-            
+            String jsonOutput = gson.toJson(res);
 	        System.out.println("JSON Output finale inviato:\n" + jsonOutput);
 
 	        resp.setContentType("application/json");

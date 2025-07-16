@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import it.unisa.model.DAO.DaoUtils;
-import it.unisa.model.DAO.Order.OrdineCompletoDao;
 import it.unisa.model.beans.AssociatoABean;
 import it.unisa.model.beans.PromozioneCompletaBean;
 import it.unisa.model.beans.RiguardaBean;
@@ -17,8 +15,6 @@ public class PromozioneCompletaDao extends PromozioneDao{
 
 	private static final String TABLE_NAME = "PromozioneCompletaBean";
 
-	private static final String[] whitelist = 
-		{"IDPromozione", "dataInizio", "durata", "percentualeSconto", "username", "codicePromozione", "codiceIdentificativo"};
 	
 	private synchronized void createView() throws SQLException {
 		Connection connection = null;
@@ -110,7 +106,7 @@ public class PromozioneCompletaDao extends PromozioneDao{
 					// Se il campo codiceIdentificativo non è null, memorizza la promozione
 					if (rs.getString("codiceIdentificativo") == null)
 						continue;
-					
+	
 					// I campi di promozione
 					promozione = new PromozioneCompletaBean();
 					promozione.setIDPromozione(rs.getString("IDPromozione"));
@@ -121,7 +117,7 @@ public class PromozioneCompletaDao extends PromozioneDao{
 					// L'oggetto dei campi riguarda
 					riguarda = new RiguardaBean();
 					riguarda.setIDPromozione(rs.getString("IDPromozione"));
-					riguarda.setCodiceIdentificativo("codiceIdentificativo");
+					riguarda.setCodiceIdentificativo(rs.getString("codiceIdentificativo"));
 					
 					// Aggiungi l'oggetto riguarda
 					promozione.setRiguarda(riguarda);
