@@ -13,13 +13,39 @@
     <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>TecnoTime - modifOfferte</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
 </head>
 <body>
     <jsp:include page="header-amministratore.jsp" />
     
     <main>
-    <!-- sezione per selezionare un'offerta e apportare modifiche -->
+    <section class="offers-categories">
+	    <h2>OPZIONI DI MODIFICA</h2>
+	    <div class="category-grid-offerte">
+	      <div class="category-box-offerte">
+	        <a href="aggiungiOfferta.jsp">
+	          <img src="<%= request.getContextPath() %>/images/offerte.png" alt="ADDSALE">
+	          <h3>AGGIUNGI OFFERTA</h3>
+	        </a>
+	      </div>
+	      <div class="category-box-offerte">
+	        <a href="rimuoviOfferta.jsp">
+	          <img src="<%= request.getContextPath() %>/images/offerte.png" alt="REMOVESALE">
+	          <h3>RIMUOVI OFFERTA</h3>
+	        </a>
+	      </div>
+	      <div class="category-box-offerte">
+	        <a href="modificaOfferta.jsp">
+	          <img src="<%= request.getContextPath() %>/images/offerte.png" alt="MODIFYSALE">
+	          <h3>MODIFICA OFFERTA</h3>
+	        </a>
+	      </div>
+	    </div>
+	</section>  
 	</main>
 	
 	<jsp:include page="footer-amministratore.jsp" />
