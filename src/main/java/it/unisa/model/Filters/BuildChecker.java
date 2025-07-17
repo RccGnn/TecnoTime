@@ -53,10 +53,10 @@ public class BuildChecker {
 	
 	
     private static final Map<String, Integer> codiciFormato = Map.of(
-            "EATX", 4,
+            "E-ATX", 4,
             "ATX", 3,
-            "MICRO ATX", 2,
-            "MINI ITX", 1
+            "MICRO-ATX", 2,
+            "MINI-ITX", 1
         );
 
     public static int codificaATX(String formato) {

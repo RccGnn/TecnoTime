@@ -75,22 +75,14 @@
 
             <label for="nation">Nazionalità:</label>
             <input type="text" id="nation" name="nation">
-
-<!-- 		<label for="role">Ruolo (es. utente/admin):</label>
-            <input type="text" id="role" name="role" required>
--->
+            
             <button type="submit">Registrati</button>
+            <% String error=null;
+            	if(request.getAttribute("error")!=null && !error.isEmpty()){ %>
+            	<div class="error-message"> <%= error = (String)request.getAttribute("error") %></div>
+            <% } %>
             <button type="reset">Reset</button>
         </form>
-
-        <% String error = (String) request.getAttribute("error"); %>
-        <% if (error != null && !error.isEmpty()) { %>
-            <div class="error-message"><%= error %></div>
-        <% } %>
-        <% String message = (String) request.getAttribute("message"); %>
-        <% if (message != null && !message.isEmpty()) { %>
-            <div class="success-message"><%= message %></div>
-        <% } %>
     </div>
 	<jsp:include page="footer.jsp" />
     
