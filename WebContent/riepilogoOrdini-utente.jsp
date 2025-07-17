@@ -20,6 +20,7 @@
     <title>Ordini effettuati - TecnoTime</title>
     <!-- Link al CSS esterno -->
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/filters.css">
 </head>
 <body>
 <%		// TEMPORANEO
@@ -50,12 +51,14 @@
             <input type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
         </div>
 
-        <div class="price-filter-group">
+        <div class="date-filter-group">
             <label for="priceLowerBound">Prezzo (MIN):</label>
-            <input type="range" id="priceLowerBound" name="priceLowerBound" placeholder="€">
-
+            <input onchange="displaySlider(this)" type="range" id="priceLowerBound" name="priceLowerBound" placeholder="€" value=0 max=9999>
+			<output id="slider1"> </output>
+			
             <label for="priceUpperBound">Prezzo (MAX):</label>
-            <input type="range" id="priceUpperBound" name="priceUpperBound" placeholder="€">
+            <input onchange="displaySlider(this)" type="range" id="priceUpperBound" name="priceUpperBound" placeholder="€" value=0 max=9999>
+            <output id="slider2"> </output>
         </div>
     </div>
     
@@ -116,4 +119,5 @@
     
 	<script src="js/navbar.js" defer></script>
 	<script src="js/deals-slider.js" defer></script>
+	<script src="js/ajaxOrdini.js" defer></script>
 </html>

@@ -80,16 +80,100 @@ function sortedProducts() {
 	                "&dateLowerBound=" + encodeURIComponent(dateLbput) +
 	                "&dateUpperBound=" + encodeURIComponent(dateUpInput);
 	
-	loadAjaxDoc("ProductFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
+	loadAjaxDoc("OrderFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }
 
-function displaySlider() {
-	let slider = document.getElementById("slider");
-	let sliderValue = document.getElementById("duration");
+
+function displaySlider(element) {
 	
-	if(sliderValue.value == 1)
-		slider.innerHTML = sliderValue.value + " giorno";
-	else
-		slider.innerHTML = sliderValue.value + " giorni";
+	console.log(element.id);
+	let slider, output;
+	if (element.id == "priceLowerBound") {
+		slider = document.getElementById(element.id);
+		output = document.getElementById("slider1");
+	}
+	if (element.id == "priceUpperBound") {
+		slider = document.getElementById(element.id);
+		output = document.getElementById("slider2");	
+	}
+	
+	console.log(slider.value);
+	output.innerHTML = slider.value + " €";
 }
+
+function cleanSection() {
+	let articoli = document.getElementsByClassName('orders-list-page')[0];
+
+	while (articoli.firstChild) {
+		articoli.removeChild(articoli.firstChild);
+	}
+}
+
+function handleFilter(xhr) {
+	// Ottieni una lista di ordini 
+	let response = JSON.parse(xhr.responseText);
+
+	if(!response) {
+		displayEmptyOrders();
+	}
+	
+	cleanSection(); // Rimuovi tutti gli elementi tranne i filtri
+	// Crea il container per gli ordini
+	let container = document.createElement("div");
+	container.className = "orders-list-page";
+	
+	// Se non ci sono prodotti, allora mostra un messaggio
+	if(response == null || response.lenght == 0) {
+		let mess = document.createElement("p");
+		mess.className = "no-orders-message";
+		container.appendChild(mess);
+		
+		return;
+	}
+	
+	// Altrimenti genera gli ordini
+	response.forEach(ord => {
+		let orderSummary = document.createElement("div");
+		orderSummary.className = "orders-summary-section";
+		
+		// Header 
+		let orderHeader = document.createElement("div");
+		orderHeader.className = "order-header";
+		
+		// Dettaglio per header ordini		
+		let orderGroup = document.createElement("div");
+		orderGroup.className = "order-details-group";
+		
+		// Dettaglio 1
+		let orderDetail = document.createElement("div");
+		orderDetail.className = "order-detail-item";
+		
+		// span 1
+		let spanDetail = document.createElement("span");
+		spanDetail.className = "detail-label";
+		spanDetail.innerHTML = "Data ordine:";
+		orderDetail.appendChild(spanDetail);
+		
+		// span 2
+		spanDetail = document.createElement("span");
+		spanDetail.className = "detail-value";
+		spanDetail.innerHTML = "Data ordine: " + ord.dataTransazione;
+		orderDetail.appendChild(spanDetail);
+
+		orderGroup.appendChild(orderDetail);
+		
+		// Dettaglio 2
+		orderDetail = document.createElement("div");
+		orderDetail.className = "order-detail-item";
+
+		// span 1
+		spanDetail = document.createElement("span");
+		spanDetail.className = "detail-label";
+		spanDetail.innerHTML = "Data ordine:";
+		orderDetail.appendChild(spanDetail);
+				
+	});
+}
+
+
 
