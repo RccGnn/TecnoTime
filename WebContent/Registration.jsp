@@ -9,7 +9,10 @@
     <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Registrazione - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/login_registrazione.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />
@@ -17,6 +20,8 @@
     <div class="form-container">
         <h2>Registrazione Utente</h2>
         <form action="RegistrationPage" method="post">
+        	<section>
+        	<h4>SEZIONE DATI ANAGRAFICI</h4>
             <label for="firstName">Nome:</label>
             <input type="text" id="firstName" name="firstName" required>
 
@@ -51,7 +56,19 @@
             <select id="city" name="city" required>
                 <option value="">Seleziona città…</option>
             </select>
+            <label for="gender">Genere:</label>
+            <select id="gender" name="gender" required>
+                <option value="M">Maschio</option>
+                <option value="F">Femmina</option>
+                <option value="A">Altro</option>
+                <option value="N">Preferisco non specificare</option>
+            </select>
 
+            <label for="nation">Nazionalità:</label>
+            <input type="text" id="nation" name="nation">
+			</section>
+			<section>
+			<h4>SEZIONE ACCOUNT</h4>
 			<label for="email">Email:</label>
 			<input type="email" id="email" name="email" required>
 
@@ -66,22 +83,16 @@
 
             <label for="telNumb">Telefono:</label>
             <input type="text" id="telNumb" name="telNumb">
-
-            <label for="gender">Genere:</label>
-            <select id="gender" name="gender" required>
-                <option value="M">Maschio</option>
-                <option value="F">Femmina</option>
-            </select>
-
-            <label for="nation">Nazionalità:</label>
-            <input type="text" id="nation" name="nation">
+			</section>
             
+            <button type="reset">Reset</button>
             <button type="submit">Registrati</button>
             <% String error=null;
             	if(request.getAttribute("error")!=null && !error.isEmpty()){ %>
             	<div class="error-message"> <%= error = (String)request.getAttribute("error") %></div>
             <% } %>
-            <button type="reset">Reset</button>
+            
+            
         </form>
     </div>
 	<jsp:include page="footer.jsp" />
