@@ -131,8 +131,8 @@ body {
 }
 
 .icon-link .icon {
-    width: 48px;
-    height: 48px;
+    width: 72px;
+    height: 96px;
     margin-top: 4px;
     filter: brightness(0) invert(1);
 }

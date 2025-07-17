@@ -9,7 +9,10 @@
     <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Guide - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/guide.css">
 </head>
 <body>
       <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
@@ -21,18 +24,13 @@
    	}%>
 
    	<main class="assembly-guide">
-   		<div class="responsive-yt-wrapper" id="yt-player-wrapper">
-		  <div id="ytplayer-placeholder">
-		    <img src="https://img.youtube.com/vi/DC-Xn2C_L1U/hqdefault.jpg" alt="Anteprima video">
-		    <div class="yt-play-button-overlay">&#9658;</div>
-		  </div>
-		</div>
-
-		<script src="js/youtubeguide-lazy.js" defer></script>
 	  <section>
 	    <h1>Guida Completa all'Assemblaggio del Tuo PC: Dalla Scelta dei Componenti al Primo Avvio</h1>
 	    <p class="intro">Assemblare un PC su misura è un'esperienza gratificante che ti permette di creare una macchina perfettamente adatta alle tue esigenze. Il processo richiede un'attenta pianificazione, una selezione oculata dei componenti e un assemblaggio metodico. Questa guida ti accompagnerà in ogni fase del percorso.</p>
 	  </section>
+	  <br>
+	  <h3>VIDEO A TITOLO ESEMPLIFICATIVO A PIÈ DI PAGINA</h3>
+	  <br>
 	
 	  <section>
 	    <h2>Capitolo 1: Pianificazione e Preparazione</h2>
@@ -169,7 +167,22 @@
 	        <li>Chiudi il pannello laterale che avevi lasciato aperto.</li>
 	        <li>Ricollega tutto e goditi la tua nuova creazione!</li>
 	    </ul>
+
+	    <h2>GUARDA IL VIDEO QUI</h2>
+	    <br>
+	    <br>
+	    <br>
+	    <br>
 	  </section>
+	  
+	  <div class="responsive-yt-wrapper" id="yt-player-wrapper">
+		  <div id="ytplayer-placeholder">
+		    <img src="https://img.youtube.com/vi/DC-Xn2C_L1U/hqdefault.jpg" alt="Anteprima video">
+		    <div class="yt-play-button-overlay">&#9658;</div>
+		  </div>
+		</div>
+
+		<script src="js/youtubeguide-lazy.js" defer></script>
 	</main>
    	
    	<jsp:include page="footer.jsp" />
