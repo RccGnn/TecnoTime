@@ -1,5 +1,5 @@
 /* Stili CSS per la barra del filtro */
-        .filter-bar-container {
+       .filter-bar-container {
             display: flex;
             align-items: center;
             padding: 15px 25px; /* Spaziatura interna */
@@ -36,8 +36,6 @@
             -moz-appearance: none;
         }
 
-        /* Stili per il formato YYYY/MM/DD visibile nel placeholder (non modificabile dall'input type="date") */
-        /* Questo è solo un esempio visivo, il formato effettivo dell'input type="date" dipende dal browser/locale */
         .date-filter-group input[type="date"]::before {
             content: attr(placeholder);
             color: #999;
