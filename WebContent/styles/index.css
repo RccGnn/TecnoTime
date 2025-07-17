@@ -75,7 +75,7 @@ main {
 }
 .deals-grid .product-image {
   width: 100%;
-  height: 140px;
+  height: 300px;         /* aumentata da 220px a 300px */
   object-fit: cover;
   border-radius: 4px;
 }
@@ -141,7 +141,7 @@ main {
 }
 .mobile-slider .slide .product-image {
   width: 100%;
-  height: 160px;
+  height: 320px;         /* aumentata da 240px a 320px */
   object-fit: cover;
   border-radius: 4px;
   margin-top: 2rem;
