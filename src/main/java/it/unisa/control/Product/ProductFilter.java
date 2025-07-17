@@ -34,6 +34,7 @@ public class ProductFilter extends HttpServlet {
         double durata = (req.getParameter("duration") != null && !req.getParameter("duration").trim().equals("")) ? Double.parseDouble(req.getParameter("duration")) : -1;
         boolean searchBar = Boolean.parseBoolean(req.getParameter("fromSearchBar")); // parseBoolean interpreta come false qualsiasi stringa diversa da true (case insensitive)
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
+        String brand = (req.getParameter("marcaInput") != null && !req.getParameter("marcaInput").trim().equals("")) ? req.getParameter("marcaInput") : null;
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
         PromozioneCompletaDao promDao = new PromozioneCompletaDao();
@@ -67,6 +68,10 @@ public class ProductFilter extends HttpServlet {
 		        // Filtra per la categoria
 		        if (categoria != null)
 		        	Filters.categoryFilter(catalogo, categoria);
+		        
+		        // Filtra per marca
+		        if(brand != null)
+		        	Filters.nameFilter(catalogo, brand);
 		        
 		        // Se si tratta di un servizio, filtra per durata del servizio
 		        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"

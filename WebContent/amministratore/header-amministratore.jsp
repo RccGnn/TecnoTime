@@ -9,7 +9,9 @@
 	href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
 <title>TecnoTime - E-commerce</title>
 <!-- Link al CSS esterno -->
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
 </head>
 <body>
 	<!-- Header con logo, ricerca, icone -->

@@ -15,7 +15,9 @@
 	href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
 <title>TecnoTime - E-commerce</title>
 <!-- Link al CSS esterno -->
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
 </head>
 <body>
 	<jsp:include page="header-utente.jsp" />
@@ -49,21 +51,21 @@
 		  <div class="deals-grid">
 		    <div class="product-card">
 		      <span class="label">Offerta Lampo</span>
-		      <img src="images/mouse-hyperx.png" alt="Mouse HyperX RGB" class="product-image">
-		      <p class="product-name">Mouse HyperX RGB</p>
-		      <p class="product-description">Gaming Mouse RGB a metà prezzo!</p>
+		      <img src="<%= request.getContextPath() %>/images/offerte.png" alt="OFFERTE" class="product-image">
+		      <p class="product-name">TIME OFFERTE</p>
+		      <p class="product-description">Approfittane ora!</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="product-card">
 		      <span class="label">OFFERTISSIMA</span>
-		      <img src="images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
+		      <img src="<%= request.getContextPath() %>/images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
 		      <p class="product-name">Ryzen 7 9800x3d</p>
 		      <p class="product-description">King dei Processori</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="product-card">
 		      <span class="label">PER BREVE TEMPO</span>
-		      <img src="images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
+		      <img src="<%= request.getContextPath() %>/images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
 		      <p class="product-name">ASUS ROG ASTRAL 5090</p>
 		      <p class="product-description">NVIDIA FLAGSHIP</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
@@ -74,21 +76,21 @@
 		  <div class="mobile-slider">
 		    <div class="slide" data-index="0">
 		      <span class="label">Offerta Lampo</span>
-		      <img src="images/mouse-hyperx.png" alt="Mouse HyperX RGB" class="product-image">
-		      <p class="product-name">Mouse HyperX RGB</p>
-		      <p class="product-description">Gaming Mouse RGB a metà prezzo!</p>
+		      <img src="<%= request.getContextPath() %>/images/offerte.png" alt="OFFERTE" class="product-image">
+		      <p class="product-name">TIME OFFERTE</p>
+		      <p class="product-description">Approfittane ora!</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="slide" data-index="1">
 		      <span class="label">OFFERTISSIMA</span>
-		      <img src="images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
+		      <img src="<%= request.getContextPath() %>/images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
 		      <p class="product-name">Ryzen 7 9800x3d</p>
 		      <p class="product-description">King dei Processori</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="slide" data-index="2">
 		      <span class="label">PER BREVE TEMPO</span>
-		      <img src="images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
+		      <img src="<%= request.getContextPath() %>/images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
 		      <p class="product-name">ASUS ROG ASTRAL 5090</p>
 		      <p class="product-description">NVIDIA FLAGSHIP</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
