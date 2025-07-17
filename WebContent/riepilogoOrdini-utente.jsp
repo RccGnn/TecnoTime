@@ -22,10 +22,14 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
 </head>
 <body>
-<%
+<%		// TEMPORANEO
 	OrdineCompletoDao ordDao = new OrdineCompletoDao();
 	ArrayList<OrdineCompletoBean> listaOrdini = ordDao.doRetrieveAllByUsername("username"); //(ArrayList<OrdineCompletoBean>) request.getAttribute("listaOrdini");
 	DecimalFormat df = new DecimalFormat("0.00 €");
+%>
+
+<%
+	String username = (String) request.getAttribute("username");
 %>
    <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
 	  %><jsp:include page="utente/header-utente.jsp"/>
@@ -36,6 +40,25 @@
    }%>
    
    
+   <div class="filter-bar-container">
+   		<input type="hidden" id="username" value ="<%= username %>">
+        <div class="date-filter-group">
+            <label for="dateLowerBound">Data (Lower Bound):</label>
+            <input type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD">
+
+            <label for="dateUpperBound">Data (Upper Bound):</label>
+            <input type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
+        </div>
+
+        <div class="price-filter-group">
+            <label for="priceLowerBound">Prezzo (MIN):</label>
+            <input type="range" id="priceLowerBound" name="priceLowerBound" placeholder="€">
+
+            <label for="priceUpperBound">Prezzo (MAX):</label>
+            <input type="range" id="priceUpperBound" name="priceUpperBound" placeholder="€">
+        </div>
+    </div>
+    
    	<div class="orders-list-page">
 		<h1>I miei ordini</h1>
 	   <% if (listaOrdini == null || listaOrdini.isEmpty()) { %>

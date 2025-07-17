@@ -1,8 +1,13 @@
 package it.unisa.control.Product;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
+
 import it.unisa.model.beans.ArticoloCompletoBean;
+import it.unisa.model.beans.OrdineCompletoBean;
 
 /**
  * Questa classe racchiude tutti i metodi usati per filtrare i prodotti
@@ -96,9 +101,36 @@ public class Filters {
 	 */
 	public static ArrayList<ArticoloCompletoBean> durationFilter(ArrayList<ArticoloCompletoBean> catalogo, double duration) {
 
-		double lamdaduration = Math.abs(duration);
+		double lambdaduration = Math.abs(duration);
 		if (catalogo == null || catalogo.isEmpty()) return catalogo;
-			catalogo.removeIf(c->c.getServizio().getDurata()<lamdaduration);
+			catalogo.removeIf(c->c.getServizio().getDurata()<lambdaduration);
 		return catalogo;
+	}
+	
+	
+	
+	/*
+	 * FILTRI DEGLI ORDINI
+	 */
+	
+	public static ArrayList<OrdineCompletoBean> priceOrderFilter(ArrayList<OrdineCompletoBean> listaOrdini, double priceMin, double priceMax) {
+
+		final double lambdaMin = Math.abs(priceMin);
+		final double lambdaMax = Math.abs(priceMax);
+		if (listaOrdini == null || listaOrdini.isEmpty()) return listaOrdini;
+			listaOrdini.removeIf(ord -> (ord.getTotale() < lambdaMin || ord.getTotale() > lambdaMax) );
+		return listaOrdini;
+	}
+	
+	public static ArrayList<OrdineCompletoBean> dateOrderFilter(ArrayList<OrdineCompletoBean> listaOrdini, String dateMin, String dateMax) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        
+		final LocalDate lambdaMin = LocalDate.parse(dateMin, formatter);
+		final LocalDate lambdaMax = LocalDate.parse(dateMax, formatter);
+
+		if (listaOrdini == null || listaOrdini.isEmpty()) return listaOrdini;
+			listaOrdini.removeIf(ord -> (ord.getDataTransazione().toLocalDate().isBefore(lambdaMin) || ord.getDataTransazione().toLocalDate().isAfter(lambdaMax) ));
+		return listaOrdini;
 	}
 }

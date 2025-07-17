@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
-import it.unisa.model.DAO.Promotion.AssociatoADao;
 import it.unisa.model.DAO.Promotion.PromozioneCompletaDao;
 import it.unisa.model.beans.*;
 

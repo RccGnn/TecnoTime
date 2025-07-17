@@ -130,8 +130,8 @@ function sortedProducts() {
 	const sortInput = document.getElementById("sort").value;	
 	const nomeInput = document.getElementById("name").value;
 	const contestoInput = window.location.pathname;
-	let durataInput = "";
-	let categoriaInput = "";	
+	let durataInput = " ";
+	let categoriaInput = " ";	
 	let contexChoice = contexEnum(contestoInput);
 
 	// In base a quale pagina effettua la chiamata ajax, si impostano i parametri da passare nel GET 
