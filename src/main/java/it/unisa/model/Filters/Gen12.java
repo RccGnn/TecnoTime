@@ -1,9 +1,0 @@
-package it.unisa.model.Filters;
-
-public enum Gen12 {
-	MSI_PRO_H610M_E,
-	ASUS_ROG_Strix_B660_A_Gaming_WiFi_D4,
-	ASUS_ROG_MAXIMUS_XII_EXTREME_Intel_Z490,
-	GIGABYTE_Z790_EAGLE_AX,
-	MSI_MAG_Z690_TOMAHAWK_WIFI
-}

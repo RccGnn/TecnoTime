@@ -20,8 +20,8 @@ public class RamDao {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ RamDao.TABLE_NAME
-				+ "(nomecompleto,marca,capacita,wifi,SupportoRam,Watt)"
-				+ "VALUES (? , ?, ?, ?, ?, ?)";
+				+ "(nomecompleto,marca,capacita,SupportoRam)"
+				+ "VALUES (? , ?, ?, ?)";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -32,7 +32,6 @@ public class RamDao {
 		    ps.setString(2, ram.marca());
 		    ps.setInt(3, ram.capacita());
 		    ps.setString(4, ram.SupportoRam());
-		    ps.setInt(5, ram.watt());
 			ps.executeUpdate();
 
 		} finally {
@@ -63,11 +62,10 @@ public class RamDao {
 		                    rs.getString("nomecompleto"),
 		                    rs.getString("marca"),
 		                    rs.getInt("capacita"),
-		                    rs.getString("SupportoRam"),
-		                    rs.getInt("Watt")
+		                    rs.getString("SupportoRam")
 		                );
 		            } else {
-		                return null; // Nessun processore trovato
+		                return null; // Nessuna ram trovata
 		            }
 		    }finally {
 				try {

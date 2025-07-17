@@ -34,7 +34,7 @@ private static final String TABLE_NAME = "SCHEDA_VIDEO";
 		    ps.setFloat(3, vc.PCI());
 		    ps.setInt(4, vc.vram());
 		    ps.setString(5, vc.tipoRam());
-		    ps.setInt(6, vc.Watt());
+		    ps.setInt(6, vc.watt());
 			ps.executeUpdate();
 
 		} finally {
@@ -68,7 +68,7 @@ private static final String TABLE_NAME = "SCHEDA_VIDEO";
 		                    rs.getFloat("PCI"),
 		                    rs.getInt("vram"),
 		                    rs.getString("tipoRam"),
-		                    rs.getInt("Watt")
+		                    rs.getInt("watt")
 		                );
 		            } else {
 		                return null; // Nessun processore trovato

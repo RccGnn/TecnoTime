@@ -94,6 +94,11 @@ public class LoginPage extends HttpServlet {
         		 daoCarrello.doSave(carrello, false);
         		 
         		 //
+             }else {
+            	 request.setAttribute("error", "Username o password errati");
+            	 RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
+    	         dispatcher.forward(request, response);      
+    	         return;
              }
         }catch (SQLException e) {
         	request.setAttribute("serverError", "Errore d'accesso: Login Fallito. Riprova"); //eventuale pagina errore
