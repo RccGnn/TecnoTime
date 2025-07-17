@@ -231,6 +231,8 @@ body {
 }
 
 .main-nav ul li {
+	padding : 0px 12px;
+	margin: 5px;
     position: relative;
 }
 

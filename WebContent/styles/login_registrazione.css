@@ -263,13 +263,13 @@ body {
   .form-container select,
   .form-container textarea{
   	display:block; 
-  	width: 100%;
+  	width: 98%;
     margin: 0 0 1.5rem;	
   	}
   .form-container button[type="submit"] {
    	 margin: 0 0 1rem;	
    	 width: 45%;
-   	 gap:15%
+   	 margin-left: 4%
    }
 
 	.button-row{
