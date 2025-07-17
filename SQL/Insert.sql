@@ -123,3 +123,22 @@ INSERT INTO Contiene (usernameCarrello, Carrello_Id, codiceIdentificativo, quant
 ('gverdi', "CAR3", 'ART600', 1),
 ('gverdi', "CAR3", 'ART500', 3),
 ('gverdi', "CAR3", 'ART900', 1);
+
+
+-- Inserisco una promozione per alcuni prodotti
+INSERT INTO Promozione (IDPromozione, dataInizio, durata, percentualeSconto) VALUES
+('PROMO_PROD_1', '2025-07-15', 7, 15.00); -- 15% di sconto per 7 giorni
+
+-- Associo la promozione 'PROMO_PROD_1' a specifici articoli
+INSERT INTO Riguarda (IDPromozione, codiceIdentificativo) VALUES
+('PROMO_PROD_1', 'ART100'), -- Monitor AOC
+('PROMO_PROD_1', 'ART400'), -- Mouse Logitech
+('PROMO_PROD_1', 'ART600'); -- Cuffie Sony
+
+-- Inserisco una promozione specifica per l'account di Mario Rossi
+INSERT INTO Promozione (IDPromozione, dataInizio, durata, percentualeSconto) VALUES
+('PROMO_MARIO_1', '2025-07-16', 3, 10.00); -- 10% di sconto per Mario Rossi per 3 giorni
+
+-- Associo la promozione 'PROMO_MARIO_1' all'account di Mario Rossi
+INSERT INTO Associato_a (username, IDPromozione, codicePromozione) VALUES
+('mrossi', 'PROMO_MARIO_1', 'MARIO10OFF'); -- Codice promozionale specifico per Mario Rossi
