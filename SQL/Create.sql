@@ -44,7 +44,7 @@ CREATE TABLE Wishlist (
 CREATE TABLE Articolo (
   codiceIdentificativo	VARCHAR(20)		PRIMARY KEY NOT NULL,
   categoria				VARCHAR(50)		NOT NULL,
-  nome                	VARCHAR(200)	NOT NULL,
+  nome                	VARCHAR(100)	NOT NULL,
   dataUltimaPromozione 	DATE          	NOT NULL,
   enteErogatore       	VARCHAR(100)   	NOT NULL,
   disponibilita       	BOOLEAN        	NOT NULL DEFAULT TRUE
@@ -101,22 +101,22 @@ CREATE TABLE Promozione (
   IDPromozione       VARCHAR(20) 	PRIMARY KEY NOT NULL,
   dataInizio       	 DATE           NOT NULL,
   durata             INT            NOT NULL, -- ORE/GIORNI
-  percentualeSconto  DECIMAL(5,2)   NOT NULL
+  percentualeSconto  DECIMAL(5,2)   NOT NULL,
+  codicePromozione   VARCHAR(50)	DEFAULT NULL
 );
 
 CREATE TABLE Ordine (
-  numeroTransazione INT            	NOT NULL UNIQUE,
-  totale           	DECIMAL(9,2)  	NOT NULL,
-  dataTransazione   DATE           	NOT NULL,
-  oraTransazione    TIME           	NOT NULL,
-  username         	VARCHAR(50)    	NOT NULL,
-  nazione       	VARCHAR(50)     NOT NULL,
-  provincia			VARCHAR(50)    	NOT NULL,
-  citta			  	VARCHAR(50)    	NOT NULL,
-  via      			VARCHAR(100)   	NOT NULL,
-  numeroCivico		VARCHAR(10)		NOT NULL,
-  CAP         		VARCHAR(5)    	NOT NULL,
-  CONSTRAINT PRIMARY KEY (numeroTransazione, username), 
+  numeroTransazione  INT            PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  totale           	 DECIMAL(9,2)  	NOT NULL,
+  dataTransazione    DATE           NOT NULL,
+  oraTransazione     TIME           NOT NULL,
+  username           VARCHAR(50)    NOT NULL,
+  nazione       VARCHAR(50)     NOT NULL,
+  provincia		VARCHAR(50)    	NOT NULL,
+  citta			  VARCHAR(50)    	NOT NULL,
+  via      		VARCHAR(100)   	NOT NULL,
+  numeroCivico	VARCHAR(10)		NOT NULL,
+  CAP         VARCHAR(5)    NOT NULL,
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
     ON DELETE CASCADE
     ON UPDATE CASCADE
@@ -124,19 +124,16 @@ CREATE TABLE Ordine (
 
 CREATE TABLE Elemento_Ordine (
   numero            	INT            	NOT NULL,
-  numeroTransazione 	INT            	NOT NULL,					
-  codiceArticolo     	VARCHAR(20)    	NOT NULL, -- Può capitare che un articolo viene eliminato, in quel caso codice articolo viene mantenuto
-  nomeArticolo			VARCHAR(200)	NOT NULL,
-  urlImmagineArticolo	VARCHAR(400)	NOT NULL,
-  quantitaArticolo      INT            	NOT NULL,
+  numeroTransazione 	INT            	NOT NULL,
+  codiceArticolo     	VARCHAR(20)    	NOT NULL,
+  quantita           	INT            	NOT NULL,
   prezzoUnitario   	 	DECIMAL(9,2)  	NOT NULL,
-  CONSTRAINT PRIMARY KEY (numeroTransazione, numero, codiceArticolo),
+  CONSTRAINT PRIMARY KEY (numeroTransazione, numero),
   CONSTRAINT FOREIGN KEY (numeroTransazione) REFERENCES Ordine(numeroTransazione)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT FOREIGN KEY (codiceArticolo) REFERENCES Articolo(codiceIdentificativo)
-	ON UPDATE CASCADE 	-- Se cambia il codice di un articolo cambia, allora modifica.
-						-- Se un articolo viene eliminato, non eliminare l'elemento dall'ordine
+	ON UPDATE CASCADE
 );
 
 CREATE TABLE Contiene (
@@ -178,7 +175,7 @@ CREATE TABLE Composto_da (
 
 CREATE TABLE Riguarda (
   IDPromozione			VARCHAR(20)	NOT NULL,
-  codiceIdentificativo 	VARCHAR(20)	UNIQUE NOT NULL,
+  codiceIdentificativo 	VARCHAR(20)	NOT NULL,
   CONSTRAINT PRIMARY KEY (IDPromozione, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (IDPromozione) REFERENCES Promozione(IDPromozione)
     ON DELETE CASCADE
@@ -191,7 +188,6 @@ CREATE TABLE Riguarda (
 CREATE TABLE Associato_a (
   username			VARCHAR(50)		NOT NULL,
   IDPromozione     	VARCHAR(20)   	NOT NULL,
-  codicePromozione   VARCHAR(50) 	NOT NULL,
   CONSTRAINT PRIMARY KEY (username, IDPromozione),
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)
     ON DELETE CASCADE
@@ -236,28 +232,58 @@ SELECT
 FROM Carrello AS car
 	LEFT JOIN Contiene AS con USING (usernameCarrello, Carrello_Id);
 
-USE tecnotimedb;
-CREATE or REPLACE VIEW OrdineCompleto AS 
-SELECT
-	ord.*,
-    elem.numero,
-    elem.codiceArticolo,
-    elem.nomeArticolo,
-    elem.urlImmagineArticolo,
-    elem.quantitaArticolo,
-    elem.prezzoUnitario
-FROM
-	Ordine as ord
-LEFT JOIN Elemento_Ordine as elem USING (numeroTransazione);
+USE tecnotimedb; 
+CREATE TABLE PROCESSORE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+socket VARCHAR(200) NOT NULL, 
+datarilascio date NOT NULL,
+Watt INT NOT NULL
+);
+
+USE tecnotimedb; 
+CREATE TABLE SCHEDA_MADRE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+socket VARCHAR(200) NOT NULL, 
+dimensione VARCHAR(200) NOT NULL,
+PCI decimal(2,1) NOT NULL,
+SupportoRam VARCHAR(100) NOT NULL,
+Watt INT NOT NULL
+);
 
 USE tecnotimedb;
-CREATE or REPLACE VIEW PromozioneCompleta AS
-SELECT
-	promo.*,
-    rig.codiceIdentificativo,
-    ass.username,
-    ass.codicePromozione
-FROM
-	Promozione AS promo
-LEFT JOIN Riguarda AS rig USING (IDPromozione)
-LEFT JOIN Associato_a AS ass USING (IDPromozione);
+CREATE TABLE RAM(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+capacita INT NOT NULL,
+SupportoRam VARCHAR(100) NOT NULL
+);
+
+USE tecnotimedb; 
+CREATE TABLE SCHEDA_VIDEO(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+PCI  DECIMAL(2,1) NOT NULL,
+vram INT NOT NULL, 
+tipoRam VARCHAR(100) NOT NULL,
+Watt INT NOT NULL
+);   
+ 
+USE tecnotimedb;
+CREATE TABLE ARCHIVIAZIONE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+PCI VARCHAR(100) NOT NULL,
+capacita VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE _CASE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+dimensione VARCHAR(200) NOT NULL
+);
+CREATE TABLE ALIMENTATORI (
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+watt INT NOT NULL
+);

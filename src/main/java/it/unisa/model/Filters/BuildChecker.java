@@ -1,6 +1,9 @@
 package it.unisa.model.Filters;
 
+import java.sql.SQLException;
 import java.util.Map;
+
+import it.unisa.model.DAO.Articoli.ProdottoFisicoDao;
 
 public class BuildChecker {
 
@@ -63,3 +66,13 @@ public class BuildChecker {
         return codiciFormato.getOrDefault(formato.toUpperCase(), -1); // restituisce -1 se non trova
     }
 }
+
+
+
+
+
+
+
+
+
+
