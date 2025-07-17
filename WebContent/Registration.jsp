@@ -9,9 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Registrazione - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
-  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
-  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+
   	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/login_registrazione.css">
 </head>
 <body>
@@ -84,9 +82,10 @@
             <label for="telNumb">Telefono:</label>
             <input type="text" id="telNumb" name="telNumb">
 			</section>
-            
-            <button type="reset">Reset</button>
-            <button type="submit">Registrati</button>
+            <div class="button-row">
+  				<button type="reset">Reset</button>
+  				<button type="submit">Registrati</button>
+			</div>
             <% String error=null;
             	if(request.getAttribute("error")!=null && !error.isEmpty()){ %>
             	<div class="error-message"> <%= error = (String)request.getAttribute("error") %></div>

@@ -261,18 +261,25 @@ body {
 
   .form-container input,
   .form-container select,
-  .form-container textarea,
+  .form-container textarea{
+  	display:block; 
+  	width: 100%;
+    margin: 0 0 1.5rem;	
+  	}
   .form-container button[type="submit"] {
-    display: block;
-    width: 100%;
-    margin: 0 0 1rem;
-  }
+   	 margin: 0 0 1rem;	
+   	 width: 45%;
+   	 gap:15%
+   }
 
+	.button-row{
+		display:flex;
+	}
 
   .form-container button[type="reset"],
   .form-container .register-link {
     display: inline-block;
-    width: 48%;
+    width: 45%;
     margin: 0 1% 1rem 0;
     box-sizing: border-box;
     vertical-align: top;
