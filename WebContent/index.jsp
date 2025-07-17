@@ -13,7 +13,9 @@
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>TecnoTime - E-commerce</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
 </head>
 <body>
     <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
@@ -47,9 +49,9 @@
 		  <div class="deals-grid">
 		    <div class="product-card">
 		      <span class="label">Offerta Lampo</span>
-		      <img src="images/mouse-hyperx.png" alt="Mouse HyperX RGB" class="product-image">
-		      <p class="product-name">Mouse HyperX RGB</p>
-		      <p class="product-description">Gaming Mouse RGB a metà prezzo!</p>
+		      <img src="images/offerte.png" alt="OFFERTE" class="product-image">
+		      <p class="product-name">TIME OFFERTE</p>
+		      <p class="product-description">Approfittane ora!</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="product-card">
@@ -72,9 +74,9 @@
 		  <div class="mobile-slider">
 		    <div class="slide" data-index="0">
 		      <span class="label">Offerta Lampo</span>
-		      <img src="images/mouse-hyperx.png" alt="Mouse HyperX RGB" class="product-image">
-		      <p class="product-name">Mouse HyperX RGB</p>
-		      <p class="product-description">Gaming Mouse RGB a metà prezzo!</p>
+		      <img src="images/offerte.png" alt="OFFERTE" class="product-image">
+		      <p class="product-name">TIME OFFERTE</p>
+		      <p class="product-description">Approfittane ora!</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="slide" data-index="1">

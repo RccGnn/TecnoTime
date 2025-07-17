@@ -74,69 +74,56 @@ body {
 /* PAGINA OFFERTE – LAYOUT PRINCIPALE     */
 /* ====================================== */
 
-/* Sidebar filtri – Desktop (1/3) */
-.filter-offerte-sidebar {
-  position: fixed;
-  top: 72px;                
-  left: 0;
-  width: 28%;
-  max-width: 280px;
-  background: #fff;
-  padding: 1rem;
-  border-right: 1px solid #ddd;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  height: calc(100% - 72px);
-  overflow-y: auto;
-  z-index: 5;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
-}
-
-/* Toggle button (solo mobile) */
-#toggleFilters {
-  display: none;
-}
-
-/* Contenuto prodotti filtrati – Desktop (2/3) */
-.filtered-products {
-  margin-left: 28%;
-  padding: 1rem 2rem;
-  box-sizing: border-box;
-}
-
 /* ============================= */
 /* BLOCCO 1: Categorie in Offerta */
 /* ============================= */
 .offers-categories {
-  max-width: calc(72% - 2rem);
+  max-width: 1200px;
   margin: 2rem auto 1rem auto;
-  padding-left: 28%;
+  padding: 0 1rem;
   box-sizing: border-box;
+  text-align: center;
 }
 
+.offers-categories h2 {
+  font-size: 2rem;
+  color: #021859;
+  margin-bottom: 1.5rem;
+}
+
+/* griglia flessibile, centered */
 .category-grid-offerte {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: stretch;
 }
 
+/* ingrandiamo i box */
 .category-box-offerte {
+  width: 100%;
+  max-width: 260px;       /* box più grandi */
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   overflow: hidden;
   text-align: center;
+  transition: transform 0.2s ease;
+}
+.category-box-offerte:hover {
+  transform: translateY(-6px);
 }
 
 .category-box-offerte img {
   width: 100%;
-  height: 140px;
+  height: 160px;          /* immagine più alta */
   object-fit: cover;
 }
 
 .category-box-offerte h3 {
-  margin: 0.75rem 0;
-  font-size: 1rem;
+  margin: 1rem 0;
+  font-size: 1.1rem;
   color: #021859;
 }
 
@@ -150,17 +137,17 @@ body {
   background: #F2D230;
   color: #011140;
   margin: 0;
-  padding: 0.5rem 0;
+  padding: 0.6rem 0;
   font-weight: bold;
   transition: background 0.2s ease;
 }
-
 .category-box-offerte a:hover h3 {
   background: #F2762E;
 }
 
+
 /* ============================= */
-/* BLOCCO 3: Prodotti Filtrati    */
+/* BLOCCO 2: Prodotti Filtrati    */
 /* ============================= */
 .filtered-products h2 {
   font-size: 1.5rem;
@@ -209,11 +196,11 @@ body {
   margin: 0.5rem 0;
   color: #021859;
 }
-.product-item .price {
+.price {
   font-weight: bold;
   color: #F2762E;
 }
-.product-item .old-price {
+.old-price {
   text-decoration: line-through;
   color: #888;
   margin-left: 0.5rem;
@@ -299,17 +286,22 @@ body {
     padding: 80px 1rem 1rem;
   }
   
-  /* Categorie full‑width */
   .offers-categories {
-    padding-left: 0;
-    margin: 1.5rem 1rem;
+    padding: 0 1rem;
   }
   .category-grid-offerte {
     grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .category-box-offerte {
+    max-width: none;
+    width: 100%;
   }
 }
 
 /* --- Solo Mobile (fino a 480px) --- */
 @media (max-width: 480px) {
-
+	.category-grid-offerte {
+    grid-template-columns: 1fr;
+  }
 }
