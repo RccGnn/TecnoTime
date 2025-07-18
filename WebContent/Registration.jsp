@@ -81,11 +81,13 @@
 
             <label for="telNumb">Telefono:</label>
             <input type="text" id="telNumb" name="telNumb">
+
 			</section>
             <div class="button-row">
   				<button type="reset">Reset</button>
   				<button type="submit">Registrati</button>
 			</div>
+
             <% String error=null;
             	if(request.getAttribute("error")!=null && !error.isEmpty()){ %>
             	<div class="error-message"> <%= error = (String)request.getAttribute("error") %></div>

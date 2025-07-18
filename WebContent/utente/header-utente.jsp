@@ -18,18 +18,17 @@
 	<!-- Header con logo, ricerca, icone -->
 	<header class="main-header">
 		<div class="header-left">
-			<img src="<%= request.getContextPath() %>/images/TecnoTime.png"
-				alt="Logo TecnoTime" class="logo">
 			<%if (request.getRequestURI().contains("utente")) {%>
-			<a href="index-utente.jsp" class="icon-link"> <span
-				class="brand-name">TECNOTIME</span>
+			<a href="index-utente.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}else if(session.getAttribute("user")!=null && (Boolean)session.getAttribute("user")==true ){ %>
-			<a href="utente/index-utente.jsp" class="icon-link"> <span
-				class="brand-name">TECNOTIME</span>
+			<a href="utente/index-utente.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<% }else{ %>
-			<a href="index.jsp" class="icon-link"> <span class="brand-name">TECNOTIME</span>
+			<a href="index.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}
        	%>
@@ -55,6 +54,16 @@
 				src="<%= request.getContextPath() %>/images/user.png" alt="Utente"
 				class="icon"> <span class="login-text">Logout</span>
 			</a>
+			<div class="admin-menu">
+				<button class="admin-menu-btn" id="adminMenuBtn"
+					aria-label="Menu modifiche">
+					<span class="admin-bar"></span> <span class="admin-bar"></span> <span
+						class="admin-bar"></span>
+				</button>
+				<div class="admin-dropdown-content" id="adminDropdown">
+					<a href="<%= request.getContextPath() %>/utente/riepilogoOrdini-utente.jsp">Riepilogo Ordini</a> 
+				</div>
+			</div>
 		</div>
 	</header>
 
@@ -68,14 +77,16 @@
 			<li><a
 				href="<%= request.getContextPath() %>/articoliProdotti.jsp">PRODOTTI</a>
 				<ul class="dropdown">
+					<% 	String destination;
+						destination = "&destination=fisico";%>
 					<li class="mobile-only"><a
 						href="<%= request.getContextPath() %>/articoliProdotti.jsp">Tutti
 							i Prodotti</a></li>
-					<li><a href="#product1">Processori</a></li>
-					<li><a href="#product2">Schede Video</a></li>
-					<li><a href="#product3">Schede Madri</a></li>
-					<li><a href="#product4">Memorie</a></li>
-					<li><a href="#product5">Archiviazione</a></li>
+					<li><a href="DisplaySubMenu1?sub=Processore<%=destination%>">Processori</a></li>
+					<li><a href="DisplaySubMenu1?sub=Scheda_Video<%=destination%>">Schede Video</a></li>
+					<li><a href="DisplaySubMenu1?sub=Scheda_Madre<%=destination%>">Schede Madri</a></li>
+					<li><a href="DisplaySubMenu1?sub=RAM<%=destination%>">Memorie</a></li>
+					<li><a href="DisplaySubMenu1?sub=Archiviazione<%=destination%>">Archiviazione</a></li>
 				</ul></li>
 			<li><a
 				href="<%= request.getContextPath() %>/articoliLicenze.jsp">LICENZE</a>
@@ -83,11 +94,13 @@
 					<li class="mobile-only"><a
 						href="<%= request.getContextPath() %>/articoliLicenze.jsp">Tutte
 							le Licenze</a></li>
-					<li><a href="#license1">Windows 11 Home</a></li>
-					<li><a href="#license2">Windows 11 Pro</a></li>
-					<li><a href="#license3">Windows 10 Home</a></li>
-					<li><a href="#license4">Windows 10 Pro</a></li>
-					<li><a href="#license5">Office Package</a></li>
+					<% 	destination = "&destination=digitale";%>
+					<li class="mobile-only"><a href="articoliLicenze.jsp">Tutte le Licenze</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_11_Home<%=destination%>">Windows 11 Home</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_11_Pro<%=destination%>">Windows 11 Pro</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_10_Home<%=destination%>">Windows 10 Home</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_10_Pro<%=destination%>">Windows 10 Pro</a></li>
+					<li><a href="DisplaySubMenu2?sub=Office_Package<%=destination%>">Office Package</a></li>
 				</ul></li>
 			<li><a
 				href="<%= request.getContextPath() %>/articoliServizi.jsp">SERVIZI</a></li>

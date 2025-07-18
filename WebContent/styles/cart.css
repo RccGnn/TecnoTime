@@ -207,10 +207,11 @@ body {
 }
 
 .summary-line {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+    margin: 30px 0px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 
 .summary-line span:last-child {
@@ -228,8 +229,9 @@ body {
 }
 
 .summary-line.total {
-  font-size: 1.3rem;
-  font-weight: bold;
+    padding: 0px 0px 15px;
+    font-size: 1.3rem;
+    font-weight: bold;
 }
 
 .checkout-btn {
@@ -251,12 +253,13 @@ body {
 }
 
 .account-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  text-align: center;
-  margin-top: 1.5rem;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 1.5rem;
 }
 
 .account-links a {

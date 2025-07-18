@@ -57,6 +57,7 @@ public class test extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 			
 		 // Intel Core i9-13900K
         ProdottoFisicoBean i9_13900K = new ProdottoFisicoBean();

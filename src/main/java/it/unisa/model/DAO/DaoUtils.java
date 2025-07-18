@@ -164,7 +164,7 @@ public class DaoUtils {
 			if (articolo.getPdDigitale() != null)
 				totale += articolo.getPdDigitale().getPrezzo();
 			if (articolo.getServizio() != null)
-				totale += articolo.getPdDigitale().getPrezzo();
+				totale += articolo.getServizio().getPrezzo();
 		}
 		
 		return totale;

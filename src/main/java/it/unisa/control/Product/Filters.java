@@ -126,7 +126,12 @@ public class Filters {
 
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
         
-		final LocalDate lambdaMin = LocalDate.parse(dateMin, formatter);
+        if (dateMin == null)
+        	dateMin = "1970-01-01";
+        if (dateMax == null)
+        	dateMax = "3000-01-01";
+
+        final LocalDate lambdaMin = LocalDate.parse(dateMin, formatter);
 		final LocalDate lambdaMax = LocalDate.parse(dateMax, formatter);
 
 		if (listaOrdini == null || listaOrdini.isEmpty()) return listaOrdini;

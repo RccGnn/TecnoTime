@@ -25,8 +25,7 @@
 <% }else{ 
 	  %> <jsp:include page="header.jsp"/><%
    }%>
-
-	
+		
     <!-- Contenuto principale -->
     <main>
         <!-- Sezione Hero: Animazione + Slogan -->

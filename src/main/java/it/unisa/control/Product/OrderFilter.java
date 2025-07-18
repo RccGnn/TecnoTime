@@ -33,9 +33,14 @@ public class OrderFilter extends HttpServlet {
         String dateLowerBound = (request.getParameter("dateLowerBound") != null && !request.getParameter("dateLowerBound").trim().equals("")) ? request.getParameter("dateLowerBound") : null; 
         String dateUpperBound = (request.getParameter("dateUpperBound") != null && !request.getParameter("dateUpperBound").trim().equals("")) ? request.getParameter("dateUpperBound") : null; 
         
-        boolean user = (boolean) request.getSession().getAttribute("user");
-        boolean admin = (boolean) request.getSession().getAttribute("admin");
+        boolean user = false, admin = false;
+        if (request.getSession().getAttribute("user") != null)
+        	user = (boolean) request.getSession().getAttribute("user");
+
+        if (request.getSession().getAttribute("admin") != null)
+        	admin = (boolean) request.getSession().getAttribute("admin");
         
+        System.out.println("Price:" + priceMax + "-" + priceMin + "\nDate: "+ dateLowerBound +"-"+dateUpperBound);
         ArrayList<OrdineCompletoBean> listaOrdini = null;
         OrdineCompletoDao dao = new OrdineCompletoDao();
         try {
@@ -50,13 +55,16 @@ public class OrderFilter extends HttpServlet {
         	response.sendError(500, "Errore nella ricerca degli ordini");
         }
         
-        Filters.priceOrderFilter(listaOrdini, priceMin, priceMax);
+        if (priceMin <= priceMax)
+        	Filters.priceOrderFilter(listaOrdini, priceMin, priceMax);
         
-        Filters.dateOrderFilter(listaOrdini, dateLowerBound, dateUpperBound);
+        if (dateLowerBound != null || dateUpperBound != null)
+        	Filters.dateOrderFilter(listaOrdini, dateLowerBound, dateUpperBound);
         
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonOutput = gson.toJson(listaOrdini);
         
+        System.out.println(jsonOutput);
         response.setContentType("application/json");
         PrintWriter prw = response.getWriter();
         prw.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter
