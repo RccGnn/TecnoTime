@@ -14,7 +14,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="${pageContext.request.contextPath}/images/TecnoTimeIcon.svg">
   <title>${articolo.nome} – TecnoTime</title>
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articolo-single.css">
 </head>
 <body>
   <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
