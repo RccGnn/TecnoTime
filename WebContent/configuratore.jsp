@@ -9,7 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Configuratore - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/configuratore.css">
 </head>
 <body>
       <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){

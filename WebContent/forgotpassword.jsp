@@ -9,13 +9,13 @@
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>Guide - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/forgotpassword.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />
 	
 	<main>
-	<div class="form-container">
+	<div class="forgot-container">
       <h2>Imposta una nuova password</h2>
       
 	<form class="recuperopassword" action="ForgotPassword" method="post">
@@ -54,8 +54,8 @@
 	</main>
       
 	<jsp:include page="footer.jsp" />
-    <script src="js/navbar.js" defer></script>
-    <script src="js/ajaxConfermaPassword.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/ajaxConfermaPassword.js" defer></script>
     
 </body>
 </html>

@@ -58,7 +58,7 @@
 		    </div>
 		    <div class="product-card">
 		      <span class="label">OFFERTISSIMA</span>
-		      <img src="<%= request.getContextPath() %>/images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
+		      <img src="<%= request.getContextPath() %>/images/ryzen.png" alt="Ryzen 7 9800x3d" class="product-image">
 		      <p class="product-name">Ryzen 7 9800x3d</p>
 		      <p class="product-description">King dei Processori</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
@@ -83,7 +83,7 @@
 		    </div>
 		    <div class="slide" data-index="1">
 		      <span class="label">OFFERTISSIMA</span>
-		      <img src="<%= request.getContextPath() %>/images/ryzen.jpeg" alt="Ryzen 7 9800x3d" class="product-image">
+		      <img src="<%= request.getContextPath() %>/images/ryzen.png" alt="Ryzen 7 9800x3d" class="product-image">
 		      <p class="product-name">Ryzen 7 9800x3d</p>
 		      <p class="product-description">King dei Processori</p>
 		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
