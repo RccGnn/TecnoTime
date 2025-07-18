@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import it.unisa.control.CookieUtils;
 import it.unisa.control.PasswordUtils;
-import it.unisa.control.Cart.CookieUtils;
 import it.unisa.model.DAO.BeanDaoInterface;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.DAO.Account.AccountDao;

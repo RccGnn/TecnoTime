@@ -47,13 +47,14 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpSession session = req.getSession(false);
 		
-		if (session == null || (session.getAttribute("user") == null && session.getAttribute("admin")==null)) {
+		if (session == null || (session.getAttribute("user") == null && session.getAttribute("admin")==null)) {  // se non ce nessun token d'accesso attivo
 		    res.sendRedirect(req.getContextPath()+"/LoginPage.jsp");
 		    // messagio d'errore
 		    return;
 		} else {
 				Boolean user= (Boolean) session.getAttribute("user");
 				Boolean admin= (Boolean) session.getAttribute("admin");
+				System.out.println(admin);
 				String path = req.getServletPath();
 				if (path.contains("/utente/")&& user==false){
 					res.sendRedirect("/LoginPage.jsp");		

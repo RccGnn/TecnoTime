@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import com.google.gson.Gson;
 
-import it.unisa.control.Cart.CookieUtils;
+import it.unisa.control.CookieUtils;
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.AccountBean;
