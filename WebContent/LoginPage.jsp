@@ -8,6 +8,9 @@
 	String error = null;
 	if(request.getAttribute("error")!=null)
 		error=(String)request.getAttribute("error");
+	String success= null;
+	if(request.getAttribute("success")!=null)
+		success=(String)request.getAttribute("success");		
 %>
 
 <!DOCTYPE html>
@@ -28,6 +31,10 @@
     	<% if (message != null) {%>
     	<span class="success-message"> <%= message %></span>
     	<% } %>
+    	<% if (success != null) {%>
+    	<span class="success-message"> <%= success %></span>
+    	<% } %>
+    	
     	
         <h2>Effettua il Login</h2>
         <% if (error!=null){ %>

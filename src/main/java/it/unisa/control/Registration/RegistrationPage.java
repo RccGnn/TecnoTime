@@ -276,10 +276,13 @@ public class RegistrationPage extends HttpServlet {
 					request.setAttribute("error", "Errore di vincolo d'integrità: " + msg);
 			} else { // Altri errori
 				request.setAttribute("error", "Errore:" + msg);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/Registration.jsp");
+		        dispatcher.forward(request, response);
 			}
 		} 
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+		
+		request.setAttribute("success","Complimenti! Registrazione effettuata con successo!");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginPage.jsp");
         dispatcher.forward(request, response);
 	}
 	
