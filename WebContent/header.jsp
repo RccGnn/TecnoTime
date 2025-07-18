@@ -16,8 +16,8 @@
 	<!-- Header con logo, ricerca, icone -->
 	<header class="main-header">
 		<div class="header-left">
+			<a href="index.jsp" class="icon-link">
 			<img src="images/TecnoTime.png" alt="Logo TecnoTime" class="logo">
-			<a href="index.jsp" class="icon-link"> <span class="brand-name">TECNOTIME</span>
 			</a>
 		</div>
 		<div class="header-center">
