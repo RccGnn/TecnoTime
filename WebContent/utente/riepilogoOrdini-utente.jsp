@@ -19,7 +19,7 @@
     <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Ordini effettuati - TecnoTime</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/ordine.css">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/filters.css">
 </head>
 <body>

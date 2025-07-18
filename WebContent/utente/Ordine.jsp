@@ -26,7 +26,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
 	<title>TecnoTime: Ordine</title>
-	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/ordine.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/login_registrazione.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/cart.css">
+	
 </head>
 
 <body>
