@@ -10,7 +10,13 @@
             gap: 20px; /* Spazio tra i gruppi di input */
             flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
             max-width: 1000px; /* Larghezza massima per il contenitore */
+            margin-left: auto;
+    		margin-right: auto;
         }
+        
+        .rieplOrdini h1 {
+    	text-align: center;
+		}
 
         .date-filter-group {
             display: flex;

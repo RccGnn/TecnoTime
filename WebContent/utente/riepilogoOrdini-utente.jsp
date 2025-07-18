@@ -16,16 +16,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/svg+xml" href="../images/TecnoTimeIcon.svg">
+    <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
     <title>Ordini effettuati - TecnoTime</title>
     <!-- Link al CSS esterno -->
-    <link rel="stylesheet" href="../styles.css">
-    <link rel="stylesheet" href="../styles/filters.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/filters.css">
 </head>
 <body>
 
 	<jsp:include page="header-utente.jsp"/>
-
+	<div class ="rieplOrdini">
     <h1>I miei ordini</h1>
     
    <div class="filter-bar-container">
@@ -52,9 +52,10 @@
 	   <!--
 		-->
 	</div>
+	</div>
 	<jsp:include page="footer-utente-registrato.jsp" />
     
-	<script src="../js/navbar.js" defer></script>
-	<script src="../js/deals-slider.js" defer></script>
-	<script src="../js/ajaxOrdini.js" defer></script>
+	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+	<script src="<%= request.getContextPath() %>/js/deals-slider.js" defer></script>
+	<script src="<%= request.getContextPath() %>/js/ajaxOrdini.js" defer></script>
 </html>

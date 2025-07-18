@@ -71,7 +71,7 @@ body {
 }
 
 .search-bar {
-    box-sizing: border-box; /* ✅ This line fixes the alignment */
+    box-sizing: border-box;
     width: 125%;
     padding: 8px 12px 8px 36px;
     border: 2px solid #F2762E;

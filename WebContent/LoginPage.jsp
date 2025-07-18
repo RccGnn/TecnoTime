@@ -18,7 +18,7 @@
     <link rel="icon" type="image/svg+xml" href="images/TecnoTimeIcon.svg">
     <title>Login - TecnoTime</title>
     <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/login_registrazione.css">
 </head>
 <body>
     <jsp:include page="header.jsp" />
