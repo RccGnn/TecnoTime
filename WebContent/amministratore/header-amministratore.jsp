@@ -17,22 +17,20 @@
 	<!-- Header con logo, ricerca, icone -->
 	<header class="main-header">
 		<div class="header-left">
-			<img src="<%= request.getContextPath() %>/images/TecnoTime.png"
-				alt="Logo TecnoTime" class="logo">
 			<%if (request.getRequestURI().contains("amministratore")) {%>
-			<a href="index-amministratore.jsp" class="icon-link"> <span
-				class="brand-name">TECNOTIME</span>
+			<a href="index-amministratore.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}else if(session.getAttribute("admin")!=null && (Boolean)session.getAttribute("admin")==true ){ %>
-			<a href="utente/index-amministratore.jsp" class="icon-link"> <span
-				class="brand-name">TECNOTIME</span>
+			<a href="utente/index-amministratore.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<% }else{ %>
-			<a href="index.jsp" class="icon-link"> <span class="brand-name">TECNOTIME</span>
+			<a href="index.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}
        	%>
-			<span class="brand-name">TECNOTIME</span>
 		</div>
 		<div class="header-center">
 			<div class="search-container">

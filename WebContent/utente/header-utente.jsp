@@ -18,18 +18,17 @@
 	<!-- Header con logo, ricerca, icone -->
 	<header class="main-header">
 		<div class="header-left">
-			<img src="<%= request.getContextPath() %>/images/TecnoTime.png"
-				alt="Logo TecnoTime" class="logo">
 			<%if (request.getRequestURI().contains("utente")) {%>
-			<a href="index-utente.jsp" class="icon-link"> <span
-				class="brand-name">TECNOTIME</span>
+			<a href="index-utente.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}else if(session.getAttribute("user")!=null && (Boolean)session.getAttribute("user")==true ){ %>
-			<a href="utente/index-utente.jsp" class="icon-link"> <span
-				class="brand-name">TECNOTIME</span>
+			<a href="utente/index-utente.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<% }else{ %>
-			<a href="index.jsp" class="icon-link"> <span class="brand-name">TECNOTIME</span>
+			<a href="index.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}
        	%>
