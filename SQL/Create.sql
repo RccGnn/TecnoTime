@@ -97,10 +97,12 @@ CREATE TABLE Servizio (
     ON UPDATE CASCADE
 );
 
+use tecnotimedb;
 CREATE TABLE Promozione (
-  IDPromozione       VARCHAR(20) 	PRIMARY KEY NOT NULL,
+  IDPromozione       INT auto_increment PRIMARY KEY NOT NULL,
+  nomesconto 		 VARCHAR(200) 	NOT NULL,
+  descrizione 		 TEXT 			NOT NULL,
   dataInizio       	 DATE           NOT NULL,
-  durata             INT            NOT NULL, -- ORE/GIORNI
   percentualeSconto  DECIMAL(5,2)   NOT NULL
 );
 
@@ -177,7 +179,7 @@ CREATE TABLE Composto_da (
 );
 
 CREATE TABLE Riguarda (
-  IDPromozione			VARCHAR(20)	NOT NULL,
+  IDPromozione			INT	NOT NULL,
   codiceIdentificativo 	VARCHAR(20)	UNIQUE NOT NULL,
   CONSTRAINT PRIMARY KEY (IDPromozione, codiceIdentificativo),
   CONSTRAINT FOREIGN KEY (IDPromozione) REFERENCES Promozione(IDPromozione)
@@ -190,7 +192,7 @@ CREATE TABLE Riguarda (
 
 CREATE TABLE Associato_a (
   username			VARCHAR(50)		NOT NULL,
-  IDPromozione     	VARCHAR(20)   	NOT NULL,
+  IDPromozione     	INT  		 	NOT NULL,
   codicePromozione   VARCHAR(50) 	NOT NULL,
   CONSTRAINT PRIMARY KEY (username, IDPromozione),
   CONSTRAINT FOREIGN KEY (username) REFERENCES Account(username)

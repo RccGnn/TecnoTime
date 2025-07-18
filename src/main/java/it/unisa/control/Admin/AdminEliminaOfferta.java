@@ -1,23 +1,27 @@
 package it.unisa.control.Admin;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+
+import it.unisa.model.DAO.Promotion.PromozioneDao;
 
 /**
- * Servlet implementation class AdminOfferte
+ * Servlet implementation class AdminEliminaOfferta
  */
-@WebServlet("/AdminOfferte")
-public class AdminOfferte extends HttpServlet {
+@WebServlet("/AdminEliminaOfferta")
+public class AdminEliminaOfferta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminOfferte() {
+    public AdminEliminaOfferta() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,7 +39,24 @@ public class AdminOfferte extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+
+		String nome=request.getParameter("nomesconto");
+		
+		PromozioneDao dao = new PromozioneDao();
+		boolean result=false;
+		try {
+			result=dao.doDelete(nome);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if(result)
+			request.setAttribute("eliminazioneSuccess","Prodotto eliminato dal DB con successo");
+		else
+			request.setAttribute("EliminazioneErrore", "errore generico.Impossibile rimuovere l'articolo. Riprova più tardi");
+		
+		RequestDispatcher disp = request.getRequestDispatcher("/.jsp");
+		disp.forward(request, response);
 	}
 
 }

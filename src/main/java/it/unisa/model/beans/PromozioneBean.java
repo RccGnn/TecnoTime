@@ -7,20 +7,21 @@ public class PromozioneBean implements Serializable, BeanMarker {
 
 	private static final long serialVersionUID = 1L;
 	
-    private String IDPromozione;
+    private int IDPromozione;
     private Date dataInizio;
-    private int durata;
+    private String nomesconto;
+    private String descrizione;
     private double percentualeSconto;
 	/**
 	 * @return the iDPromozione
 	 */
-	public String getIDPromozione() {
+	public int getIDPromozione() {
 		return IDPromozione;
 	}
 	/**
 	 * @param iDPromozione the iDPromozione to set
 	 */
-	public void setIDPromozione(String iDPromozione) {
+	public void setIDPromozione(int iDPromozione) {
 		IDPromozione = iDPromozione;
 	}
 	/**
@@ -38,14 +39,21 @@ public class PromozioneBean implements Serializable, BeanMarker {
 	/**
 	 * @return the durata
 	 */
-	public int getDurata() {
-		return durata;
+	public String getNomesconto() {
+		return nomesconto;
+	}
+	public void setNomesconto(String nome) {
+		this.nomesconto=nome;
+	}
+	
+	public String getDescrizione() {
+		return descrizione;
 	}
 	/**
 	 * @param durata the durata to set
 	 */
-	public void setDurata(int durata) {
-		this.durata = durata;
+	public void setDescrizione (String descrizione) {
+		this.descrizione = descrizione;
 	}
 	/**
 	 * @return the percentualeSconto
@@ -67,7 +75,7 @@ public class PromozioneBean implements Serializable, BeanMarker {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(IDPromozione, dataInizio, durata, percentualeSconto);
+		return Objects.hash(IDPromozione, nomesconto,descrizione, dataInizio, percentualeSconto);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -78,13 +86,13 @@ public class PromozioneBean implements Serializable, BeanMarker {
 		if (getClass() != obj.getClass())
 			return false;
 		PromozioneBean other = (PromozioneBean) obj;
-		return Objects.equals(IDPromozione, other.IDPromozione) && Objects.equals(dataInizio, other.dataInizio)
-				&& durata == other.durata
+		return Objects.equals(IDPromozione, other.IDPromozione) && Objects.equals(nomesconto, other.nomesconto) 
+				&& Objects.equals(dataInizio, other.dataInizio)	&& descrizione == other.descrizione 
 				&& Double.doubleToLongBits(percentualeSconto) == Double.doubleToLongBits(other.percentualeSconto);
 	}
 	@Override
 	public String toString() {
-		return "PromozioneBean [IDPromozione=" + IDPromozione + ", dataInizio=" + dataInizio + ", durata=" + durata
+		return "PromozioneBean [IDPromozione=" + IDPromozione + ", nomesconto=" + nomesconto + ", dataInizio=" + dataInizio + ", descrizone=" + descrizione
 				+ ", percentualeSconto=" + percentualeSconto + "]";
 	}
     
