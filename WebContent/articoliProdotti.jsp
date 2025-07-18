@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/pagination.css">
 </head>
 <body data-logged-in="<%= (session.getAttribute("user") != null) ? "true" : "false" %>">
 
@@ -81,6 +82,11 @@
         </div>
         -->
     </section>
+    
+    <!-- Pagination Component -->
+    <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
+    </div>
+    
   </main>
 
   <jsp:include page="footer.jsp"/>

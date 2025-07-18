@@ -179,6 +179,9 @@ public class DaoUtils {
 		PromozioneCompletaDao dao = new PromozioneCompletaDao();
 		try {
 			ArrayList<PromozioneCompletaBean> rawDiscountList = dao.doRetrieveByKeyProducts("");
+			if (rawDiscountList == null || rawDiscountList.isEmpty()) {
+				return lista;
+			}
 			
 			// Mappa le percentuali di sconto per ogni ID articolo univoco.
 			// Usa Collectors.toMap con un merge function per gestire duplicati (mantiene il primo).

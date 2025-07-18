@@ -125,6 +125,10 @@ function articoloEnum(articolo) {
 	return subClass;		
 }
 
+
+var pageNumber;
+var currentPage = 1;
+
 // Funzione di parsing dell'input dei filtri
 function sortedProducts() {
 	const minInput = parseFloat(document.getElementById("min").value);
@@ -137,7 +141,7 @@ function sortedProducts() {
 	let categoriaInput = "";
 	let marcaInput = "";
 	let contexChoice = contexEnum(contestoInput);
-
+	
 	// In base a quale pagina effettua la chiamata ajax, si impostano i parametri da passare nel GET 
 	if (contexChoice === 1 || contexChoice === 4) { // Prodotti fisici
 		categoriaInput = document.getElementById("categoria").value;
@@ -149,10 +153,12 @@ function sortedProducts() {
 		marcaInput = document.getElementById("brand").value;
 	}
 	
+	console.log("PageNumber: " + pageNumber + "\ncurrentPage=" + currentPage);
 	let params = 	"min="+ encodeURIComponent(minInput) +"&max="+ encodeURIComponent(maxInput)
 					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput)
 					+"&contex="+ encodeURIComponent(contestoInput) +"&duration="+ encodeURIComponent(durataInput)
-					+"&categoriaInput="+ encodeURIComponent(categoriaInput) +"&marcaInput=" + encodeURIComponent(marcaInput);
+					+"&categoriaInput="+ encodeURIComponent(categoriaInput) +"&marcaInput=" + encodeURIComponent(marcaInput)
+					+"&page="+encodeURIComponent(currentPage);
 	
 	loadAjaxDoc("ProductFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }
@@ -184,7 +190,12 @@ function handleFilter(xhr) {
 	let response = JSON.parse(xhr.responseText);
 	// Si ripuliscono gli articoli già presenti
 	cleanSection();
-			
+	
+	pageNumber = response[2];
+	// Rigenera il numero di pagine sapendo il numero massimo di pagine
+	
+	displayPageSelector();
+	
 	// Eventuale errore se non ci sono articoli 
 	if (response[0] == null || (response[0] == null && response[0].length === 0)) {
 		let noResults = document.createElement("p");
@@ -271,10 +282,101 @@ function handleFilter(xhr) {
 		
 		element.appendChild(articolo);
 	});
+	
+	displayPageSelector();
 }
 
 window.onload = sortedProducts;
 
+// Funzione che permette di visualizzare la barra delle pagine
+function displayPageSelector() {
+	
+	let pageMenu = document.getElementById("pagination-nav");
+	
+	// Rigenera la barra di navigazione ad ogni iterazione, se è presente
+	if(pageMenu != null) {
+		while (pageMenu.firstChild)
+			pageMenu.removeChild(pageMenu.firstChild);
+	}
+	
+	let pageList = document.createElement("ul");
+	pageList.className = "pagination-list";
+	let listElement, btn;
+	
+	// Bottone elem precedente
+	listElement = document.createElement("li");
+	
+	btn = document.createElement("button");
+	btn.classList.add("pagination-button");
+	btn.classList.add("pagination-button--prev"); 
+	btn.type = "button";
+	
+	// Al click chiama la funzione sortedProducts() modificando la pagina corrente
+	if(currentPage > 1) { // Se possibile
+		btn.disabled = false;
+		btn.onclick = function() {	
+			currentPage = currentPage - 1;
+			sortedProducts();
+		};		
+	} else {
+		btn.disabled = true;
+	}
+	
+	let span = document.createElement("span");
+	span.innerHTML = " PREV ";
+	
+	btn.appendChild(span);
+	listElement.appendChild(btn);
+	pageList.appendChild(listElement);
+	
+	
+	
+	// Pagine
+	for (let i = 1; i < pageNumber + 1; i++) {
+		listElement = document.createElement("li");
+		listElement.classList.add("pagination-link");
+		
+		if (i == currentPage)
+			listElement.classList.add("pagination-link--active");
+		
+		// Al click chiama la funzione sortedProducts() modificando la pagina corrente
+		listElement.onclick = function() {	
+			currentPage = i;
+			sortedProducts();
+		};		
+
+		listElement.innerHTML = i;	
+		pageList.appendChild(listElement);		
+	}
+	
+	// Bottone elem successivo	
+	listElement = document.createElement("li");
+
+	btn = document.createElement("button");
+	btn.classList.add("pagination-button");
+	btn.classList.add("pagination-button--next"); 
+	btn.type = "button";
+
+	// Al click chiama la funzione sortedProducts() modificando la pagina corrente
+	if(currentPage < pageNumber) { // Se possibile
+		btn.disabled = false;
+		btn.onclick = function() {	
+			currentPage = currentPage + 1;
+			sortedProducts();
+		};		
+	} else {
+		btn.disabled = true;
+	}	
+		
+	span = document.createElement("span");
+	span.innerHTML = " NEXT ";
+
+	btn.appendChild(span);
+	listElement.appendChild(btn);
+	pageList.appendChild(listElement);
+	
+	pageMenu.appendChild(pageList);
+}
 
 function displaySlider() {
 	let slider = document.getElementById("slider");

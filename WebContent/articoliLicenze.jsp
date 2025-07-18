@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/pagination.css">
 </head>
 <body>
 
@@ -78,6 +79,10 @@
     </section>
   </main>
 
+<!-- Pagination Component -->
+    <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
+    </div>
+    
   <jsp:include page="footer.jsp"/>
 
   <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>

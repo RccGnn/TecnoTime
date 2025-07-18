@@ -24,6 +24,9 @@ import com.google.gson.*;
 public class ProductFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	// Indica il numero di prodotti che possono essere visualizzati per pagina
+	private static final int articlesPerPage = 10;
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double min = (req.getParameter("min") != null && !req.getParameter("min").trim().equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
         double max = (req.getParameter("max") != null && !req.getParameter("max").trim().equals("")) ? Double.parseDouble(req.getParameter("max")) : Double.MAX_VALUE;
@@ -34,6 +37,7 @@ public class ProductFilter extends HttpServlet {
         boolean searchBar = Boolean.parseBoolean(req.getParameter("fromSearchBar")); // parseBoolean interpreta come false qualsiasi stringa diversa da true (case insensitive)
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         String brand = (req.getParameter("marcaInput") != null && !req.getParameter("marcaInput").trim().equals("")) ? req.getParameter("marcaInput") : null;
+        int page = (req.getParameter("page") != null && !req.getParameter("page").trim().equals("")) ? Integer.parseInt(req.getParameter("page")) : 1;
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
         PromozioneCompletaDao promDao = new PromozioneCompletaDao();
@@ -41,6 +45,8 @@ public class ProductFilter extends HttpServlet {
         //System.out.println("MIN: "+min +"\nMAX:"+ max +"\nNOME:"+ nome +"\nSORT:"+ sort+"\nCONTEX: "+contesto+"\nDuration: "+durata);
         // Ordinamento dei prodotti - sfrutta doRetrieveAll(), inoltre esso già effettua controlli sulla stringa passata come parametro esplicito
         
+        double length = 0, limit = 0, numeroPagine = 0, offset = 0;
+
         try {
 	        ArrayList<ArticoloCompletoBean> catalogo = dao.doRetrieveAll(sort); 
 
@@ -75,7 +81,15 @@ public class ProductFilter extends HttpServlet {
 		        // Se si tratta di un servizio, filtra per durata del servizio
 		        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"
 		        if (durata != -1)
-		        	Filters.durationFilter(catalogo, durata);	        	
+		        	Filters.durationFilter(catalogo, durata);	
+		        		
+		        length = catalogo.size(); // numero di prodotti filtrati
+		        limit = articlesPerPage * page; // limite (indice) dell'ultimo elemento accettabile per pagina
+		        numeroPagine = Math.ceil(length / articlesPerPage); // Per eccesso, determina il numero di pagine 
+		        offset = (page - 1) * articlesPerPage;
+
+		        catalogo = Filters.pageFilter(catalogo, offset, limit);
+		        
 	        }
 	        
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
@@ -85,10 +99,11 @@ public class ProductFilter extends HttpServlet {
 	        ArrayList<Object> res = new ArrayList<>();
 	        res.add(catalogo);
 	        res.add(promozioni);
+	        res.add(numeroPagine);
 	        
             // Serializza l'intera lista di ArticoloCompletoBean e promozioni in una singola stringa JSON
             String jsonOutput = gson.toJson(res);
-	        System.out.println("JSON Output finale inviato:\n" + jsonOutput);
+	        //System.out.println("JSON Output finale inviato:\n" + jsonOutput);
 
 	        resp.setContentType("application/json");
 	        PrintWriter prw = resp.getWriter();
