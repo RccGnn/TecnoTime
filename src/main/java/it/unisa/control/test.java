@@ -58,37 +58,28 @@ public class test extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		SchedaMadreDao mbDao = new SchedaMadreDao();
-		ProcessoreDao cpuDao = new ProcessoreDao();
-		RamDao ramDao= new RamDao();
-		CaseDao caseDao = new CaseDao();
-		SchedaVideoDAO gpuDao= new SchedaVideoDAO();
-		Case tipoCase=null;
-		Ram ram= null;
-		Processore cpu=null;
-		SchedaMadre mb=null;
-		SchedaVideo gpu=null;
+		ProdottoFisicoBean pf = new ProdottoFisicoBean();
+		
+		pf.setArticolo_codiceIdentificativo("ART1000");
+		pf.setCategoria("RAM");
+		pf.setCodiceIdentificativo("ART1000");
+		pf.setDataUltimaPromozione(new Date(System.currentTimeMillis()));
+		pf.setDescrizione("ALALALALALALALLALALALAL");
+		pf.setDisponibilita(false);
+		pf.setEnteErogatore("intel");
+		pf.setNome("LUCCA PALLA");
+		pf.setPreassemblato(false);
+		pf.setPrezzo(13.30f);
+		pf.setQuantitaMagazzino(10);
+		pf.setSeriale("PDF-1000");
+		
+		ProdottoFisicoDao dao = new ProdottoFisicoDao();
 		
 		try {
-			tipoCase=caseDao.doRetrieveByKey("NZXT H7 Flow");
-			ram=ramDao.doRetrieveByKey("Corsair Vengeance DDR5 32GB (2x16GB)");
-			mb=mbDao.doRetrieveByKey("Asus ROG Maximus Z790 HERO");
-			cpu=cpuDao.doRetrieveByKey("Intel Core i9-13900K");
-			gpu=gpuDao.doRetrieveByKey("NVIDIA GEFORCE RTX 4090");
-		}catch(SQLException e) {
+			dao.doSave(pf);			
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
-		boolean res = false;
-		int minimo=0;
-		if(cpu!=null && mb!=null) {
-			res=BuildChecker.isCompatible(cpu, mb) && BuildChecker.isCompatible(mb, ram) && BuildChecker.isCompatible(tipoCase, mb);
-			minimo=BuildChecker.minimumWatt(mb, gpu, cpu);
-		}else {
-			System.out.println("cpu o mb null");
-		}
-		System.out.println("il controllo è "+res+ " il minimo alimentatore è"+minimo+ "watt");
-	
 	
 	}
 

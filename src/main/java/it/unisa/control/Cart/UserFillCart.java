@@ -33,6 +33,7 @@ public class UserFillCart extends HttpServlet {
 		
 		String values[] = new String[2];
 		HttpSession s = request.getSession();
+		
 		// Recupera username e carrello_id dalla sessione
 		if (s != null && s.getAttribute("username") != null) {
 			values[0] = (String) s.getAttribute("username");
@@ -50,11 +51,16 @@ public class UserFillCart extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
-        bean.setListaArticoli(DaoUtils.dropboxImagesDecoderUrl(bean.getListaArticoli()));
-        
+
 		request.setAttribute("carrello", bean);	
-		RequestDispatcher rd = request.getRequestDispatcher("/utente/Ordine.jsp");
+		RequestDispatcher rd;
+		if(bean == null || bean.getListaArticoli() == null || bean.getListaArticoli().isEmpty()) {
+			rd = request.getRequestDispatcher("/utente/index-utente.jsp");			
+		} else {
+			rd = request.getRequestDispatcher("/utente/Ordine.jsp");
+			bean.setListaArticoli(DaoUtils.dropboxImagesDecoderUrl(bean.getListaArticoli()));
+		}
+        
 		rd.forward(request, response);
 	}
 

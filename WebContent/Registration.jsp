@@ -71,6 +71,8 @@
             <select id="gender" name="gender" required>
                 <option value="M">Maschio</option>
                 <option value="F">Femmina</option>
+                <option value="A">Altro</option>
+                <option value="X">Preferisco non rispondere</option>
             </select>
 
             <label for="nation">Nazionalità:</label>

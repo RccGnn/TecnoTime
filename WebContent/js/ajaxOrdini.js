@@ -67,22 +67,21 @@ function loadAjaxDoc(url, method, params, cFuction) {
 }
 
 
-function sortedProducts() {
+function sortedOrders() {
 	const priceUbInput = parseFloat(document.getElementById("priceUpperBound").value);
 	const priceLbInput = parseFloat(document.getElementById("priceLowerBound").value);
-	const dateLbput = document.getElementById("dateLowerBound").value;	
+	const dateLbput = document.getElementById("dateLowerBound").value;
 	const dateUpInput = document.getElementById("dateUpperBound").value;
-	
-	//const contestoInput = window.location.pathname;
 	
 	let params = 	"min=" + encodeURIComponent(priceLbInput) +
 	                "&max=" + encodeURIComponent(priceUbInput) +
 	                "&dateLowerBound=" + encodeURIComponent(dateLbput) +
 	                "&dateUpperBound=" + encodeURIComponent(dateUpInput);
 	
-	loadAjaxDoc("OrderFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
+	loadAjaxDoc("/TecnoTime/OrderFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }
 
+window.onload = sortedOrders;
 
 function displaySlider(element) {
 	
@@ -112,20 +111,16 @@ function cleanSection() {
 function handleFilter(xhr) {
 	// Ottieni una lista di ordini 
 	let response = JSON.parse(xhr.responseText);
-
-	if(!response) {
-		displayEmptyOrders();
-	}
 	
 	cleanSection(); // Rimuovi tutti gli elementi tranne i filtri
 	// Crea il container per gli ordini
-	let container = document.createElement("div");
-	container.className = "orders-list-page";
+	let container = document.getElementsByClassName("orders-list-page")[0];
 	
 	// Se non ci sono prodotti, allora mostra un messaggio
-	if(response == null || response.lenght == 0) {
+	if(response == null || (response != null && response.length == 0) ) {
 		let mess = document.createElement("p");
 		mess.className = "no-orders-message";
+		mess.innerHTML = "Nessun ordine per i criteri di ricerca selezionati";
 		container.appendChild(mess);
 		
 		return;
@@ -133,6 +128,7 @@ function handleFilter(xhr) {
 	
 	// Altrimenti genera gli ordini
 	response.forEach(ord => {
+		// Summary generale
 		let orderSummary = document.createElement("div");
 		orderSummary.className = "orders-summary-section";
 		
@@ -143,6 +139,8 @@ function handleFilter(xhr) {
 		// Dettaglio per header ordini		
 		let orderGroup = document.createElement("div");
 		orderGroup.className = "order-details-group";
+		
+		///				Header ordini
 		
 		// Dettaglio 1
 		let orderDetail = document.createElement("div");
@@ -157,7 +155,7 @@ function handleFilter(xhr) {
 		// span 2
 		spanDetail = document.createElement("span");
 		spanDetail.className = "detail-value";
-		spanDetail.innerHTML = "Data ordine: " + ord.dataTransazione;
+		spanDetail.innerHTML = ord.dataTransazione;
 		orderDetail.appendChild(spanDetail);
 
 		orderGroup.appendChild(orderDetail);
@@ -169,9 +167,121 @@ function handleFilter(xhr) {
 		// span 1
 		spanDetail = document.createElement("span");
 		spanDetail.className = "detail-label";
-		spanDetail.innerHTML = "Data ordine:";
+		spanDetail.innerHTML = "Totale: ";
 		orderDetail.appendChild(spanDetail);
-				
+		
+		// span 2
+		spanDetail = document.createElement("span");
+		spanDetail.className = "detail-value";
+		spanDetail.innerHTML = ord.totale + " €";
+		orderDetail.appendChild(spanDetail);
+
+		orderGroup.appendChild(orderDetail);
+
+		// Aggiungi all'header
+		orderHeader.appendChild(orderGroup);
+		
+		
+		// Nuovo Group
+		
+		orderGroup = document.createElement("div");
+		orderGroup.className = "order-details-group";
+		
+		// Dettaglio
+		orderDetail = document.createElement("div");
+		orderDetail.className = "order-detail-item";
+
+		// span 1
+		spanDetail = document.createElement("span");
+		spanDetail.className = "detail-label";
+		spanDetail.innerHTML = "ID Ordine: ";
+		orderDetail.appendChild(spanDetail);
+
+		// span 2
+		spanDetail = document.createElement("span");
+		spanDetail.className = "detail-value";
+		spanDetail.innerHTML = ord.numeroTransazione;
+		orderDetail.appendChild(spanDetail);
+		
+		orderGroup.appendChild(orderDetail);
+
+		// Aggiungi all'header
+		orderHeader.appendChild(orderGroup);
+
+		///			FINE - Header ordini
+
+		// Aggiungi al summary
+		orderSummary.appendChild(orderHeader);
+		
+		
+		///			LISTA ELEMENTI ORDINE
+		
+		let orderItemsList = document.createElement("div");
+		orderItemsList.className = "order-items-list"
+		
+		let listaElementi = ord.elementiOrdine;
+		listaElementi.forEach(elem => {
+			
+			let itemCard = document.createElement("div");
+			itemCard.className = "order-item-card";
+			
+			// Imposta url immagine
+			let url;
+			if (elem.urlImmagineArticolo === null || elem.urlImmagineArticolo === "") {
+			    url = "/images/alt-prodotti.png"; // Fallback image path
+			} else {
+			    url = elem.urlImmagineArticolo; // Use the provided URL (which can already include context path)
+			}
+			
+			let img = document.createElement("img");
+			img.src = url;
+			img.alt = elem.nomeArticolo;
+			img.className = "order-item-img";
+			itemCard.appendChild(img);
+			
+			// Dettaglio
+			
+			let elemDetail = document.createElement("div");
+			elemDetail.className = "order-item-details";
+			
+			// 1
+			let detail = document.createElement("div");
+			detail.className = "order-item-name";
+			detail.innerHTML = elem.nomeArticolo;
+			elemDetail.appendChild(detail);
+			
+			// 2
+			detail = document.createElement("div");
+			detail.className = "order-item-qty";
+			detail.innerHTML = "Qtà: " + elem.quantitaArticolo;
+			elemDetail.appendChild(detail);
+
+			// 3
+			detail = document.createElement("div");
+			detail.className = "order-item-price-per-unit";
+			detail.innerHTML = "Prezzo Unitario: " + elem.prezzoUnitario.toFixed(2) + " €";
+			elemDetail.appendChild(detail);
+			
+			//
+			
+			itemCard.appendChild(elemDetail);
+			
+			// Prezzo totale
+			
+			let totalPrice = document.createElement("div");
+			totalPrice.className = "order-item-total-price";
+			let temp = (elem.prezzoUnitario * elem.quantitaArticolo).toFixed(2);
+			totalPrice.innerHTML = temp + " €";
+			
+			itemCard.appendChild(totalPrice);
+			
+			orderItemsList.appendChild(itemCard);
+			
+		});
+		
+		orderSummary.appendChild(orderItemsList);
+		
+		container.appendChild(orderSummary);
 	});
 }
 

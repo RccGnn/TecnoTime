@@ -216,6 +216,7 @@ body {
 /* Navigazione (Desktop)               */
 /* =================================== */
 .main-nav {
+	padding: 15px 10px;
     background-color: #011140;
     display: flex;
     justify-content: center;
@@ -231,6 +232,7 @@ body {
 }
 
 .main-nav ul li {
+	padding: 0px 12px;
     position: relative;
 }
 
