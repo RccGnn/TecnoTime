@@ -31,58 +31,58 @@
 	    <div class="category-grid-offerte">
 	      <div class="category-box-offerte">
 	        <a href="offerteProcessori.jsp">
-	          <img src="images/alt-prodotti.png" alt="Processori">
+	          <img src="images/cpu.svg" alt="Processori">
 	          <h3>Processori</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="offerteSchedeVideo.jsp">
-	          <img src="images/alt-prodotti.png" alt="Schede Video">
+	          <img src="images/gpu.svg" alt="Schede Video">
 	          <h3>Schede Video</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="offerteRam.jsp">
-	          <img src="images/alt-prodotti.png" alt="RAM">
+	          <img src="images/ram.svg" alt="RAM">
 	          <h3>Memorie</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="offerteSchedeMadri.jsp">
-	          <img src="images/alt-prodotti.png" alt="Schede Madri">
+	          <img src="images/mobo.svg" alt="Schede Madri">
 	          <h3>Schede Madri</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="offerteArchiviazione.jsp">
-	          <img src="images/alt-prodotti.png" alt="Archiviazione">
+	          <img src="images/storage.svg" alt="Archiviazione">
 	          <h3>Archiviazione</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="offerteAlimentatori.jsp">
-	          <img src="images/alt-prodotti.png" alt="Alimentatori">
+	          <img src="images/psu.svg" alt="Alimentatori">
 	          <h3>Alimentatori</h3>
 	        </a>
 	      </div>
 	      
 	      <div class="category-box-offerte">
 	        <a href="offerteVentole.jsp">
-	          <img src="images/alt-prodotti.png" alt="Ventole">
+	          <img src="images/fan.svg" alt="Ventole">
 	          <h3>Ventole</h3>
 	        </a>
 	      </div>
 	      
 	      <div class="category-box-offerte">
 	        <a href="offerteDissipatori.jsp">
-	          <img src="images/alt-prodotti.png" alt="Dissipatori">
+	          <img src="images/cooler.svg" alt="Dissipatori">
 	          <h3>Dissipatori</h3>
 	        </a>
 	      </div>
 	      
 	      <div class="category-box-offerte">
 	        <a href="offerteCase.jsp">
-	          <img src="images/alt-prodotti.png" alt="Case">
+	          <img src="images/case.svg" alt="Case">
 	          <h3>Case</h3>
 	        </a>
 	      </div>
