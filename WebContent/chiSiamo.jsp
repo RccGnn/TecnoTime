@@ -5,9 +5,14 @@
 <html lang="it">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
 	<title>Chi Siamo - TecnoTime</title>
-    <!-- Riferimento al CSS comune -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/chiSiamo.css">
+  	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/guide.css">
 </head>
 <body>
 	<jsp:include page="header.jsp" />
@@ -61,16 +66,16 @@
 	        <p class="team-employees__position">Sviluppatore Front-end</p>
 	      </div>
 	    </div>
-	    <div class="team-employees__employee" style="background-image:url('images/mario_mascheri.jpg')">
-	      <div class="team-employees__info">
-	        <h3 class="team-employees__name">Giovanni Riccardi</h3>
-	        <p class="team-employees__position">DAO admin e Deployer</p>
-	      </div>
-	    </div>
-	    <div class="team-employees__employee" style="background-image:url('images/mario_mascheri.jpg')">
+	    <div class="team-employees__employee" style="background-image:url('images/stefano_santoro.jpg')">
 	      <div class="team-employees__info">
 	        <h3 class="team-employees__name">Stefano Santoro</h3>
 	        <p class="team-employees__position">Sviluppatore Back-end</p>
+	      </div>
+	    </div>
+	    <div class="team-employees__employee" style="background-image:url('images/giovanni_riccardi.jpg')">
+	      <div class="team-employees__info">
+	        <h3 class="team-employees__name">Giovanni Riccardi</h3>
+	        <p class="team-employees__position">DAO admin e Deployer</p>
 	      </div>
 	    </div>
 	  </section>

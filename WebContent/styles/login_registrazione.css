@@ -105,6 +105,12 @@ body {
 }
 
 .form-container h2 {
+    display: block;
+    color: #021859;
+    margin-bottom: 1.5rem;
+}
+
+.form-container h4 {
     text-align: center;
     color: #021859;
     margin-bottom: 1.5rem;
@@ -146,6 +152,24 @@ body {
 
 .form-container button:hover {
     opacity: 0.9;
+}
+
+.login-container form,
+.form-container form {
+  padding: 0.5rem 1rem; 
+  box-sizing: border-box;
+}
+
+.login-container form > div,
+.form-container form > div {
+  margin-bottom: 1rem;
+}
+
+
+.form-container button[type="submit"],
+.form-container button[type="reset"],
+.form-container .register-link {
+  margin-top: 1.5rem;
 }
 
 /* --- Messaggi di stato --- */
@@ -229,7 +253,66 @@ body {
 }
 
 /*form registrazione*/
-@media (max-width: 600px) {
+@media (min-width: 600px) {
+  /* Mantieni il form container in display block */
+  .form-container {
+    display: block;
+  }
+
+  .form-container input,
+  .form-container select,
+  .form-container textarea{
+  	display:block; 
+  	width: 100%;
+    margin: 0 0 1.5rem;	
+  	}
+  .form-container button[type="submit"] {
+   	 margin: 0 0 1rem;	
+   	 width: 45%;
+   	 gap:15%
+   }
+
+	.button-row{
+		display:flex;
+	}
+
+  .form-container button[type="reset"],
+  .form-container .register-link {
+    display: inline-block;
+    width: 45%;
+    margin: 0 1% 1rem 0;
+    box-sizing: border-box;
+    vertical-align: top;
+  }
+  
+  .form-container .register-link {
+    margin-right: 0;
+  }
+
+  
+  .form-container .register-link a {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background-color: #011140;
+    color: #F2D230;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+}
+
+/* Su mobile (<600px) comportamento a colonna */
+@media (max-width: 599px) {
+  .form-container {
+    display: block;
+  }
+  .form-container button[type="submit"],
+  .form-container button[type="reset"],
+  .form-container .register-link {
+    width: 100%;
+    margin: 0 0 1rem 0;
+  }
   .form-container fieldset {
     padding: 0.75rem;
   }
