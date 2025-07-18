@@ -57,14 +57,15 @@ body {
 
 .login-container input[type="text"],
 .login-container input[type="password"] {
-    width: 100%;
+    width: 95%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    
 }
 
 .login-container button[type="submit"] {
-    width: 100%;
+    width: 103%;
     padding: 10px;
     background-color: #F2762E;
     color: #fff;
@@ -72,6 +73,7 @@ body {
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
+    margin-top: 0.2rem;
 }
 
 .login-container button[type="submit"]:hover {
@@ -158,6 +160,11 @@ body {
 .form-container form {
   padding: 0.5rem 1rem; 
   box-sizing: border-box;
+}
+
+
+.forgot-password{
+	text-align:center;
 }
 
 .login-container form > div,
