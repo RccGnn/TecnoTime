@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/pagination.css">
 </head>
 <body>
 
@@ -59,6 +60,10 @@
         </div>
     </aside>
 
+<!-- Pagination Component -->
+    <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
+    </div>
+    
     <!-- GRID PRODOTTI -->
     <section class="products-container">
     </section>

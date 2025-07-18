@@ -1,55 +1,56 @@
 /* Stili CSS per la barra del filtro */
-       .filter-bar-container {
-            display: flex;
-            align-items: center;
-            padding: 15px 25px; /* Spaziatura interna */
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 25px; /* Bordi arrotondati come nell'immagine */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra leggera */
-            gap: 20px; /* Spazio tra i gruppi di input */
-            flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
-            max-width: 1000px; /* Larghezza massima per il contenitore */
-            margin-left: auto;
-    		margin-right: auto;
-        }
-        
-        .rieplOrdini h1 {
-    	text-align: center;
-		}
+.filter-bar-container {
+	display: flex;
+	align-items: center;
+	padding: 15px 25px; /* Spaziatura interna */
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 25px; /* Bordi arrotondati come nell'immagine */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra leggera */
+	gap: 20px; /* Spazio tra i gruppi di input */
+	flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
+	max-width: 1000px; /* Larghezza massima per il contenitore */
+	margin-left: auto;
+	margin-right: auto;
+}
 
-        .date-filter-group {
-            display: flex;
-            align-items: center;
-            gap: 10px; /* Spazio tra etichetta e input */
-        }
+.rieplOrdini h1 {
+	text-align: center;
+}
 
-        .date-filter-group label {
-            font-size: 0.9em;
-            color: #555;
-            white-space: nowrap; /* Evita che l'etichetta vada a capo */
-        }
+.date-filter-group {
+	display: flex;
+	align-items: center;
+	gap: 10px; /* Spazio tra etichetta e input */
+}
 
-        .date-filter-group input[type="date"] {
-            padding: 8px 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 0.9em;
-            width: 120px; /* Larghezza fissa per l'input data */
-            box-sizing: border-box; /* Include padding e border nella larghezza */
-            appearance: none; /* Rimuove lo stile di default dei browser */
-            -webkit-appearance: none;
-            -moz-appearance: none;
-        }
+.date-filter-group label {
+	font-size: 0.9em;
+	color: #555;
+	white-space: nowrap; /* Evita che l'etichetta vada a capo */
+}
 
-        .date-filter-group input[type="date"]::before {
-            content: attr(placeholder);
-            color: #999;
-            width: 100%;
-            display: block;
-            line-height: 1;
-        }
-        .date-filter-group input[type="date"]:valid::before,
-        .date-filter-group input[type="date"]:focus::before {
-            content: '';
-        }
+.date-filter-group input[type="date"] {
+	padding: 8px 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-size: 0.9em;
+	width: 120px; /* Larghezza fissa per l'input data */
+	box-sizing: border-box; /* Include padding e border nella larghezza */
+	appearance: none; /* Rimuove lo stile di default dei browser */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.date-filter-group input[type="date"]::before {
+	content: attr(placeholder);
+	color: #999;
+	width: 100%;
+	display: block;
+	line-height: 1;
+}
+
+.date-filter-group input[type="date"]:valid::before, .date-filter-group input[type="date"]:focus::before
+	{
+	content: '';
+}

@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
-
 import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.OrdineCompletoBean;
 
@@ -16,6 +14,26 @@ public class Filters {
 	/*
 	 * FILTRI PER TUTTI GLI ARTICOLI
 	 */
+	
+	public static ArrayList<ArticoloCompletoBean> pageFilter(ArrayList<ArticoloCompletoBean> catalogo, double offset, double limit) {
+	
+		if (catalogo == null)	return catalogo;
+	
+		// Verifica che offset non sia > o = alla dimensione della lista, in quanta limit è > 0
+		if (offset < 0 || limit < 0 || offset >= catalogo.size()) return catalogo;
+		
+		double endIndex = Math.min(limit, catalogo.size());
+		
+		// Seleziona solo gli elementi nel range accettabile
+		ArrayList <ArticoloCompletoBean> temp = new ArrayList<>();
+		for (int i = 0; i < catalogo.size(); i++) {
+			if (i >= offset && i < endIndex)
+				temp.add(catalogo.get(i));
+		}
+		
+		return temp;
+	}
+	
 	public static ArrayList<ArticoloCompletoBean> disponibilitaFilter(ArrayList<ArticoloCompletoBean> catalogo) {
 		if (catalogo == null)	return catalogo;
 
