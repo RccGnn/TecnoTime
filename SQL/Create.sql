@@ -261,3 +261,61 @@ FROM
 	Promozione AS promo
 LEFT JOIN Riguarda AS rig USING (IDPromozione)
 LEFT JOIN Associato_a AS ass USING (IDPromozione);
+
+USE tecnotimedb; 
+CREATE TABLE PROCESSORE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+socket VARCHAR(200) NOT NULL, 
+datarilascio date NOT NULL,
+Watt INT NOT NULL
+);
+
+USE tecnotimedb; 
+CREATE TABLE SCHEDA_MADRE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+socket VARCHAR(200) NOT NULL, 
+dimensione VARCHAR(200) NOT NULL,
+PCI decimal(2,1) NOT NULL,
+SupportoRam VARCHAR(100) NOT NULL,
+Watt INT NOT NULL
+);
+
+USE tecnotimedb;
+CREATE TABLE RAM(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+capacita INT NOT NULL,
+SupportoRam VARCHAR(100) NOT NULL
+);
+
+USE tecnotimedb; 
+CREATE TABLE SCHEDA_VIDEO(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+PCI  DECIMAL(2,1) NOT NULL,
+vram INT NOT NULL, 
+tipoRam VARCHAR(100) NOT NULL,
+Watt INT NOT NULL
+);   
+ 
+USE tecnotimedb;
+CREATE TABLE ARCHIVIAZIONE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+PCI VARCHAR(100) NOT NULL,
+capacita VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE _CASE(
+nomecompleto VARCHAR(200) PRIMARY KEY,
+dimensione VARCHAR(200) NOT NULL
+);
+CREATE TABLE ALIMENTATORI (
+nomecompleto VARCHAR(200) PRIMARY KEY,
+marca VARCHAR(200) NOT NULL,
+watt INT NOT NULL
+);
+
+    
