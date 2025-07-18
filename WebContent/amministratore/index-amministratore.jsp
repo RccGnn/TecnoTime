@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
   	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
   	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
+  	
 </head>
 <body>
     <jsp:include page="header-amministratore.jsp" />
