@@ -19,15 +19,14 @@
 	<jsp:include page="header-amministratore.jsp" />
 
 	<main>
-		<form action="AdminAggiungiProdotto" method="POST"
-			enctype="multipart/form-data" class="productsingle-details">
+		<form action="<%= request.getContextPath() %>/AdminAggiungiProdotto" method="POST" enctype="multipart/form-data"  class="productsingle-details">
 			<h1 class="productsingle-title">Aggiungi Nuovo Prodotto</h1>
 
 			<label for="tipologia">Tipologia di prodotto: </label> 
 			
 			<select
 				onchange = "modifyForm()"
-				name="tipologia" id="tipologia" value="Tipologia (Obbligatorio)" required>
+				name="tipologia" id="tipologia" value="tipologia" required>
 				<option value="processore"> Processore </option>
 				<option value="scheda_madre"> Scheda madre </option>
 				<option value="scheda_video"> Scheda video</option>
@@ -59,14 +58,13 @@
 			<label for="immagini">Immagini (PNG, JPG, JPEG, SVG):</label> 
 			
 			<input type="file" name="immagini" id="immagini"
-				accept=".png,.jpg,.jpeg,.svg" multiple required>
+				accept=".png,.jpg,.jpeg,.svg" >
 
 			<!-- CATEGORIE SPECIFICHE DELLA TIPOLOGIA DI PRODOTTO -->
 			<div id="optionElements">	
 			</div>
 
-			<button type="submit" id="productsingle-add-btn">Aggiungi
-				Prodotto</button>
+			<button type="submit" id="productsingle-add-btn">Aggiungi Prodotto</button>
 		</form>
 	</main>
 
