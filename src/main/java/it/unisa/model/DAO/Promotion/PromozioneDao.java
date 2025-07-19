@@ -106,7 +106,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setString(2, key);
+			ps.setString(1, key);
 
 			result = ps.executeUpdate();
 
@@ -146,7 +146,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 					PromozioneBean promozione = new PromozioneBean();
 					
 					promozione.setIDPromozione(rs.getInt("IDPromozione"));
-					promozione.setNomesconto("nomesconto");
+					promozione.setNomesconto(rs.getString("nomesconto"));
 					promozione.setDataInizio(rs.getDate("dataInizio"));
 					promozione.setDescrizione(rs.getString("descrizione"));
 					promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));

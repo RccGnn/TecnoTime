@@ -36,15 +36,19 @@ public class AdminEliminaOfferta extends HttpServlet {
 		PromozioneDao dao = new PromozioneDao();
 		ArrayList<PromozioneBean> lista = new ArrayList<PromozioneBean>(); 
 		try {
-			lista= dao.doRetrieveAll("nomesconto");
+			lista= dao.doRetrieveAll("nomesconto ASC");
 			if(lista == null) {
-				request.setAttribute("errorRetrive", "nessuno sconto presente nel db. Aggiungere prima un nuovo sconto ");
+				request.setAttribute("errorRetrive", "Nessuno sconto presente nel db. Aggiungere prima un nuovo sconto ");
 				RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
 				disp.forward(request, response);
 				return;
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
+		}
+		
+		for (PromozioneBean promso : lista) {
+			System.out.println(promso);
 		}
 		request.setAttribute("lista", lista);
 		RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
@@ -60,7 +64,7 @@ public class AdminEliminaOfferta extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String nome=request.getParameter("nomesconto");
-		
+		System.out.println(nome);
 		PromozioneDao dao = new PromozioneDao();
 		boolean result=false;
 		try {
@@ -70,11 +74,11 @@ public class AdminEliminaOfferta extends HttpServlet {
 		}
 		
 		if(result)
-			request.setAttribute("eliminazioneSuccess","Offerta" + nome+ " eliminata dal DB con successo");
+			request.setAttribute("eliminazioneSuccess","Offerta  " + nome+ " eliminata dal DB con successo");
 		else
 			request.setAttribute("EliminazioneError", "errore generico.Impossibile rimuovere l'offerta"+ nome + ". Riprova più tardi");
 		
-		RequestDispatcher disp = request.getRequestDispatcher("/rimuoviOfferta.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
 		disp.forward(request, response);
 	}
 
