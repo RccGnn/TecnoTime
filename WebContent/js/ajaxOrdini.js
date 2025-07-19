@@ -72,11 +72,17 @@ function sortedOrders() {
 	const priceLbInput = parseFloat(document.getElementById("priceLowerBound").value);
 	const dateLbput = document.getElementById("dateLowerBound").value;
 	const dateUpInput = document.getElementById("dateUpperBound").value;
+	let usernameInput = "";
+	
+	if (window.location.pathname.includes("amministratore") )
+		usernameInput = document.getElementById("username").value;
+	
 	
 	let params = 	"min=" + encodeURIComponent(priceLbInput) +
 	                "&max=" + encodeURIComponent(priceUbInput) +
 	                "&dateLowerBound=" + encodeURIComponent(dateLbput) +
-	                "&dateUpperBound=" + encodeURIComponent(dateUpInput);
+	                "&dateUpperBound=" + encodeURIComponent(dateUpInput) + 
+					"&username=" + encodeURIComponent(usernameInput);
 	
 	loadAjaxDoc("/TecnoTime/OrderFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }
@@ -117,7 +123,7 @@ function handleFilter(xhr) {
 	let container = document.getElementsByClassName("orders-list-page")[0];
 	
 	// Se non ci sono prodotti, allora mostra un messaggio
-	if(response == null || (response != null && response.length == 0) ) {
+	if(response[1] == null || (response[1] != null && response[1].length == 0) ) {
 		let mess = document.createElement("p");
 		mess.className = "no-orders-message";
 		mess.innerHTML = "Nessun ordine per i criteri di ricerca selezionati";
@@ -126,8 +132,15 @@ function handleFilter(xhr) {
 		return;
 	}
 	
+	let flag;
+	if(response[0] == true) {
+		flag = true;
+	} else {
+		flag = false;
+	}
+	
 	// Altrimenti genera gli ordini
-	response.forEach(ord => {
+	response[1].forEach(ord => {
 		// Summary generale
 		let orderSummary = document.createElement("div");
 		orderSummary.className = "orders-summary-section";
@@ -178,6 +191,26 @@ function handleFilter(xhr) {
 
 		orderGroup.appendChild(orderDetail);
 
+		if (flag) { // Opzionale: solo per ADMIN
+	 		// Dettaglio 3
+			orderDetail = document.createElement("div");
+			orderDetail.className = "order-detail-item";
+	
+			// span 1
+			spanDetail = document.createElement("span");
+			spanDetail.className = "detail-label";
+			spanDetail.innerHTML = "Username: ";
+			orderDetail.appendChild(spanDetail);
+	
+			// span 2
+			spanDetail = document.createElement("span");
+			spanDetail.className = "detail-value";
+			spanDetail.innerHTML = ord.username;
+			orderDetail.appendChild(spanDetail);
+	
+			orderGroup.appendChild(orderDetail);
+		}
+		
 		// Aggiungi all'header
 		orderHeader.appendChild(orderGroup);
 		

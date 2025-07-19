@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.beans.*;
 import it.unisa.model.connections.*;
 
@@ -200,6 +201,60 @@ public class OrdineCompletoDao extends OrdineDao{
 				
 			} else {
 				listaOrdini = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return listaOrdini;
+	}
+	
+	
+	/**
+	 * Permette di recuperare l'ordine di tutti gli utenti e tutti i loro elementi
+	 * @param key {@code int} - numeroTransazione
+	 * @return {@code OrdineCompletoBean} ordine
+	 * @throws SQLException
+	 */
+	public synchronized ArrayList<OrdineCompletoBean> doRetrieveAllOrders() throws SQLException {
+
+		createView();
+		
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<OrdineCompletoBean> listaOrdini = new ArrayList<>();
+		AccountDao dao = new AccountDao();
+		// Restituisce tutte le transazioni, divise per numeroTransazione, di un utente
+		String selectSQL = "SELECT numeroTransazione, username FROM " + OrdineCompletoDao.TABLE_NAME + " WHERE username = ? GROUP BY numeroTransazione";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+
+			// Esegui doRetrieveAllByUsername per ogni username
+			ArrayList<String> allUsernames = dao.doRetrieveAllUsernames("usernama asc");
+			
+			for (String username : allUsernames) {
+				ps = connection.prepareStatement(selectSQL);
+				ps.setString(1, username);
+				
+				ResultSet rs = ps.executeQuery();
+
+				// Recupera tutte le transazioni dell'utente
+				if (rs.next()) {
+					
+					OrdineCompletoBean ordine = null;
+					do {
+						ordine = doRetrieveByKey(rs.getInt("numeroTransazione"));
+						listaOrdini.add(ordine);
+					} while(rs.next());
+				}
 			}
 
 		} finally {

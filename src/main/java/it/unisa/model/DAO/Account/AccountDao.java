@@ -317,4 +317,42 @@ public class AccountDao implements BeanDaoInterface<AccountBean> {
 		return accounts;
 	}
 
+	public synchronized ArrayList<String> doRetrieveAllUsernames(String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<String> usernames = new ArrayList<>();
+
+		String selectSQL = "SELECT username FROM " + AccountDao.TABLE_NAME;
+
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				
+				do{
+					usernames.add(rs.getString("username"));
+				} while (rs.next());
+			} else {
+				usernames = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return usernames;
+	}
 }
