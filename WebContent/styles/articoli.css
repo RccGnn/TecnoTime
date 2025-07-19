@@ -9,6 +9,7 @@
 /* =================================== */
 /* Reset e Stili di Base               */
 /* =================================== */
+
 main {
 	padding: 20px;
 }
@@ -22,6 +23,7 @@ body {
 }
 
 /* --- Messaggi di stato --- */
+
 .error-message {
 	color: red;
 	margin-top: 1rem;
@@ -54,7 +56,7 @@ body {
 	max-width: 80%;
 }
 
-/* --- errori blocchi registrazione ---*/
+/* --- errori blocchi registrazione --- */
 
 /* inline error style */
 .inline-error {
@@ -74,10 +76,12 @@ body {
 /* --------------------
    PAGE PRODOTTI
    -------------------- */
+
 .products-page {
 	display: flex;
-	align-items: flex-start; /* sidebar e griglia allineati in alto */
-	gap: 1.5rem; /* spazio tra sidebar e griglia */
+	flex-direction: column; /* Imposta la direzione a colonna per allineare la griglia e la paginazione verticalmente */
+	align-items: center; /* Centra i figli (griglia e paginazione) orizzontalmente */
+	gap: 1.5rem;
 	padding: 20px;
 }
 
@@ -131,6 +135,7 @@ body {
 	flex-wrap: wrap; /* permette il wrapping */
 	gap: 1.5rem;
 	padding: 0.5rem 0;
+	width: 100%; /* Assicura che la griglia occupi lo spazio disponibile */
 }
 
 .product-card {
@@ -193,10 +198,9 @@ body {
 
 /* --------------------
 	NOTIFICA
-   --------------------  */
+   -------------------- */
 .notification-inline {
 	background-color: #e6ecf7;
-	/* leggermente più denso per supportare testo chiaro */
 	color: #4d90fe; /* testo bianco */
 	padding: 12px 16px;
 	border-left: 4px solid rgba(2, 24, 89, 0.4);
@@ -231,23 +235,114 @@ body {
 	transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
-.notification.show { /*Quando l'oggetto è visibie*/
+.notification.show { /*Quando l'oggetto è visibile*/
 	opacity: 1;
 	visibility: visible;
 }
 
-/* =================================================================== */
-/* STILI RESPONSIVE                                                    */
-/* =================================================================== */
+/* ================================================== */
+/* --- PAGINAZIONE (Stile Amazon - Corretto) ---      */
+/* ================================================== */
 
-/* --- Tablet e Mobile (fino a 768px) --- */
-@media ( max-width : 768px) {
+/* Navigazione Paginazione: posizionata nel flusso normale del documento */
+.pagination-nav {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 1rem 0;
+	margin-top: 2.5rem; /* Aggiunge spazio sopra la paginazione per separarla dalla griglia di prodotti */
+}
+
+/* Lista della Paginazione (ul) */
+.pagination-list {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem; /* Aumentato leggermente il gap per uno stile più pulito */
+	font-size: 1rem;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* Elementi della Lista (li) */
+.pagination-list li {
+	margin: 0;
+	padding: 0;
+}
+
+/* Pulsanti (Prev/Next) e Link (numeri pagine) */
+.pagination-button, 
+.pagination-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 1rem;
+	min-width: 40px; /* Larghezza minima per un aspetto uniforme */
+	height: 40px;
+	line-height: 1.25;
+	color: #011140; /* Colore testo coerente con la palette */
+	background-color: #fff;
+	border: 1px solid #d1d5db;
+	border-radius: 0.5rem; /* Bordi arrotondati su tutti gli elementi */
+	transition: all 200ms ease;
+	text-decoration: none;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.pagination-button svg {
+	width: 1.25rem;
+	height: 1.25rem;
+}
+
+/* Stati Hover e Focus */
+.pagination-button:hover, 
+.pagination-link:hover {
+	background-color: #f3f4f6;
+	border-color: #021859;
+}
+
+.pagination-button:focus, 
+.pagination-link:focus {
+	box-shadow: 0 0 0 3px rgba(242, 118, 46, 0.4); /* Ombra focus arancione */
+	border-color: #F2762E;
+	outline: none;
+}
+
+/* Link Attivo */
+.pagination-link--active {
+	color: #fff;
+	background-color: #021859; /* Blu primario per l'elemento attivo */
+	border-color: #021859;
+	font-weight: bold;
+}
+
+.pagination-link--active:hover {
+	background-color: #011140; /* Blu navy al passaggio del mouse */
+	color: #fff;
+}
+
+/* Stile per i puntini (...) se presenti */
+.pagination-ellipsis {
+	padding: 0 0.5rem;
+	color: #555;
+}
+
+/* =================================== */
+/* Stili Responsive                    */
+/* =================================== */
+
+@media (max-width: 768px) {
 	.products-page {
 		flex-direction: column;
+		padding: 10px;
 	}
+	
 	.filter-toggle-btn {
 		display: block;
 	}
+	
 	.filters-sidebar {
 		position: fixed;
 		top: 150px; /* sotto header */
@@ -257,28 +352,75 @@ body {
 		max-height: calc(100vh - 100px);
 		overflow-y: auto;
 	}
+
 	.filters-sidebar.visible {
 		left: 10px;
 	}
+	
 	.products-container {
-		/* su mobile la griglia scende a 1 colonna */
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr; /* su mobile la griglia scende a 1 colonna */
 	}
-}
 
-/*form registrazione*/
-@media ( max-width : 600px) {
 	.form-container fieldset {
 		padding: 0.75rem;
 	}
+
 	.form-container legend {
 		font-size: 1rem;
 	}
+
 	.form-container textarea {
 		min-height: 120px;
 	}
 }
 
-/* --- Solo Mobile (fino a 480px) --- */
-@media ( max-width : 480px) {
+@media (max-width: 480px) {
+	.pagination-button, 
+	.pagination-link {
+		padding: 0 0.75rem;
+		min-width: 36px;
+		height: 36px;
+		font-size: 0.9rem;
+	}
+
+	.pagination-list {
+		gap: 0.25rem;
+	}
 }
+
+/* Desktop: affianca sidebar e contenuto prodotti, posiziona la paginazione sotto i prodotti */
+@media (min-width: 769px) {
+  .products-page {
+    display: grid;
+    grid-template-columns: 1fr 2fr;              /* 1/3 + 2/3 */
+    grid-template-rows: auto auto;               /* riga 1: sidebar+prodotti, riga 2: sidebar+paginazione */
+    grid-template-areas:
+      "filters-sidebar products-container"
+      "filters-sidebar pagination-nav";
+    gap: 1.5rem;
+    align-items: start;
+    padding: 20px;
+  }
+
+  .filters-sidebar {
+    grid-area: filters-sidebar;
+    /* mantiene width fissa su desktop */
+    max-width: none;
+    width: auto;
+  }
+
+  .products-container {
+    grid-area: products-container;
+    /* rimuove flex-grow su desktop se non serve */
+    flex: none;
+    width: 100%;
+  }
+
+  .pagination-nav {
+    grid-area: pagination-nav;
+    justify-self: start;  /* allinea la nav a sinistra dell’area prodotti */
+    width: 100%;
+    margin-top: 0;        /* lo spacing lo gestisce il gap del grid */
+  }
+}
+

@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/pagination.css">
 </head>
 <body>
   <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
