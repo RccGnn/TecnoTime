@@ -67,22 +67,13 @@
 
     <!-- GRID PRODOTTI -->
     <section class="products-container">
-        <!--  
-        <div class="product-card">
-          <img src="${p.imageURL}" alt="${p.name}" class="product-image"/>
-          <h3 class="product-name">${p.name}</h3>
-          <p class="product-price">€ ${p.price}</p>
-          <p class="product-description">${p.description}</p>
-          <button class="add-to-cart-btn">Aggiungi al carrello</button>
-        </div>
-        -->
     </section>
-  </main>
-
-<!-- Pagination Component -->
+    
+    <!-- Pagination Component -->
     <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
     </div>
-    
+  </main>
+  
   <jsp:include page="footer.jsp"/>
 
   <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
