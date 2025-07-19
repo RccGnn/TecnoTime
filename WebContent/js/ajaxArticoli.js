@@ -399,6 +399,11 @@ function displayPageSelector() {
 	
 	pageMenu.appendChild(pageList);
 }
+const main = document.querySelector('main');
+const pageMenu = document.getElementById('pagination-nav');
+	if (main && pageMenu && pageMenu.parentElement !== main) {
+	  main.appendChild(pageMenu);
+	}
 
 function displaySlider() {
 	let slider = document.getElementById("slider");

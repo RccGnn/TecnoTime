@@ -1,74 +1,139 @@
-/* Stili CSS per la barra del filtro */
+/* filters.css */
+
+/* Palette:
+   Blu scuro primario: #021859
+   Blu navy secondario: #011140
+   Giallo: #F2D230
+   Arancione: #F2762E
+   Grigio chiaro sfondo: #F2F2F2
+*/
+
+/* =================================== */
+/* Reset e Stili di Base               */
+/* =================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F2F2F2;
+  color: #011140;
+}
+
+/* =================================== */
+/* Container Filtro                     */
+/* =================================== */
+
 .filter-bar-container {
-	display: inline-block;
-	align-items: center;
-	padding: 15px 25px; /* Spaziatura interna */
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 25px; /* Bordi arrotondati come nell'immagine */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra leggera */
-	gap: 20px; /* Spazio tra i gruppi di input */
-	flex-wrap: wrap; /* Permette di andare a capo su schermi piccoli */
-	max-width: 1000px; /* Larghezza massima per il contenitore */
-	margin-left: auto;
-	margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem; /* Increased padding */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  gap: 1.5rem; /* Increased gap */
+  max-width: 1000px;
+  margin: 2rem auto; /* Increased margin */
 }
 
-.admin-search-form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	margin: 20px auto;
-	max-width: 600px;
-	background-color: #fff;
-	border-radius: 8px;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.rieplOrdini {
-	display: block;
-	justify-content: center;
-}
-
-.rieplOrdini h1 {
-	text-align: center;
-}
+/* =================================== */
+/* Gruppo Data                         */
+/* =================================== */
 
 .date-filter-group {
-	padding: 15px;
-	display: flex;
-	align-items: center;
-	gap: 10px; /* Spazio tra etichetta e input */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem; /* Increased gap */
+  flex: 1 1 200px;
+  min-width: 150px;
+  padding: 0.5rem; /* Added padding */
 }
 
+/* Etichetta responsive */
 .date-filter-group label {
-	font-size: 0.9em;
-	color: #555;
-	white-space: nowrap; /* Evita che l'etichetta vada a capo */
+  font-size: 0.9em;
+  color: #555;
+  font-weight: bold;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0.25rem; /* Added margin */
 }
 
+/* Input data responsive */
 .date-filter-group input[type="date"] {
-	padding: 8px 10px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	font-size: 0.9em;
-	width: 120px; /* Larghezza fissa per l'input data */
-	box-sizing: border-box; /* Include padding e border nella larghezza */
-	appearance: none; /* Rimuove lo stile di default dei browser */
-	-webkit-appearance: none;
-	-moz-appearance: none;
+  width: 100%;
+  padding: 0.75rem 1rem; /* Increased padding */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9em;
+  background-color: #fff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
-.date-filter-group input[type="date"]::before {
-	content: attr(placeholder);
-	color: #999;
-	width: 100%;
-	display: block;
-	line-height: 1;
+/* Placeholder styling */
+.date-filter-group input[type="date"]::-webkit-datetime-edit-text,
+.date-filter-group input[type="date"]::-webkit-datetime-edit-month-field,
+.date-filter-group input[type="date"]::-webkit-datetime-edit-day-field,
+.date-filter-group input[type="date"]::-webkit-datetime-edit-year-field {
+  color: #333;
 }
 
-.date-filter-group input[type="date"]:valid::before, .date-filter-group input[type="date"]:focus::before
-	{
-	content: '';
+/* =================================== */
+/* Bottone di filtraggio               */
+/* =================================== */
+
+.filter-bar-container button {
+  padding: 0.8rem 1.5rem; /* Increased padding */
+  background-color: #F2762E;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-top: 0.5rem; /* Added margin */
+}
+
+.filter-bar-container button:hover {
+  opacity: 0.9;
+}
+
+/* =================================== */
+/* Media Query: schermi piccoli (<600px) mobile */
+/* =================================== */
+
+@media (max-width: 600px) {
+  .filter-bar-container {
+    padding: 1.2rem; /* Adjusted padding */
+    gap: 0.8rem; /* Adjusted gap */
+    margin: 1.5rem auto; /* Adjusted margin */
+  }
+  .date-filter-group {
+    flex: 1 1 100%;
+    min-width: unset;
+    padding: 0.4rem; /* Adjusted padding */
+  }
+  .date-filter-group label {
+    font-size: 0.85em;
+    margin-bottom: 0.2rem; /* Adjusted margin */
+  }
+  .date-filter-group input[type="date"] {
+    font-size: 0.85em;
+    padding: 0.6rem 0.8rem; /* Adjusted padding */
+  }
+  .filter-bar-container button {
+    width: 100%;
+    padding: 0.85rem; /* Adjusted padding */
+    margin-top: 0.4rem; /* Adjusted margin */
+  }
 }
