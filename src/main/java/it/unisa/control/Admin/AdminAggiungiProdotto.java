@@ -67,19 +67,19 @@ public class AdminAggiungiProdotto extends HttpServlet {
 
 	
 		
-		String tipologia = (String) request.getAttribute("tipologia");
+		String tipologia = (String) request.getParameter("tipologia");
 		Date date = Date.valueOf(LocalDate.now());
 		
 		if (tipologia.equals("processore")) {
-			String nomecompletocpu = (String) request.getAttribute("nomecompleto");
-			String marcacpu = (String) request.getAttribute("marca");
-			String socketcpu = (String) request.getAttribute("datarilascio");	
-			int wattcpu = (int) request.getAttribute("watt");
-			String seriale  = (String) request.getAttribute("seriale");
-			float prezzopf = (float) request.getAttribute("prezzo");
-			String descrizionepf = (String) request.getAttribute("descrizione");
-			int quantitaMagazzino= (int) request.getAttribute("quantitaMagazzino");
-			String url = (String) request.getAttribute("url");
+			String nomecompletocpu = (String) request.getParameter("nomecompleto");
+			String marcacpu = (String) request.getParameter("marca");
+			String socketcpu = (String) request.getParameter("datarilascio");	
+			String wattcpu = request.getParameter("watt");
+			String seriale  = (String) request.getParameter("seriale");
+			String prezzopf =  request.getParameter("prezzo");
+			String descrizionepf = (String) request.getParameter("descrizione");
+			String quantitaMagazzino= request.getParameter("quantitaMagazzino");
+			String url = (String) request.getParameter("url");
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
@@ -93,9 +93,9 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pf.setEnteErogatore(marcacpu);
 			pf.setNome(nomecompletocpu);
 			pf.setPreassemblato(false);
-			pf.setPrezzo(prezzopf);
+			pf.setPrezzo(Float.parseFloat(prezzopf));
 			pf.setSeriale(seriale);
-			pf.setQuantitaMagazzino(quantitaMagazzino);
+			pf.setQuantitaMagazzino(Integer.parseInt(quantitaMagazzino));
 
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
 			ArticoloCompletoDao artdao = new ArticoloCompletoDao();
@@ -109,7 +109,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 				art.setImmagini(img);
 			}
 			
-			Processore cpu = new Processore(nomecompletocpu, marcacpu, socketcpu, date, wattcpu);
+			Processore cpu = new Processore(nomecompletocpu, marcacpu, socketcpu, date, Integer.parseInt(wattcpu));
 			ProcessoreDao cpuDao = new ProcessoreDao();
 			try {
 				if(url!=null) {
@@ -123,18 +123,18 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			
 		}else  if(tipologia.equals("scheda_madre")) {
-			String nomecompletomb = (String) request.getAttribute("nomecompleto");
-			String marcamb = (String) request.getAttribute("marca");
-			String socketmb = (String) request.getAttribute("socket");
-			String dimensionemb = (String) request.getAttribute("dimensione");
-			float PCImb = (float) request.getAttribute("PCI");
-			int wattmb = (int) request.getAttribute("watt");
-			String supportoRam = (String) request.getAttribute("supportoRam");
-			String seriale  = (String) request.getAttribute("seriale");
-			float prezzopf = (float) request.getAttribute("prezzo");
-			String descrizionepf = (String) request.getAttribute("descrizione");
-			int quantitaMagazzino= (int) request.getAttribute("quantitaMagazzino");
-			String url = (String) request.getAttribute("url");
+			String nomecompletomb = (String) request.getParameter("nomecompleto");
+			String marcamb = (String) request.getParameter("marca");
+			String socketmb = (String) request.getParameter("socket");
+			String dimensionemb = (String) request.getParameter("dimensione");
+			String PCImb =  request.getParameter("PCI");
+			String wattmb =  request.getParameter("watt");
+			String supportoRam = (String) request.getParameter("supportoRam");
+			String seriale  = (String) request.getParameter("seriale");
+			String prezzopf =  request.getParameter("prezzo");
+			String descrizionepf = (String) request.getParameter("descrizione");
+			String quantitaMagazzino=  request.getParameter("quantitaMagazzino");
+			String url = (String) request.getParameter("url");
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
@@ -148,9 +148,9 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pf.setEnteErogatore(marcamb);
 			pf.setNome(nomecompletomb);
 			pf.setPreassemblato(false);
-			pf.setPrezzo(prezzopf);
+			pf.setPrezzo(Float.parseFloat(prezzopf));
 			pf.setSeriale(seriale);
-			pf.setQuantitaMagazzino(quantitaMagazzino);
+			pf.setQuantitaMagazzino(Integer.parseInt(quantitaMagazzino));
 			
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
 			ArticoloCompletoDao artdao = new ArticoloCompletoDao();
@@ -163,7 +163,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 				art.setPdFisico(pf);
 				art.setImmagini(img);
 			}
-			SchedaMadre mb = new SchedaMadre(nomecompletomb, marcamb, socketmb, dimensionemb,PCImb, supportoRam,wattmb);
+			SchedaMadre mb = new SchedaMadre(nomecompletomb, marcamb, socketmb, dimensionemb,Float.parseFloat(PCImb), supportoRam,Integer.parseInt(wattmb));
 			SchedaMadreDao mbDao = new SchedaMadreDao();
 			
 			try {
@@ -178,17 +178,17 @@ public class AdminAggiungiProdotto extends HttpServlet {
 
 			
 		}else  if(tipologia.equals("scheda_video")) {
-			String nomecompletogpu = (String) request.getAttribute("nomecompleto");
-			String marcagpu = (String) request.getAttribute("marca");
-			float PCIgpu = (float) request.getAttribute("PCI");
-			int vram = (int) request.getAttribute("vram");
-			String tipoRam = (String) request.getAttribute("tipoRam");
-			int wattgpu= (int) request.getAttribute("watt");
-			String seriale  = (String) request.getAttribute("seriale");
-			float prezzopf = (float) request.getAttribute("prezzo");
-			String descrizionepf = (String) request.getAttribute("descrizione");
-			int quantitaMagazzino= (int) request.getAttribute("quantitaMagazzino");
-			String url = (String) request.getAttribute("url");
+			String nomecompletogpu = (String) request.getParameter("nomecompleto");
+			String marcagpu = (String) request.getParameter("marca");
+			String PCIgpu = request.getParameter("PCI");
+			String vram=  request.getParameter("vram");
+			String tipoRam = (String) request.getParameter("tipoRam");
+			String wattgpu= request.getParameter("watt");
+			String seriale  = (String) request.getParameter("seriale");
+			String prezzopf = request.getParameter("prezzo");
+			String descrizionepf = (String) request.getParameter("descrizione");
+			String quantitaMagazzino=  request.getParameter("quantitaMagazzino");
+			String url = (String) request.getParameter("url");
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
@@ -202,9 +202,9 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pf.setEnteErogatore(marcagpu);
 			pf.setNome(nomecompletogpu);
 			pf.setPreassemblato(false);
-			pf.setPrezzo(prezzopf);
+			pf.setPrezzo(Float.parseFloat(prezzopf));
 			pf.setSeriale(seriale);
-			pf.setQuantitaMagazzino(quantitaMagazzino);
+			pf.setQuantitaMagazzino(Integer.parseInt(quantitaMagazzino));
 			
 
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
@@ -219,7 +219,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 				art.setImmagini(img);
 			}
 			
-			SchedaVideo gpu = new SchedaVideo(nomecompletogpu, marcagpu, PCIgpu, vram, tipoRam, wattgpu);
+			SchedaVideo gpu = new SchedaVideo(nomecompletogpu, marcagpu, Float.parseFloat(PCIgpu), Integer.parseInt(vram), tipoRam, Integer.parseInt(wattgpu));
 			SchedaVideoDAO gpuDao = new SchedaVideoDAO(); 
 			
 			try {
@@ -234,14 +234,14 @@ public class AdminAggiungiProdotto extends HttpServlet {
 
 		
 		}else  if(tipologia.equals("alimentatori")) {
-			String nomecompletopsu= (String) request.getAttribute("nomecompleto");
-			String marcapsu = (String) request.getAttribute("marca");
-			int wattpsu = (int) request.getAttribute("watt");
-			String seriale  = (String) request.getAttribute("seriale");
-			float prezzopf = (float) request.getAttribute("prezzo");
-			String descrizionepf = (String) request.getAttribute("descrizione");
-			int quantitaMagazzino= (int) request.getAttribute("quantitaMagazzino");
-			String url = (String) request.getAttribute("url");
+			String nomecompletopsu= (String) request.getParameter("nomecompleto");
+			String marcapsu = (String) request.getParameter("marca");
+			String wattpsu = request.getParameter("watt");
+			String seriale  = (String) request.getParameter("seriale");
+			String prezzopf =  request.getParameter("prezzo");
+			String descrizionepf = (String) request.getParameter("descrizione");
+			String quantitaMagazzino=  request.getParameter("quantitaMagazzino");
+			String url = (String) request.getParameter("url");
 			
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
@@ -256,9 +256,9 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pf.setEnteErogatore(marcapsu);
 			pf.setNome(nomecompletopsu);
 			pf.setPreassemblato(false);
-			pf.setPrezzo(prezzopf);
+			pf.setPrezzo(Float.parseFloat(prezzopf));
 			pf.setSeriale(seriale);
-			pf.setQuantitaMagazzino(quantitaMagazzino);
+			pf.setQuantitaMagazzino(Integer.parseInt(quantitaMagazzino));
 			
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
 			ArticoloCompletoDao artdao = new ArticoloCompletoDao();
@@ -272,7 +272,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 				art.setImmagini(img);
 			}
 			
-			Alimentatore psu = new Alimentatore(nomecompletopsu, marcapsu, wattpsu);
+			Alimentatore psu = new Alimentatore(nomecompletopsu, marcapsu, Integer.parseInt(wattpsu));
 			AlimentatoreDao psuDao = new AlimentatoreDao();
 			
 			try {
@@ -288,14 +288,14 @@ public class AdminAggiungiProdotto extends HttpServlet {
 		
 		
 		}else if (tipologia.equals("_case")) {
-			String nomecompletocase= (String) request.getAttribute("nomecompleto");
-			String dimensionecase = (String) request.getAttribute("dimensione");
-			String marcacase =  (String) request.getAttribute("marca");
-			String seriale  = (String) request.getAttribute("seriale");
-			float prezzopf = (float) request.getAttribute("prezzo");
-			String descrizionepf = (String) request.getAttribute("descrizione");
-			int quantitaMagazzino= (int) request.getAttribute("quantitaMagazzino");
-			String url = (String) request.getAttribute("url");
+			String nomecompletocase= (String) request.getParameter("nomecompleto");
+			String dimensionecase = (String) request.getParameter("dimensione");
+			String marcacase =  (String) request.getParameter("marca");
+			String seriale  = (String) request.getParameter("seriale");
+			String prezzopf =  request.getParameter("prezzo");
+			String descrizionepf = (String) request.getParameter("descrizione");
+			String quantitaMagazzino= request.getParameter("quantitaMagazzino");
+			String url = (String) request.getParameter("url");
 			
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
@@ -310,9 +310,9 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pf.setEnteErogatore(marcacase);
 			pf.setNome(nomecompletocase);
 			pf.setPreassemblato(false);
-			pf.setPrezzo(prezzopf);
+			pf.setPrezzo(Float.parseFloat(prezzopf));
 			pf.setSeriale(seriale);
-			pf.setQuantitaMagazzino(quantitaMagazzino);
+			pf.setQuantitaMagazzino(Integer.parseInt(quantitaMagazzino));
 			
 
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
@@ -344,13 +344,13 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 		
 		}else if (tipologia.equals("altro")) {
-			String nome= (String) request.getAttribute("nome");
-			String seriale  = (String) request.getAttribute("seriale");
-			float prezzopf = (float) request.getAttribute("prezzo");
-			String marcapf = (String) request.getAttribute("marca");
-			String descrizionepf = (String) request.getAttribute("descrizione");
-			int quantitaMagazzino= (int) request.getAttribute("quantitaMagazzino");
-			String url = (String) request.getAttribute("url");
+			String nome= (String) request.getParameter("nome");
+			String seriale  = (String) request.getParameter("seriale");
+			String prezzopf =  request.getParameter("prezzo");
+			String marcapf = (String) request.getParameter("marca");
+			String descrizionepf = (String) request.getParameter("descrizione");
+			String quantitaMagazzino=  request.getParameter("quantitaMagazzino");
+			String url = (String) request.getParameter("url");
 			
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
@@ -365,9 +365,9 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pf.setEnteErogatore(marcapf);
 			pf.setNome(nome);
 			pf.setPreassemblato(false);
-			pf.setPrezzo(prezzopf);
+			pf.setPrezzo(Float.parseFloat(prezzopf));
 			pf.setSeriale(seriale);
-			pf.setQuantitaMagazzino(quantitaMagazzino);
+			pf.setQuantitaMagazzino(Integer.parseInt(quantitaMagazzino));
 			
 			
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
@@ -396,13 +396,13 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			
 		}else if ( tipologia.equals("prodotto_digitale")){
-			String nome = ( String) request.getAttribute("nome");
-			String marca = (String) request.getAttribute("marca");
-			String codiceSoftware= (String) request.getAttribute("codiceSoftware");
-			String descrizionepd= (String) request.getAttribute("descrizione");
-			float prezzopd= (float) request.getAttribute("prezzopf");
-			int chiaviDisponibili = (int) request.getAttribute("chiaviDisponibili");
-			String url = (String) request.getAttribute("url");
+			String nome = ( String) request.getParameter("nome");
+			String marca = (String) request.getParameter("marca");
+			String codiceSoftware= (String) request.getParameter("codiceSoftware");
+			String descrizionepd= (String) request.getParameter("descrizione");
+			String prezzopd= request.getParameter("prezzopf");
+			String chiaviDisponibili = request.getParameter("chiaviDisponibili");
+			String url = (String) request.getParameter("url");
 			
 			ProdottoDigitaleBean pd = new ProdottoDigitaleBean();
 			ProdottoDigitaleDao pdDao = new ProdottoDigitaleDao();
@@ -416,8 +416,8 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			pd.setDisponibilita(true);
 			pd.setEnteErogatore(marca);
 			pd.setNome(nome);
-			pd.setNumeroChiavi(chiaviDisponibili);
-			pd.setPrezzo(prezzopd);
+			pd.setNumeroChiavi(Integer.parseInt(chiaviDisponibili));
+			pd.setPrezzo(Float.parseFloat(prezzopd));
 			
 			ArticoloCompletoBean art = new ArticoloCompletoBean();
 			ArticoloCompletoDao artdao = new ArticoloCompletoDao();
@@ -442,12 +442,12 @@ public class AdminAggiungiProdotto extends HttpServlet {
 
 			
 		}else if ( tipologia.equals("servizio")){
-			String nome = (String) request.getAttribute("nome");
-			String codiceServizio= (String) request.getAttribute("codiceServizio");
-			float prezzosv= (float) request.getAttribute("prezzo");
-			String descrizionesv= (String) request.getAttribute("descrizione");
-			double durata = (double) request.getAttribute("durata");
-			String url = (String) request.getAttribute("url");
+			String nome = (String) request.getParameter("nome");
+			String codiceServizio= (String) request.getParameter("codiceServizio");
+			String prezzosv= request.getParameter("prezzo");
+			String descrizionesv= (String) request.getParameter("descrizione");
+			String durata =  request.getParameter("durata");
+			String url = (String) request.getParameter("url");
 			
 			 ServizioBean servizio = new ServizioBean();
 			 ServizioDao servDao = new ServizioDao();
@@ -460,10 +460,10 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			 servizio.setDataUltimaPromozione(date);
 			 servizio.setDescrizione(descrizionesv);
 			 servizio.setDisponibilita(true);
-			 servizio.setDurata(durata);
+			 servizio.setDurata(Double.parseDouble(durata));
 			 servizio.setEnteErogatore("tecnotime");
 			 servizio.setNome(nome);
-			 servizio.setPrezzo(prezzosv);
+			 servizio.setPrezzo(Float.parseFloat(prezzosv));
 			 
 			 ArticoloCompletoBean art = new ArticoloCompletoBean();
 				ArticoloCompletoDao artdao = new ArticoloCompletoDao();
