@@ -32,6 +32,7 @@ public class OrderFilter extends HttpServlet {
         double priceMax = (request.getParameter("max") != null && !request.getParameter("max").trim().equals("")) ? Double.parseDouble(request.getParameter("max")) : Double.MAX_VALUE;
         String dateLowerBound = (request.getParameter("dateLowerBound") != null && !request.getParameter("dateLowerBound").trim().equals("")) ? request.getParameter("dateLowerBound") : null; 
         String dateUpperBound = (request.getParameter("dateUpperBound") != null && !request.getParameter("dateUpperBound").trim().equals("")) ? request.getParameter("dateUpperBound") : null; 
+        String username = (request.getParameter("username") != null && !request.getParameter("username").trim().equals("")) ? request.getParameter("username") : null; 
         
         boolean user = false, admin = false;
         if (request.getSession().getAttribute("user") != null)
@@ -40,16 +41,28 @@ public class OrderFilter extends HttpServlet {
         if (request.getSession().getAttribute("admin") != null)
         	admin = (boolean) request.getSession().getAttribute("admin");
         
-        System.out.println("Price:" + priceMax + "-" + priceMin + "\nDate: "+ dateLowerBound +"-"+dateUpperBound);
+        System.out.println("Price:" + priceMax + "-" + priceMin + "\nDate: "+ dateLowerBound +"-"+dateUpperBound + "\nUsername: " + username);
         ArrayList<OrdineCompletoBean> listaOrdini = null;
         OrdineCompletoDao dao = new OrdineCompletoDao();
+        ArrayList<Object> resultToJson = new ArrayList<Object>(2);
+        
         try {
             if (user) {
-            	String username = (String) request.getSession().getAttribute("username");
-            	listaOrdini = dao.doRetrieveAllByUsername(username);
+            	resultToJson.add(false); // Flag per indicare se la richiesta proviene dalle pagine dell'admin
+            	String accountUsername = (String) request.getSession().getAttribute("username");
+            	listaOrdini = dao.doRetrieveAllByUsername(accountUsername);
             }
             if (admin) {
-            	// recupera tutti gli ordini di tutti gli account
+            	resultToJson.add(true);            	
+            	if (username != null && !username.trim().equals("")) {
+            		// Recupera gli ordini di un solo account
+            		listaOrdini = dao.doRetrieveAllByUsername(username);
+            		
+            	} else {
+            		// recupera tutti gli ordini di tutti gli account
+            		listaOrdini = dao.doRetrieveAllOrders();
+            	}
+
             }        	
         } catch (SQLException e){
         	response.sendError(500, "Errore nella ricerca degli ordini");
@@ -61,10 +74,11 @@ public class OrderFilter extends HttpServlet {
         if (dateLowerBound != null || dateUpperBound != null)
         	Filters.dateOrderFilter(listaOrdini, dateLowerBound, dateUpperBound);
         
+        resultToJson.add(listaOrdini);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        String jsonOutput = gson.toJson(listaOrdini);
+        String jsonOutput = gson.toJson(resultToJson);
         
-        System.out.println(jsonOutput);
+        System.out.println("output" + jsonOutput);
         response.setContentType("application/json");
         PrintWriter prw = response.getWriter();
         prw.print(jsonOutput); // Scrivi la stringa JSON nel PrintWriter

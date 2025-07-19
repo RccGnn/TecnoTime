@@ -32,10 +32,10 @@
 	   <div class="filter-bar-container">
 	        <div class="date-filter-group">
 	            <label for="dateLowerBound">Data (Lower Bound):</label>
-	            <input onchange="sortedOrders()" type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD">
+	            <input onchange="sortedOrders()" type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD" value="1970-0-0">
 	
 	            <label for="dateUpperBound">Data (Upper Bound):</label>
-	            <input onchange="sortedOrders()" type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
+	            <input onchange="sortedOrders()" type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD" value="1970-0-0">
 	        </div>
 	
 	        <div class="date-filter-group">
