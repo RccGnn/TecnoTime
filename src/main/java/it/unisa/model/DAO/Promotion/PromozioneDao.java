@@ -28,7 +28,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ PromozioneDao.TABLE_NAME
-				+ "(IDPromozione,nomesconto,descrizione, dataInizio, percentualeSconto) "
+				+ "(IDPromozione, nomesconto, descrizione, dataInizio, percentualeSconto) "
 				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		try {
