@@ -90,7 +90,13 @@ function modifyForm() {
 	while (displayElements.firstChild)
 		displayElements.removeChild(displayElements.firstChild);
 	
-	let label, input;		
+	
+	// Aggiungi bottone per impostare la durata
+	if (tipologia == "servizio") {
+		appendLabelNumber("durata", "Durata (ora):", displayElements, 1);
+		return;
+	}
+
 	// Aggiungi bottoni per impostare la quantità
 	if (tipologia != "servizio") {
 		appendLabelNumber("quantita", "Quantità: ", displayElements, 1);
@@ -138,6 +144,7 @@ function modifyForm() {
 	if (tipologia == "_case") {
 		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
 		appendLabelText("dimensione", "Dimensioni (w X d X h): ", displayElements);
+		appendLabelText("marca", "Marca: ", displayElements);
 	}
 
 	// Alimentatori
@@ -145,22 +152,6 @@ function modifyForm() {
 		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
 		appendLabelText("marca", "Marca: ", displayElements);
 		appendLabelNumber("watt", "Wattaggio: ", displayElements, 1);
-	}
-	// Aggiungi bottone per impostare la durata
-	if (tipologia == "servizio") {
-		label = document.createElement("label");
-		label.htmlFor = "durata";
-		label.innerHTML = "Durata (ore): ";
-
-		input = document.createElement("input");
-		input.type = "number";
-		input.name="durata";
-		input.id="durata";
-		input.min = "1";
-		input.required = true;
-
-		displayElements.appendChild(label);
-		displayElements.appendChild(input);		
 	}
 		
 }

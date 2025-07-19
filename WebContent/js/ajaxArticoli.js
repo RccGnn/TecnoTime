@@ -137,11 +137,15 @@ function sortedProducts() {
 	const nomeInput = document.getElementById("name").value;
 	const contestoInput = window.location.pathname;
 
+	// Attributi falcoltativi
 	let durataInput = "";
 	let categoriaInput = "";
 	let marcaInput = "";
+	let modifyInput = "";
 	let contexChoice = contexEnum(contestoInput);
 	
+	if (document.getElementById("modify") != null)
+		modifyInput = document.getElementById("modify").value;
 	// In base a quale pagina effettua la chiamata ajax, si impostano i parametri da passare nel GET 
 	if (contexChoice === 1 || contexChoice === 4) { // Prodotti fisici
 		categoriaInput = document.getElementById("categoria").value;
@@ -158,7 +162,7 @@ function sortedProducts() {
 					+"&sort="+ encodeURIComponent(sortInput) +"&name="+ encodeURIComponent(nomeInput)
 					+"&contex="+ encodeURIComponent(contestoInput) +"&duration="+ encodeURIComponent(durataInput)
 					+"&categoriaInput="+ encodeURIComponent(categoriaInput) +"&marcaInput=" + encodeURIComponent(marcaInput)
-					+"&page="+encodeURIComponent(currentPage);
+					+"&page="+encodeURIComponent(currentPage)+"&modify="+encodeURIComponent(modifyInput);
 	
 	loadAjaxDoc("ProductFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 }
@@ -193,8 +197,8 @@ function handleFilter(xhr) {
 	
 	pageNumber = response[2];
 	// Rigenera il numero di pagine sapendo il numero massimo di pagine
-	
 	displayPageSelector();
+	const modifyFlag = response[3]; // Flag di modifica
 	
 	console.log(response[0].length);
 	// Eventuale errore se non ci sono articoli 
@@ -266,20 +270,36 @@ function handleFilter(xhr) {
 			articolo.appendChild(price);			
 		}
 			
-		let btn = document.createElement('button');		
-		if(subClass.disponibilita) {
+		let btn = document.createElement('button');
+		// Amministratore
+		if (modifyFlag) {
+			btn.innerHTML = "Modifica l\'articolo";
 			btn.className = 'add-to-cart-btn';
-			btn.innerHTML = 'Aggiungi al carrello';
+			let a = document.createElement("a");
+			a.href = 'DisplayProductPage?id='+encodeURIComponent(art.codiceIdentificativo)+'&modify='+encodeURIComponent(true);
+			a.appendChild(btn);
 			
-			btn.onclick = function () {
-				let articolo = JSON.stringify(art); // Chiama la servlet per aggiungere l'elemento al carrello
-				loadAjaxDoc("CartServlet", "POST", articolo, showNotification, "application/json");
-			}
+			articolo.appendChild(a);
+		// Non amministratore
 		} else {
-			btn.className = 'out-of-stock-cart-btn';
-			btn.innerHTML = 'Scorte esaurite';			
+			if(subClass.disponibilita) {
+				
+				btn.className = 'add-to-cart-btn';
+				
+					btn.innerHTML = 'Aggiungi al carrello';
+					
+					btn.onclick = function () {
+						let articolo = JSON.stringify(art); // Chiama la servlet per aggiungere l'elemento al carrello
+						loadAjaxDoc("CartServlet", "POST", articolo, showNotification, "application/json");
+					}
+				
+			} else {
+				btn.className = 'out-of-stock-cart-btn';
+				btn.innerHTML = 'Scorte esaurite';			
+			}
+			articolo.appendChild(btn);
 		}
-		articolo.appendChild(btn);
+		
 		
 		element.appendChild(articolo);
 	});

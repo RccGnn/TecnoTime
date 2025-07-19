@@ -35,19 +35,12 @@
 				<option value="alimentatori"> Alimentatori </option>
 				<option value="servizio">Servizio</option>
 				<option value="licenza">Licenza (Prodotto digitale)</option>
+				<option value="altro">Accessori o altro</option>
 			</select>
 			
 			<label for="nome">Nome del prodotto:</label>
 			<input type="text" name="nome" id="nome" required> 
 				
-			<label for="categoria">Categoria d'appartenenza:</label>
-			<input type="text" name="categoria" id="categoria" required>
-			
-			<!--  
-						<label for="marca">Marca del prodotto:</label> 
-			<input type="text" name="marca" id="marca" required>
-			-->
-			
 			<label for="prezzo">Prezzo (€):</label> 
 			<input type="text" name="prezzo" id="prezzo" placeholder="99.99" inputmode="decimal"
 				pattern="^\d+([.,]\d{1,2})?$" required> 
@@ -55,10 +48,10 @@
 			<label for="descrizione">Descrizione:</label>
 			<textarea name="descrizione" id="descrizione" rows="4" required></textarea>
 
-			<label for="immagini">Immagini (PNG, JPG, JPEG, SVG):</label> 
-			
-			<input type="file" name="immagini" id="immagini"
-				accept=".png,.jpg,.jpeg,.svg" >
+
+			<label for="immagini">Immagini (PNG, JPG, JPEG, SVG):</label> 			
+			<input type="text" name="immagini" id="immagini" >
+
 
 			<!-- CATEGORIE SPECIFICHE DELLA TIPOLOGIA DI PRODOTTO -->
 			<div id="optionElements">	

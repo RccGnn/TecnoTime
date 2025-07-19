@@ -26,6 +26,8 @@ public class DisplayProductPage extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		String id = request.getParameter("id");
+		boolean modify = Boolean.parseBoolean(request.getParameter("modify")); // parseBoolean interpreta come false qualsiasi stringa diversa da true (case insensitive)
+        
 		if (id == null) response.sendError(500, "id inserito non valido");
 		ArticoloCompletoDao artDao = new ArticoloCompletoDao();
 		
@@ -35,8 +37,13 @@ public class DisplayProductPage extends HttpServlet {
 				artBean.getImmagini().forEach(img -> img.setUrl(Decoder.DecoderDropboxUrl(img.getUrl())));
 			}
 
-			request.setAttribute("articolo", artBean);			
-			RequestDispatcher rd = request.getRequestDispatcher("/articolo-single.jsp");
+			request.setAttribute("articolo", artBean);
+			RequestDispatcher rd = null;
+			if (modify) { // Utente amministratore; reindirizzazemento alla modifica di un prodotto
+				rd = request.getRequestDispatcher("/amministratore/modificaProdotto.jsp");
+			} else {
+				rd = request.getRequestDispatcher("/articolo-single.jsp");
+			}
 			rd.forward(request, response);
 
 		} catch (Exception e) {

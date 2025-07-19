@@ -106,6 +106,7 @@
 			<li><a href="<%= request.getContextPath() %>/guide.jsp"class="icon-link">GUIDE</a></li>
 		</ul>
 	</nav>
+	<input type="hidden" id="modify" value="true"> 
 	<input type="hidden" id="ContextPath" value="<%= request.getContextPath() %>" />
 	<!-- serve ad avere sempre nel js un riferimento al contextpath  -->
 	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
