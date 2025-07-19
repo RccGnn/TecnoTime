@@ -109,9 +109,9 @@ public class PromozioneCompletaDao extends PromozioneDao{
 	
 					// I campi di promozione
 					promozione = new PromozioneCompletaBean();
-					promozione.setIDPromozione(rs.getString("IDPromozione"));
+					promozione.setIDPromozione(rs.getInt("IDPromozione"));
 					promozione.setDataInizio(rs.getDate("dataInizio"));
-					promozione.setDurata(rs.getInt("durata"));
+					promozione.setDescrizione(rs.getString("descrizione"));
 					promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
 
 					// L'oggetto dei campi riguarda
@@ -174,14 +174,15 @@ public class PromozioneCompletaDao extends PromozioneDao{
 					
 					// I campi di promozione
 					promozione = new PromozioneCompletaBean();
-					promozione.setIDPromozione(rs.getString("IDPromozione"));
+					promozione.setNomesconto("nomesconto");
+					promozione.setIDPromozione(rs.getInt("IDPromozione"));
 					promozione.setDataInizio(rs.getDate("dataInizio"));
-					promozione.setDurata(rs.getInt("durata"));
+					promozione.setDescrizione(rs.getString("durata"));
 					promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
 
 					// L'oggetto dei campi associato
 					associato = new AssociatoABean();
-					associato.setIDPromozione(rs.getString("IDPromozione"));
+					associato.setIDPromozione(rs.getInt("IDPromozione"));
 					associato.setUsername(rs.getString("Username"));
 					associato.setCodicePromozione(rs.getString("codiceIdentificativo"));
 					

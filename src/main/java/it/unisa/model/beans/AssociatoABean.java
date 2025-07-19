@@ -8,7 +8,7 @@ public class AssociatoABean implements Serializable, BeanMarker{
 	private static final long serialVersionUID = 1L;
 	
 	private String username;
-    private String IDPromozione;
+    private int IDPromozione;
     private String codicePromozione;
 	/**
 	 * @return the username
@@ -25,13 +25,13 @@ public class AssociatoABean implements Serializable, BeanMarker{
 	/**
 	 * @return the iDPromozione
 	 */
-	public String getIDPromozione() {
+	public int getIDPromozione() {
 		return IDPromozione;
 	}
 	/**
 	 * @param iDPromozione the iDPromozione to set
 	 */
-	public void setIDPromozione(String iDPromozione) {
+	public void setIDPromozione(int iDPromozione) {
 		IDPromozione = iDPromozione;
 	}
 	/**

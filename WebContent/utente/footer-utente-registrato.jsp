@@ -21,19 +21,19 @@
 <body>
 <!-- Footer -->
     <div class="footer-social">
-        <a title="X" href="https://x.com/TecnoTime" target="_blank" rel="noreferrer">
+        <a title="X" href="https://x.com/TecnoTimeee" target="_blank" rel="noreferrer">
             <img src="<%= request.getContextPath() %>/images/x.svg" alt="X" class="social-icon">
         </a>
-        <a title="Instagram" href="https://www.instagram.com/TecnoTime" target="_blank" rel="noreferrer">
+        <a title="Instagram" href="https://www.instagram.com/mariomask02/" target="_blank" rel="noreferrer">
             <img src="<%= request.getContextPath() %>/images/instagram.svg" alt="Instagram" class="social-icon">
         </a>
         <a title="Facebook" href="https://www.facebook.com/TecnoTime" target="_blank" rel="noreferrer">
             <img src="<%= request.getContextPath() %>/images/facebook.svg" alt="Facebook" class="social-icon">
         </a>
-        <a title="YouTube" href="https://www.youtube.com/TecnoTime" target="_blank" rel="noreferrer">
+        <a title="YouTube" href="https://www.youtube.com/@TecnoTimeee" target="_blank" rel="noreferrer">
             <img src="<%= request.getContextPath() %>/images/youtube.svg" alt="YouTube" class="social-icon">
         </a>
-        <a title="TikTok" href="https://www.tiktok.com/@TecnoTime" target="_blank" rel="noreferrer">
+        <a title="TikTok" href="https://www.tiktok.com/@tecnotimeee" target="_blank" rel="noreferrer">
             <img src="<%= request.getContextPath() %>/images/tiktok.svg" alt="TikTok" class="social-icon">
         </a>
     </div>
@@ -58,7 +58,7 @@
             </div>
             <section class="footer-right">
                 <h2>Contatti</h2>
-                <p>Email: info@tecnotime.com<br>
+                <p>Email: info@tecnotime.it<br>
                    Telefono: +39 089 256 3945<br>
                    Cellulare: +39 348 924 3567
                 </p>

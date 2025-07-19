@@ -22,7 +22,7 @@
 				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}else if(session.getAttribute("admin")!=null && (Boolean)session.getAttribute("admin")==true ){ %>
-			<a href="utente/index-amministratore.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+			<a href="utente/index-utente.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
 				alt="Logo TecnoTime" class="logo">
 			</a>
 			<% }else{ %>
@@ -44,10 +44,10 @@
 			</div>
 		</div>
 		<div class="header-right">
-			<a href="<%= request.getContextPath() %>/carrello.jsp"
-				class="icon-link"> <!-- l'amministratore non dovrebbe avere la funzionalita carrello -->
+			<a href="riepilogoOrdini-amministratore.jsp"
+				class="icon-link">
 				<img src="<%= request.getContextPath() %>/images/shopping_cart.png"
-				alt="Carrello" class="icon"> <span class="Carrello">Carrello</span>
+				alt="Carrello" class="icon"> <span class="Carrello">Riepilogo Ordini Utenti</span>
 			</a> <a href="${pageContext.request.contextPath}/LogoutServlet"
 				class="icon-link"> <img
 				src="<%= request.getContextPath() %>/images/user.png" alt="Utente"
@@ -74,28 +74,30 @@
 			<span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
 		</button>
 		<ul id="main-menu">
-			<li><a href="#about">CHI SIAMO</a></li>
+			<li><a href="<%= request.getContextPath() %>/">CHI SIAMO</a></li>
 			<li><a
 				href="<%= request.getContextPath() %>/articoliProdotti.jsp">PRODOTTI</a>
 				<ul class="dropdown">
+				<% 	String destination;
+						destination = "&destination=fisico";%>
 					<li class="mobile-only"><a
 						href="<%= request.getContextPath() %>/articoliProdotti.jsp">Tutti i Prodotti</a></li>
-					<li><a href="#product1">Processori</a></li>
-					<li><a href="#product2">Schede Video</a></li>
-					<li><a href="#product3">Schede Madri</a></li>
-					<li><a href="#product4">Memorie</a></li>
-					<li><a href="#product5">Archiviazione</a></li>
+					<li><a href="DisplaySubMenu1?sub=Processori<%=destination%>">Processori</a></li>
+					<li><a href="DisplaySubMenu1?sub=Scheda_Video<%=destination%>">Schede Video</a></li>
+					<li><a href="DisplaySubMenu1?sub=Schede_Madri<%=destination%>">Schede Madri</a></li>
+					<li><a href="DisplaySubMenu1?sub=RAM<%=destination%>">Memorie</a></li>
+					<li><a href="DisplaySubMenu1?sub=Archiviazione<%=destination%>">Archiviazione</a></li>
 				</ul></li>
 			<li><a
 				href="<%= request.getContextPath() %>/articoliLicenze.jsp">LICENZE</a>
 				<ul class="dropdown">
 					<li class="mobile-only"><a
-						href="<%= request.getContextPath() %>/articoliLicenze.jsp">Tuttele Licenze</a></li>
-					<li><a href="#license1">Windows 11 Home</a></li>
-					<li><a href="#license2">Windows 11 Pro</a></li>
-					<li><a href="#license3">Windows 10 Home</a></li>
-					<li><a href="#license4">Windows 10 Pro</a></li>
-					<li><a href="#license5">Office Package</a></li>
+						href="<%= request.getContextPath() %>/articoliLicenze.jsp">Tutte le Licenze</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_11_Home<%=destination%>">Windows 11 Home</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_11_Pro<%=destination%>">Windows 11 Pro</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_10_Home<%=destination%>">Windows 10 Home</a></li>
+					<li><a href="DisplaySubMenu2?sub=Windows_10_Pro<%=destination%>">Windows 10 Pro</a></li>
+					<li><a href="DisplaySubMenu2?sub=Office_Package<%=destination%>">Office Package</a></li>
 				</ul></li>
 			<li><a
 				href="<%= request.getContextPath() %>/articoliServizi.jsp">SERVIZI</a></li>
@@ -104,6 +106,8 @@
 			<li><a href="<%= request.getContextPath() %>/guide.jsp"class="icon-link">GUIDE</a></li>
 		</ul>
 	</nav>
+	<input type="hidden" id="ContextPath" value="<%= request.getContextPath() %>" />
+	<!-- serve ad avere sempre nel js un riferimento al contextpath  -->
 	<script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 	<script src="<%= request.getContextPath() %>/js/ajaxRicerca.js" defer></script>
 </body>

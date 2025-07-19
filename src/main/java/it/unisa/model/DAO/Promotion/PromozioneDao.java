@@ -28,7 +28,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ PromozioneDao.TABLE_NAME
-				+ "(IDPromozione, dataInizio, durata, percentualeSconto) "
+				+ "(IDPromozione,nomesconto,descrizione, dataInizio, percentualeSconto) "
 				+ "VALUES (?, ?, ?, ?, ?)";
 		
 		try {
@@ -36,9 +36,10 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 			
 			ps = connection.prepareStatement(insertSQL);	
 
-			ps.setString(1, promozione.getIDPromozione());
-		    ps.setDate(2, promozione.getDataInizio());
-		    ps.setInt(3, promozione.getDurata());
+			
+			ps.setString(2, promozione.getNomesconto());
+			ps.setString(3, promozione.getDescrizione());
+		    ps.setDate(3, promozione.getDataInizio());
 		    ps.setDouble(4, promozione.getPercentualeSconto());
 			ps.executeUpdate();
 
@@ -62,19 +63,19 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 
 		PromozioneBean promozione = new PromozioneBean();
 
-		String selectSQL = "SELECT * FROM " + PromozioneDao.TABLE_NAME + " WHERE IDPromozione = ?";
+		String selectSQL = "SELECT * FROM " + PromozioneDao.TABLE_NAME + " WHERE nomesconto = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, key);
+			ps.setString(2, key);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				promozione.setIDPromozione(rs.getString("IDPromozione"));
+				promozione.setIDPromozione(rs.getInt("IDPromozione"));
 				promozione.setDataInizio(rs.getDate("dataInizio"));
-				promozione.setDurata(rs.getInt("durata"));
+				promozione.setDescrizione(rs.getString("descrizione"));;
 				promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
 			} else {
 				promozione = null;
@@ -100,12 +101,12 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 
 		int result = 0;
 
-		String deleteSQL = "DELETE FROM " + PromozioneDao.TABLE_NAME + " WHERE IDPromozione = ?";
+		String deleteSQL = "DELETE FROM " + PromozioneDao.TABLE_NAME + " WHERE nomesconto = ?";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(deleteSQL);
-			ps.setString(1, key);
+			ps.setString(2, key);
 
 			result = ps.executeUpdate();
 
@@ -144,9 +145,9 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 				do {
 					PromozioneBean promozione = new PromozioneBean();
 					
-					promozione.setIDPromozione(rs.getString("IDPromozione"));
+					promozione.setIDPromozione(rs.getInt("IDPromozione"));
 					promozione.setDataInizio(rs.getDate("dataInizio"));
-					promozione.setDurata(rs.getInt("durata"));
+					promozione.setDescrizione(rs.getString("descrizione"));
 					promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
 				
 					listaPromozioni.add(promozione);

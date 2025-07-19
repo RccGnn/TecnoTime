@@ -36,7 +36,7 @@ public class AssociatoADao implements BeanDaoInterfaceArray<AssociatoABean>{
 
 				ps = connection.prepareStatement(insertSQL);
 
-				ps.setString(1, associato.getIDPromozione());
+				ps.setInt(1, associato.getIDPromozione());
 				ps.setString(2, associato.getUsername());
 				ps.setString(3, associato.getCodicePromozione());
 
@@ -76,7 +76,7 @@ public class AssociatoADao implements BeanDaoInterfaceArray<AssociatoABean>{
 				ResultSet rs = ps.executeQuery();
 
 				if (rs.next()) {
-					associato.setIDPromozione(rs.getString("IDPromozione"));
+					associato.setIDPromozione(rs.getInt("IDPromozione"));
 					associato.setUsername(rs.getString("username"));
 					associato.setCodicePromozione(rs.getString("codicePromozione"));
 
@@ -152,7 +152,7 @@ public class AssociatoADao implements BeanDaoInterfaceArray<AssociatoABean>{
 				while (rs.next()) {
 					AssociatoABean associato = new AssociatoABean();
 
-					associato.setIDPromozione(rs.getString("IDPromozione"));
+					associato.setIDPromozione(rs.getInt("IDPromozione"));
 					associato.setUsername(rs.getString("username"));
 					associato.setCodicePromozione(rs.getString("codicePromozione"));
 
