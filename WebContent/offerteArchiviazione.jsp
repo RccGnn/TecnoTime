@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/pagination.css">
 </head>
 <body data-logged-in="<%= (session.getAttribute("user") != null) ? "true" : "false" %>">
 
@@ -79,16 +80,11 @@
 
     <!-- GRID PRODOTTI -->
     <section class="products-container">
-        <!--  
-        <div class="product-card">
-          <img src="${p.imageURL}" alt="${p.name}" class="product-image"/>
-          <h3 class="product-name">${p.name}</h3>
-          <p class="product-price">€ ${p.price}</p>
-          <p class="product-description">${p.description}</p>
-          <button class="add-to-cart-btn">Aggiungi al carrello</button>
-        </div>
-        -->
     </section>
+    
+    <!-- Pagination Component -->
+    <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
+    </div>
   </main>
 
   <jsp:include page="footer.jsp"/>

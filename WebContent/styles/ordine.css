@@ -74,6 +74,14 @@ body {
 	ORDINE
    ============================== */
 
+.rieplOrdini h2 {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 .orders-list-page {
     max-width: 1000px;
     margin: 2rem auto;

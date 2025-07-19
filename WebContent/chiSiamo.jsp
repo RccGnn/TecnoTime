@@ -30,7 +30,7 @@
 		<p> TecnoTime nasce nel 2025 nelle aule di un’università sperduta tra le 
 			montagne salernitane da un minuto team di studenti d’informatica accomunati 
 			dalla passione per i computer, il gaming e dall'odio verso le form di registrazione 
-			del sito dell'ASICURC che prima ti chiede lo SPID e poi ti fa inserire tutti i dati ricavabili dallo SPID.
+			del sito dell'ADISURC che prima ti chiede lo SPID e poi ti fa inserire tutti i dati ricavabili dallo SPID.
 		</p>
 	</section>
 

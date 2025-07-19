@@ -60,13 +60,13 @@
         </div>
     </aside>
 
-<!-- Pagination Component -->
-    <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
-    </div>
-    
     <!-- GRID PRODOTTI -->
     <section class="products-container">
     </section>
+    
+    <!-- Pagination Component -->
+    <div id="pagination-nav" aria-label="Pagination" class="pagination-nav">
+    </div>
   </main>
 
   <jsp:include page="footer.jsp"/>

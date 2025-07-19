@@ -111,6 +111,8 @@ body {
 }
 
 .productsingle-details {
+	flex-direction: column;
+	display: flex;
 	flex: 1 1 300px;
 }
 
@@ -226,6 +228,11 @@ body {
 	visibility: visible;
 }
 
+#optionElements {
+	display: flex;
+	flex-direction: column;
+	padding: 1 em;
+}
 /* =================================================================== */
 /* STILI RESPONSIVE                                                    */
 /* =================================================================== */

@@ -42,7 +42,6 @@ public class AdminAggiungiProdotto extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -55,6 +54,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 	
 		
 		String tipologia = (String) request.getAttribute("tipologia");
@@ -321,7 +321,5 @@ public class AdminAggiungiProdotto extends HttpServlet {
 		//case
 		nomecompleto, dimensione */
 	
-		
 	}
-
 }

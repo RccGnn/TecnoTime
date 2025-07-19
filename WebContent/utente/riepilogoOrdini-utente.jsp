@@ -26,16 +26,16 @@
 
 	<jsp:include page="header-utente.jsp"/>
 	<div class ="rieplOrdini">
-    <h1>I miei ordini</h1>
+    <h2>I miei ordini</h2>
    
    <div class="admin-search-form"> 
 	   <div class="filter-bar-container">
 	        <div class="date-filter-group">
 	            <label for="dateLowerBound">Data (Lower Bound):</label>
-	            <input onchange="sortedOrders()" type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD" value="1970-0-0">
+	            <input onchange="sortedOrders()" type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD">
 	
 	            <label for="dateUpperBound">Data (Upper Bound):</label>
-	            <input onchange="sortedOrders()" type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD" value="1970-0-0">
+	            <input onchange="sortedOrders()" type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
 	        </div>
 	
 	        <div class="date-filter-group">
