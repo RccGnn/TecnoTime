@@ -4,6 +4,11 @@
     // Ottieni anno corrente
     java.util.Calendar cal = java.util.Calendar.getInstance();
     int currentYear = cal.get(java.util.Calendar.YEAR);
+    
+    String retrive = (String) request.getAttribute("errorRetrive");
+    String success = (String) request.getAttribute("eliminazioneSuccess");
+    String error = (String) request.getAttribute("eliminazioneError");
+    String lista = (String) request.getAttribute("lista");  // inserire la lista nel menu a tendina con jstl
 %>
 <!DOCTYPE html>
 <html lang="it">
@@ -20,7 +25,7 @@
 <main>
 <div class="form-container">
     <h2>RIMUOVI OFFERTA</h2>
-    <form id="removeOfferForm" method="POST" action="<%= request.getContextPath() %>/offerte/delete">
+    <form id="removeOfferForm" method="POST" action="<%= request.getContextPath() %>/AdminEliminaOfferta.java">
 
       <fieldset>
         <legend>Seleziona Offerta</legend>
@@ -34,6 +39,14 @@
           </select>
         </div>
       </fieldset>
+      
+     		<% if(retrive != null) { %>
+	      		<div> <%=retrive %></div>
+	      	<% } else if( success != null) {%>
+				<div> <%=success %></div>
+			<%} else if (error != null) {%>
+				<div> <%=error %></div>
+			<%} %>
 
       <button type="submit">Rimuovi Offerta</button>
 		

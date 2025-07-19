@@ -4,6 +4,10 @@
     // Ottieni anno corrente
     java.util.Calendar cal = java.util.Calendar.getInstance();
     int currentYear = cal.get(java.util.Calendar.YEAR);
+    
+    String error  = (String) request.getAttribute("scontoErrore");
+    String success = (String) request.getAttribute("scontoapplicato");
+    String errorSconto = (String) request.getAttribute("scontoPresente");
 %>
 <!DOCTYPE html>
 <html lang="it">
@@ -20,7 +24,7 @@
 <main>
     <div class="form-container">
 	    <h2>AGGIUNGI OFFERTA</h2>
-	    <form id="addOfferForm" method="POST" action="<%= request.getContextPath() %> LA SERVLET">
+	    <form id="addOfferForm" method="POST" action= "<%= request.getContextPath() %>/AggiungiOfferta">
 	
 	      <fieldset>
 	        <legend>Nome Offerta</legend>
@@ -29,7 +33,7 @@
 	          <span class="input-icon-container">
 	            <img src="<%= request.getContextPath() %>/images/offer.svg" alt="" class="input-icon">
 	          </span>
-	          <input type="text" id="offerName" name="name" placeholder="Es: Super Sconto Estivo" maxlength="100" required>
+	          <input type="text" id="offerName" name="nomesconto" placeholder="Es: Super Sconto Estivo" maxlength="100" required>
 	        </div>
 	      </fieldset>
 	
@@ -63,10 +67,18 @@
 	          <span class="input-icon-container">
 	            <img src="<%= request.getContextPath() %>/images/desc.svg" alt="" class="input-icon">
 	          </span>
-	          <textarea id="description" name="description" rows="5" cols="50" placeholder="Dettagli dell'offerta..." maxlength="500"></textarea>
+	          <textarea id="description" name="descrizione" rows="5" cols="50" placeholder="Dettagli dell'offerta..." maxlength="500"></textarea>
 	        </div>
 	      </fieldset>
-	
+	      
+	      <% if(error!=null) {%>
+	      		<span> <%=error %></span>
+	      	<% } else if( success != null) {%>
+				<span> <%= success %></span>
+			<%} else if (errorSconto != null) {%>
+				<span> <%= errorSconto %></span>
+			<%} %>
+			
 	      <button type="submit">Aggiungi Offerta</button>
 	      
 	      <c:if test="${not empty successMessage}">

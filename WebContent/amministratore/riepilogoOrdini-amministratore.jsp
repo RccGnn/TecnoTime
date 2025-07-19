@@ -5,13 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
-    String username = request.getParameter("username");
-    ArrayList<OrdineCompletoBean> ordiniUtente = null;
-
-    if (username != null && !username.trim().isEmpty()) {
-        OrdineCompletoDao dao = new OrdineCompletoDao();
-        ordiniUtente = dao.doRetrieveAllByUsername(username.trim());
-    }
+	String username =request.getParameter("username");
 %>
 
 <!DOCTYPE html>

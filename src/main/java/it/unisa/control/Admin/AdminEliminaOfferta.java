@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import it.unisa.model.DAO.Promotion.PromozioneDao;
+import it.unisa.model.beans.PromozioneBean;
 
 /**
  * Servlet implementation class AdminEliminaOfferta
@@ -31,8 +33,25 @@ public class AdminEliminaOfferta extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		PromozioneDao dao = new PromozioneDao();
+		ArrayList<PromozioneBean> lista = new ArrayList<PromozioneBean>(); 
+		try {
+			lista= dao.doRetrieveAll("nomesconto");
+			if(lista == null) {
+				request.setAttribute("errorRetrive", "nessuno sconto presente nel db. Aggiungere prima un nuovo sconto ");
+				RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
+				disp.forward(request, response);
+				return;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		request.setAttribute("lista", lista);
+		RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
+		disp.forward(request, response);
+		return;
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -51,11 +70,11 @@ public class AdminEliminaOfferta extends HttpServlet {
 		}
 		
 		if(result)
-			request.setAttribute("eliminazioneSuccess","Prodotto eliminato dal DB con successo");
+			request.setAttribute("eliminazioneSuccess","Offerta" + nome+ " eliminata dal DB con successo");
 		else
-			request.setAttribute("EliminazioneErrore", "errore generico.Impossibile rimuovere l'articolo. Riprova più tardi");
+			request.setAttribute("EliminazioneError", "errore generico.Impossibile rimuovere l'offerta"+ nome + ". Riprova più tardi");
 		
-		RequestDispatcher disp = request.getRequestDispatcher("/.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/rimuoviOfferta.jsp");
 		disp.forward(request, response);
 	}
 

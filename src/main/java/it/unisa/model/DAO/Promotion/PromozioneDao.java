@@ -19,7 +19,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 	private static final String TABLE_NAME = "Promozione";
 
 	private static final String[] whitelist = 
-		{"IDPromozione", "dataInizio", "durata", "percentualeSconto"};
+		{"IDPromozione","nomesconto","descrizione", "dataInizio", "percentualeSconto"};
 	
 	@Override
 	public synchronized void doSave(PromozioneBean promozione) throws SQLException {
@@ -28,8 +28,8 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ PromozioneDao.TABLE_NAME
-				+ "(IDPromozione, nomesconto, descrizione, dataInizio, percentualeSconto) "
-				+ "VALUES (?, ?, ?, ?, ?)";
+				+ "(nomesconto, descrizione, dataInizio, percentualeSconto) "
+				+ "VALUES ( ?, ?, ?, ?)";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -37,8 +37,8 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 			ps = connection.prepareStatement(insertSQL);	
 
 			
-			ps.setString(2, promozione.getNomesconto());
-			ps.setString(3, promozione.getDescrizione());
+			ps.setString(1, promozione.getNomesconto());
+			ps.setString(2, promozione.getDescrizione());
 		    ps.setDate(3, promozione.getDataInizio());
 		    ps.setDouble(4, promozione.getPercentualeSconto());
 			ps.executeUpdate();
@@ -68,7 +68,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(2, key);
+			ps.setString(1, key);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -146,6 +146,7 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 					PromozioneBean promozione = new PromozioneBean();
 					
 					promozione.setIDPromozione(rs.getInt("IDPromozione"));
+					promozione.setNomesconto("nomesconto");
 					promozione.setDataInizio(rs.getDate("dataInizio"));
 					promozione.setDescrizione(rs.getString("descrizione"));
 					promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
