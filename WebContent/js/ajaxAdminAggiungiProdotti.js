@@ -138,6 +138,7 @@ function modifyForm() {
 	if (tipologia == "_case") {
 		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
 		appendLabelText("dimensione", "Dimensioni (w X d X h): ", displayElements);
+		appendLabelText("marca", "Marca: ", displayElements);
 	}
 
 	// Alimentatori
