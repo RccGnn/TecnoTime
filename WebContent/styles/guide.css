@@ -1,3 +1,67 @@
+.help-section {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  margin-top: 3rem;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.help-section h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.help-section p {
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.help-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-submit {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #0069d9;
+}
+
+.success-message {
+  color: green;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 /* Palette:
     Blu scuro primario: #021859
     Blu navy secondario: #011140
@@ -22,7 +86,7 @@ body {
 }
 
 /* =================================== */
-/* 			 PAGINA GUIDE              */
+/*        PAGINA GUIDE               */
 /* =================================== */
 
 /* Lazy Load YouTube Responsive Wrapper */
@@ -37,8 +101,7 @@ body {
 	background: #000;
 }
 
-.responsive-yt-wrapper iframe, .responsive-yt-wrapper #ytplayer-placeholder
-	{
+.responsive-yt-wrapper iframe, .responsive-yt-wrapper #ytplayer-placeholder {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -159,15 +222,9 @@ body {
 	border-radius: 4px;
 }
 
-/* --- Messaggi di stato --- */
+/* Messaggi di stato */
 .error-message {
 	color: red;
-	margin-top: 1rem;
-	text-align: center;
-}
-
-.success-message {
-	color: green;
 	margin-top: 1rem;
 	text-align: center;
 }
@@ -192,9 +249,7 @@ body {
 	max-width: 80%;
 }
 
-/* --- errori blocchi registrazione ---*/
-
-/* inline error style */
+/* Inline error style */
 .inline-error {
 	display: block;
 	color: #c00;
@@ -211,7 +266,6 @@ body {
 /* STILI RESPONSIVE                                                    */
 /* =================================================================== */
 
-/* --- Tablet e Mobile (fino a 768px) --- */
 @media ( max-width : 768px) {
 	.assembly-guide {
 		padding: 1rem;
@@ -245,19 +299,16 @@ body {
 		left: 10px;
 	}
 	.products-container {
-		/* su mobile la griglia scende a 1 colonna */
 		grid-template-columns: 1fr;
 	}
 }
 
-/* --- Solo Mobile (fino a 480px) --- */
 @media ( max-width : 480px) {
 	.yt-play-button-overlay {
 		font-size: 44px;
 	}
 }
 
-/*form registrazione*/
 @media ( max-width : 600px) {
 	.form-container fieldset {
 		padding: 0.75rem;
