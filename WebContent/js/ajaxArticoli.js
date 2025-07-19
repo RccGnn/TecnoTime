@@ -294,6 +294,12 @@ function displayPageSelector() {
 	
 	let pageMenu = document.getElementById("pagination-nav");
 	
+	if (pageNumber <= 1) {
+		pageMenu.style.display = "none";		
+	} else {
+		pageMenu.style.display = "flex";
+	}
+
 	// Rigenera la barra di navigazione ad ogni iterazione, se è presente
 	if(pageMenu != null) {
 		while (pageMenu.firstChild)
