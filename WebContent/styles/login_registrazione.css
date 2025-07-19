@@ -9,17 +9,16 @@
 /* =================================== */
 /* Reset e Stili di Base               */
 /* =================================== */
-
 main {
-    padding: 20px;
+	padding: 20px;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #F2F2F2;
-    color: #011140;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	color: #011140;
 }
 
 /* =================================== */
@@ -28,173 +27,166 @@ body {
 
 /* --- Contenitore Login --- */
 .login-container {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 320px;
-    margin: 40px auto;
-    box-sizing: border-box;
+	background: #fff;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	width: 100%;
+	max-width: 320px;
+	margin: 40px auto;
+	box-sizing: border-box;
 }
 
 .login-container h2 {
-    text-align: center;
-    color: #021859;
-    margin-bottom: 1.5rem;
+	text-align: center;
+	color: #021859;
+	margin-bottom: 1.5rem;
 }
 
 .login-container form {
-    margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
 .login-container label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-    color: #011140;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 0.3rem;
+	color: #011140;
 }
 
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 95%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    
+.login-container input[type="text"], .login-container input[type="password"]
+	{
+	width: 95%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
 .login-container button[type="submit"] {
-    width: 103%;
-    padding: 10px;
-    background-color: #F2762E;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    margin-top: 0.2rem;
+	width: 103%;
+	padding: 10px;
+	background-color: #F2762E;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	cursor: pointer;
+	margin-top: 0.2rem;
 }
 
 .login-container button[type="submit"]:hover {
-    background-color: #d1641f;
+	background-color: #d1641f;
 }
 
 .login-container .register-link {
-    text-align: center;
-    margin-top: 1.5rem;
+	text-align: center;
+	margin-top: 1.5rem;
 }
 
 .login-container .register-link a {
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 8px 16px;
-    background-color: #011140;
-    color: #F2D230;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
+	display: inline-block;
+	margin-top: 0.5rem;
+	padding: 8px 16px;
+	background-color: #011140;
+	color: #F2D230;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: bold;
 }
 
 /* --- Contenitore Registrazione --- */
 .form-container {
-    max-width: 600px;
-    background: white;
-    margin: 3rem auto;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+	max-width: 600px;
+	background: white;
+	margin: 3rem auto;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h2 {
-    display: block;
-    color: #021859;
-    margin-bottom: 1.5rem;
+	display: block;
+	color: #021859;
+	margin-bottom: 1.5rem;
 }
 
 .form-container h4 {
-    text-align: center;
-    color: #021859;
-    margin-bottom: 1.5rem;
+	text-align: center;
+	color: #021859;
+	margin-bottom: 1.5rem;
 }
 
 .form-container label {
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.3rem;
-    font-weight: bold;
-    color: #011140;
+	display: block;
+	margin-top: 1rem;
+	margin-bottom: 0.3rem;
+	font-weight: bold;
+	color: #011140;
 }
 
-.form-container input,
-.form-container select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
+.form-container input, .form-container select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 1rem;
 }
 
 .form-container button {
-    margin-top: 1.5rem;
-    padding: 12px;
-    background-color: #F2762E;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 48%;
+	margin-top: 1.5rem;
+	padding: 12px;
+	background-color: #F2762E;
+	color: white;
+	font-weight: bold;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	width: 48%;
 }
 
 .form-container button[type="reset"] {
-    background-color: #ccc;
-    margin-left: 4%;
+	background-color: #ccc;
+	margin-left: 4%;
 }
 
 .form-container button:hover {
-    opacity: 0.9;
+	opacity: 0.9;
 }
 
-.login-container form,
-.form-container form {
-  padding: 0.5rem 1rem; 
-  box-sizing: border-box;
+.login-container form, .form-container form {
+	padding: 0.5rem 1rem;
+	box-sizing: border-box;
 }
 
-
-.forgot-password{
-	text-align:center;
+.forgot-password {
+	text-align: center;
 }
 
-.login-container form > div,
-.form-container form > div {
-  margin-bottom: 1rem;
+.login-container form>div, .form-container form>div {
+	margin-bottom: 1rem;
 }
 
-
-.form-container button[type="submit"],
-.form-container button[type="reset"],
-.form-container .register-link {
-  margin-top: 1.5rem;
+.form-container button[type="submit"], .form-container button[type="reset"],
+	.form-container .register-link {
+	margin-top: 1.5rem;
 }
 
 /* --- Messaggi di stato --- */
 .error-message {
-    color: red;
-    margin-top: 1rem;
-    text-align: center;
+	color: red;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 .success-message {
-    color: green;
-    margin-top: 1rem;
-    text-align: center;
+	color: green;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 .error-title {
 	font-size: 5rem;
-	color: #021859; 
+	color: #021859;
 	margin-bottom: 1rem;
 	text-align: center;
 	margin-left: auto;
@@ -209,22 +201,22 @@ body {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 80%; 
+	max-width: 80%;
 }
 
 /* --- errori blocchi registrazione ---*/
 
 /* inline error style */
 .inline-error {
-  display: block;
-  color: #c00;
-  font-size: 0.9em;
-  margin-top: 4px;
+	display: block;
+	color: #c00;
+	font-size: 0.9em;
+	margin-top: 4px;
 }
 
 .invalid {
-  border-color: #c00;
-  background-color: #fee;
+	border-color: #c00;
+	background-color: #fee;
 }
 
 /* =================================================================== */
@@ -232,101 +224,90 @@ body {
 /* =================================================================== */
 
 /* --- Tablet e Mobile (fino a 768px) --- */
-@media (max-width: 768px) {
+@media ( max-width : 768px) {
 	.products-page {
-    flex-direction: column;
-  }
-  .filter-toggle-btn {
-    display: block;
-  }
-  .filters-sidebar {
-    position: fixed;
-    top: 150px; /* sotto header */
-    left: -260px;
-    transition: left .3s ease;
-    z-index: 999;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
-  .filters-sidebar.visible {
-    left: 10px;
-  }
-
-  .products-container {
-    /* su mobile la griglia scende a 1 colonna */
-    grid-template-columns: 1fr;
-  }
-	
+		flex-direction: column;
+	}
+	.filter-toggle-btn {
+		display: block;
+	}
+	.filters-sidebar {
+		position: fixed;
+		top: 150px; /* sotto header */
+		left: -260px;
+		transition: left .3s ease;
+		z-index: 999;
+		max-height: calc(100vh - 100px);
+		overflow-y: auto;
+	}
+	.filters-sidebar.visible {
+		left: 10px;
+	}
+	.products-container {
+		/* su mobile la griglia scende a 1 colonna */
+		grid-template-columns: 1fr;
+	}
 }
 
 /*form registrazione*/
-@media (min-width: 600px) {
-  /* Mantieni il form container in display block */
-  .form-container {
-    display: block;
-  }
-
-  .form-container input,
-  .form-container select,
-  .form-container textarea{
-  	display:block; 
-  	width: 98%;
-    margin: 0 0 1.5rem;	
-  	}
-  .form-container button[type="submit"] {
-   	 margin: 0 0 1rem;	
-   	 width: 45%;
-   	 margin-left: 4%
-   }
-
-	.button-row{
-		display:flex;
+@media ( min-width : 600px) {
+	/* Mantieni il form container in display block */
+	.form-container {
+		display: block;
 	}
-
-  .form-container button[type="reset"],
-  .form-container .register-link {
-    display: inline-block;
-    width: 45%;
-    margin: 0 1% 1rem 0;
-    box-sizing: border-box;
-    vertical-align: top;
-  }
-  
-  .form-container .register-link {
-    margin-right: 0;
-  }
-
-  
-  .form-container .register-link a {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    background-color: #011140;
-    color: #F2D230;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-  }
+	.form-container input, .form-container select, .form-container textarea
+		{
+		display: block;
+		width: 98%;
+		margin: 0 0 1.5rem;
+	}
+	.form-container button[type="submit"] {
+		margin: 0 0 1rem;
+		width: 45%;
+		margin-left: 4%
+	}
+	.button-row {
+		display: flex;
+	}
+	.form-container button[type="reset"], .form-container .register-link {
+		display: inline-block;
+		width: 45%;
+		margin: 0 1% 1rem 0;
+		box-sizing: border-box;
+		vertical-align: top;
+	}
+	.form-container .register-link {
+		margin-right: 0;
+	}
+	.form-container .register-link a {
+		display: block;
+		text-align: center;
+		padding: 12px;
+		background-color: #011140;
+		color: #F2D230;
+		text-decoration: none;
+		border-radius: 6px;
+		font-weight: bold;
+	}
 }
 
 /* Su mobile (<600px) comportamento a colonna */
-@media (max-width: 599px) {
-  .form-container {
-    display: block;
-  }
-  .form-container button[type="submit"],
-  .form-container button[type="reset"],
-  .form-container .register-link {
-    width: 100%;
-    margin: 0 0 1rem 0;
-  }
-  .form-container fieldset {
-    padding: 0.75rem;
-  }
-  .form-container legend {
-    font-size: 1rem;
-  }
-  .form-container textarea {
-    min-height: 120px;
-  }
+@media ( max-width : 599px) {
+	.form-container {
+		display: block;
+	}
+	.form-container button[type="submit"], .form-container button[type="reset"],
+		.form-container .register-link {
+		width: 100%;
+		margin: 0 0 1rem 0;
+	}
+	.form-container fieldset {
+		padding: 0.75rem;
+	}
+	.form-container legend {
+		font-size: 1rem;
+	}
+	.form-container textarea {
+		min-height: 120px;
+	}
 }

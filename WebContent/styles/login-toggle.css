@@ -1,28 +1,32 @@
 /* --- password toggle --- */
 .password-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-.password-wrapper input {
-  width: 100%;
-  padding-right: 2.5rem;
+	position: relative;
+	display: flex;
+	align-items: center;
 }
 
-.hidden { display: none; }
+.password-wrapper input {
+	width: 100%;
+	padding-right: 2.5rem;
+}
+
+.hidden {
+	display: none;
+}
 
 .password-wrapper button {
-  position: absolute;
-  right: 0.5rem;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
+	position: absolute;
+	right: 0.5rem;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
 }
+
 .password-wrapper svg {
-  pointer-events: none;
+	pointer-events: none;
 }

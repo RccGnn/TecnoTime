@@ -1,6 +1,6 @@
 /* Stili CSS per la barra del filtro */
 .filter-bar-container {
-	display: flex;
+	display: inline-block;
 	align-items: center;
 	padding: 15px 25px; /* Spaziatura interna */
 	background-color: #fff;
@@ -19,6 +19,7 @@
 }
 
 .date-filter-group {
+	padding: 15px;
 	display: flex;
 	align-items: center;
 	gap: 10px; /* Spazio tra etichetta e input */

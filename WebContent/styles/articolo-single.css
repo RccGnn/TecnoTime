@@ -9,35 +9,34 @@
 /* =================================== */
 /* Reset e Stili di Base               */
 /* =================================== */
-
 main {
-    padding: 20px;
+	padding: 20px;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #F2F2F2;
-    color: #011140;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #F2F2F2;
+	color: #011140;
 }
 
 /* --- Messaggi di stato --- */
 .error-message {
-    color: red;
-    margin-top: 1rem;
-    text-align: center;
+	color: red;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 .success-message {
-    color: green;
-    margin-top: 1rem;
-    text-align: center;
+	color: green;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 .error-title {
 	font-size: 5rem;
-	color: #021859; 
+	color: #021859;
 	margin-bottom: 1rem;
 	text-align: center;
 	margin-left: auto;
@@ -52,179 +51,179 @@ body {
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
-	max-width: 80%; 
+	max-width: 80%;
 }
 
 /* --- errori blocchi registrazione ---*/
 
 /* inline error style */
 .inline-error {
-  display: block;
-  color: #c00;
-  font-size: 0.9em;
-  margin-top: 4px;
+	display: block;
+	color: #c00;
+	font-size: 0.9em;
+	margin-top: 4px;
 }
 
 .invalid {
-  border-color: #c00;
-  background-color: #fee;
+	border-color: #c00;
+	background-color: #fee;
 }
 
 /* ===================================== */
 /* Pagina Singola Prodotto               */
 /* ===================================== */
 .productsingle-page {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  padding: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding: 2rem;
 }
 
 .productsingle-gallery {
-  flex: 1 1 400px;
+	flex: 1 1 400px;
 }
 
 .productsingle-main-image-wrapper {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	border-radius: 8px;
 }
 
 .productsingle-main-image-wrapper img {
-  width: 100%;
-  transition: transform 0.3s ease;
-  cursor: zoom-in;
+	width: 100%;
+	transition: transform 0.3s ease;
+	cursor: zoom-in;
 }
 
 .productsingle-thumbs {
-  margin-top: 0.5rem;
-  display: flex;
-  gap: 0.5rem;
+	margin-top: 0.5rem;
+	display: flex;
+	gap: 0.5rem;
 }
 
 .productsingle-thumb {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 .productsingle-details {
-  flex: 1 1 300px;
+	flex: 1 1 300px;
 }
 
 .productsingle-title {
-  font-size: 2rem;
-  color: #021859;
-  margin-bottom: 0.5rem;
+	font-size: 2rem;
+	color: #021859;
+	margin-bottom: 0.5rem;
 }
 
 .productsingle-price {
-  font-size: 1.6rem;
-  color: #F2762E;
-  margin-bottom: 1rem;
+	font-size: 1.6rem;
+	color: #F2762E;
+	margin-bottom: 1rem;
 }
 
 .productsingle-description {
-  line-height: 1.5;
-  margin-bottom: 1.5rem;
+	line-height: 1.5;
+	margin-bottom: 1.5rem;
 }
 
 #productsingle-add-form {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
 }
 
 #productsingle-add-form input[type="number"] {
-  width: 4rem;
-  padding: 0.3rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+	width: 4rem;
+	padding: 0.3rem;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
 #productsingle-add-btn {
-  background-color: #021859;
-  color: #F2D230;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 4px;
-  cursor: pointer;
+	background-color: #021859;
+	color: #F2D230;
+	border: none;
+	padding: 0.6rem 1.2rem;
+	border-radius: 4px;
+	cursor: pointer;
 }
 
 #productsingle-add-btn:hover {
-  background-color: #011140;
+	background-color: #011140;
 }
 
 .productsingle-reviews {
-  padding: 2rem;
-  background: #f9f9f9;
-  border-top: 1px solid #e5e5e5;
+	padding: 2rem;
+	background: #f9f9f9;
+	border-top: 1px solid #e5e5e5;
 }
 
 .productsingle-reviews h2 {
-  margin-bottom: 1rem;
-  color: #021859;
+	margin-bottom: 1rem;
+	color: #021859;
 }
 
 .productsingle-review {
-  margin-bottom: 1.5rem;
+	margin-bottom: 1.5rem;
 }
 
 .productsingle-review h3 {
-  margin: 0 0 0.2rem;
-  font-size: 1rem;
+	margin: 0 0 0.2rem;
+	font-size: 1rem;
 }
 
 .productsingle-review p {
-  margin: 0.2rem 0;
+	margin: 0.2rem 0;
 }
 
 /* --------------------
 	NOTIFICA
    --------------------  */
- .notification-inline{
- 
-  background-color: #e6ecf7; /* leggermente più denso per supportare testo chiaro */
-  color: #4d90fe; /* testo bianco */
-  padding: 12px 16px;
-  border-left: 4px solid rgba(2, 24, 89, 0.4);
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 16px;
-  transition: all 0.3s ease;
-  visibility: hidden;
-  opacity: 0;
- }  
- .notification-inline.show{
-  opacity:1;
-  visibility: visible;
- }
- 
-.notification {
-  position: fixed; 
-  top: 20px;       /* bordo superiore */
-  left: 50%;       /* bordo sinistro (metà schermo) */
-  transform: translateX(-50%); 
-  z-index: 9999;   /* priorità per metterlo in primo piano */
+.notification-inline {
+	background-color: #e6ecf7;
+	/* leggermente più denso per supportare testo chiaro */
+	color: #4d90fe; /* testo bianco */
+	padding: 12px 16px;
+	border-left: 4px solid rgba(2, 24, 89, 0.4);
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 16px;
+	transition: all 0.3s ease;
+	visibility: hidden;
+	opacity: 0;
+}
 
-  background-color: rgba(242, 118, 46, 1);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 1em;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+.notification-inline.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.notification {
+	position: fixed;
+	top: 20px; /* bordo superiore */
+	left: 50%; /* bordo sinistro (metà schermo) */
+	transform: translateX(-50%);
+	z-index: 9999; /* priorità per metterlo in primo piano */
+	background-color: rgba(242, 118, 46, 1);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 1em;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .notification.show { /*Quando l'oggetto è visibie*/
-  opacity: 1;
-  visibility: visible;
+	opacity: 1;
+	visibility: visible;
 }
 
 /* =================================================================== */
@@ -232,50 +231,47 @@ body {
 /* =================================================================== */
 
 /* --- Tablet e Mobile (fino a 768px) --- */
-@media (max-width: 768px) {
+@media ( max-width : 768px) {
 	.productsingle-page {
-    	flex-direction: column;
-    	padding: 1rem;
-    	}
-    
-    .productsingle-main-image-wrapper {
-    	margin-bottom: 1rem;
-    	}
-    	
-    .products-page {
-    flex-direction: column;
-  }
-  .filter-toggle-btn {
-    display: block;
-  }
-  .filters-sidebar {
-    position: fixed;
-    top: 150px; /* sotto header */
-    left: -260px;
-    transition: left .3s ease;
-    z-index: 999;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-  }
-  .filters-sidebar.visible {
-    left: 10px;
-  }
-
-  .products-container {
-    /* su mobile la griglia scende a 1 colonna */
-    grid-template-columns: 1fr;
-  }
+		flex-direction: column;
+		padding: 1rem;
+	}
+	.productsingle-main-image-wrapper {
+		margin-bottom: 1rem;
+	}
+	.products-page {
+		flex-direction: column;
+	}
+	.filter-toggle-btn {
+		display: block;
+	}
+	.filters-sidebar {
+		position: fixed;
+		top: 150px; /* sotto header */
+		left: -260px;
+		transition: left .3s ease;
+		z-index: 999;
+		max-height: calc(100vh - 100px);
+		overflow-y: auto;
+	}
+	.filters-sidebar.visible {
+		left: 10px;
+	}
+	.products-container {
+		/* su mobile la griglia scende a 1 colonna */
+		grid-template-columns: 1fr;
+	}
 }
 
 /*form registrazione*/
-@media (max-width: 600px) {
-  .form-container fieldset {
-    padding: 0.75rem;
-  }
-  .form-container legend {
-    font-size: 1rem;
-  }
-  .form-container textarea {
-    min-height: 120px;
-  }
+@media ( max-width : 600px) {
+	.form-container fieldset {
+		padding: 0.75rem;
+	}
+	.form-container legend {
+		font-size: 1rem;
+	}
+	.form-container textarea {
+		min-height: 120px;
+	}
 }
