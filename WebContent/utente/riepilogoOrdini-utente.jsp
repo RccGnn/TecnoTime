@@ -27,25 +27,27 @@
 	<jsp:include page="header-utente.jsp"/>
 	<div class ="rieplOrdini">
     <h1>I miei ordini</h1>
-    
-   <div class="filter-bar-container">
-        <div class="date-filter-group">
-            <label for="dateLowerBound">Data (Lower Bound):</label>
-            <input onchange="sortedOrders()" type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD">
-
-            <label for="dateUpperBound">Data (Upper Bound):</label>
-            <input onchange="sortedOrders()" type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
-        </div>
-
-        <div class="date-filter-group">
-            <label for="priceLowerBound">Prezzo (MIN):</label>
-            <input onchange="displaySlider(this), sortedOrders()" type="range" id="priceLowerBound" name="priceLowerBound" placeholder="€" value=0 max=9999>
-			<output id="slider1"> </output>
-			
-            <label for="priceUpperBound">Prezzo (MAX):</label>
-            <input onchange="displaySlider(this), sortedOrders()" type="range" id="priceUpperBound" name="priceUpperBound" placeholder="€" value=0 max=9999>
-            <output id="slider2"> </output>
-        </div>
+   
+   <div class="admin-search-form"> 
+	   <div class="filter-bar-container">
+	        <div class="date-filter-group">
+	            <label for="dateLowerBound">Data (Lower Bound):</label>
+	            <input onchange="sortedOrders()" type="date" id="dateLowerBound" name="dateLowerBound" placeholder="YYYY-MM-DD">
+	
+	            <label for="dateUpperBound">Data (Upper Bound):</label>
+	            <input onchange="sortedOrders()" type="date" id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
+	        </div>
+	
+	        <div class="date-filter-group">
+	            <label for="priceLowerBound">Prezzo (MIN):</label>
+	            <input onchange="displaySlider(this), sortedOrders()" type="range" id="priceLowerBound" name="priceLowerBound" placeholder="€" value=0 max=9999>
+				<output id="slider1"> </output>
+				
+	            <label for="priceUpperBound">Prezzo (MAX):</label>
+	            <input onchange="displaySlider(this), sortedOrders()" type="range" id="priceUpperBound" name="priceUpperBound" placeholder="€" value=0 max=9999>
+	            <output id="slider2"> </output>
+	        </div>
+	    </div>
     </div>
     
    	<div class="orders-list-page">

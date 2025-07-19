@@ -264,6 +264,15 @@ body {
 }
 
 /* Comportamento Hover per Desktop */
+.main-nav li {
+	transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.main-nav li:hover {
+	color: black;
+	transform: scale(1.05);
+}
+
 .main-nav ul li:hover>.dropdown {
 	display: flex;
 	opacity: 1;

@@ -73,7 +73,10 @@ function search() {
 	const url = context+"/ProductFilter";
 	let params = "name=" + encodeURIComponent(input) + "&fromSearchBar=" + encodeURIComponent(search);
 	
-	loadAjaxDoc(url, "GET", params, handleDisplaySearch);  
+	if (input == null || input.trim() == "")
+		hideSearchBar();
+	else
+		loadAjaxDoc(url, "GET", params, handleDisplaySearch);  
 }
 
 function hideSearchBar() {
@@ -109,5 +112,5 @@ function handleDisplaySearch(xhr) {
 		
 	});
 	
-	res.style.display = "block";
+	res.style.display = "inline";
 }

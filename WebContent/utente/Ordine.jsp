@@ -29,6 +29,8 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/ordine.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/login_registrazione.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/cart.css">
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/filters.css">
+	
 	
 </head>
 
