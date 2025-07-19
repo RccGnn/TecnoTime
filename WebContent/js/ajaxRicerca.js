@@ -81,6 +81,7 @@ function hideSearchBar() {
 	root.style.display = "none";
 }
 
+
 function handleDisplaySearch(xhr) {
 	let searchResults = JSON.parse(xhr.responseText);
 
@@ -105,6 +106,7 @@ function handleDisplaySearch(xhr) {
 		suggItem.appendChild(linkToDisplayPage);
 		// Collega risultato <-- display risultati
 		res.appendChild(suggItem);
+		
 	});
 	
 	res.style.display = "block";

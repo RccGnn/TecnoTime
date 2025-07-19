@@ -82,7 +82,7 @@
 					<li class="mobile-only"><a
 						href="<%= request.getContextPath() %>/articoliProdotti.jsp">Tutti
 							i Prodotti</a></li>
-					<li><a href="DisplaySubMenu1?sub=Processore<%=destination%>">Processori</a></li>
+					<li><a href="DisplaySubMenu1?sub=Processori<%=destination%>">Processori</a></li>
 					<li><a href="DisplaySubMenu1?sub=Scheda_Video<%=destination%>">Schede Video</a></li>
 					<li><a href="DisplaySubMenu1?sub=Scheda_Madre<%=destination%>">Schede Madri</a></li>
 					<li><a href="DisplaySubMenu1?sub=RAM<%=destination%>">Memorie</a></li>

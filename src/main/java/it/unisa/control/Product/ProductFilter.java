@@ -25,7 +25,7 @@ public class ProductFilter extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// Indica il numero di prodotti che possono essere visualizzati per pagina
-	private static final int articlesPerPage = 10;
+	private static final int articlesPerPage = 12;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double min = (req.getParameter("min") != null && !req.getParameter("min").trim().equals("")) ? Double.parseDouble(req.getParameter("min")) : 0;
@@ -48,19 +48,29 @@ public class ProductFilter extends HttpServlet {
         double length = 0, limit = 0, numeroPagine = 0, offset = 0;
 
         try {
-	        ArrayList<ArticoloCompletoBean> catalogo = dao.doRetrieveAll(sort); 
+        	
+	        ArrayList<ArticoloCompletoBean> catalogo = null;
 
 	        // Ricerca effettuata dalla barra di navigazione centrale
         	if(searchBar) {
+        		
         		if (nome != null)
-        			Filters.nameFilter(catalogo, nome);	 // Filtra solo sul nome (input utente)
-        		else
+        			catalogo = dao.doRetrieveAllSearch(sort, nome);	 // Filtra solo sul nome (input utente)
+        		
+        		if (catalogo == null)
         			catalogo = new ArrayList<ArticoloCompletoBean>(0);
-        	
+        		
         	// Ricerca effettuata dalle altre pagine dei prodotti
         	} else {
+        		
+        		length = dao.countQueries(); // conta il numero delle query
+        		numeroPagine = (int) Math.ceil(length / ProductFilter.articlesPerPage); // numero di pagine
+        		int modulo = (int)length / 2;
+        		catalogo = dao.doRetrieveAllLimit(sort, (int) numeroPagine, (int) page);
+        		
 		        // Filtra per il contesto
 		        Filters.contexFilter(catalogo, contesto);
+        		System.out.println(catalogo.size());		        
 
 		        // Filtra per il prezzo
 		        Filters.priceFilter(catalogo, min, max);
@@ -69,13 +79,12 @@ public class ProductFilter extends HttpServlet {
 		        if (nome != null)
 		        	Filters.nameFilter(catalogo, nome);
 		    
-		        System.out.println("Categoria:" +categoria);
 		        // Filtra per la categoria
 		        if (categoria != null)
 		        	Filters.categoryFilter(catalogo, categoria);
 		        
 		        // Filtra per marca
-		        if(brand != null)
+		        if (brand != null)
 		        	Filters.nameFilter(catalogo, brand);
 		        
 		        // Se si tratta di un servizio, filtra per durata del servizio
@@ -83,15 +92,21 @@ public class ProductFilter extends HttpServlet {
 		        if (durata != -1)
 		        	Filters.durationFilter(catalogo, durata);	
 		        		
-		        length = catalogo.size(); // numero di prodotti filtrati
 		        limit = articlesPerPage * page; // limite (indice) dell'ultimo elemento accettabile per pagina
-		        numeroPagine = Math.ceil(length / articlesPerPage); // Per eccesso, determina il numero di pagine 
 		        offset = (page - 1) * articlesPerPage;
 
-		        catalogo = Filters.pageFilter(catalogo, offset, limit);
+		        if(limit > offset && offset >= modulo && limit >= modulo) {
+		        	offset = offset % modulo;
+		        	limit = limit % modulo;
+		        }
+		        
+		        numeroPagine = (int) Math.ceil(catalogo.size() / ProductFilter.articlesPerPage); // numero di pagine
+		        catalogo = Filters.pageFilter(catalogo, offset % modulo, limit % modulo);
 		        
 	        }
-	        
+        	
+        	
+        	System.out.println("Lunghezza: " + length + "\numeroPagine: "+numeroPagine + "\nPagina: " + page + "\noffset: " + offset + "\nLimit: "+ limit +"\nSize: "+ catalogo.size());
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
 	        ArrayList<PromozioneCompletaBean> promozioni = promDao.doRetrieveByKeyProducts("");
 	        

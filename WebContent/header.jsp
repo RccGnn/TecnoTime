@@ -56,9 +56,9 @@
 					<li class="mobile-only"><a href="articoliProdotti.jsp">Tutti i Prodotti</a></li>
 					<li><a href="DisplaySubMenu1?sub=Processore<%=destination%>">Processori</a></li>
 					<li><a href="DisplaySubMenu1?sub=Scheda_Video<%=destination%>">Schede Video</a></li>
-					<li><a href="DisplaySubMenu1?sub=Scheda_Madre<%=destination%>">Schede Madri</a></li>
+					<li><a href="DisplaySubMenu1?sub=Schede_Madri<%=destination%>">Schede Madri</a></li>
 					<li><a href="DisplaySubMenu1?sub=RAM<%=destination%>">Memorie</a></li>
-					<li><a href="DisplaySubMenu1?sub=Archiviazione<%=destination%>">Archiviazione</a></li>
+					<li><a href="DisplaySubMenu1?sub=Memoria_Archiviazione<%=destination%>">Archiviazione</a></li>
 				</ul></li>
 			<li><a href="articoliLicenze.jsp">LICENZE</a>
 				<ul class="dropdown">

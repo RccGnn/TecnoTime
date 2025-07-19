@@ -20,14 +20,12 @@ public class Filters {
 		if (catalogo == null)	return catalogo;
 	
 		// Verifica che offset non sia > o = alla dimensione della lista, in quanta limit è > 0
-		if (offset < 0 || limit < 0 || offset >= catalogo.size()) return catalogo;
-		
-		double endIndex = Math.min(limit, catalogo.size());
-		
+		if (offset < 0 || limit < 0) return catalogo;
+				
 		// Seleziona solo gli elementi nel range accettabile
 		ArrayList <ArticoloCompletoBean> temp = new ArrayList<>();
-		for (int i = 0; i < catalogo.size(); i++) {
-			if (i >= offset && i < endIndex)
+		for (int i = (int) offset; i < catalogo.size(); i++) {
+			if (i >= offset && i < limit)
 				temp.add(catalogo.get(i));
 		}
 		

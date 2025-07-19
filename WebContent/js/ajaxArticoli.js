@@ -196,6 +196,7 @@ function handleFilter(xhr) {
 	
 	displayPageSelector();
 	
+	console.log(response[0].length);
 	// Eventuale errore se non ci sono articoli 
 	if (response[0] == null || (response[0] == null && response[0].length === 0)) {
 		let noResults = document.createElement("p");
@@ -329,10 +330,25 @@ function displayPageSelector() {
 	listElement.appendChild(btn);
 	pageList.appendChild(listElement);
 	
+	// Genera sempre 6 pagine 3 prima e 3 dopo alla currentPage
+	let start, end;
 	
-	
+	// MASSIMO 6 BOTTONI NELLA BARRA DI NAVIGAZIONE DEGLI ARTICOLI
+	if (pageNumber > 6) {
+		if (currentPage > 3) {
+			start = currentPage - 3;
+			end = Math.min(currentPage + 3, pageNumber);	
+		} else {
+			start = currentPage;
+			end = currentPage + 6;
+		}		
+	} else {
+		start = 1;
+		end = pageNumber;			
+	}
+		
 	// Pagine
-	for (let i = 1; i < pageNumber + 1; i++) {
+	for (let i = start; i <= end; i++) {
 		listElement = document.createElement("li");
 		listElement.classList.add("pagination-link");
 		
