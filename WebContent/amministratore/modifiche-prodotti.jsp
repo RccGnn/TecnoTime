@@ -39,7 +39,7 @@
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="modificaProdotto.jsp">
+	        <a href="articoliProdotti.jsp">
 	          <img src="<%= request.getContextPath() %>/images/alt-prodotti.png" alt="MODIFYPRODUCT">
 	          <h3>MODIFICA PRODOTTO</h3>
 	        </a>

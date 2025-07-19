@@ -38,6 +38,7 @@ public class ProductFilter extends HttpServlet {
         String categoria = (req.getParameter("categoriaInput") != null && !req.getParameter("categoriaInput").trim().equals("")) ? req.getParameter("categoriaInput") : null; 
         String brand = (req.getParameter("marcaInput") != null && !req.getParameter("marcaInput").trim().equals("")) ? req.getParameter("marcaInput") : null;
         int page = (req.getParameter("page") != null && !req.getParameter("page").trim().equals("")) ? Integer.parseInt(req.getParameter("page")) : 1;
+        boolean modify = Boolean.parseBoolean(req.getParameter("modify")); // parseBoolean interpreta come false qualsiasi stringa diversa da true (case insensitive)
         
         ArticoloCompletoDao dao = new ArticoloCompletoDao();
         PromozioneCompletaDao promDao = new PromozioneCompletaDao();
@@ -115,6 +116,7 @@ public class ProductFilter extends HttpServlet {
 	        res.add(catalogo);
 	        res.add(promozioni);
 	        res.add(numeroPagine);
+	        res.add(modify); // La richiesta è arrivata dall'admin, article-single page deve premettere di modificare l'articolo
 	        
             // Serializza l'intera lista di ArticoloCompletoBean e promozioni in una singola stringa JSON
             String jsonOutput = gson.toJson(res);

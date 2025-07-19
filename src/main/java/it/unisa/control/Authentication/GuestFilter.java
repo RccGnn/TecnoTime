@@ -13,18 +13,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.UUID;
 
-import com.google.gson.Gson;
-
-import it.unisa.control.CookieUtils;
 import it.unisa.model.DAO.Account.AccountDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
 import it.unisa.model.beans.AccountBean;
-import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
 
 /**
@@ -33,7 +27,10 @@ import it.unisa.model.beans.CarrelloRiempitoBean;
 @WebFilter("/index.jsp")
 public class GuestFilter extends HttpFilter implements Filter {
        
-    /**
+	private static final long serialVersionUID = 1L;
+
+
+	/**
      * @see HttpFilter#HttpFilter()
      */
     public GuestFilter() {
