@@ -110,7 +110,6 @@ public class ProductFilter extends HttpServlet {
         	System.out.println("Lunghezza: " + length + "\numeroPagine: "+numeroPagine + "\nPagina: " + page + "\noffset: " + offset + "\nLimit: "+ limit +"\nSize: "+ catalogo.size());
 	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
 	        ArrayList<PromozioneCompletaBean> promozioni = promDao.doRetrieveByKeyProducts("");
-	        
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	        ArrayList<Object> res = new ArrayList<>();
 	        res.add(catalogo);
