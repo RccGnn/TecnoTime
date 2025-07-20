@@ -103,54 +103,48 @@ function modifyForm() {
 	}
 	
 	if (tipologia != "servizio" && tipologia != "licenza") {
-		appendLabelTextPH("seriale", "Aggiungi seriale: ", displayElements, "i.e.: PDF-9999999");
+		appendLabelTextPH("seriale", "Aggiungi seriale: ", displayElements, "es: PDF-9999999");
 	}
 	
 	if (tipologia == "processore") {
 
-		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
-		appendLabelText("marca", "Marca: ", displayElements);
-		appendLabelText("socket", "Nome socket: ", displayElements);
+		appendLabelTextPH("marca", "Marca: ", displayElements, "es: Intel");
+		appendLabelTextPH("socket", "Nome socket: ", displayElements, "es: AM4");
 		appendLabelDate("dataRilascio", "Data di rilascio: ", displayElements);
 		appendLabelNumber("watt", "Wattaggio: ", displayElements, 1);
 	}
 	// Scheda madre
 	if (tipologia == "scheda_madre") {
 				
-		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
-		appendLabelText("marca", "Marca: ", displayElements);
-		appendLabelText("socket", "Nome socket: ", displayElements);
-		appendLabelText("dimensione", "Dimensioni (w X d X h): ", displayElements);
-		appendLabelText("SupportoRam", "Supporto RAM: ", displayElements);
+		appendLabelTextPH("marca", "Marca: ", displayElements, "es: Intel");
+		appendLabelTextPH("socket", "Nome socket: ", displayElements, "es: AM4");
+		appendLabelTextPH("dimensione", "Dimensioni: ", displayElements, "es: E-ATX");
+		appendLabelTextPH("SupportoRam", "Supporto RAM: ", displayElements, "es: DDR5");
 		appendLabelNumber("Watt", "Wattaggio: ", displayElements, 1);
 	}
 	// RAM
 	if (tipologia == "RAM") {
-		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
-		appendLabelText("marca", "Marca: ", displayElements);
+		appendLabelTextPH("marca", "Marca: ", displayElements, "es: Intel");
 		appendLabelNumber("capacita", "Capacità: ", displayElements, 1);
-		appendLabelText("SupportoRam", "Supporto RAM: ", displayElements);
+		appendLabelTextPH("SupportoRam", "Supporto RAM: ", displayElements, "es: DDR5");
 	}
 	// Scheda Video
 	if (tipologia == "scheda_video") {
-		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
-		appendLabelText("marca", "Marca: ", displayElements);
+		appendLabelTextPH("marca", "Marca: ", displayElements, "es: Intel");
 		appendLabelDecimail("PCI", "Inserisci PCI: ", displayElements);
 		appendLabelNumber("vram", "VRAM: ", displayElements, 1);
-		appendLabelText("tipoRam", "Tipo di RAM: ", displayElements);
+		appendLabelTextPH("tipoRam", "Tipo di RAM: ", displayElements, "GDDR7");
 		appendLabelNumber("Watt", "Wattaggio: ", displayElements, 1);		
 	}
 	// _Case
 	if (tipologia == "_case") {
-		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
-		appendLabelText("dimensione", "Dimensioni (w X d X h): ", displayElements);
-		appendLabelText("marca", "Marca: ", displayElements);
+		appendLabelTextPH("dimensione", "Dimensioni: ", displayElements, "es: E-ATX");
+		appendLabelTextPH("marca", "Marca: ", displayElements, "es: Intel");
 	}
 
 	// Alimentatori
 	if (tipologia == "alimentatori") {
-		appendLabelText("nomecompleto", "Nome completo: ", displayElements);
-		appendLabelText("marca", "Marca: ", displayElements);
+		appendLabelTextPH("marca", "Marca: ", displayElements, "es: Intel");
 		appendLabelNumber("watt", "Wattaggio: ", displayElements, 1);
 	}
 		

@@ -66,6 +66,79 @@ function loadAjaxDoc(url, method, params, cFuction) {
 	}
 }
 
+// helper che pulisce eventuale messaggio
+function clearError() {
+	let isError = document.getElementsByClassName("error-message")[0];
+	if (isError != null) { // Già è presente un errore
+		isError.remove(); // Elimina l'errore
+	}
+}
+
+// helper che mostra messaggio errore
+function showError(message) {
+	clearError(); // Elimina l'errore precedente
+
+	// Se non è presente un errore, mostralo
+	let errorContainer = document.getElementById("filter-error-container");
+	let error = document.createElement("div");
+	error.className = "error-message";
+	error.innerHTML = message;
+	
+	errorContainer.appendChild(error);
+}
+
+function checkDate() {
+    clearError();
+
+    const lowerDateInputEl = document.getElementById("dateLowerBound");
+    const upperDateInputEl = document.getElementById("dateUpperBound");
+        
+    const lowerDateValue = lowerDateInputEl.value;
+    const upperDateValue = upperDateInputEl.value;
+	
+	if (!lowerDateValue) {
+		showError('Si prega di inserire la data finale!');
+		return false;		
+	}
+	
+	if (!lowerDateValue) {
+		showError('Si prega di inserire la data iniziale!');
+		return false;		
+	}
+	
+	// Effettua il confronto fra date solo quando sono inserite entrambe
+    if (lowerDateValue && upperDateValue) {
+        const lowerDate = new Date(lowerDateValue);    
+        const upperDate = new Date(upperDateValue);
+
+        let currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0); 
+        
+        if (isNaN(lowerDate.getTime()) || isNaN(upperDate.getTime())) {
+            showError('Si prega di inserire date valide (YYYY-MM-DD)!');
+            return false;
+        }
+
+		if (upperDate > currentDate) {
+		    showError('La data finale non può essere successiva alla data odierna!');
+		    return false;
+		}
+
+		if (lowerDate > upperDate) {
+		    showError('La data iniziale non può essere successiva alla data finale!');
+		    return false;
+		}
+
+		// L'utente mette una data del futuro
+        if (lowerDate > currentDate) {
+            showError('La data iniziale non può essere successiva alla data odierna!');
+            return false;
+        }
+    }
+	
+	return true;
+}
+
 
 function sortedOrders() {
 	const priceUbInput = parseFloat(document.getElementById("priceUpperBound").value);
@@ -84,10 +157,10 @@ function sortedOrders() {
 	                "&dateUpperBound=" + encodeURIComponent(dateUpInput) + 
 					"&username=" + encodeURIComponent(usernameInput);
 	
-	loadAjaxDoc("/TecnoTime/OrderFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
-}
+	if (checkDate()) 
+		loadAjaxDoc("/TecnoTime/OrderFilter", "GET", params, handleFilter, "application/x-www-form-urlencoded");
 
-window.onload = sortedOrders;
+}
 
 function displaySlider(element) {
 	

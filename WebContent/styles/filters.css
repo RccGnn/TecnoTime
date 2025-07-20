@@ -24,6 +24,7 @@ body {
   color: #011140;
 }
 
+
 /* =================================== */
 /* Container Filtro                     */
 /* =================================== */
@@ -41,6 +42,18 @@ body {
   gap: 1.5rem; /* Increased gap */
   max-width: 1000px;
   margin: 2rem auto; /* Increased margin */
+}
+
+.error-message {
+	color: red;
+	margin-top: 1rem;
+	text-align: center;
+}
+
+.success-message {
+	color: green;
+	margin-top: 1rem;
+	text-align: center;
 }
 
 /* =================================== */

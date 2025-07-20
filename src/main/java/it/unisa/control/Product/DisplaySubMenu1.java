@@ -21,12 +21,19 @@ public class DisplaySubMenu1 extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String subField = request.getParameter("sub"); // Sottocategoria da filtrare
-		
-		request.setAttribute("subField", subField.replace('_', ' '));
+		boolean offerta = (boolean) Boolean.parseBoolean(request.getParameter("offerta"));
+		request.setAttribute("subField", subField.toLowerCase().trim().replace('_', ' '));
 		
 		RequestDispatcher rd = null;
+
 		// SubMenù di prodotto fisico
-		rd = request.getRequestDispatcher("articoliProdotti.jsp");
+		String path;
+		if (offerta) {
+			path = "paginaOfferte.jsp";
+		} else {
+			path = "articoliProdotti.jsp";
+		}
+		rd = request.getRequestDispatcher(path);
 		rd.forward(request, response);
 	}
 

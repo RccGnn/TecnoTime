@@ -178,6 +178,8 @@ function cleanSection() {
 
 function isPromotion(promotionList, codiceIdentificativo) {
 	
+	if (promotionList == null)
+		return false;
 	let flag = false;
 	for (let i = 0; i < promotionList.length; i++) {
 		if(promotionList[i].riguarda.codiceIdentificativo == codiceIdentificativo) {

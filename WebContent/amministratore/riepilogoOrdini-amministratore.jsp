@@ -29,13 +29,14 @@
 	<div class="rieplOrdini">
 		<h2>Gestione Ordini Utente</h2>
 
-		<div class="admin-search-form">
+		<div id="filter-error-container" class="admin-search-form">
 			<div class="date-filter-group">
 				<label for="dateLowerBound">Data (Lower Bound):</label> 
 				<input
-					type="date" id="dateLowerBound" name="dateLowerBound"
-					placeholder="YYYY-MM-DD"> <label
-					for="dateUpperBound">Data (Upper Bound):</label> <input type="date"
+					type="date" onchange="checkDate()" id="dateLowerBound" name="dateLowerBound"
+					placeholder="YYYY-MM-DD"> 
+				<label for="dateUpperBound">Data (Upper Bound):</label> 
+				<input type="date" onchange="checkDate()"
 					id="dateUpperBound" name="dateUpperBound" placeholder="YYYY-MM-DD">
 			</div>
 

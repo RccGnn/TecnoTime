@@ -7,12 +7,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
-  <title>Schede Video in Offerta - TecnoTime</title>
+  <title>Case in Offerta - TecnoTime</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
+  
 </head>
 <body data-logged-in="<%= (session.getAttribute("user") != null) ? "true" : "false" %>">
 
@@ -48,19 +49,20 @@
           <input  onchange="sortedProducts()" type="text" id="name" name="name"
                  value="${param.nome != null ? param.nome : ''}">
         </div>
+         <div class="filter-group">
+          <label for="categoria">Cerca per categoria:</label>
+          <% if(request.getAttribute("subField") != null) {%>
+        	<input readonly onchange="sortedProducts()" type="text" id="categoria" name="categoria"
+                 value="<%=request.getAttribute("subField")%>">
+        	<% } else { %>
+        	<input  onchange="sortedProducts()" type="text" id="categoria" name="categoria"
+                 value="${param.categoria != null ? param.categoria : ''}">
+        	<%} %>
+        </div>
         <div class="filter-group">
-        	<label for="brand">Marca:</label>
-        	<select onchange="sortedProducts()" id="brand" name="brand">
-	        <option value="">Tutti</option>
-			<option value="INTEL">INTEL</option>
-			<option value="AMD">AMD</option>
-			<option value="NVIDIA">NVIDIA</option>
-			<option value="Sapphire">Sapphire</option>
-			<option value="Asus">Asus</option>
-			<option value="MSI">MSI</option>
-			<option value="Gigabyte">Gigabyte</option>
-			<option value="Asrock">Asrock</option>
-	      </select>
+          <label for="marca">Cerca per marca:</label>
+          <input  onchange="sortedProducts()" type="text" id="brand" name="brand"
+                 value="${param.marca != null ? param.marca : ''}">
         </div>
         <div class="filter-group">
           <label for="sort">Ordina per:</label>

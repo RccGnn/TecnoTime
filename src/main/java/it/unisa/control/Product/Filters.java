@@ -40,6 +40,24 @@ public class Filters {
 		return catalogo;
 	}
 	
+	public static ArrayList<ArticoloCompletoBean> brandFilter(ArrayList<ArticoloCompletoBean> catalogo, String brandName) {
+
+		if (brandName == null || brandName.trim().isEmpty() || catalogo == null) return catalogo;
+			
+		// se la stringa dell utente da comparare non è contenuta nel nome completo dell articolo, questo verrà rimosso
+		ArrayList<ArticoloCompletoBean> newCatalogo = new ArrayList<>();
+		for (ArticoloCompletoBean articolo : catalogo) {
+			if (articolo.getPdDigitale() != null && articolo.getPdDigitale().getCategoria().toLowerCase().contains(brandName.toLowerCase()) )
+				newCatalogo.add(articolo);
+		    else if (articolo.getPdFisico() != null && articolo.getPdFisico().getCategoria().toLowerCase().contains(brandName.toLowerCase()) )
+				newCatalogo.add(articolo);
+		    else if (articolo.getServizio() != null && articolo.getServizio().getCategoria().toLowerCase().contains(brandName.toLowerCase()) )
+				newCatalogo.add(articolo);
+		}
+
+		return newCatalogo;
+	}
+	
 	public static ArrayList<ArticoloCompletoBean> nameFilter(ArrayList<ArticoloCompletoBean> catalogo, String nomeComparator) {
 
 		if (nomeComparator == null || nomeComparator.trim().isEmpty() || catalogo == null) return catalogo;

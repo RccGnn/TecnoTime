@@ -75,7 +75,7 @@
 	    <div class="team-employees__employee" style="background-image:url('images/giovanni_riccardi.jpg')">
 	      <div class="team-employees__info">
 	        <h3 class="team-employees__name">Giovanni Riccardi</h3>
-	        <p class="team-employees__position">DataBase & JS Developer</p>
+	        <p class="team-employees__position">DataBase / JS Developer</p>
 	      </div>
 	    </div>
 	  </section>

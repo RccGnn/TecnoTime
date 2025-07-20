@@ -78,7 +78,10 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 		};
 	
 	private static final String TABLE_NAME = "Catalogo";
-
+	private static final String FISICO_TABLE_NAME = "Prodotto_Fisico";
+	private static final String DIGITALE_TABLE_NAME = "Prodotto_Digitale";
+	private static final String SERVIZIO_TABLE_NAME = "Servizio";
+	
 	private synchronized void createView() throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -451,7 +454,7 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 
 		name = name.toLowerCase().trim() + "%";
 		System.out.println(name);
-		String selectSQL = 	"SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE LOWER(nome) LIKE '" + name + "' LIMIT 6"; 
+		String selectSQL = 	"SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE LOWER(nome) LIKE '%" + name + "%' LIMIT 6"; 
 
 		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(ArticoloCompletoDao.whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
@@ -639,5 +642,59 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 		}
 		return catalogo;
 	}
+
+	public synchronized void updateByKey(String key, double prezzo, int quantità, String descrizione) throws SQLException {
+
+	    Connection connection = null;
+	    PreparedStatement ps = null;
+
+	    try {
+	        ArticoloCompletoDao comDao = new ArticoloCompletoDao(); 
+	        ArticoloCompletoBean articoloDaModificare = comDao.doRetrieveByKey(key);
+
+	        connection = DriverManagerConnectionPool.getConnection();
+
+	        String updateSQL = "";
+	        
+	        if (articoloDaModificare.getPdFisico() != null) {
+	            updateSQL = "UPDATE " + ArticoloCompletoDao.FISICO_TABLE_NAME + 
+	                        " SET prezzo = ?, descrizione = ?, quantitaMagazzino = ? WHERE codiceIdentificativo = ?";
+	            ps = connection.prepareStatement(updateSQL);
+	            ps.setDouble(1, prezzo);
+	            ps.setString(2, descrizione);
+	            ps.setInt(3, quantità);
+	            ps.setString(4, key);
+	        } else if (articoloDaModificare.getPdDigitale() != null) {
+	            updateSQL = "UPDATE " + ArticoloCompletoDao.DIGITALE_TABLE_NAME + 
+	                        " SET prezzo = ?, descrizione = ?, chiaviDisponibili = ? WHERE codiceIdentificativo = ?";
+	            ps = connection.prepareStatement(updateSQL);
+	            ps.setDouble(1, prezzo);
+	            ps.setString(2, descrizione);
+	            ps.setInt(3, quantità);
+	            ps.setString(4, key);
+	        } else if (articoloDaModificare.getServizio() != null) {
+	            updateSQL = "UPDATE " + ArticoloCompletoDao.SERVIZIO_TABLE_NAME + 
+	                        " SET prezzo = ?, descrizione = ? WHERE codiceIdentificativo = ?";
+	            ps = connection.prepareStatement(updateSQL);
+	            ps.setDouble(1, prezzo);
+	            ps.setString(2, descrizione);
+	            ps.setString(3, key);
+	        } else {
+	            throw new SQLException("Tipo di articolo non riconosciuto per la modifica: " + key);
+	        }
+
+	        ps.executeUpdate();
+
+	    } finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+	}
+	
 	
 }
