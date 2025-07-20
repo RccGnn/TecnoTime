@@ -171,6 +171,21 @@ body {
 	margin-top: 1.5rem;
 }
 
+
+.search-bar {
+    box-sizing: border-box;
+    width: 125%;
+    padding: 8px 12px 8px 36px;
+    border: 2px solid #F2762E;
+    border-radius: 20px;
+    font-size: 24px;
+    color: #011140;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+
 /* --- Messaggi di stato --- */
 .error-message {
 	color: red;
@@ -310,4 +325,7 @@ body {
 	.form-container textarea {
 		min-height: 120px;
 	}
+	
+	
+	
 }

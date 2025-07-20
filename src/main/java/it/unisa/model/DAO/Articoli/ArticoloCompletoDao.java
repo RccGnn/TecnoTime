@@ -537,6 +537,99 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 		return catalogo;
 	}
 	
+	public synchronized ArrayList<ArticoloCompletoBean> doRetrieveCategory(String categoria,String order) throws SQLException{
+		createView();
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ArrayList<ArticoloCompletoBean> catalogo = new ArrayList<>();
+		
+		String selectSQL = "SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME +" WHERE categoria = ?";
+		
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(ArticoloCompletoDao.whitelist, order)) {
+			selectSQL += " ORDER BY " + order;
+		}
+		
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+
+			ps.setString(1,categoria);
+			
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				do {
+					ArticoloCompletoBean articoloCatalogo = new ArticoloCompletoBean();
+
+					// Per primo recupero il codiceIdentificativo, la chiave primaria
+					String key = rs.getString("codiceIdentificativo");
+					articoloCatalogo.setCodiceIdentificativo(key);
+					articoloCatalogo.setNome(rs.getString("nome"));
+					
+					// Verifica se sono presenti immagini per l'articolo
+					ImmagineDao imgDao = new ImmagineDao();
+					ArrayList<ImmagineBean> imgList = imgDao.doRetrieveByCodiceIdentificativo(key);
+					if (imgList != null && !imgList.isEmpty())
+						articoloCatalogo.setImmagini(imgList);
+					else
+						articoloCatalogo.setImmagini(null);
+					
+					// Verifico ora se le sottoclassi sono presenti; se non lo sono, imposto null
+				
+					String seriale = rs.getString("seriale");
+					if (seriale != null && !seriale.trim().equals("")) {
+						ProdottoFisicoDao pdfDao = new ProdottoFisicoDao();
+						ArrayList<Object> temp = new ArrayList<>(2);
+						temp.add(seriale);
+						temp.add(key);
+						articoloCatalogo.setPdFisico(pdfDao.doRetrieveByKey(temp));
+					} else {
+						articoloCatalogo.setPdFisico(null);
+					}
+					
+					String codiceSoftware = rs.getString("codiceSoftware");
+					if (codiceSoftware != null && !codiceSoftware.trim().equals("")) {
+						ProdottoDigitaleDao pddDao = new ProdottoDigitaleDao();
+						ArrayList<Object> temp = new ArrayList<>(2);
+						temp.add(codiceSoftware);
+						temp.add(key);
+						articoloCatalogo.setPdDigitale(pddDao.doRetrieveByKey(temp));
+					} else {
+						articoloCatalogo.setPdDigitale(null);
+					}
+					
+					String codiceServizio = rs.getString("codiceServizio");
+					if ( codiceServizio != null &&  !codiceServizio.trim().equals("")) {
+						ServizioDao srvDao = new ServizioDao();
+						ArrayList<Object> temp = new ArrayList<>(2);
+						temp.add(codiceServizio);
+						temp.add(key);
+						articoloCatalogo.setServizio(srvDao.doRetrieveByKey(temp));
+					} else {
+						articoloCatalogo.setServizio(null);
+					}
+					
+					catalogo.add(articoloCatalogo);
+					
+				} while (rs.next());
+			} else {
+				catalogo = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return catalogo;
+	}
+	
+	
 	public synchronized ArrayList<ArticoloCompletoBean> doRetrieveAllLimit(String order, int pageSize, int currentPage) throws SQLException {
 		createView();
 		Connection connection = null;

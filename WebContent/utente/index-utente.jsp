@@ -54,21 +54,21 @@
 		      <img src="<%= request.getContextPath() %>/images/offerte.png" alt="OFFERTE" class="product-image">
 		      <p class="product-name">TIME OFFERTE</p>
 		      <p class="product-description">Approfittane ora!</p>
-		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		      <a href="<%= request.getContextPath() %>/offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="product-card">
 		      <span class="label">OFFERTISSIMA</span>
 		      <img src="<%= request.getContextPath() %>/images/ryzen.png" alt="Ryzen 7 9800x3d" class="product-image">
 		      <p class="product-name">Ryzen 7 9800x3d</p>
 		      <p class="product-description">King dei Processori</p>
-		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		      <a href="<%= request.getContextPath() %>/offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		    <div class="product-card">
 		      <span class="label">PER BREVE TEMPO</span>
 		      <img src="<%= request.getContextPath() %>/images/rtx5090.jpg" alt="ASUS ROG ASTRAL 5090" class="product-image">
 		      <p class="product-name">ASUS ROG ASTRAL 5090</p>
 		      <p class="product-description">NVIDIA FLAGSHIP</p>
-		      <a href="offerte.jsp" class="btn-secondary">Scopri</a>
+		      <a href="<%= request.getContextPath() %>/offerte.jsp" class="btn-secondary">Scopri</a>
 		    </div>
 		  </div>
 		

@@ -43,7 +43,7 @@
 	    <div class="banner-container">
 	        <img src="<%= request.getContextPath() %>/images/banner_pubblicitario.png" alt="Banner Pubblicitario" class="banner-png">
 	    </div>
-	    <button class="config-btn" onclick="window.location.href='configuratore.html'">Configura il tuo PC</button>
+	    <button class="config-btn" onclick="window.location.href=&quot;<%= request.getContextPath() %>/configuratore.jsp&quot;"> Configura il tuo PC</button>
 	</div>
 
     <footer>
