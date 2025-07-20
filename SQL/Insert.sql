@@ -440,6 +440,47 @@ INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quant
 ('MBSN2025035', 900.00, 'Scheda madre E-ATX AM5 MSI MEG GODLIKE (prezzo stimato al lancio).', FALSE, 30, 'SMW9T5U0'),
 ('MBSN2025036', 370.00, 'Scheda madre AM5 MSI MAG X870E TOMAHAWK WIFI (prezzo stimato al lancio).', FALSE, 30, 'SMX3V8Z1');
 
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- LGA1851 (Z890)
+('https://www.dropbox.com/scl/fi/69tkczquiyfb77vwnl4wv/LGA1851-schedeMadri.jpg?dl=1', 'SMN8D0P3'),
+('https://www.dropbox.com/scl/fi/69tkczquiyfb77vwnl4wv/LGA1851-schedeMadri.jpg?dl=1', 'SMF2G6H9'),
+('https://www.dropbox.com/scl/fi/69tkczquiyfb77vwnl4wv/LGA1851-schedeMadri.jpg?dl=1', 'SMK7L1M4'),
+
+-- LGA1700 (Z790)
+('https://www.dropbox.com/scl/fi/s2ufqij8uqpfraxyna63s/LGA1700-schedeMadri.jpg?dl=1', 'SMJ2K8P4'),
+
+-- AM4 (X470, X570, B450, B550)
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMP2N7Q5'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMR4S9T2'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMN1B5C7'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMG7L3M5'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMO6Q1S3'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMZ4H9I0'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMB8E2W4'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMJ0C6D1'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMY1Z5A7'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMW7J3K6'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMP9S4T8'),
+('https://www.dropbox.com/scl/fi/msg7j0uc4q6ben8hho2ep/am4-schedeMadri.jpg?dl=1', 'SMA2D8F0'),
+
+-- AM5 (X870E, X670E, B650/B650E)
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMQ5L0R7'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMX9B1V3'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMD6F4G9'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SML1H7N0'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMP3S8W2'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMT0C5E1'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMV4Y9Z6'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMB7D2G0'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMW9T5U0'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMX3V8Z1'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMF1J6K8'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMY6Z1A3'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMQ8C4D9'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMH3M9P5'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMR0W4X7'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SMS2U5V0'),
+('https://www.dropbox.com/scl/fi/tsv7mgejpbtu2jg1pfxv9/am5-schedeMadri.jpg?dl=1', 'SME0G7I2');
 
 -- RAM -- 
 USE TECNOTIMEDB;
@@ -558,6 +599,65 @@ INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozion
 ('RAMSN2025054', 84.99, 'Kit RAM DDR4 32GB (2x16GB) 3200MHz con RGB.', FALSE, 50, 'RAME3F4G5H6'),
 ('RAMSN2025055', 54.99, 'Kit RAM DDR4 16GB (2x8GB) 3200MHz.', FALSE, 50, 'RAMI7J8K9L0');
 
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- DDR4 RAM
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAME5F6G7H8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMI9J0K1L2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMM3N4O5P6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMQ7R8S9T0'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMU1V2W3X4'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMY5Z6A7B8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMC9D0E1F2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMG3H4I5J6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMK7L8M9N0'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMO1P2Q3R4'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMS5T6U7V8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMW9X0Y1Z2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMA3B4C5D6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAME7F8G9H0'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMI1J2K3L4'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMM5N6O7P8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMQ9R0S1T2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMU3V4W5X6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMY7Z8A9B0'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMI5J6K7L8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMM9N0O1P2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMQ3R4S5T6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMU7V8W9X0'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMY1Z2A3B4'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMC5D6E7F8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMG9H0I1J2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMK3L4M5N6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMO7P8Q9R0'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMS1T2U3V4'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMW5X6Y7Z8'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMA9B0C1D2'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAME3F4G5H6'),
+('https://www.dropbox.com/scl/fi/fc9pycl7mcttau4dt42wl/ddr4RAM.png?dl=1', 'RAMI7J8K9L0'),
+
+-- DDR5 RAM
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMA1B2C3D4'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMC1D2E3F4'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMG5H6I7J8'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMK9L0M1N2'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMO3P4Q5R6'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMS7T8U9V0'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMW1X2Y3Z4'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMA5B6C7D8'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAME9F0G1H2'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMI3J4K5L6'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMM7N8O9P0'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMQ1R2S3T4'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMU5V6W7X8'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMY9Z0A1B2'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMC3D4E5F6'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMG7H8I9J0'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMK1L2M3N4'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMO5P6Q7R8'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMS9T0U1V2'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMW3X4Y5Z6'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAMA7B8C9D0'),
+('https://www.dropbox.com/scl/fi/kjnk9elrpw7kwpyg1ur8a/ddr5RAM.jpeg?dl=1', 'RAME1F2G3H4');
 
 -- SCHEDE VIDEO --
 USE TECNOTIMEDB;
@@ -615,6 +715,36 @@ INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quant
 ('VGSN2025024', 99.00, 'Scheda video SAPPHIRE PULSE Radeon RX 6400 Low Profile, ideale per PC compatti e uso base.', FALSE, 50, 'VGID6400AM'),
 ('VGSN2025025', 389.00, 'Scheda video ASUS ROG Strix GeForce RTX 3060 OC Edition 12GB, perfetta per gaming 1080p/1440p con VRAM extra.', FALSE, 50, 'VGID306012G');
 
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- Schede Video AMD Radeon
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID8900XTX'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID8800XT'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID7900XTX'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID7900XT'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID7800XT'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID7700XT'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID7600X16'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID7600AM'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID6750XT'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID6600AM'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID6500XT'),
+('https://www.dropbox.com/scl/fi/2oqj12un8ax6t3wle3rlg/SchedaVideoAMDRadeon.png?dl=1', 'VGID6400AM'),
+
+-- Schede Video NVIDIA GeForce RTX/GTX
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID5090NV'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID5080NV'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID5070TI'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID4090NV'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID4080SP'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID4070TS'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID4070SP'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID4060T8'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID4060NV'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID30506G'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID1650GTX'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID1630GTX'),
+('https://www.dropbox.com/scl/fi/qnv5lpo85jhhc5nin9x8r/schedaVideoNVIDIA-geforce-rtx.png?dl=1', 'VGID306012G');
+
 
 -- ARCHIVIAZIONE --
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
@@ -671,6 +801,36 @@ INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quant
 ('SSDPF024', 69.99, 'SSD Corsair Force MP510 da 960GB, performance PCIe 3.0 elevate e spazio abbondante.', FALSE, 50, 'SSD_COR_FORCE1T'),
 ('SSDPF025', 29.99, 'SSD Corsair CSSD-F240GBGTX-B da 240GB SATA III, perfetto per avvio del sistema e applicazioni base.', FALSE, 50, 'SSD_COR_CSSD240');
 
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- SATA SSD (Archiviazione)
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_SAM870E4T'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_SAM870E2T'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_SAM870E1T'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_CRU_MX5004T'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_CRU_MX5002T'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_CRU_MX5001T'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_CRU_BX500500'),
+('https://www.dropbox.com/scl/fi/x705k3aq4v0bnlyl85898/SATASSD.png?dl=1', 'SSD_COR_CSSD240'),
+
+-- NVMe SSD (Archiviazione)
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SAM990P4T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SAM990P2T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SAM990P1T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SAM980P1T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SKH_P412T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SKH_P411T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SKH_P312T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_SKH_P311T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_CRU_P5P2T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_CRU_P5P1T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_CRU_P3P4T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_CRU_P3P2T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_COR_MP600P4T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_COR_MP600P2T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_COR_MP600C2T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_COR_MP600C1T'),
+('https://www.dropbox.com/scl/fi/jzl6x6es2p6fv8jkjlm78/SSD.jpg?dl=1', 'SSD_COR_FORCE1T');
+
 -- CASE-- 
 
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
@@ -717,6 +877,29 @@ INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quant
 ('CASE_PF_JONSBD30', 89.99, 'Case Micro-ATX Jonsbo D30 Black, design elegante e compatto, ideale per build piccole e potenti.', FALSE, 50, 'CASE_JONSBD30'),
 ('CASE_PF_CMNR200P', 119.99, 'Case Mini-ITX Cooler Master NR200P, il riferimento per build SFF (Small Form Factor) performanti.', FALSE, 50, 'CASE_CMNR200P'),
 ('CASE_PF_FDRIDGE', 134.99, 'Case Mini-ITX Fractal Design Ridge, design sottile e da salotto, perfetto per HTPC e gaming compatto.', FALSE, 50, 'CASE_FDRIDGE');
+
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- Case PC
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_CMHAF700'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_COR7000D'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_LIO11XL'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_FDMESH2XL'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_NZXTH9'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_LIO11EVO'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_FDTORRENT'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_COR5000RGB'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_NZXTH7'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_LILANCOOL3'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_FDNORTH'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_BEQ500DX'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_CMTD500V2'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_PHEG360A'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_COR4000D'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_MON903MAX'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_ASUSAP201'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_JONSBD30'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_CMNR200P'),
+('https://www.dropbox.com/scl/fi/dccw1hqp21kmbfz1sgjt6/CASE.jpg?dl=1', 'CASE_FDRIDGE');
 
 -- ALIMENTATORI --
 
@@ -775,6 +958,39 @@ INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quant
 -- 1500W
 ('PSU_PF_CORHX1500I', 359.99, 'Alimentatore Corsair HX1500i, 1500W 80 PLUS Platinum, controllabile via software, potenza estrema per super-build.', FALSE, 50, 'PSU_CORHX1500I'),
 ('PSU_PF_SEAPRIMETX1500', 389.99, 'Alimentatore Seasonic PRIME TX-1500, 1500W 80 PLUS Titanium, l`apice dell`efficienza e delle prestazioni per i sistemi più potenti.', FALSE, 50, 'PSU_SEAPRIMETX1500');
+
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- Alimentatori 500W
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CORRM550X'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_BEQPP12M500'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_SEAFOCUSG550'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CMMWEG550V2'),
+
+-- Alimentatori 750W
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CORRM750E'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_MSIMAG750GL'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_EVGA750G6'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_SEAFOCUSGX750'),
+
+-- Alimentatori 850W
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CORRM850X'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_BEQPP12M850'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CMMWEG850V2'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_EVGA850G6'),
+
+-- Alimentatori 1000W
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CORRM1000E'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_MSIMAG1000P'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_SEAPRIMETX1000'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_BEQDP131000'),
+
+-- Alimentatori 1200W
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CORHX1200'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_EVGA1200P2'),
+
+-- Alimentatori 1500W
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_CORHX1500I'),
+('https://www.dropbox.com/scl/fi/jbhn9rdxqbxl6lsq1luur/alimentatori.jpeg?dl=1', 'PSU_SEAPRIMETX1500');
 
 -- PROCESSORI AMD--
 INSERT INTO processore(nomecompleto, marca, socket, datarilascio, Watt) VALUES
@@ -919,6 +1135,43 @@ INSERT INTO prodotto_fisico (seriale, prezzo, descrizione, isPreassemblato, quan
 ('PROC-I5-14400T-001', 140.00, 'Processore Intel Core i5-14400T, 10 Core, basso consumo, ideale per sistemi silenziosi e desktop sottili.', FALSE, 50, 'INTCI514400T'),
 ('PROC-300-001', 80.00, 'Processore Intel Processor 300, 2 Core, per sistemi base, office e navigazione web.', FALSE, 50, 'INTPROC300');
 
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- Processori Intel
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU9285K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU7265K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI914900KS'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI914900K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI913900K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI912900KS'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI912900K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI714700K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI712700K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU9285'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU7265'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU5245K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU5245'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI914900'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI912900'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI714700'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI714700F'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI712700'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI712700F'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI514600K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI514400'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI514400F'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI513600K'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI513600KF'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI514500'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU7265T'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCU5235T'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI314100'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI314100F'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI912900T'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI712700T'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI514500T'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTCI514400T'),
+('https://www.dropbox.com/scl/fi/lrfeggs683xxm93030yye/processoriINTEL.jpeg?dl=1', 'INTPROC300');
+
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
 ('AMDRZN93950X', 'Processore', 'AMD Ryzen 9 3950X', '2025-07-17', 'AMD', TRUE),
 ('AMDRZN93900X', 'Processore', 'AMD Ryzen 9 3900X', '2025-07-17', 'AMD', TRUE),
@@ -978,3 +1231,34 @@ INSERT INTO prodotto_fisico (seriale, prezzo, descrizione, isPreassemblato, quan
 ('AMDP-R7-9800X3D-001', 500.00, 'Processore AMD Ryzen 7 9800X3D, 8 Core Zen 5 con 3D V-Cache, per gaming avanzato (stima lancio Q4 2024).', FALSE, 50, 'AMDRZN79800X3D'),
 ('AMDP-R5-9600X-001', 250.00, 'Processore AMD Ryzen 5 9600X, 6 Core Zen 5, il futuro del gaming mainstream (stima lancio Q3 2024).', FALSE, 50, 'AMDRZN59600X'),
 ('AMDP-R5-9600X3D-001', 320.00, 'Processore AMD Ryzen 5 9600X3D, 6 Core Zen 5 con 3D V-Cache, per gaming di nuova generazione (stima lancio 2025).', FALSE, 50, 'AMDRZN59600X3D');
+
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+-- Processori AMD
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN93950X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN93900X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN73700X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN53600'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN33300X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN95950X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN95900X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN75800X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN75700X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN55600X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN55600'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN75700X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN55500X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN97950X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN97950X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN97900X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN97900X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN77800X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN77700X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN77700'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN57600X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN57500F'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN99950X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN99900X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN99950X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN79800X3D'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN59600X'),
+('https://www.dropbox.com/scl/fi/536ld7tque7mhyay0d2tm/processoriAMD.jpg?dl=1', 'AMDRZN59600X3D');
