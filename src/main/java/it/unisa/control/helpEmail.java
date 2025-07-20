@@ -30,7 +30,7 @@ public class helpEmail extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		request.setAttribute("success", "Email inviata con successo. Grazie per averci scelto!");
-		RequestDispatcher disp = request.getRequestDispatcher("/helpEmail");
+		RequestDispatcher disp = request.getRequestDispatcher("/guide.jsp");
 		disp.forward(request, response);
 	}
 

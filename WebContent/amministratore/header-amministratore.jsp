@@ -22,7 +22,7 @@
 				alt="Logo TecnoTime" class="logo">
 			</a>
 			<%}else if(session.getAttribute("admin")!=null && (Boolean)session.getAttribute("admin")==true ){ %>
-			<a href="utente/index-utente.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
+			<a href="amministratore/index-amministratore.jsp" class="icon-link"> <img src="<%= request.getContextPath() %>/images/TecnoTime.png"
 				alt="Logo TecnoTime" class="logo">
 			</a>
 			<% }else{ %>
@@ -55,14 +55,20 @@
 			</a>
 
 			<div class="admin-menu">
-				<button class="admin-menu-btn" id="adminMenuBtn"
-					aria-label="Menu modifiche">
-					<span class="admin-bar"></span> <span class="admin-bar"></span> <span
-						class="admin-bar"></span>
+				<button class="admin-menu-btn" id="adminMenuBtn" aria-label="Menu modifiche">
+					<span class="admin-bar"></span> <span class="admin-bar"></span>
+					 <span	class="admin-bar"></span>
 				</button>
 				<div class="admin-dropdown-content" id="adminDropdown">
-					<a href="modifiche-prodotti.jsp">Modifiche Prodotti</a> <a
-						href="modifiche-offerte.jsp">Modifiche Offerte</a>
+					
+					<%if (request.getRequestURI().contains("amministratore")) {%>
+						 <a href="modifiche-prodotti.jsp">Modifiche Prodotti</a> 
+						 <a href="modifiche-offerte.jsp">Modifiche Offerte</a>
+					<% } else{%>
+						 <a href="amministratore/modifiche-prodotti.jsp">Modifiche Prodotti</a> 
+						 <a href="amministratore/modifiche-offerte.jsp">Modifiche Offerte</a>
+				  <%}%>	
+				  
 				</div>
 			</div>
 		</div>

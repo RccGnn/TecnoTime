@@ -15,7 +15,9 @@
   	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/guide.css">
 </head>
 <body>
-      <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
+      <%
+      	String success = (String) request.getAttribute("success");
+      if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
 	  %><jsp:include page="utente/header-utente.jsp"/>
 	<% }else if ((Boolean)session.getAttribute("admin") !=null &&(Boolean)session.getAttribute("admin")) {
 	  %><jsp:include page="amministratore/header-amministratore.jsp"/>
@@ -24,6 +26,11 @@
    	}%>
 
    	<main class="assembly-guide">
+   	
+   		<%if(success!=null) {%>
+   		 	<div class= success-message> <%=success %> </div>
+   		<% }%>
+   	
 	  <section>
 	    <h1>Guida Completa all'Assemblaggio del Tuo PC: Dalla Scelta dei Componenti al Primo Avvio</h1>
 	    <p class="intro">Assemblare un PC su misura è un'esperienza gratificante che ti permette di creare una macchina perfettamente adatta alle tue esigenze. Il processo richiede un'attenta pianificazione, una selezione oculata dei componenti e un assemblaggio metodico. Questa guida ti accompagnerà in ogni fase del percorso.</p>

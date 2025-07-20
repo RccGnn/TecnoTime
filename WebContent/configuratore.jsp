@@ -12,15 +12,25 @@
     <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/configuratore.css">
 </head>
 <body>
-      <%if ((Boolean)session.getAttribute("user") !=null &&(Boolean)session.getAttribute("user")){
-	  %><jsp:include page="utente/header-utente.jsp"/>
-	<% }else if ((Boolean)session.getAttribute("admin") !=null &&(Boolean)session.getAttribute("admin")) {
-	  %><jsp:include page="amministratore/header-amministratore.jsp"/>
-	<% }else{ 
-	  %> <jsp:include page="header.jsp"/><%
-   	}%>
-    
-    <main>
+			<%
+			Boolean isUser = (Boolean) session.getAttribute("user");
+			Boolean isAdmin = (Boolean) session.getAttribute("admin");
+			
+			if (Boolean.TRUE.equals(isUser)) {
+			%>
+			<jsp:include page="utente/header-utente.jsp"  />
+			<%
+			} else if (Boolean.TRUE.equals(isAdmin)) {
+			%>
+			<jsp:include page="amministratore/header-amministratore.jsp" />
+			<%
+			} else {
+			%>
+			<jsp:include page="header.jsp" />
+			<%
+			}
+			%>
+<main>
     <div class="form-container">
       <h2>Inserire informazioni richieste per la configurazione</h2>
 
@@ -128,7 +138,14 @@
             </div>
         </fieldset>
 
-        <button type="submit" id="submitConfigBtn">Invia Configurazione</button>
+		<% Boolean admin = (Boolean) session.getAttribute("admin");
+			String avviso = "bottone disabilitato per admin";
+			if(admin!=null &&admin==true){%>
+					<button type="submit" id="submitConfigBtn" disabled>Invia Configurazione</button>
+					<div class="error-message"><%=avviso %></div>
+			<%} else{%>
+				<button type="submit" id="submitConfigBtn">Invia Configurazione</button>
+        	<%}%>
 
     </form>
     </div>

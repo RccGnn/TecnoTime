@@ -55,10 +55,11 @@ public class AuthenticatorFilter extends HttpFilter implements Filter {
 				Boolean user= (Boolean) session.getAttribute("user");
 				Boolean admin= (Boolean) session.getAttribute("admin");
 				System.out.println(admin);
+				System.out.println(user);
 				String path = req.getServletPath();
-				if (path.contains("/utente/")&& user==false){
+				if (path.contains("/utente/")&& user !=null && user==false){
 					res.sendRedirect("/LoginPage.jsp");		
-				}else if(path.contains("/amministratore/")&& admin==false) {
+				}else if(path.contains("/amministratore/")&& admin !=null && admin==false) {
 					res.sendRedirect("/LoginPage.jsp");
 				}
 		}	
