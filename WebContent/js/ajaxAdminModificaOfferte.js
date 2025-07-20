@@ -66,18 +66,39 @@ function loadAjaxDoc(url, method, params, cFuction) {
 	}
 }
 
+
+
 function displayOfferFields() {
 	// Leggi il campo offerta per ricavare il nome il nome
 	let offerSelector = document.getElementById("offerSelect");
 	if(!offerSelector) {
 		return;
 	}
+
 	const offerName = offerSelector.value;
+	if(offerName == "-- Seleziona --") {
+		clearAllFields();
+		return;
+	}
 	
 	const url = "RetrieveOrder";
 	let params = "offername=" + encodeURIComponent(offerName);
 	
 	loadAjaxDoc(url, "GET", params, handleDisplayFields);
+}
+
+
+function clearAllFields() {
+	// Elimina i campi in display
+	let nome = document.getElementById("nome");
+	nome.value = "";
+
+	let descrizione = document.getElementById("descrizione");
+	descrizione.innerHTML = "";
+
+	let sconto = document.getElementById("sconto");
+	sconto.value = "";
+	
 }
 
 function handleDisplayFields(xhr) {
@@ -92,8 +113,7 @@ function handleDisplayFields(xhr) {
 	descrizione.innerHTML = response.descrizione;
 	
 	let sconto = document.getElementById("sconto");
-	sconto.value = response.percentualeSconto;
-			
+	sconto.value = response.percentualeSconto;	
 }
 
 

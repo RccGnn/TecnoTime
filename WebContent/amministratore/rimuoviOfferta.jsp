@@ -29,7 +29,7 @@
 	<main>
 		<div class="form-container">
 			<h2>RIMUOVI OFFERTA</h2>
-			<form id="removeOfferForm" method="POST" action="<%=request.getContextPath()%>/AdminEliminaOfferta">
+			<form id="removeOfferForm" method="POST" action="<%=request.getContextPath()%>/AdminEliminaOfferte">
 
 				<%
 				if (retrive != null) {
@@ -56,12 +56,12 @@
 				<%
 				if (success != null) {
 				%>
-				<div>
+				<div class="success-message">
 					<%=success%></div>
 				<%
 				} else if (error != null) {
 				%>
-				<div>
+				<div class="error-message">
 					<%=error%></div>
 				<%
 				}

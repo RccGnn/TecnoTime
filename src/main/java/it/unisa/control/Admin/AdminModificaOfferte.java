@@ -64,23 +64,27 @@ public class AdminModificaOfferte extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String nome=request.getParameter("nomesconto");
-		System.out.println(nome);
+		String nome = request.getParameter("nome");
+		String descrizione = request.getParameter("descrizione");
+		Double prezzo = Double.parseDouble(request.getParameter("sconto"));
+		
+		
 		PromozioneDao dao = new PromozioneDao();
-		boolean result=false;
+		boolean result = false;
 		try {
-			result=dao.doDelete(nome);
+			result = dao.doUpdate(nome, descrizione, prezzo);
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
 		if(result)
-			request.setAttribute("eliminazioneSuccess","Offerta  " + nome+ " eliminata dal DB con successo");
+			request.setAttribute("modifySuccess", "Offerta " + nome+ " modifica con successo!");
 		else
-			request.setAttribute("EliminazioneError", "errore generico.Impossibile rimuovere l'offerta"+ nome + ". Riprova più tardi");
+			request.setAttribute("modifyError", " [ERRORE]: Impossibile modificare l'offerta "+ nome + ". Riprova più tardi.");
 		
-		RequestDispatcher disp = request.getRequestDispatcher("amministratore/modificaOfferta.jsp");
-		disp.forward(request, response);
+		doGet(request, response);
+		//RequestDispatcher disp = request.getRequestDispatcher("amministratore/modificaOfferta.jsp");
+		//disp.forward(request, response);
 	}
 
 }

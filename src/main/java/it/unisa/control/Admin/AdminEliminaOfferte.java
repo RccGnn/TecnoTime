@@ -76,12 +76,13 @@ public class AdminEliminaOfferte extends HttpServlet {
 		}
 		
 		if(result)
-			request.setAttribute("eliminazioneSuccess","Offerta  " + nome+ " eliminata dal DB con successo");
+			request.setAttribute("eliminazioneSuccess", "Offerta " +nome+ " eliminata dal DB con successo!");
 		else
-			request.setAttribute("EliminazioneError", "errore generico.Impossibile rimuovere l'offerta"+ nome + ". Riprova più tardi");
+			request.setAttribute("eliminazioneError", " [ERRORE]: Impossibile rimuovere l'offerta "+ nome + ". Riprova più tardi.");
 		
-		RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
-		disp.forward(request, response);
+		doGet(request, response);
+		//RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
+		//disp.forward(request, response);
 	}
 
 }

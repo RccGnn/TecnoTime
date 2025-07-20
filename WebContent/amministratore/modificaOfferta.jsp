@@ -9,8 +9,8 @@ java.util.Calendar cal = java.util.Calendar.getInstance();
 int currentYear = cal.get(java.util.Calendar.YEAR);
 
 String retrive = (String) request.getAttribute("errorRetrive");
-String success = (String) request.getAttribute("eliminazioneSuccess");
-String error = (String) request.getAttribute("eliminazioneError");
+String success = (String) request.getAttribute("modifySuccess");
+String error = (String) request.getAttribute("modifyError");
 ArrayList<PromozioneBean> lista = (ArrayList<PromozioneBean>) request.getAttribute("lista");
 %>
 
@@ -30,9 +30,9 @@ ArrayList<PromozioneBean> lista = (ArrayList<PromozioneBean>) request.getAttribu
 
 	<main>
 		<div class="form-container">
-			<h2>RIMUOVI OFFERTA</h2>
+			<h2>MODIFICA OFFERTA</h2>
 			<form id="removeOfferForm" method="POST"
-				action="<%=request.getContextPath()%>/AdminEliminaOfferta">
+				action="<%=request.getContextPath()%>/AdminModificaOfferte">
 
 				<%
 				if (retrive != null) {
@@ -62,35 +62,35 @@ ArrayList<PromozioneBean> lista = (ArrayList<PromozioneBean>) request.getAttribu
 					<legend>Seleziona campi da modificare</legend>
 					<div class="input-with-icon">
 						<label for="offerProduct">Nome sconto: </label>
-						<input type="text" name="offerProduct" id="nome" required>						
+						<input type="text" name="nome" id="nome" disabled="true" required>						
 						
 						
 						<label for="offerDescription">Descrizione dell'offerta:</label>
-						<textarea name="offerDescription" id="descrizione" rows="4" required>
+						<textarea name="descrizione" id="descrizione" rows="4" required>
 						</textarea>
 						
 						<label for="offerPercent">Percentuale di sconto applicata:</label>
-						<input type="number" step="0.01" min="1" name="offerProduct" id="sconto" required>						
+						<input type="number" step="0.01" min="1" max="99" name="sconto" id="sconto" required>						
 					</div>
 				</fieldset>
 
-				<%
+								<%
 				if (success != null) {
 				%>
-				<div>
+				<div class="success-message">
 					<%=success%></div>
 				<%
 				} else if (error != null) {
 				%>
-				<div>
+				<div class="error-message">
 					<%=error%></div>
 				<%
 				}
 				%>
-
+				
 				<button type="submit">Rimuovi Offerta</button>
 
-				<a href="amministratore/modifiche-offerte.jsp">
+				<a href="AdminModificaOfferte">
 					<button type="button">Torna a Modifiche Offerte</button>
 				</a>
 

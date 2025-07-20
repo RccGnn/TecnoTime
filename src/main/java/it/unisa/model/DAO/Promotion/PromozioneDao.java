@@ -56,6 +56,44 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 		
 	}
 
+	public synchronized boolean doUpdate(String nome, String descrizione, double sconto) throws SQLException {
+		
+		Connection connection = null;
+		PreparedStatement ps = null;
+		
+		String insertSQL = "UPDATE "+ PromozioneDao.TABLE_NAME
+				+ " SET nomesconto = ?, descrizione = ?, percentualeSconto = ? "
+				+ " WHERE nomesconto = ?";
+		
+		int result = 0;
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			
+			ps = connection.prepareStatement(insertSQL);	
+
+			
+			ps.setString(1, nome);
+			ps.setString(2, descrizione);
+		    ps.setDouble(3, sconto);
+			ps.setString(4, nome);
+		    result = ps.executeUpdate();
+
+		} finally {
+			
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		
+		if(result == 0)
+			return false;
+		return true;
+	}
+
 	@Override
 	public synchronized PromozioneBean doRetrieveByKey(String key) throws SQLException {
 		Connection connection = null;
