@@ -28,9 +28,6 @@
 	href="<%= request.getContextPath() %>/styles/articoli.css">
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/styles/articolo-single.css">
-<link rel="stylesheet"
-	href="<%= request.getContextPath() %>/styles/login_registrazione.css">
-</head>
 <body>
 	<jsp:include page="header-amministratore.jsp" />
 

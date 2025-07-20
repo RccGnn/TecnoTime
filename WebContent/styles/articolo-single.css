@@ -233,6 +233,19 @@ body {
 	flex-direction: column;
 	padding: 1 em;
 }
+
+.error-message {
+	color: red;
+	margin-top: 1rem;
+	text-align: center;
+}
+
+.success-message {
+	color: green;
+	margin-top: 1rem;
+	text-align: center;
+}
+
 /* =================================================================== */
 /* STILI RESPONSIVE                                                    */
 /* =================================================================== */
