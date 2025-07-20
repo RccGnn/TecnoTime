@@ -33,13 +33,13 @@
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="<%= request.getContextPath()%>/AdminEliminaOfferta">
+	        <a href="<%= request.getContextPath()%>/AdminEliminaOfferte">
 	          <img src="<%= request.getContextPath() %>/images/offerte.png" alt="REMOVESALE">
 	          <h3>RIMUOVI OFFERTA</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="modificaOfferta.jsp">
+	        <a href="<%= request.getContextPath()%>/AdminModificaOfferte">
 	          <img src="<%= request.getContextPath() %>/images/offerte.png" alt="MODIFYSALE">
 	          <h3>MODIFICA OFFERTA</h3>
 	        </a>

@@ -65,9 +65,9 @@ public class ProductFilter extends HttpServlet {
         	} else {
         		
         		length = dao.countQueries(); // conta il numero delle query
-        		numeroPagine = (int) Math.ceil(length / ProductFilter.articlesPerPage); // numero di pagine
-        		int modulo = (int)length / 2;
-        		catalogo = dao.doRetrieveAllLimit(sort, (int) numeroPagine, (int) page);
+        		numeroPagine = (int) Math.ceil((double) length / (double) ProductFilter.articlesPerPage); // numero di pagine
+        		int modulo = (int) Math.ceil(((double) length / (double) 2));
+            	catalogo = dao.doRetrieveAllLimit(sort, (int) numeroPagine, (int) page);        			
         		
 		        // Filtra per il contesto
 		        Filters.contexFilter(catalogo, contesto);
@@ -101,14 +101,15 @@ public class ProductFilter extends HttpServlet {
 		        	limit = limit % modulo;
 		        }
 		        
-		        numeroPagine = (int) Math.ceil(catalogo.size() / ProductFilter.articlesPerPage); // numero di pagine
+		        numeroPagine = (int) Math.ceil((double)catalogo.size() / (double)ProductFilter.articlesPerPage); // numero di pagine
+		        System.out.println("Lunghezza: " + length + "\numeroPagine: "+numeroPagine + "\nPagina: " + page + "\noffset: " + offset + "\nLimit: "+ limit +"\nSize: "+ catalogo.size());
+		        
 		        catalogo = Filters.pageFilter(catalogo, offset % modulo, limit % modulo);
 		        
 	        }
         	
         	
-        	System.out.println("Lunghezza: " + length + "\numeroPagine: "+numeroPagine + "\nPagina: " + page + "\noffset: " + offset + "\nLimit: "+ limit +"\nSize: "+ catalogo.size());
-	        catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
+        	catalogo = DaoUtils.dropboxImagesDecoderUrl(catalogo);
 	        ArrayList<PromozioneCompletaBean> promozioni = promDao.doRetrieveByKeyProducts("");
 	        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 	        ArrayList<Object> res = new ArrayList<>();

@@ -76,6 +76,7 @@ public class PromozioneCompletaDao extends PromozioneDao{
 	}
 
 
+	
 	/**
 	 * Restituisce tutte le promozioni che riguardano Articoli.
 	 * @param key

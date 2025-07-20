@@ -14,16 +14,16 @@ import it.unisa.model.DAO.Promotion.PromozioneDao;
 import it.unisa.model.beans.PromozioneBean;
 
 /**
- * Servlet implementation class AdminEliminaOfferta
+ * Servlet implementation class AdminEliminaOfferte
  */
-@WebServlet("/AdminEliminaOfferta")
-public class AdminEliminaOfferta extends HttpServlet {
+@WebServlet("/AdminEliminaOfferte")
+public class AdminEliminaOfferte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminEliminaOfferta() {
+    public AdminEliminaOfferte() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -50,6 +50,8 @@ public class AdminEliminaOfferta extends HttpServlet {
 		for (PromozioneBean promso : lista) {
 			System.out.println(promso);
 		}
+		
+		
 		request.setAttribute("lista", lista);
 		RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
 		disp.forward(request, response);

@@ -552,17 +552,20 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 
 		// Conta quante query ci sono nel database
 		int numeroQuery = countQueries();
-		int numeroPagine = (int) Math.ceil(numeroQuery / pageSize); // Restituisce il numero di pagine
+		int numeroPagine = (int) Math.ceil((double)numeroQuery / (double)pageSize); // Restituisce il numero di pagine
 		
 		System.out.println("Numero Pagine: " + numeroPagine + "\nNumeroQUery:" + numeroQuery);
-		if (numeroQuery <= pageSize) {
+		if (numeroQuery <= pageSize || numeroQuery < 100) {
 			// Non fare niente in quanto tutti i prodotti sono contenuti in un unica pagina
-		}
-		if (numeroQuery > pageSize && currentPage <= numeroPagine / 2) { // Mi trovo nella prima metà delle pagine
-			selectSQL += " LIMIT " + numeroQuery/2 + ";";
-		}
-		if (numeroQuery > pageSize && currentPage > numeroPagine / 2) { // Mi trovo nella seconda metà delle pagine
-			selectSQL += " LIMIT " + numeroQuery/2 + " OFFSET " + (int) Math.floor(numeroQuery/2) + ";";
+			// oppure sono pochi
+		} else {
+			// Altrimenti prendi solo una parte dei prodotti
+			if (numeroQuery > pageSize && currentPage <= numeroPagine / 2) { // Mi trovo nella prima metà delle pagine
+				selectSQL += " LIMIT " + numeroQuery/2 + ";";
+			}
+			if (numeroQuery > pageSize && currentPage > numeroPagine / 2) { // Mi trovo nella seconda metà delle pagine
+				selectSQL += " LIMIT " + numeroQuery/2 + " OFFSET " + (int) Math.floor(numeroQuery/2) + ";";
+			}			
 		}
 		
 		System.out.println("QUery: "+selectSQL); 

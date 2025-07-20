@@ -74,8 +74,9 @@ public class PromozioneDao implements BeanDaoInterface<PromozioneBean> {
 
 			if (rs.next()) {
 				promozione.setIDPromozione(rs.getInt("IDPromozione"));
+				promozione.setNomesconto(rs.getString("nomesconto"));
 				promozione.setDataInizio(rs.getDate("dataInizio"));
-				promozione.setDescrizione(rs.getString("descrizione"));;
+				promozione.setDescrizione(rs.getString("descrizione"));
 				promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
 			} else {
 				promozione = null;
