@@ -147,13 +147,13 @@ INSERT INTO Immagine (url, codiceIdentificativo) VALUES
 ( "https://www.dropbox.com/scl/fi/ctn11umzadaepmq2t540z/intel-nvidia.png?rlkey=41n5h5oxqi0aodn14nt7rvfwz&st=ufp511pl&dl=0", "ART854"),
 ( "https://www.dropbox.com/scl/fi/jczhjjkgymotl5x0qbivj/AMD-RYZEN.png?rlkey=ljycvl2merng9lhxi33vq8lr7&st=340q959b&dl=0", "ART855"),
 ( "https://www.dropbox.com/scl/fi/daesa10kb8b09ukqg6mwk/intel-amd.png?rlkey=nys62m0m1dtuu6rs4r18p0bit&st=kl7oc85y&dl=0", "ART856"),
-( "https://www.dropbox.com/scl/fi/k1r1cdg0ccw8qx0pvqbnx/eclipse.png?rlkey=tl2z5e4pxm6ejuajcihx5u2y2&st=g4gnf5ft&dl=0", "ART857");
+( "https://www.dropbox.com/scl/fi/k1r1cdg0ccw8qx0pvqbnx/eclipse.png?rlkey=tl2z5e4pxm6ejuajcihx5u2y2&st=g4gnf5ft&dl=0", "ART857"),
 ("https://www.dropbox.com/scl/fi/m1m85ffz5g0r27eerhir6/AF120ventole.jpg?rlkey=kihrsokb35hclhdh1iiz26sav&st=6hmonrop&dl=0", "ART860"),
 ("https://www.dropbox.com/scl/fi/9ypn1uapembunec16uhwy/ML120_Pro_RGB.png?rlkey=20y616y3mff7940vwkjodol71&st=drhrm9lb&dl=0", "ART861"),
 ("https://www.dropbox.com/scl/fi/hxsw71nq4ybm2t1jd9d5j/VentolaCorsairQL120RGBQuad.jpg?rlkey=7jpmt4v12k9q5rsmmglswvvj0&st=1hv868xg&dl=0", "ART862"),
 ("https://www.dropbox.com/scl/fi/lxh2iqnppuih36e609io9/Ventola-Cooler-Master-JetFlo-120.jpg?rlkey=u3it5p89rb0totcoparm9revs&st=ubdwtl8c&dl=0", "ART864"),
 ("https://www.dropbox.com/scl/fi/8bdvaemw47f386df8jzhe/Ventola-Cooler-Master-MF120R-ARGB.jpg?rlkey=ptybacacvitcybc999mfxwgxr&st=pw6l35oh&dl=0", "ART863"),
-("https://www.dropbox.com/scl/fi/vfj80fch8bhg4pztr3ors/Ventola-Lian-Li-UNI-FAN-SL120-RGB.jpg?rlkey=mklgvkl0mkeehq7kyhhemqh65&st=vv86omgc&dl=0", "ART866"),
+("https://www.dropbox.com/scl/fi/vfj80fch8bhg4pztr3ors/Ventola-Lian-Li-UNI-FAN-SL120-RGB.jpg?rlkey=mklgvkl0mkeehq7kyhhemqh65&st=vv86omgc&dl=0", "ART866");
 
 
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
