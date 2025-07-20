@@ -59,7 +59,7 @@
 			    <img src="<%= request.getContextPath() %>/images/case.svg" alt="" class="input-icon">
 			    </span>
                 <input list="caseList" id="caseInput" name="_case"
-                       placeholder="	Es: NZXT H7 Flow" maxlength="100" required>
+                       placeholder="	Es: NZXT H7 Flow" maxlength="100" required disabled>
                        <datalist id="caseList">
 							<c:forEach var="casePc" items="${_case}">
 								<option value="${casePc.nome} -   € ${casePc.pdFisico.prezzo}"> ${casePc.nome} </option>
@@ -73,7 +73,7 @@
 			    <img src="<%= request.getContextPath() %>/images/cpu.svg" alt="" class="input-icon">
 			    </span>
                 <input list="processoriList" id="processorInput" name="processor"
-                       placeholder=" 	Es: Intel Core i9-13900K" maxlength="100" required>
+                       placeholder=" 	Es: Intel Core i9-13900K" maxlength="100" required disabled>
 						<datalist id="processoriList">
 							<c:forEach var="cpu" items="${processori}">
 								<option value="${cpu.nome} -   € ${cpu.pdFisico.prezzo}"> ${cpu.nome} </option>
@@ -87,7 +87,7 @@
 			    <img src="<%= request.getContextPath() %>/images/mobo.svg" alt="" class="input-icon">
 			    </span>
                 <input list="motherboardList" id="motherboardInput" name="motherboard"
-                       placeholder="	Es: ASUS ROG MAXIMUS Z790 HERO" maxlength="100" required>
+                       placeholder="	Es: ASUS ROG MAXIMUS Z790 HERO" maxlength="100" required >
                        <datalist id="motherboardList">
 							<c:forEach var="mobo" items="${schedeMadri}">
 								<option value="${mobo.nome} -   € ${mobo.pdFisico.prezzo}"> ${mobo.nome} </option>
@@ -101,8 +101,8 @@
 			    <img src="<%= request.getContextPath() %>/images/ram.svg" alt="" class="input-icon">
 			    </span>
                 <input list="ramList" id="ramInput" name="ram"
-                       placeholder="	Es: Corsair Vengeance DDR5 32GB (2x16GB)" maxlength="100" required>
-                       <datalist id="ramList">
+                       placeholder="	Es: Corsair Vengeance DDR5 32GB (2x16GB)" maxlength="100" required disabled>
+                       <datalist id="ramList" >
 							<c:forEach var="ram" items="${ram}">
 								<option value="${ram.nome} -   € ${ram.pdFisico.prezzo}"> ${ram.nome} </option>
 							</c:forEach>
@@ -115,7 +115,7 @@
 			    <img src="<%= request.getContextPath() %>/images/gpu.svg" alt="" class="input-icon">
 			    </span>
                 <input list="gpuList" id="gpuInput" name="gpu"
-                       placeholder="	Es: NVIDIA GeForce RTX 4090" maxlength="100" required>
+                       placeholder="	Es: NVIDIA GeForce RTX 4090" maxlength="100" required disabled>
                        <datalist id="gpuList">
 							<c:forEach var="gpu" items="${schedeVideo}">
 								<option value="${gpu.nome} -   € ${gpu.pdFisico.prezzo}"> ${gpu.nome} </option>
@@ -129,7 +129,7 @@
 			    <img src="<%= request.getContextPath() %>/images/storage.svg" alt="" class="input-icon">
 			    </span>
                 <input list="storageList" id="storageInput" name="storage"
-                       placeholder="	Es: Samsung 990 Pro 2TB NVMe SSD" maxlength="100" required>
+                       placeholder="	Es: Samsung 990 Pro 2TB NVMe SSD" maxlength="100" required disabled>
                         <datalist id="storageList">
 							<c:forEach var="storage" items="${archiviazione}">
 								<option value="${storage.nome} -   € ${storage.pdFisico.prezzo}"> ${storage.nome} </option>
@@ -143,7 +143,7 @@
 			    <img src="<%= request.getContextPath() %>/images/psu.svg" alt="" class="input-icon">
 			    </span>
                 <input list="psuList" id="psuInput" name="psu"
-                       placeholder="	Es: Corsair RM1000e" maxlength="100" required>
+                       placeholder="	Es: Corsair RM1000e" maxlength="100" required disabled>
                         <datalist id="psuList">
 							<c:forEach var="psu" items="${alimentatori}">
 								<option value="${psu.nome} -   € ${psu.pdFisico.prezzo}"> ${psu.nome} </option>
@@ -157,7 +157,7 @@
 			    <img src="<%= request.getContextPath() %>/images/fan.svg" alt="" class="input-icon">
 			    </span>
                 <input list="fanList" id="fansInput" name="fans"
-                       placeholder="	Es: Noctua NF-A12x25 PWM (3x)" maxlength="100">
+                       placeholder="	Es: Noctua NF-A12x25 PWM (3x)" maxlength="100" disabled>
                         <datalist id="fanList">
 							<c:forEach var="fan" items="${ventole}">
 								<option value="${fan.nome} -   € ${fan.pdFisico.prezzo}"> ${fan.nome} </option>
