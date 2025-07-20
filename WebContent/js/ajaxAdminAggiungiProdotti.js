@@ -112,7 +112,7 @@ function modifyForm() {
 		appendLabelText("marca", "Marca: ", displayElements);
 		appendLabelText("socket", "Nome socket: ", displayElements);
 		appendLabelDate("dataRilascio", "Data di rilascio: ", displayElements);
-		appendLabelNumber("Watt", "Wattaggio: ", displayElements, 1);
+		appendLabelNumber("watt", "Wattaggio: ", displayElements, 1);
 	}
 	// Scheda madre
 	if (tipologia == "scheda_madre") {

@@ -1,5 +1,6 @@
 package it.unisa.control.Admin;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -70,20 +71,26 @@ public class AdminAggiungiProdotto extends HttpServlet {
 		String tipologia = (String) request.getParameter("tipologia");
 		Date date = Date.valueOf(LocalDate.now());
 		
+		
+		
 		if (tipologia.equals("processore")) {
 			String nomecompletocpu = (String) request.getParameter("nomecompleto");
 			String marcacpu = (String) request.getParameter("marca");
-			String socketcpu = (String) request.getParameter("datarilascio");	
+			String socketcpu = (String) request.getParameter("socket");	
 			String wattcpu = request.getParameter("watt");
 			String seriale  = (String) request.getParameter("seriale");
 			String prezzopf =  request.getParameter("prezzo");
 			String descrizionepf = (String) request.getParameter("descrizione");
-			String quantitaMagazzino= request.getParameter("quantitaMagazzino");
+			String quantitaMagazzino= request.getParameter("quantita");
 			String url = (String) request.getParameter("url");
+			String datarilascio = request.getParameter("dataRilascio");
+			System.out.println(datarilascio);
+			
+			java.sql.Date dataSql = java.sql.Date.valueOf(datarilascio);
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pf.setArticolo_codiceIdentificativo(ci);
 			pf.setCategoria(tipologia);
 			pf.setCodiceIdentificativo(ci);
@@ -109,7 +116,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 				art.setImmagini(img);
 			}
 			
-			Processore cpu = new Processore(nomecompletocpu, marcacpu, socketcpu, date, Integer.parseInt(wattcpu));
+			Processore cpu = new Processore(nomecompletocpu, marcacpu, socketcpu, dataSql, Integer.parseInt(wattcpu));
 			ProcessoreDao cpuDao = new ProcessoreDao();
 			try {
 				if(url!=null) {
@@ -138,7 +145,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pf.setArticolo_codiceIdentificativo(ci);
 			pf.setCategoria(tipologia);
 			pf.setCodiceIdentificativo(ci);
@@ -192,7 +199,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pf.setArticolo_codiceIdentificativo(ci);
 			pf.setCategoria(tipologia);
 			pf.setCodiceIdentificativo(ci);
@@ -246,7 +253,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pf.setArticolo_codiceIdentificativo(ci);
 			pf.setCategoria(tipologia);
 			pf.setCodiceIdentificativo(ci);
@@ -300,7 +307,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pf.setArticolo_codiceIdentificativo(ci);
 			pf.setCategoria(tipologia);
 			pf.setCodiceIdentificativo(ci);
@@ -355,7 +362,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			ProdottoFisicoBean pf = new ProdottoFisicoBean();
 			ProdottoFisicoDao pfDao = new ProdottoFisicoDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pf.setArticolo_codiceIdentificativo(ci);
 			pf.setCategoria(tipologia);
 			pf.setCodiceIdentificativo(ci);
@@ -406,7 +413,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			
 			ProdottoDigitaleBean pd = new ProdottoDigitaleBean();
 			ProdottoDigitaleDao pdDao = new ProdottoDigitaleDao();
-			String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			pd.setArticolo_codiceIdentificativo(ci);
 			pd.setCategoria(tipologia);
 			pd.setCodiceIdentificativo(ci);
@@ -452,7 +459,7 @@ public class AdminAggiungiProdotto extends HttpServlet {
 			 ServizioBean servizio = new ServizioBean();
 			 ServizioDao servDao = new ServizioDao();
 			 
-			 String ci="ART"+UUID.randomUUID().toString().substring(0,20);
+			 String ci="ART"+UUID.randomUUID().toString().substring(0,10);
 			 servizio.setArticolo_codiceIdentificativo(ci);
 			 servizio.setCategoria(tipologia);
 			 servizio.setCodiceIdentificativo(ci);
@@ -487,6 +494,13 @@ public class AdminAggiungiProdotto extends HttpServlet {
 				}
 		}
 
+		
+		if(tipologia!=null) {
+			request.setAttribute("success", "articolo aggiunto con successo");
+		}
+		RequestDispatcher disp = request.getRequestDispatcher("amministratore/aggiungiProdotto.jsp");
+		disp.forward(request, response);
+	
 		/*	//processori
 		nomecompleto, marca, socket, datarilascio, Watt
 		

@@ -16,6 +16,10 @@
 </head>
 <body>
 
+
+<% 
+	String success = (String) request.getAttribute("success");
+%>
 	<jsp:include page="header-amministratore.jsp" />
 
 	<main>
@@ -58,6 +62,10 @@
 			</div>
 
 			<button type="submit" id="productsingle-add-btn">Aggiungi Prodotto</button>
+			
+			<%if(success!=null){ %>
+				<div><%= success %></div>
+			<%} %>
 		</form>
 	</main>
 
