@@ -103,7 +103,7 @@ select#offerSelect {
     width: 500px;
 }
 
-.input-with-icon input[type="text"] {
+.input-with-icon input[list]  {
 	padding-left: 2.75rem;
 }
 
