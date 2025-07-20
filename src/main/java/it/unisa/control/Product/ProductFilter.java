@@ -73,20 +73,20 @@ public class ProductFilter extends HttpServlet {
 		        Filters.contexFilter(catalogo, contesto);
         		System.out.println(catalogo.size());		        
 
-		        // Filtra per il prezzo
-		        Filters.priceFilter(catalogo, min, max);
+        		// Filtra per marca
+		        if (brand != null)
+		        	Filters.brandFilter(catalogo, brand);
 		        
 		        // Filtra facendo un match sul nome
 		        if (nome != null)
 		        	Filters.nameFilter(catalogo, nome);
 		    
+		        // Filtra per il prezzo
+		        Filters.priceFilter(catalogo, min, max);
+		        
 		        // Filtra per la categoria
 		        if (categoria != null)
 		        	Filters.categoryFilter(catalogo, categoria);
-		        
-		        // Filtra per marca
-		        if (brand != null)
-		        	Filters.nameFilter(catalogo, brand);
 		        
 		        // Se si tratta di un servizio, filtra per durata del servizio
 		        // - Di norma questo filtro non dovrebbe sortire effetto se il contesto != "articoliServizi.jsp"

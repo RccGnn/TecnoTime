@@ -73,7 +73,7 @@ function search() {
 	const url = context+"/ProductFilter";
 	let params = "name=" + encodeURIComponent(input) + "&fromSearchBar=" + encodeURIComponent(search);
 	
-	if (input == null || input.trim() == "")
+	if (input == null || input.match(/^ *$/) != null)
 		hideSearchBar();
 	else
 		loadAjaxDoc(url, "GET", params, handleDisplaySearch);  

@@ -30,58 +30,58 @@
 	    <h2>Categorie in Offerta</h2>
 	    <div class="category-grid-offerte">
 	      <div class="category-box-offerte">
-	        <a href="offerteProcessori.jsp">
+	        <a href="DisplaySubMenu1?sub=Processore&offerta=true">
 	          <img src="images/cpu.svg" alt="Processori">
 	          <h3>Processori</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="offerteSchedeVideo.jsp">
+	        <a href="DisplaySubMenu1?sub=Scheda_Video&offerta=true">
 	          <img src="images/gpu.svg" alt="Schede Video">
 	          <h3>Schede Video</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="offerteRam.jsp">
+	        <a href="DisplaySubMenu1?sub=RAM&offerta=true">
 	          <img src="images/ram.svg" alt="RAM">
 	          <h3>Memorie</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="offerteSchedeMadri.jsp">
+	        <a href="DisplaySubMenu1?sub=Schede_Madri&offerta=true">
 	          <img src="images/mobo.svg" alt="Schede Madri">
 	          <h3>Schede Madri</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="offerteArchiviazione.jsp">
+	        <a href="DisplaySubMenu1?sub=Memoria_Archiviazione&offerta=true">
 	          <img src="images/storage.svg" alt="Archiviazione">
 	          <h3>Archiviazione</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="offerteAlimentatori.jsp">
+	        <a href="DisplaySubMenu1?sub=alimentatore&offerta=true">
 	          <img src="images/psu.svg" alt="Alimentatori">
 	          <h3>Alimentatori</h3>
 	        </a>
 	      </div>
 	      
 	      <div class="category-box-offerte">
-	        <a href="offerteVentole.jsp">
+	        <a href="DisplaySubMenu1?sub=Accessori_altro&offerta=true">
 	          <img src="images/fan.svg" alt="Ventole">
 	          <h3>Ventole</h3>
 	        </a>
 	      </div>
 	      
 	      <div class="category-box-offerte">
-	        <a href="offerteDissipatori.jsp">
+	        <a href="DisplaySubMenu1?sub=Accessori_altro&offerta=true">
 	          <img src="images/cooler.svg" alt="Dissipatori">
 	          <h3>Dissipatori</h3>
 	        </a>
 	      </div>
 	      
 	      <div class="category-box-offerte">
-	        <a href="offerteCase.jsp">
+	        <a href="DisplaySubMenu1?sub=Case_PC&offerta=true">
 	          <img src="images/case.svg" alt="Case">
 	          <h3>Case</h3>
 	        </a>

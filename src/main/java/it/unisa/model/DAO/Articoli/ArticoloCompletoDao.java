@@ -454,7 +454,7 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 
 		name = name.toLowerCase().trim() + "%";
 		System.out.println(name);
-		String selectSQL = 	"SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE LOWER(nome) LIKE '" + name + "' LIMIT 6"; 
+		String selectSQL = 	"SELECT * FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE LOWER(nome) LIKE '%" + name + "%' LIMIT 6"; 
 
 		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(ArticoloCompletoDao.whitelist, order)) {
 			selectSQL += " ORDER BY " + order;

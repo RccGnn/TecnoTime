@@ -46,7 +46,7 @@
                  value="${param.nome != null ? param.nome : ''}">
         </div>
         <div class="filter-group">
-        	<label for="max">Categoria :</label>
+        	<label for="categoria">Categoria :</label>
         	<% if(request.getAttribute("subField") != null) {%>
         	<input readonly onchange="sortedProducts()" type="text" id="categoria" name="categoria"
                  value="<%=request.getAttribute("subField")%>">
