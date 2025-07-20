@@ -33,7 +33,7 @@
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
-	        <a href="rimuoviProdotto.jsp">
+	        <a href="<%= request.getContextPath()%>/AdminEliminaProdotto?Admin=">
 	          <img src="<%= request.getContextPath() %>/images/product.png" alt="REMOVEPRODUCT">
 	          <h3>RIMUOVI PRODOTTO</h3>
 	        </a>

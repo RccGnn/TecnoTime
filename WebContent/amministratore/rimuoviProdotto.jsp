@@ -1,57 +1,54 @@
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="it.unisa.model.beans.ArticoloCompletoBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@  %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-
-<%
-    // Ottieni anno corrente
-    java.util.Calendar cal = java.util.Calendar.getInstance();
-    int currentYear = cal.get(java.util.Calendar.YEAR);
-    
-    String retrive = (String) request.getAttribute("errorRetrive");
-    String success = (String) request.getAttribute("eliminazioneSuccess");
-    String error = (String) request.getAttribute("eliminazioneError");    
-    ArrayList<ArticoloCompletoBean> lista = (ArrayList<PromozioneBean>) request.getAttribute("lista");
-  %>
-
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/styles/login_registrazione.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/styles/configuratore.css">
+	href="<%= request.getContextPath() %>/styles/login_registrazione.css">
 <title>TecnoTime Admin - E-commerce</title>
 </head>
 <body>
 	<jsp:include page="header-amministratore.jsp" />
 
+	<main class="form-container">
+		<form action="AdminEliminaProdotto" method="post">
+			<h2>Rimuovi un prodotto</h2>
 
+			<c:if test="${not empty errorRetrive}">
+				<div class="error-message">${errorRetrive}</div>
+			</c:if>
+			<c:if test="${not empty eliminazioneSuccess}">
+				<div class="success-message">${eliminazioneSuccess}</div>
+			</c:if>
+			<c:if test="${not empty eliminazioneError}">
+				<div class="error-message">${eliminazioneError}</div>
+			</c:if>
 
-	<form class="form-container" action="AdmimEliminaProdotto"
-		method="post">
-		<h2>Rimuovi un prodotto</h2>
-
-		<div>
 			<div class="form-group">
-				<label for="Cerca un prodotto per eliminarlo "></label>
+				<input type="text" list="articoli" name="codiceIdentificativo"
+					class="search-bar" placeholder="Inserisci nome prodotto..." />
+				<datalist id="articoli">
+					<c:forEach items="${listaArticoli}" var="articolo">
+						<option value="${articolo.codiceIdentificativo}">${articolo.nome}</option>
+					</c:forEach>
+				</datalist>
 			</div>
-			<input type="text"
-				class="search-bar" id="search-bar" name="nomeProdotto"
-				autocomplete="off" placeholder="Cerca prodotto..."
-				oninput="search()">
-			<div id="search-results" class="search-results-dropdown"></div>
-		</div>
 
-		<button type="submit" class="remove-button">Rimuovi il
-			Prodotto selezionato</button>
-
-		<a href="amministratore/modifiche-offerte.jsp">
-			<button type="button">Torna a Modifiche Offerte</button>
-		</a>
-	</form>
+			<div class="button-row">
+				<button type="submit" class="remove-button">Rimuovi il
+					Prodotto selezionato</button>
+				<button type="button" class="remove-button"
+					onclick="location.href='amministratore/modifiche-offerte.jsp'">
+					Torna a Modifiche Offerte</button>
+			</div>
+		</form>
+	</main>
 
 	<jsp:include page="footer-amministratore.jsp" />
-	<script src="<%=request.getContextPath()%>/js/navbar.js" defer></script>
+	<script src="${pageContext.request.contextPath}/js/navbar.js" defer></script>
 </body>
 </html>
