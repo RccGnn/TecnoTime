@@ -50,7 +50,7 @@ body {
 	padding: 0 0.5rem;
 }
 
-.form-container input[type="text"] {
+.form-container input[list]  {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 10px;
