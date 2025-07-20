@@ -64,26 +64,83 @@ INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozion
   ('ART300', 'Webcam', 'Logitech C920', '2025-03-20', 'Logitech', TRUE),
   ('ART400', 'Mouse', 'Logitech MX Master 3S', '2025-04-10', 'Logitech', TRUE),
   ('ART500', 'Stampante', 'HP LaserJet Pro M404dn', '2025-02-25', 'HP', FALSE),
-  ('ART600', 'Cuffie', 'Sony WH-1000XM5', '2025-05-05', 'Sony', TRUE);
+  ('ART600', 'Cuffie', 'Sony WH-1000XM5', '2025-05-05', 'Sony', TRUE),
+  ('ART751', 'Servizio', 'AssemblaggioPC', '2025-05-05', 'reptecnotime', TRUE),
+  ('ART752', 'Servizio', 'Pulizia PC', '2025-05-05', 'reptecnotime', TRUE),
+  ('ART850', 'Prodotto_Fisico', 'Dragon Forge 5800X/RTX 4070', '2025-05-06', 'reptecnotime', TRUE),
+  ('ART851', 'Prodotto_Fisico', 'Titan Blitz 12700K/RTX 4080', '2025-05-07', 'reptecnotime', TRUE),
+  ('ART852', 'Prodotto_Fisico', 'Aurora Pulse 7600X/RX 7800 XT', '2025-05-08', 'reptecnotime', TRUE),
+  ('ART853', 'Prodotto_Fisico', 'Oblivion X3D 9950X3D/RTX 5090', '2025-05-09', 'reptecnotime', TRUE),
+  ('ART854', 'Prodotto_Fisico', 'Quantum Surge 14700K/RTX 5080', '2025-05-10', 'reptecnotime', TRUE),
+  ('ART855', 'Prodotto_Fisico', 'Nebula Storm 9800X3D/RX 9070 XT', '2025-05-11', 'reptecnotime', TRUE),
+  ('ART856', 'Prodotto_Fisico', 'Vortex Fury 13600K/RX 7900 XTX', '2025-05-12', 'reptecnotime', TRUE),
+  ('ART857', 'Prodotto_Fisico', 'Eclipse Infinity Ultra9/RTX 5090', '2025-05-13', 'reptecnotime', TRUE),
+  ('ART860', 'Prodotto_Fisico', 'Ventola Corsair AF120 RGB PWM', '2025-05-05', 'Corsair', TRUE),
+  ('ART861', 'Prodotto_Fisico', 'Ventola Corsair ML120 Pro RGB', '2025-05-05', 'Corsair', TRUE),
+  ('ART862', 'Prodotto_Fisico', 'Ventola Corsair QL120 RGB Quad', '2025-05-05', 'Corsair', TRUE),
+  ('ART863', 'Prodotto_Fisico', 'Ventola Cooler Master MF120R ARGB', '2025-05-05', 'Cooler Master', TRUE),
+  ('ART864', 'Prodotto_Fisico', 'Ventola Cooler Master JetFlo 120', '2025-05-05', 'Cooler Master', TRUE),
+  ('ART865', 'Prodotto_Fisico', 'Ventola Cooler Master Silencio FP120', '2025-05-05', 'Cooler Master', TRUE),
+  ('ART866', 'Prodotto_Fisico', 'Ventola Lian Li UNI FAN SL120 RGB', '2025-05-05', 'Lian Li', TRUE),
+  ('ART867', 'Prodotto_Fisico', 'Ventola Lian Li UNI FAN AL120', '2025-05-05', 'Lian Li', TRUE),
+  ('ART868', 'Prodotto_Fisico', 'Ventola Lian Li Bora Digital 120mm', '2025-05-05', 'Lian Li', TRUE),
+  ('ART869', 'Prodotto_Fisico', 'Ventola Lian Li Galahad AIO 120mm', '2025-05-05', 'Lian Li', TRUE),
+  ('ART858', 'Servizio', 'Abbonamento newsletter TecnoTime', '2025-05-05', 'reptecnotime', TRUE),
+  ('ART1000', 'Servizio', 'Ottimizzazione PC', '2025-05-05', 'reptecnotime', TRUE);
   
 -- Inserisco servizi legati agli articoli corrispondenti
 INSERT INTO Servizio (codiceServizio, prezzo, descrizione, durata, codiceIdentificativo) VALUES
-  ('SRV100', 49.99, 'Installazione monitor AOC', 2, 'ART100'),
-  ('SRV200', 19.99, 'Setup tastiera Keychron', 1, 'ART200'),
-  ('SRV300', 29.99, 'Installazione webcam Logitech', 1, 'ART300');
+  ('SRV100', 9.99, 'Abbonamento newsletter TecnoTime', 30, 'ART858'),
+  ('SRV200', 19.99, 'Ottimizzazione PC', 1, 'ART1000'),
+  ('SRV300', 29.99, 'Pulizia PC', 1, 'ART752'),
+  ('SRV400', 99.99, 'AssemblaggioPC', 1, 'ART751');
 
 -- Inserisco prodotti fisici basati sugli articoli
 INSERT INTO Prodotto_Fisico (seriale, prezzo, descrizione, isPreassemblato, quantitaMagazzino, codiceIdentificativo) VALUES
   ('PF100A', 299.99, 'Monitor AOC CQ27G2U QHD 165Hz', FALSE, 15, 'ART400'),
   ('PF200B', 89.50, 'Tastiera meccanica RGB Keychron K8 I/O', FALSE, 30, 'ART500'),
-  ('PF300C', 59.90, 'Webcam Logitech C920 Full HD', FALSE, 50, 'ART600');
-
+  ('PF300C', 59.90, 'Webcam Logitech C920 Full HD', FALSE, 50, 'ART600'),
+  -- 1build: Ryzen 7 5800X + RTX 4070
+  ('PF1PREA', 1899.99, 'Ryzen 7 5800X, ASUS TUF GAMING B550-PLUS, RTX 4070 12GB, Corsair RM750x 750W, Corsair iCUE H100i Elite LCD liquid cooler, 32GB DDR4-3600, Samsung 980 Pro 1TB NVMe, NZXT H510 case, 3x Corsair AF120 fans', TRUE, 5, 'ART850'),
+-- 2build: Intel i7-12700K + RTX 4080
+  ('PF2PREB', 2799.99, 'Intel i7-12700K, MSI MAG Z690 TORPEDO DDR5, RTX 4080 16GB, Seasonic Focus GX-850W, Noctua NH-D15 air cooler, 32GB DDR5-6000, WD Black SN850X 2TB NVMe, Fractal Meshify 2 case, 3x Noctua NF-A14 fans', TRUE, 5, 'ART851'),
+-- 3build: Ryzen 5 7600X + RX 7800 XT
+  ('PF3PREC', 1599.99, 'Ryzen 5 7600X, ASUS TUF GAMING B650M-PLUS, Radeon RX 7800 XT 16GB, Corsair RM750x 750W, MSI MAG CoreLiquid 240R, 32GB DDR5-6000, Crucial P5 Plus 1TB NVMe, Phanteks Eclipse P360A case, 3x Phanteks SK120 fans', TRUE, 5, 'ART852'),
+-- 4build: Ryzen 9 9950X3D + RTX 5090
+  ('PF4PRED', 4999.99, 'Ryzen 9 9950X3D, MSI MEG X670E GODLIKE, RTX 5090 32GB GDDR7, Corsair AX1000W, Corsair iCUE H150i ELITE LCD, 128GB DDR5-6800, Samsung 990 Pro 4TB NVMe, Lian Li O11 Dynamic XL case, 5x Corsair QL120 fans', TRUE, 2, 'ART853'),
+-- 5build: Intel i7-14700K + RTX 5080
+  ('PF5PREE', 3599.99, 'Intel i7-14700K, Gigabyte Z790 AORUS ELITE AX, RTX 5080 16GB GDDR7, Seasonic Focus GX-850W, be quiet! Dark Rock Pro 4, 64GB DDR5-6000, Crucial P5 Plus 2TB NVMe, NZXT H7 Flow case, 4x NZXT RF-FN142 fans', TRUE, 3, 'ART854'),
+-- 6build: Ryzen 7 9800X3D + RX 9070 XT
+  ('PF6PREF', 1899.99, 'Ryzen 7 9800X3D, ASUS ROG STRIX X670E-F, Radeon RX 9070 XT, Corsair RM850x 850W, Arctic Liquid Freezer II 280, 32GB DDR5-6400, WD Black SN770 2TB NVMe, Cooler Master H500 case, 4x Cooler Master MF120R fans', TRUE, 4, 'ART855'),
+-- 7build: Intel i5-13600K + RX 7900 XTX
+  ('PF7PREG', 1699.99, 'Intel i5-13600K, MSI PRO Z690-P DDR5, Radeon RX 7900 XTX, Corsair RM850x 850W, Noctua NH-U12A, 64GB DDR5-6000, Samsung 980 Pro 2TB NVMe, Fractal Torrent case, 3x Noctua NF-A14 fans', TRUE, 4, 'ART856'),
+-- 8build: Intel Core Ultra 9 285K + RTX 5090
+  ('PF8PREH', 5599.99, 'Intel Core Ultra 9 285K, ASUS ROG MAXIMUS Z990 HERO, RTX 5090 32GB GDDR7, Corsair AX1000W, Corsair iCUE H150i ELITE LCD, 128GB DDR5-7200, Samsung 990 Pro 4TB NVMe, Lian Li PC-O11D EVO case, 5x Corsair QL120 fans', TRUE, 2, 'ART857'),
+  ('PF860A', 14.99, 'Ventola Corsair AF120 RGB PWM 120mm, 52 CFM, 1500 RPM, 16 LED RGB', FALSE, 50, 'ART860'),
+  ('PF861A', 29.99, 'Ventola Corsair ML120 Pro RGB 120mm, 47 CFM, 2400 RPM, cuscinetto magnetico, RGB', FALSE, 50, 'ART861'),
+  ('PF862A', 49.99, 'Ventola Corsair QL120 RGB Quad 120mm, 43 CFM, 1500 RPM, 34 LED RGB', FALSE, 50, 'ART862'),
+  ('PF863A', 19.99, 'Ventola Cooler Master MF120R ARGB 120mm, 59 CFM, 2000 RPM, anello ARGB', FALSE, 50, 'ART863'),
+  ('PF864A', 9.99,  'Ventola Cooler Master JetFlo 120 120mm, 74 CFM, 2000 RPM, design ad alto flusso', FALSE, 50, 'ART864'),
+  ('PF865A', 12.99, 'Ventola Cooler Master Silencio FP120 120mm, 38 CFM, 1200 RPM, silent edition', FALSE, 50, 'ART865'),
+  ('PF866A', 39.99, 'Ventola Lian Li UNI FAN SL120 RGB 120mm, 46 CFM, 1900 RPM, modulo a catena magnetica RGB', FALSE, 50, 'ART866'),
+  ('PF867A', 34.99, 'Ventola Lian Li UNI FAN AL120 120mm, 55 CFM, 2200 RPM, design a lama acusticamente ottimizzato', FALSE, 50, 'ART867'),
+  ('PF868A', 24.99, 'Ventola Lian Li Bora Digital 120mm, 56 CFM, 1500 RPM, 16 LED digital RGB', FALSE, 50, 'ART868'),
+  ('PF869A', 44.99, 'Ventola Lian Li Galahad AIO 120mm (per AIO), 45 CFM, 2000 RPM, illuminazione Addressable RGB', FALSE, 50, 'ART869');
+  
 -- Inserisco immagini per prodotti
 INSERT INTO Immagine (url, codiceIdentificativo) VALUES 
 ( "https://www.dropbox.com/scl/fi/t6h8nzgtila0vqyzbcrsy/prova1.jpeg?rlkey=9euu5tm8rntz3td09cjq4dsx4&st=u5kas2lw&dl=0", "ART100"),
 ( "https://www.dropbox.com/scl/fi/t6h8nzgtila0vqyzbcrsy/prova1.jpeg?rlkey=9euu5tm8rntz3td09cjq4dsx4&st=u5kas2lw&dl=0", "ART200"),
 ( "https://www.dropbox.com/scl/fi/x7c9tbqvxg1yof0keohkr/prova2.jpeg?rlkey=eryqlx9mtyax4ujhqibgd6lf3&st=4xgo5ez7&dl=0", "ART200"),
-( "https://www.dropbox.com/scl/fi/obhqwh5ykppawn1i7l2pp/prova3.jpeg?rlkey=35ay786sq5r2p9mqysd5qpjox&st=6effh8o8&dl=0", "ART300");
+( "https://www.dropbox.com/scl/fi/obhqwh5ykppawn1i7l2pp/prova3.jpeg?rlkey=35ay786sq5r2p9mqysd5qpjox&st=6effh8o8&dl=0", "ART300"),
+( "https://www.dropbox.com/scl/fi/jczhjjkgymotl5x0qbivj/AMD-RYZEN.png?rlkey=ljycvl2merng9lhxi33vq8lr7&st=340q959b&dl=0", "ART850"),
+( "https://www.dropbox.com/scl/fi/ctn11umzadaepmq2t540z/intel-nvidia.png?rlkey=41n5h5oxqi0aodn14nt7rvfwz&st=ufp511pl&dl=0", "ART851"),
+( "https://www.dropbox.com/scl/fi/jczhjjkgymotl5x0qbivj/AMD-RYZEN.png?rlkey=ljycvl2merng9lhxi33vq8lr7&st=340q959b&dl=0", "ART852"),
+( "https://www.dropbox.com/scl/fi/979d1m8av3e948qqwuagc/AMD-Nvidia.png?rlkey=x5roz6iwv79elenftwhk5v4qp&st=nk76kog5&dl=0", "ART853"),
+( "https://www.dropbox.com/scl/fi/ctn11umzadaepmq2t540z/intel-nvidia.png?rlkey=41n5h5oxqi0aodn14nt7rvfwz&st=ufp511pl&dl=0", "ART854"),
+( "https://www.dropbox.com/scl/fi/jczhjjkgymotl5x0qbivj/AMD-RYZEN.png?rlkey=ljycvl2merng9lhxi33vq8lr7&st=340q959b&dl=0", "ART855"),
+( "https://www.dropbox.com/scl/fi/daesa10kb8b09ukqg6mwk/intel-amd.png?rlkey=nys62m0m1dtuu6rs4r18p0bit&st=kl7oc85y&dl=0", "ART856"),
+( "https://www.dropbox.com/scl/fi/k1r1cdg0ccw8qx0pvqbnx/eclipse.png?rlkey=tl2z5e4pxm6ejuajcihx5u2y2&st=g4gnf5ft&dl=0", "ART857");
 
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
   ('ART700', 'Software', 'Microsoft Office 365', '2025-05-20', 'Microsoft', TRUE),
@@ -168,11 +225,11 @@ INSERT INTO scheda_madre (nomecompleto, marca, socket, dimensione, PCI, Supporto
 use tecnotimedb;
 INSERT INTO scheda_video(nomecompleto, marca, PCI, vram, tipoRam, Watt) VALUES
 
-('ASUS ROG Strix GeForce RTX 5090 OC Edition','ASUS',5.0,32,'GDDR7',600),
+('ASUS ROG Astral GeForce RTX 5090 OC Edition','ASUS',5.0,32,'GDDR7',600),
 ('MSI GeForce RTX 5080 SUPRIM X','MSI',5.0,24,'GDDR7',450),
 ('GIGABYTE AORUS GeForce RTX 5070 Ti MASTER','GIGABYTE',5.0,16,'GDDR7',320),
-('SAPPHIRE NITRO+ Radeon RX 8900 XTX','SAPPHIRE',5.0,32,'GDDR7',480),
-('ASRock Aqua Radeon RX 8800 XT','ASRock',5.0,24,'GDDR7',350),
+('SAPPHIRE NITRO+ Radeon RX 9070 XT','SAPPHIRE',5.0,32,'GDDR7',480),
+('ASRock Aqua Radeon RX 9070','ASRock',5.0,24,'GDDR7',350),
 ('ASUS TUF Gaming GeForce RTX 4090 OC Edition','ASUS',4.0,24,'GDDR6X',450),
 ('MSI GeForce RTX 4080 Super EXPERT 16G','MSI',4.0,16,'GDDR6X',320),
 ('GIGABYTE GeForce RTX 4070 Ti Super AORUS MASTER','GIGABYTE',4.0,16,'GDDR6X',285),
@@ -505,11 +562,11 @@ INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozion
 -- SCHEDE VIDEO --
 USE TECNOTIMEDB;
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
-('VGID5090NV', 'Scheda Video', 'ASUS ROG Strix GeForce RTX 5090 OC Edition', '2025-07-17', 'ASUS', TRUE),
+('VGID5090NV', 'Scheda Video', 'ASUS ROG Astral GeForce RTX 5090 OC Edition', '2025-07-17', 'ASUS', TRUE),
 ('VGID5080NV', 'Scheda Video', 'MSI GeForce RTX 5080 SUPRIM X', '2025-07-17', 'MSI', TRUE),
 ('VGID5070TI', 'Scheda Video', 'GIGABYTE AORUS GeForce RTX 5070 Ti MASTER', '2025-07-17', 'GIGABYTE', TRUE),
-('VGID8900XTX', 'Scheda Video', 'SAPPHIRE NITRO+ Radeon RX 8900 XTX', '2025-07-17', 'SAPPHIRE', TRUE),
-('VGID8800XT', 'Scheda Video', 'ASRock Aqua Radeon RX 8800 XT', '2025-07-17', 'ASRock', TRUE),
+('VGID8900XTX', 'Scheda Video', 'SAPPHIRE NITRO+ Radeon RX 9070 XT', '2025-07-17', 'SAPPHIRE', TRUE),
+('VGID8800XT', 'Scheda Video', 'ASRock Aqua Radeon RX 9070', '2025-07-17', 'ASRock', TRUE),
 ('VGID4090NV', 'Scheda Video', 'ASUS TUF Gaming GeForce RTX 4090 OC Edition', '2025-07-17', 'ASUS', TRUE),
 ('VGID4080SP', 'Scheda Video', 'MSI GeForce RTX 4080 Super EXPERT 16G', '2025-07-17', 'MSI', TRUE),
 ('VGID4070TS', 'Scheda Video', 'GIGABYTE GeForce RTX 4070 Ti Super AORUS MASTER', '2025-07-17', 'GIGABYTE', TRUE),
@@ -532,7 +589,7 @@ INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozion
 ('VGID306012G', 'Scheda Video', 'ASUS ROG Strix GeForce RTX 3060 OC Edition 12GB', '2025-07-17', 'ASUS', TRUE);
 
 INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quantitaMagazzino, codiceIdentificativo) VALUES
-('VGSN2025001', 2799.00, 'Scheda video di punta ASUS ROG Strix GeForce RTX 5090, performance estrema per gaming 8K e AI.', FALSE, 50, 'VGID5090NV'),
+('VGSN2025001', 2799.00, 'Scheda video di punta ASUS ROG Astral GeForce RTX 5090 OC Edition, performance estrema per gaming 8K e AI.', FALSE, 50, 'VGID5090NV'),
 ('VGSN2025002', 1999.00, 'Scheda video MSI GeForce RTX 5080 SUPRIM X, design premium e potenza elevata per 4K/8K.', FALSE, 50, 'VGID5080NV'),
 ('VGSN2025003', 1499.00, 'Scheda video GIGABYTE AORUS GeForce RTX 5070 Ti MASTER, ideale per gaming 4K ad alto refresh.', FALSE, 50, 'VGID5070TI'),
 ('VGSN2025004', 2099.00, 'Scheda video ASUS TUF Gaming GeForce RTX 4090, ottima dissipazione e prestazioni gaming 4K definitive.', FALSE, 50, 'VGID4090NV'),
@@ -544,8 +601,8 @@ INSERT INTO prodotto_fisico(seriale, prezzo, descrizione, isPreassemblato, quant
 ('VGSN2025010', 239.00, 'Scheda video ASUS Dual GeForce RTX 3050 OC Edition 6GB, entry-level efficiente per gaming 1080p.', FALSE, 50, 'VGID30506G'),
 ('VGSN2025011', 179.00, 'Scheda video MSI GeForce GTX 1650 D6 VENTUS XS OC, soluzione base per gaming leggero e sistemi compatti.', FALSE, 50, 'VGID1650GTX'),
 ('VGSN2025012', 119.00, 'Scheda video GIGABYTE GeForce GTX 1630 OC 4G, economica per sistemi HTPC e gaming molto leggero.', FALSE, 50, 'VGID1630GTX'),
-('VGSN2025013', 1749.00, 'Scheda video SAPPHIRE NITRO+ Radeon RX 8900 XTX, top di gamma AMD per gaming e produttività estrema.', FALSE, 50, 'VGID8900XTX'),
-('VGSN2025014', 1199.00, 'Scheda video ASRock Aqua Radeon RX 8800 XT, prestazioni elevate e raffreddamento avanzato per gaming 4K.', FALSE, 50, 'VGID8800XT'),
+('VGSN2025013', 1749.00, 'Scheda video SAPPHIRE NITRO+ Radeon RX 9070 XT, top di gamma AMD per gaming e produttività estrema.', FALSE, 50, 'VGID8900XTX'),
+('VGSN2025014', 1199.00, 'Scheda video ASRock Aqua Radeon RX 9070, prestazioni elevate e raffreddamento avanzato per gaming 4K.', FALSE, 50, 'VGID8800XT'),
 ('VGSN2025015', 999.00, 'Scheda video SAPPHIRE NITRO+ Radeon RX 7900 XTX VAPOR-X 24G, eccellente per gaming 4K/8K.', FALSE, 50, 'VGID7900XTX'),
 ('VGSN2025016', 799.00, 'Scheda video ASUS TUF Gaming Radeon RX 7900 XT OC Edition, potente per il gaming in 4K.', FALSE, 50, 'VGID7900XT'),
 ('VGSN2025017', 569.00, 'Scheda video GIGABYTE Radeon RX 7800 XT GAMING OC 16G, l`ottima scelta per il 1440p ad alto refresh.', FALSE, 50, 'VGID7800XT'),
