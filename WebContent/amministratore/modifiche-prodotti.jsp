@@ -28,19 +28,19 @@
 	    <div class="category-grid-offerte">
 	      <div class="category-box-offerte">
 	        <a href="aggiungiProdotto.jsp">
-	          <img src="<%= request.getContextPath() %>/images/alt-prodotti.png" alt="ADDPRODUCT">
+	          <img src="<%= request.getContextPath() %>/images/product.png" alt="ADDPRODUCT">
 	          <h3>AGGIUNGI PRODOTTO</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="rimuoviProdotto.jsp">
-	          <img src="<%= request.getContextPath() %>/images/alt-prodotti.png" alt="REMOVEPRODUCT">
+	          <img src="<%= request.getContextPath() %>/images/product.png" alt="REMOVEPRODUCT">
 	          <h3>RIMUOVI PRODOTTO</h3>
 	        </a>
 	      </div>
 	      <div class="category-box-offerte">
 	        <a href="articoliProdotti.jsp">
-	          <img src="<%= request.getContextPath() %>/images/alt-prodotti.png" alt="MODIFYPRODUCT">
+	          <img src="<%= request.getContextPath() %>/images/product.png" alt="MODIFYPRODUCT">
 	          <h3>MODIFICA PRODOTTO</h3>
 	        </a>
 	      </div>

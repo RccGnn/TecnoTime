@@ -8,12 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="<%= request.getContextPath() %>/images/TecnoTimeIcon.svg">
   <title>Prodotti - TecnoTime</title>
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/header.css">
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/footer.css">
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/index.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/offerte.css">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/articoli.css">
-  <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/pagination.css">
 </head>
 <body data-logged-in="<%= (session.getAttribute("user") != null) ? "true" : "false" %>">
 

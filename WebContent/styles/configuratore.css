@@ -107,6 +107,10 @@ select#offerSelect {
 	padding-left: 2.75rem;
 }
 
+ .checkbox-container{
+ 	margin-top:1rem;
+ }
+
 .form-container button {
 	margin-top: 1.5rem;
 	padding: 12px;

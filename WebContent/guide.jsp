@@ -184,7 +184,22 @@
 
 		<script src="js/youtubeguide-lazy.js" defer></script>
 	</main>
-   	
+	<section class="help-section">
+      <h2>Non perdere tempo, affidati ora agli esperti!</h2>
+      <p>Invia ora la tua email per informazioni su configurazioni PC, ottimizzazione o altri problemi.</p>
+      <form action="helpEmail" method="GET" class="help-form">
+        <div class="form-group">
+          <label for="email">La tua email:</label>
+          <input type="email" id="email" name="email" required placeholder="es. mario@regex.com" />
+        </div>
+        <div class="form-group">
+          <label for="message">Descrivi la tua richiesta:</label>
+          <textarea id="message" name="message" rows="4" placeholder="Es. Ho bisogno di aiuto per..."></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Invia Email</button>
+      </form>
+    </section>
+
    	<jsp:include page="footer.jsp" />
     <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
 </body>

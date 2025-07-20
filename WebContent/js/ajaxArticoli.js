@@ -359,14 +359,14 @@ function displayPageSelector() {
 	// Genera sempre 6 pagine 3 prima e 3 dopo alla currentPage
 	let start, end;
 	
-	// MASSIMO 6 BOTTONI NELLA BARRA DI NAVIGAZIONE DEGLI ARTICOLI
-	if (pageNumber > 6) {
-		if (currentPage > 3) {
-			start = currentPage - 3;
-			end = Math.min(currentPage + 3, pageNumber);	
+	// MASSIMO 5 BOTTONI NELLA BARRA DI NAVIGAZIONE DEGLI ARTICOLI
+	if (pageNumber > 4) {
+		if (currentPage > 2) {
+			start = currentPage - 2;
+			end = Math.min(currentPage + 2, pageNumber);	
 		} else {
 			start = currentPage;
-			end = currentPage + 6;
+			end = currentPage + 4;
 		}		
 	} else {
 		start = 1;

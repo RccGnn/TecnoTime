@@ -71,6 +71,35 @@
 	        </div>
 	      </fieldset>
 	      
+	      <!-- INIZIO sezione AJAX di ricerca prodotto + checkbox abbonati -->
+			<fieldset>
+			  <legend>Prodotto in Offerta</legend>
+			  <div class="input-with-icon">
+			    <label for="searchProduct">Cerca prodotto:</label>
+			    <input 
+			      type="text" 
+			      id="searchProduct" 
+			      name="productQuery" 
+			      placeholder="Digita nome prodotto..." 
+			      autocomplete="off"
+			    >
+			  </div>
+			  <div id="productResults" class="search-results">
+			    <!-- ajaxArticoli.js carica i prodotti man mano che si digita -->
+			  </div>
+			  <div class="checkbox-container">
+			    <input 
+			      type="checkbox" 
+			      id="exclusiveOffer" 
+			      name="exclusiveOffer" 
+			      value="true"
+			    >
+			    <label for="exclusiveOffer">Offerta esclusiva riservata agli abbonati</label>
+			  </div>
+			</fieldset>
+
+	      
+	      
 	      <% if(error!=null) {%>
 	      		<span> <%=error %></span>
 	      	<% } else if( success != null) {%>
