@@ -37,7 +37,7 @@ public class AdminEliminaOfferte extends HttpServlet {
 		ArrayList<PromozioneBean> lista = new ArrayList<PromozioneBean>(); 
 		try {
 			lista= dao.doRetrieveAll("nomesconto ASC");
-			if(lista == null) {
+			if(lista == null || lista.isEmpty()) {
 				request.setAttribute("errorRetrive", "Nessuno sconto presente nel db. Aggiungere prima un nuovo sconto ");
 				RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviOfferta.jsp");
 				disp.forward(request, response);

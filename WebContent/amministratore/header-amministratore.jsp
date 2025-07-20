@@ -107,8 +107,6 @@
 				</ul></li>
 			<li><a
 				href="<%= request.getContextPath() %>/articoliServizi.jsp">SERVIZI</a></li>
-			<li><a
-				href="<%= request.getContextPath() %>/articoliPreassemblati.jsp">PREASSEMBLATI E PORTATILI</a></li>
 			<li><a href="<%= request.getContextPath() %>/guide.jsp"class="icon-link">GUIDE</a></li>
 		</ul>
 	</nav>
