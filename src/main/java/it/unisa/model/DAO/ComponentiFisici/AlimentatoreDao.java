@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.Filters.Alimentatore;
+import it.unisa.model.Filters.Ram;
 import it.unisa.model.Filters.SchedaMadre;
 import it.unisa.model.connections.DriverManagerConnectionPool;
 
@@ -13,6 +16,8 @@ public class AlimentatoreDao {
 	
 private static final String TABLE_NAME = "ALIMENTATORI";
 	
+	private static final String[] whitelist = 
+	{"nomecompleto","marca","watt"};
 	
 	public synchronized void doSave(Alimentatore psu) throws SQLException {
 		
@@ -77,4 +82,47 @@ private static final String TABLE_NAME = "ALIMENTATORI";
 			}
 	}
 
+	
+
+	public synchronized ArrayList<Alimentatore>  doRetrieveAll (String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<Alimentatore> psus = new ArrayList<Alimentatore>();
+
+		String selectSQL = "SELECT * FROM " + AlimentatoreDao.TABLE_NAME;
+
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = ps.executeQuery();
+
+		  if (rs.next()) {
+               Alimentatore psu = new Alimentatore(
+	                    rs.getString("nomecompleto"),
+	                    rs.getString("marca"),
+	                    rs.getInt("watt")
+	                   
+	                );
+					psus.add(psu);
+			} else {
+				psus = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return psus;
+	}
 }

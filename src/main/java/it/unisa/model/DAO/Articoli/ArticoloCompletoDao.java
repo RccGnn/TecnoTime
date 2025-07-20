@@ -537,6 +537,91 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 		return catalogo;
 	}
 	
+	public synchronized ArticoloCompletoBean doRetrieveByName(String nome) throws SQLException{
+	
+		createView();
+		
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArticoloCompletoBean articoloCatalogo = new ArticoloCompletoBean();
+
+		String selectSQL = "SELECT FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE nome = ?";
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+			ps.setString(1, nome);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				
+				// Verifica se sono presenti immagini per l'articolo
+				ImmagineDao imgDao = new ImmagineDao();
+				ArrayList<ImmagineBean> imgList = imgDao.doRetrieveByCodiceIdentificativo(rs.getString("codiceIdentificativo"));
+				if (imgList != null && !imgList.isEmpty())
+					articoloCatalogo.setImmagini(imgList);
+				else
+					articoloCatalogo.setImmagini(null);
+				
+				// Verifica ora se le sottoclassi sono presenti osservando la view Catalogo; se non lo sono, imposto null
+			
+				String seriale = rs.getString("seriale");
+				if (seriale != null && !seriale.trim().equals("")) {
+					ProdottoFisicoDao pdfDao = new ProdottoFisicoDao();
+					ArrayList<Object> temp = new ArrayList<>(2);
+					temp.add(seriale);
+					temp.add(nome);
+					articoloCatalogo.setPdFisico(pdfDao.doRetrieveByKey(temp));
+				} else {
+					articoloCatalogo.setPdFisico(null);
+				}
+				
+				String codiceSoftware = rs.getString("codiceSoftware");
+				if (codiceSoftware != null && !codiceSoftware.trim().equals("")) {
+					ProdottoDigitaleDao pddDao = new ProdottoDigitaleDao();
+					ArrayList<Object> temp = new ArrayList<>(2);
+					temp.add(codiceSoftware);
+					temp.add(nome);
+					articoloCatalogo.setPdDigitale(pddDao.doRetrieveByKey(temp));
+				} else {
+					articoloCatalogo.setPdDigitale(null);
+				}
+				
+				String codiceServizio = rs.getString("codiceServizio");
+				if ( codiceServizio != null &&  !codiceServizio.trim().equals("")) {
+					ServizioDao srvDao = new ServizioDao();
+					ArrayList<Object> temp = new ArrayList<>(2);
+					temp.add(codiceServizio);
+					temp.add(nome);
+					articoloCatalogo.setServizio(srvDao.doRetrieveByKey(temp));
+				} else {
+					articoloCatalogo.setServizio(null);
+				}
+				
+				articoloCatalogo.setCodiceIdentificativo(rs.getString("CodiceIdentificativo"));
+				articoloCatalogo.setNome(nome);
+				
+			} else {
+				articoloCatalogo = null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return articoloCatalogo;
+	}
+	
+
+	
+	
 	public synchronized ArrayList<ArticoloCompletoBean> doRetrieveCategory(String categoria,String order) throws SQLException{
 		createView();
 		Connection connection = null;

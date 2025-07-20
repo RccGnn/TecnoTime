@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.Filters.SchedaMadre;
 import it.unisa.model.Filters.SchedaVideo;
 import it.unisa.model.connections.DriverManagerConnectionPool;
@@ -12,7 +14,9 @@ import it.unisa.model.connections.DriverManagerConnectionPool;
 public class SchedaMadreDao {
 	
 private static final String TABLE_NAME = "SCHEDA_MADRE";
-	
+
+	private static final String[] whitelist = 
+	{"nomecompleto","marca","PCI","vram","tipoRam","Watt"};
 	
 	public synchronized void doSave(SchedaMadre mb) throws SQLException {
 		
@@ -20,7 +24,7 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 		PreparedStatement ps = null;
 		
 		String insertSQL = "INSERT INTO "+ SchedaMadreDao.TABLE_NAME
-				+ "(nomecompleto,marca,socket,wifi,PCI,SupportoRam,Watt)"
+				+ "(nomecompleto,marca,socket,dimensione,PCI,SupportoRam,Watt)"
 				+ "VALUES (? , ?, ?, ?, ?, ?, ?)";
 
 		try {
@@ -85,4 +89,51 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 			}
 	}
 
+	
+	public synchronized ArrayList<SchedaMadre>  doRetrieveAll (String order) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+
+		ArrayList<SchedaMadre> mobos = new ArrayList<SchedaMadre>();
+
+		String selectSQL = "SELECT * FROM " + SchedaMadreDao.TABLE_NAME;
+
+		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
+			selectSQL += " ORDER BY " + order;
+		}
+
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = ps.executeQuery();
+
+		  if (rs.next()) {
+               SchedaMadre mobo= new SchedaMadre(
+	                    rs.getString("nomecompleto"),
+	                    rs.getString("marca"),
+	                    rs.getString("socket"),
+	                    rs.getString("dimensione"),
+	                    rs.getFloat("PCI"),
+	                    rs.getString("SupportoRam"),
+	                    rs.getInt("watt")
+	                   
+	                );
+               mobos.add(mobo);
+			} else {
+				mobos= null;
+			}
+
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return mobos;
+	}
 }
+
