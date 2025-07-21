@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import it.unisa.model.beans.AssociatoABean;
 import it.unisa.model.beans.PromozioneCompletaBean;
 import it.unisa.model.beans.RiguardaBean;
 import it.unisa.model.connections.DriverManagerConnectionPool;
@@ -23,13 +22,10 @@ public class PromozioneCompletaDao extends PromozioneDao{
 		String createViewSQL = " CREATE or REPLACE VIEW " + PromozioneCompletaDao.TABLE_NAME + " AS "
 				+ " SELECT "
 				+	" 	promo.*, "
-				+	" 	rig.codiceIdentificativo, "
-				+	" 	ass.username, "
-				+   " 	ass.codicePromozione "
+				+	" 	rig.codiceIdentificativo "
 				+	" FROM "
 				+	" 	Promozione AS promo "
-				+	" LEFT JOIN Riguarda AS rig USING (IDPromozione) "
-				+	" LEFT JOIN Associato_a AS ass USING (IDPromozione) ";
+				+	" LEFT JOIN Riguarda AS rig USING (IDPromozione) ";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -51,23 +47,12 @@ public class PromozioneCompletaDao extends PromozioneDao{
 		// Salva la promozione
 		super.doSave(promozione);
 		
-		// Se la promozione è associata_ad un account, allora salvalo 
-		if (promozione.getAssociato() != null) {
-			AssociatoADao dao = new AssociatoADao();
-			dao.doSave(promozione.getAssociato());
-		}
-		
 		// Se la promozione riguarda un articolo, allora salvalo 
 		if (promozione.getRiguarda() != null) {
 			RiguardaDao dao = new RiguardaDao();
 			try {
 				dao.doSave(promozione.getRiguarda());				
 			} catch (SQLException e) {
-				// Se la seconda promozione non viene memorizzata, allora cancella la prima promozione
-				ArrayList<Object> arr = new ArrayList<Object>(2);
-				arr.add(promozione.getAssociato().getIDPromozione());
-				arr.add(promozione.getAssociato().getUsername());
-				dao.doDelete(arr);
 				throw e;
 			}
 			
@@ -122,73 +107,6 @@ public class PromozioneCompletaDao extends PromozioneDao{
 					
 					// Aggiungi l'oggetto riguarda
 					promozione.setRiguarda(riguarda);
-					
-					promozioni.add(promozione);
-				} while (rs.next());
-				
-			} else {
-				promozioni = null;
-			}
-
-		} finally {
-			try {
-				if (ps != null)
-					ps.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return promozioni;
-	}
-	
-	/**
-	 * Restituisce tutte le promozioni che riguardano Accounts.
-	 * @param key
-	 * @return
-	 * @throws SQLException
-	 */
-	public synchronized ArrayList<PromozioneCompletaBean> doRetrieveByKeyAccounts(String key) throws SQLException {
-
-		createView();
-		
-		Connection connection = null;
-		PreparedStatement ps = null;
-
-		ArrayList<PromozioneCompletaBean> promozioni = new ArrayList<>();
-
-		String selectSQL = "SELECT * FROM " + PromozioneCompletaDao.TABLE_NAME + " ";
-
-		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			ps = connection.prepareStatement(selectSQL);
-
-			ResultSet rs = ps.executeQuery();
-			
-			if (rs.next()) {
-				PromozioneCompletaBean promozione = null;	
-				AssociatoABean associato = null;
-				do {
-					// Se il campo codiceIdentificativo non è null, memorizza la promozione
-					if (rs.getString("username") == null)
-						continue;
-					
-					// I campi di promozione
-					promozione = new PromozioneCompletaBean();
-					promozione.setNomesconto("nomesconto");
-					promozione.setIDPromozione(rs.getInt("IDPromozione"));
-					promozione.setDataInizio(rs.getDate("dataInizio"));
-					promozione.setDescrizione(rs.getString("durata"));
-					promozione.setPercentualeSconto(rs.getDouble("percentualeSconto"));
-
-					// L'oggetto dei campi associato
-					associato = new AssociatoABean();
-					associato.setIDPromozione(rs.getInt("IDPromozione"));
-					associato.setUsername(rs.getString("Username"));
-					associato.setCodicePromozione(rs.getString("codiceIdentificativo"));
-					
-					// Aggiungi l'oggetto associato
-					promozione.setAssociato(associato);
 					
 					promozioni.add(promozione);
 				} while (rs.next());

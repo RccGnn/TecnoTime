@@ -44,11 +44,23 @@
 			</div>
 		</div>
 		<div class="header-right">
-			<a href="riepilogoOrdini-amministratore.jsp"
+		
+			<%if (request.getRequestURI().contains("amministratore")) {%>
+				<a href="riepilogoOrdini-amministratore.jsp"
 				class="icon-link">
 				<img src="<%= request.getContextPath() %>/images/shopping_cart.png"
 				alt="Carrello" class="icon"> <span class="Carrello">Riepilogo Ordini Utenti</span>
-			</a> <a href="${pageContext.request.contextPath}/LogoutServlet"
+				</a> 
+			<%} else {%>	
+				<a href="amministratore/riepilogoOrdini-amministratore.jsp"
+				class="icon-link">
+				<img src="<%= request.getContextPath() %>/images/shopping_cart.png"
+				alt="Carrello" class="icon"> <span class="Carrello">Riepilogo Ordini Utenti</span>
+				</a> 
+			<%} %>
+			
+			
+			<a href="${pageContext.request.contextPath}/LogoutServlet"
 				class="icon-link"> <img
 				src="<%= request.getContextPath() %>/images/user.png" alt="Utente"
 				class="icon"> <span class="login-text">Logout</span>
