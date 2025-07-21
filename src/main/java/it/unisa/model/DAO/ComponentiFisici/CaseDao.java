@@ -99,12 +99,14 @@ public class CaseDao {
 			ResultSet rs = ps.executeQuery();
 
 		  if (rs.next()) {
+			  do {
                Case case1 = new Case(
 	                    rs.getString("nomecompleto"),
 	                    rs.getString("dimensione")
 	                   
 	                );
                cases.add(case1);
+			  } while (rs.next());
 			} else {
 				cases = null;
 			}

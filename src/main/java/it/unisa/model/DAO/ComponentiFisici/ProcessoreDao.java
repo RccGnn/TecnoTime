@@ -110,6 +110,7 @@ public class ProcessoreDao {
 			ResultSet rs = ps.executeQuery();
 
 		  if (rs.next()) {
+			  do {
                 Processore cpus= new Processore(
 	                    rs.getString("nomecompleto"),
 	                    rs.getString("marca"),
@@ -118,6 +119,7 @@ public class ProcessoreDao {
 	                    rs.getInt("Watt")
 	                );
 					cpu.add(cpus);
+		  	} while (rs.next());
 			} else {
 				cpu = null;
 			}

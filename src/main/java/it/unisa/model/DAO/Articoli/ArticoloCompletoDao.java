@@ -546,7 +546,8 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 
 		ArticoloCompletoBean articoloCatalogo = new ArticoloCompletoBean();
 
-		String selectSQL = "SELECT FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE nome = ?";
+		String selectSQL = "SELECT codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita, prezzo, seriale, descrizione_prodotto_fisico, isPreassemblato, quantitaMagazzino, codiceServizio, descrizione_servizio, durata, codiceSoftware, descrizione_prodotto_digitale, chiaviDisponibili "
+				+ "FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE nome = ? ";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();

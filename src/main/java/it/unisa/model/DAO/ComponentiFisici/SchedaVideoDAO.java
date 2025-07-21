@@ -110,6 +110,7 @@ private static final String TABLE_NAME = "SCHEDA_VIDEO";
 			ResultSet rs = ps.executeQuery();
 
 		  if (rs.next()) {
+			  do {
                SchedaVideo gpu = new SchedaVideo(
 	                    rs.getString("nomecompleto"),
 	                    rs.getString("marca"),
@@ -120,6 +121,7 @@ private static final String TABLE_NAME = "SCHEDA_VIDEO";
 	                   
 	                );
                gpus.add(gpu);
+			  } while (rs.next());
 			} else {
 				gpus = null;
 			}

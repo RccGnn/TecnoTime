@@ -49,6 +49,7 @@ public class FetchProduct extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 String rawNameM = request.getParameter("nameM");
+		 	System.out.println(rawNameM);
 	 
 		 	ArrayList<Processore> cp= new ArrayList<Processore>();  // array da filtrare
  			ArrayList<Ram> ra = new ArrayList<Ram>();  	//array da filtrare
@@ -82,16 +83,17 @@ public class FetchProduct extends HttpServlet {
 	 		}catch(SQLException e ) {
 	 			e.printStackTrace();
 	 		}
+	 		
+	 		for (SchedaMadre mb : mobos) {
+	            System.out.println("- " + mb);
+	        }
  		
 		 
 
-	        if (rawNameM != null && !rawNameM.trim().isEmpty()) {
-	            String cleanNameM = rawNameM.split(" - ")[0].trim(); // Rimuove " - € prezzo" se presente
+	        if (rawNameM != null) {
+	            //String cleanNameM = rawNameM.split(" - ")[0].trim(); // Rimuove " - € prezzo" se presente
 	            
 	            boolean mb = false;
-	    		
-	            
-	    		
 	            
 		           ArticoloCompletoDao daoartcpu = new ArticoloCompletoDao();
 		           ArticoloCompletoBean artbeancpu= new ArticoloCompletoBean();
@@ -99,10 +101,10 @@ public class FetchProduct extends HttpServlet {
 		           ArticoloCompletoDao daoartram = new ArticoloCompletoDao();
 		           
 	    		for (SchedaMadre artmobo : mobos) {
-	    		    if (artmobo.nome().equalsIgnoreCase(cleanNameM)) {
+	    		    if (artmobo.nome().equals(rawNameM)) {
 	    		        mb = true;
 	    		        try {
-			    			mobo=moboDao.doRetrieveByKey(cleanNameM);
+			    			mobo=moboDao.doRetrieveByKey(rawNameM);
 			    		}catch (SQLException e) {
 			    			e.printStackTrace();
 			    		}
@@ -132,6 +134,14 @@ public class FetchProduct extends HttpServlet {
 	    		        	}
 	    		        }	
 	    		    }
+	        }
+	        
+	      
+	        for (ArticoloCompletoBean frutto : artcpu) {
+	            System.out.println("- " + frutto);
+	        }
+	        for (ArticoloCompletoBean frutta : artram) {
+	            System.out.println("- " + frutta);
 	        }
 	        
 	        Gson gson = new Gson();
