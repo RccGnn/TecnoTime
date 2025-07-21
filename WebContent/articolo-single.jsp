@@ -33,7 +33,8 @@
   <main class="productsingle-page">
     <div class="productsingle-gallery">
       <div class="productsingle-main-image-wrapper">
-        <img id="productsingle-main-image" src="${articolo.immagini[0].url != null ? articolo.immagini[0].url : "/images/alt-prodotti.png"}" alt="${articolo.nome}">
+        <div id="notification" class="notification"> </div>
+        <img id="productsingle-main-image" src="${articolo.immagini[0].url != null ? articolo.immagini[0].url : '${pageContext.request.contextPath}/images/alt-prodotti.png'}" alt="${articolo.nome}">
       </div>
       <div class="productsingle-thumbs">
         <c:forEach var="imgBean" items="${articolo.immagini}">
@@ -43,15 +44,20 @@
     </div>
 
     <div class="productsingle-details">
+    
+    <c:set var="quantita" value="1" />
+    
       <h1 class="productsingle-title">${articolo.nome}</h1>
       <c:choose>
         <c:when test="${articolo.pdFisico != null}">
           <p class="productsingle-price"><fmt:formatNumber value="${articolo.pdFisico.prezzo}" type="currency" currencySymbol="€"/></p>
           <p class="productsingle-description">${articolo.pdFisico.descrizione}</p>
+          <c:set var="quantita" value="${articolo.pdFisico.quantitaMagazzino}" />
         </c:when>
         <c:when test="${articolo.pdDigitale != null}">
           <p class="productsingle-price"><fmt:formatNumber value="${articolo.pdDigitale.prezzo}" type="currency" currencySymbol="€"/></p>
           <p class="productsingle-description">${articolo.pdDigitale.descrizione}</p>
+          <c:set var="quantita" value="${articolo.pdDigitale.chiaviDisponibili}" />
         </c:when>
         <c:when test="${articolo.servizio != null}">
           <p class="productsingle-price"><fmt:formatNumber value="${articolo.servizio.prezzo}" type="currency" currencySymbol="€"/></p>
@@ -59,12 +65,12 @@
         </c:when>
       </c:choose>
       
-      <form id="productsingle-add-form" method="post" action="CartServlet">
+      <form id="productsingle-add-form">
         <input type="hidden" name="action"    value="add">
-        <input type="hidden" name="productId" value="${articolo.codiceIdentificativo}">  <!-- controllare come si ottiene il product id -->
+        <input type="hidden" id="productId" name="productId" value="${articolo.codiceIdentificativo}">  <!-- controllare come si ottiene il product id -->
         <label for="productsingle-quantity">Quantità:</label>
-        <input type="number" id="productsingle-quantity" name="quantity" value="1" min="1">  <!-- aggiungere eventuale controllo per vedere la quantità disponibile del prodotto considerato -->
-        <button id="productsingle-add-btn" type="submit">Aggiungi al carrello</button>  <!-- id per fare la submit per aggiungere al carrello -->
+        <input type="number" id="productsingle-quantity" name="quantity" value="1" min="1" max="${quantita}">  <!-- aggiungere eventuale controllo per vedere la quantità disponibile del prodotto considerato -->
+        <button id="productsingle-add-btn" type="button" onclick="addProducts()">Aggiungi al carrello</button>  <!-- id per fare la submit per aggiungere al carrello -->
       </form>
     </div>
   </main>
