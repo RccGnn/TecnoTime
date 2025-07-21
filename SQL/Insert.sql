@@ -157,15 +157,33 @@ INSERT INTO Immagine (url, codiceIdentificativo) VALUES
 
 
 INSERT INTO Articolo (codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita) VALUES
-  ('ART700', 'Software', 'Microsoft Office 365', '2025-05-20', 'Microsoft', TRUE),
+  ('ART700', 'Software', 'Microsoft Office Package 365', '2025-05-20', 'Microsoft', TRUE),
   ('ART800', 'Software', 'Adobe Photoshop CC', '2025-04-10', 'Adobe', TRUE),
-  ('ART900', 'Software', 'AutoCAD 2025', '2025-03-01', 'Autodesk', TRUE);
+  ('ART900', 'Software', 'AutoCAD 2025', '2025-03-01', 'Autodesk', TRUE),
+  ('ART875', 'Software', 'WINDOWS 11 PRO', '2025-05-11', 'Microsoft', TRUE),
+  ('ART876', 'Software', 'WINDOWS 10 PRO', '2025-05-12', 'Microsoft', TRUE),
+  ('ART877', 'Software', 'WINDOWS 11 HOME', '2025-05-13', 'Microsoft', TRUE),
+  ('ART878', 'Software', 'WINDOWS 10 HOME', '2025-05-14', 'Microsoft', TRUE);
 
 -- Inserimento prodotti digitali
 INSERT INTO Prodotto_Digitale (codiceSoftware, descrizione, prezzo, codiceIdentificativo) VALUES
   ('SW-OFF365', 'Licenza annuale per Office 365, versione personal e business', 69.99, 'ART700'),
   ('SW-PSCC', 'Adobe Photoshop Creative Cloud, licenza mensile', 22.99, 'ART800'),
-  ('SW-ACAD', 'AutoCAD 2025 per studenti e professionisti', 159.00, 'ART900');
+  ('SW-ACAD', 'AutoCAD 2025 per studenti e professionisti', 159.00, 'ART900'),
+  ('SW-AW11P', 'licenza windows 11 per professionisti', 259.00, 'ART875'),
+  ('SW-AW1OP', 'licenza windows 10 per professionisti', 199.00, 'ART876'),
+  ('SW-AW11H', 'licenza windows 11 per uso domestico', 159.00, 'ART877'),
+  ('SW-AW10H', 'licenza windows 10 per uso domestico', 119.00, 'ART878');
+
+INSERT INTO Immagine (url, codiceIdentificativo) VALUES
+  ( "https://www.dropbox.com/scl/fi/enptht6p8ppu9gc0tve0o/pacchetto-office.jpg?rlkey=o059dnlkomztvzbszs5nvpnbe&st=udkegb88&dl=0", "ART700"),
+  ( "https://www.dropbox.com/scl/fi/m3huo4pbm06jx3viwnhku/adobe-photoshop.jpg?rlkey=7rneut8dfqmc3b8aryv2ambmd&st=y368as63&dl=0", "ART800"),
+  ( "https://www.dropbox.com/scl/fi/a2ag9dnky70702mu7p8hd/AutoCAD.jpg?rlkey=gu219nomck4hz56o91wl4dmsw&st=mtzx91un&dl=0", "ART900"),
+  ( "https://www.dropbox.com/scl/fi/usxjs0b7p8fd2hafn44ml/windows11pro.jpg?rlkey=sobzdux1n9mr1l99fcqompegn&st=oe1gtwch&dl=0", "ART875"),
+  ( "https://www.dropbox.com/scl/fi/d2doxs7ouxeb7p97p17p1/windows10pro.png?rlkey=0a2k75mm09md4fil7nm25v9t6&st=r82crhl6&dl=0", "ART876"),
+  ( "https://www.dropbox.com/scl/fi/ctyxjpf3l7brtto3dzryt/windows11home.jpg?rlkey=ntceardoerduw1ttn2228tfak&st=3d4lzu8q&dl=0", "ART877"),
+  ( "https://www.dropbox.com/scl/fi/is0ootkuh34qcn9o8opxc/windows10home.jpg?rlkey=mia7urt6n82kew9c5m0c1jpsq&st=dfkafnyw&dl=0", "ART878");
+
   
   USE tecnotimedb;
 
