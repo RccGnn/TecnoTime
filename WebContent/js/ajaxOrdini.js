@@ -111,8 +111,11 @@ function checkDate() {
         const lowerDate = new Date(lowerDateValue);    
         const upperDate = new Date(upperDateValue);
 
-        let currentDate = new Date();
-        currentDate.setHours(0, 0, 0, 0); 
+		lowerDate.setHours(0, 0, 0, 0);
+		upperDate.setHours(0, 0, 0, 0);
+		
+		let currentDate = new Date();
+		currentDate.setHours(0, 0, 0, 0);
         
         if (isNaN(lowerDate.getTime()) || isNaN(upperDate.getTime())) {
             showError('Si prega di inserire date valide (YYYY-MM-DD)!');

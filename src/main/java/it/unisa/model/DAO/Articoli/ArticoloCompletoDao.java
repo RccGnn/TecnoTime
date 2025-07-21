@@ -623,7 +623,7 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 
 	
 	
-	public synchronized ArrayList<ArticoloCompletoBean> doRetrieveCategory(String categoria,String order) throws SQLException{
+	public synchronized ArrayList<ArticoloCompletoBean> doRetrieveCategory(String categoria, String order) throws SQLException{
 		createView();
 		Connection connection = null;
 		PreparedStatement ps = null;

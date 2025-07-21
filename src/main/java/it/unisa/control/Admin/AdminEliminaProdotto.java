@@ -30,7 +30,7 @@ public class AdminEliminaProdotto extends HttpServlet {
 		ArticoloCompletoDao artDao = new ArticoloCompletoDao();
 		
 		try {
-			listaArticoli = artDao.doRetrieveAll("nome asc");
+			listaArticoli = artDao.doRetrieveAll("");
 			if(listaArticoli == null || listaArticoli.isEmpty()) {
 				request.setAttribute("errorRetrive", "Nessun articolo presente nel db. Aggiungere prima un nuovo articolo. ");
 				RequestDispatcher disp = request.getRequestDispatcher("amministratore/rimuoviProdotto.jsp");
