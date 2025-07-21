@@ -102,8 +102,9 @@ public class RamDao {
 			ps = connection.prepareStatement(selectSQL);
 
 			ResultSet rs = ps.executeQuery();
-
+		 
 		  if (rs.next()) {
+			  do {
                Ram ram= new Ram(
 	                    rs.getString("nomecompleto"),
 	                    rs.getString("marca"),
@@ -112,6 +113,7 @@ public class RamDao {
 	                   
 	                );
 					rams.add(ram);
+		  } while (rs.next());
 			} else {
 				rams = null;
 			}

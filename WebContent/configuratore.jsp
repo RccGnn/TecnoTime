@@ -86,7 +86,8 @@
                 <span class="input-icon-container">
 			    <img src="<%= request.getContextPath() %>/images/mobo.svg" alt="" class="input-icon">
 			    </span>
-                <input list="motherboardList" id="motherboardInput" name="motherboard"
+			    <input type="hidden" id="ContextPath" value="<%= request.getContextPath() %>" />
+                <input onchange="" list="motherboardList" id="motherboardInput" name="motherboard"
                        placeholder="	Es: ASUS ROG MAXIMUS Z790 HERO" maxlength="100" required >
                        <datalist id="motherboardList">
 							<c:forEach var="mobo" items="${schedeMadri}">
@@ -208,5 +209,6 @@
 
 	<jsp:include page="footer.jsp" />
     <script src="<%= request.getContextPath() %>/js/navbar.js" defer></script>
+    <script src="<%= request.getContextPath() %>/js/ajaxConfiguratore.js" defer></script>
 </body>
 </html>

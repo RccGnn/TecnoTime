@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import it.unisa.model.DAO.DaoUtils;
 import it.unisa.model.Filters.SchedaMadre;
 import it.unisa.model.Filters.SchedaVideo;
+import it.unisa.model.beans.CarrelloBean;
 import it.unisa.model.connections.DriverManagerConnectionPool;
 
 public class SchedaMadreDao {
@@ -101,6 +102,9 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 		if (order != null && !order.trim().equals("") && DaoUtils.checkWhitelist(whitelist, order)) {
 			selectSQL += " ORDER BY " + order;
 		}
+		
+		
+		
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -109,7 +113,9 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 			ResultSet rs = ps.executeQuery();
 
 		  if (rs.next()) {
-               SchedaMadre mobo= new SchedaMadre(
+			 
+			  do{
+                SchedaMadre mobo =new SchedaMadre(
 	                    rs.getString("nomecompleto"),
 	                    rs.getString("marca"),
 	                    rs.getString("socket"),
@@ -120,6 +126,8 @@ private static final String TABLE_NAME = "SCHEDA_MADRE";
 	                   
 	                );
                mobos.add(mobo);
+               
+			  } while (rs.next());
 			} else {
 				mobos= null;
 			}

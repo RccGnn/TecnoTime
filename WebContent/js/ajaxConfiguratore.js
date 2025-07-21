@@ -64,60 +64,65 @@ function loadAjaxDoc(url, method, params, cFuction) {
 					}			
 		}
 }
-function disableInput(){
-	
-	document.addEventListener('DOMContentLoaded', () => {
-		
+
 		const moboInput  = document.getElementById('motherboardInput');
 		const cpuInput   = document.getElementById('processorInput');
 		const ramInput   = document.getElementById('ramInput');
-		const ctx        = document.getElementById('ContextPath').value;
 		
-		const raw      = moboInput.value.trim();
-		const nomeM    = raw.split(" -")[0];
-		const params   = "nameM=" + encodeURIComponent(nomeM);
-		
-		loadAjaxDoc("FetchProduct","GET",params,FilterProduct)
-		
-	});
+	
+		document.addEventListener('DOMContentLoaded', () => {
+		  const moboInput = document.getElementById('motherboardInput');
+		  const cpuInput  = document.getElementById('processorInput');
+		  const ramInput  = document.getElementById('ramInput');
+		  const ctx       = document.getElementById('ContextPath').value;
 
+		  // Disabilita CPU e RAM finché non scegli la scheda madre
+		  cpuInput.disabled = true;
+		  ramInput.disabled = true;
 
-function FilterProduct(xhr){
-	
-	
-	document.getElementById('processorInput');
-	
-	 const data = JSON.parse(xhr.responseText);
-	 const cpus = data.artcpu;   // lista di processori
-	 const rams = data.artram;   // lista di RAM
+		  
+		  moboInput.addEventListener('input', () => {
+		    const raw    = moboInput.value.trim();
+		    if (!raw) return;
+		    const nomeM  = raw.split(' -')[0];
+		    const params = 'nameM=' + encodeURIComponent(nomeM);
+		    loadAjaxDoc('FetchProduct', 'GET', params, FilterProduct);
+		  });
 
-	 
-	 const cpuDatalist = document.getElementById('processoriList');
-	 cpuDatalist.innerHTML = '';          
-	 artcpu.forEach(cpu => {
-	   const opt = document.createElement('option');
-	   // imposto value come nome + prezzo
-	   opt.value = `${cpu.nome} - €${cpu.pdFisico.prezzo}`;
-	   // se vuoi tener traccia dell'ID:
-	   opt.dataset.id = cpu.codiceIdentificativo;
-	   cpuDatalist.appendChild(opt);
-	 });
-	 
-	 const ramDatalist = document.getElementById('ramList');
-	 ramDatalist.innerHTML= '';
-	 artram.forEach(ram =>{
-		const opt = document.createElement('option');
-		   // imposto value come nome + prezzo
-		   opt.value = `${ram.nome} - €${ram.pdFisico.prezzo}`;
-		   // se vuoi tener traccia dell'ID:
-		   opt.dataset.id = ram.codiceIdentificativo;
-		   cpuDatalist.appendChild(opt);
 		
-		
-		
-	 }
-	
-}		
-	
-	
-}
+		  function FilterProduct(xhr) {
+		    if (xhr.status !== 200) {
+		      console.error('FetchProduct error:', xhr.statusText);
+		      return;
+		    }
+
+		    const data = JSON.parse(xhr.responseText);
+		    const cpus = data.artcpu;  
+		    const rams = data.artram;
+
+			
+		    const cpuDatalist = document.getElementById('processoriList');
+		    cpuDatalist.innerHTML = '';
+		    cpus.forEach(cpu => {
+		      const opt = document.createElement('option');
+		      opt.value      = `${cpu.nome} - €${cpu.pdFisico.prezzo}`;
+		      opt.dataset.id = cpu.codiceIdentificativo;
+		      cpuDatalist.appendChild(opt);
+		    });
+
+		    // Popola RAM
+		    const ramDatalist = document.getElementById('ramList');
+		    ramDatalist.innerHTML = '';
+		    rams.forEach(ram => {
+		      const opt = document.createElement('option');
+		      opt.value      = `${ram.nome} - €${ram.pdFisico.prezzo}`;
+		      opt.dataset.id = ram.codiceIdentificativo;
+		      ramDatalist.appendChild(opt);
+		    });
+
+				console.log("sad");
+		    // Abilita
+		    cpuInput.disabled = false;
+		    ramInput.disabled = false;
+		  }
+		});  

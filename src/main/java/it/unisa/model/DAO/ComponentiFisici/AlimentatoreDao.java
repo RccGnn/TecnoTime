@@ -103,6 +103,7 @@ private static final String TABLE_NAME = "ALIMENTATORI";
 			ResultSet rs = ps.executeQuery();
 
 		  if (rs.next()) {
+			  do {
                Alimentatore psu = new Alimentatore(
 	                    rs.getString("nomecompleto"),
 	                    rs.getString("marca"),
@@ -110,6 +111,7 @@ private static final String TABLE_NAME = "ALIMENTATORI";
 	                   
 	                );
 					psus.add(psu);
+			  } while (rs.next());
 			} else {
 				psus = null;
 			}
