@@ -44,7 +44,7 @@ public class configuratoreservlet extends HttpServlet {
 		ArrayList<ArticoloCompletoBean>  casePc = new ArrayList<ArticoloCompletoBean>();
 		
 		try {
-			processori= dao.doRetrieveCategory("Processori", "");
+			processori= dao.doRetrieveCategory("Processore", "");
 			schedeMadri=dao.doRetrieveCategory("schede madri", "");
 			ram=dao.doRetrieveCategory("RAM", "");
 			schedeVideo = dao.doRetrieveCategory("scheda video","");

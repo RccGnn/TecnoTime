@@ -109,6 +109,11 @@ public class ConfiguratorCartServlet extends HttpServlet {
 	        	e.printStackTrace();
 	        }
 	        
+	        
+	        System.out.println("case" + BuildChecker.isCompatible(contenitore, mb));
+	        System.out.println("cpu" + BuildChecker.isCompatible(cpur, mb));
+	        System.out.println("ram" + BuildChecker.isCompatible(mb, ramr));
+	        System.out.println("watt" + BuildChecker.minimumWatt(mb, gpur, cpur));
 	      Boolean result = BuildChecker.buildValidator(contenitore, mb, cpur, ramr, gpur,psur);
 	      
 	      System.out.println(result);
@@ -172,6 +177,9 @@ public class ConfiguratorCartServlet extends HttpServlet {
         	response.sendError(500, "Errore salvataggio nel carrello");
         	return;
         }
+		
+		RequestDispatcher disp = request.getRequestDispatcher("/carrello.jsp");
+		disp.forward(request, response);
 		
 	}
 

@@ -37,7 +37,7 @@
 
 <filter-mapping>
     <filter-name>AuthenticatorFilter</filter-name>
-    <url-pattern>/amminist/*</url-pattern>
+    <url-pattern>/amministratore/*</url-pattern>
 </filter-mapping>
 
 <filter-mapping>
