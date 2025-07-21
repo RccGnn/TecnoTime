@@ -208,7 +208,7 @@
         		if(result != null && result){%>
         			<div class = success-message>Complimenti la tua build è pronta all' acquisto</div>
         		
-        		<%}else{ %>
+        		<%}else if (result != null && !result){ %>
         			<div class = error-message>La build selezionata non è compatibile</div>
         		<% }%>
         		

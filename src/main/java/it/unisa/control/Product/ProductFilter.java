@@ -67,7 +67,11 @@ public class ProductFilter extends HttpServlet {
         		length = dao.countQueries(); // conta il numero delle query
         		numeroPagine = (int) Math.ceil((double) length / (double) ProductFilter.articlesPerPage); // numero di pagine
         		int modulo = (int) Math.ceil(((double) length / (double) 2));
-            	catalogo = dao.doRetrieveAllLimit(sort, (int) numeroPagine, (int) page);        			
+            	if (numeroPagine < 4) {
+            		catalogo = dao.doRetrieveAll(sort);
+            	} else {
+            		catalogo = dao.doRetrieveAllLimit(sort, (int) numeroPagine, (int) page);            		
+            	}
         		
 		        // Filtra per il contesto
 		        Filters.contexFilter(catalogo, contesto);
