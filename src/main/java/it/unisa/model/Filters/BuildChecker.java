@@ -44,7 +44,7 @@ public class BuildChecker {
 		boolean psuvalidator= false;
 		if(c!=null && mb!=null && cpu!=null && ram!=null && gpu!=null){
 			res=BuildChecker.isCompatible(cpu, mb) && BuildChecker.isCompatible(mb, ram) && BuildChecker.isCompatible(c, mb);
-			if(psu.watt()==minimumWatt(mb, gpu, cpu))
+			if(psu.watt()>=minimumWatt(mb, gpu, cpu))
 				psuvalidator=true;
 			return res && psuvalidator;
 		}

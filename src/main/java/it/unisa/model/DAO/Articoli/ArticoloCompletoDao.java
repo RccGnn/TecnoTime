@@ -547,12 +547,11 @@ public class ArticoloCompletoDao implements BeanDaoInterface<ArticoloCompletoBea
 		ArticoloCompletoBean articoloCatalogo = new ArticoloCompletoBean();
 
 		String selectSQL = "SELECT codiceIdentificativo, categoria, nome, dataUltimaPromozione, enteErogatore, disponibilita, prezzo, seriale, descrizione_prodotto_fisico, isPreassemblato, quantitaMagazzino, codiceServizio, descrizione_servizio, durata, codiceSoftware, descrizione_prodotto_digitale, chiaviDisponibili "
-				+ "FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE nome = ? ";
+				+ "FROM " + ArticoloCompletoDao.TABLE_NAME + " WHERE nome LIKE '" +nome+"'";
 
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, nome);
 
 			ResultSet rs = ps.executeQuery();
 

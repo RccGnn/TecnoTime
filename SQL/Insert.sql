@@ -342,7 +342,7 @@ INSERT INTO ram(nomecompleto, marca, capacita, SupportoRam) VALUES
 ('ADATA XPG Gammix D10 DDR4 3200MHz 2x8GB', 'ADATA', 16, 'DDR4');
 
 USE TECNOTIMEDB;
-INSERT INTO _case(nomecompleto, dimensione) VALUES
+INSERT INTO CASE_PC(nomecompleto, dimensione) VALUES
 ('Cooler Master HAF 700 EVO', 'E-ATX'),
 ('Corsair iCUE 7000D AIRFLOW', 'E-ATX'),
 ('Lian Li O11D EVO XL', 'E-ATX'),

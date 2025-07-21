@@ -14,7 +14,7 @@ import it.unisa.model.Filters.SchedaMadre;
 import it.unisa.model.connections.DriverManagerConnectionPool;
 
 public class CaseDao {
-	private static final String TABLE_NAME = "_case";
+	private static final String TABLE_NAME = "case_pc";
 	
 	private static final String[] whitelist = 
 		{"nomecompleto","dimensione"};

@@ -23,6 +23,7 @@ import it.unisa.model.DAO.ComponentiFisici.SchedaMadreDao;
 import it.unisa.model.DAO.ComponentiFisici.SchedaVideoDAO;
 import it.unisa.model.Filters.Alimentatore;
 import it.unisa.model.Filters.BuildChecker;
+import it.unisa.model.Filters.Case;
 import it.unisa.model.Filters.Processore;
 import it.unisa.model.Filters.Ram;
 import it.unisa.model.Filters.SchedaMadre;
@@ -42,6 +43,9 @@ public class ConfiguratorCartServlet extends HttpServlet {
 		boolean flag = true;
 		String temp = request.getParameter(paramName);
 		if(temp != null && !temp.trim().equals("")) {
+			 if (temp.contains(" -")) {
+		            temp = temp.split(" -")[0];
+		        }
 			paramList.add(temp);
 		} else {
 			flag = false;
@@ -56,6 +60,28 @@ public class ConfiguratorCartServlet extends HttpServlet {
 		ArrayList<String> paramList = new ArrayList<>();
 		ArrayList<Boolean> flags = new ArrayList<>();
 		
+
+		
+	 	String rawMobo = request.getParameter("motherboard");
+        String processor = request.getParameter("processor");
+        String Case =  request.getParameter("_case");
+        String rame = request.getParameter("ram");
+        String gpus = request.getParameter("gpu");
+        String ssd = request.getParameter("storage");
+        String psus = request.getParameter("psu"); 
+        String ventole = request.getParameter("fans");
+        
+     // Rimuovi " - ..." da tutti i parametri (per compatibilità con DB)
+        rawMobo = rawMobo.split(" -")[0];
+        processor = processor.split(" -")[0];
+        Case = Case.split(" -")[0];
+        rame = rame.split(" -")[0];
+        gpus = gpus.split(" -")[0];
+        ssd = ssd.split(" -")[0];
+        psus = psus.split(" -")[0];
+        ventole = ventole.split(" -")[0];
+
+
 		// Leggi tutti i parametri
 		flags.add(addParameter(request, "_case", paramList));
 		flags.add(addParameter(request, "processor", paramList));
@@ -73,47 +99,75 @@ public class ConfiguratorCartServlet extends HttpServlet {
 				return;
 			}
 		}
-		
-		 	String rawMobo = request.getParameter("motherboard");
-	        String processor = request.getParameter("processor");
-	        String Case =  request.getParameter("_case");
-	        String rame = request.getParameter("ram");
-	        String gpus = request.getParameter("gpu");
-	        String ssd = request.getParameter("storage");
-	        String psus = request.getParameter("psu"); 
-	        String ventole = request.getParameter("fans");
+        
+        
+        
+        System.out.println(Case);        
+        ArticoloCompletoBean mobo = new ArticoloCompletoBean();
+        ArticoloCompletoBean cpu = new ArticoloCompletoBean();
+        ArticoloCompletoBean ram = new ArticoloCompletoBean();
+        ArticoloCompletoBean gpu = new ArticoloCompletoBean();
+        ArticoloCompletoBean psu = new ArticoloCompletoBean();
+        ArticoloCompletoBean fan = new ArticoloCompletoBean();
+        ArticoloCompletoBean storage = new ArticoloCompletoBean();
+        ArticoloCompletoBean _case = new ArticoloCompletoBean();
+       
+        
+        
+        ArticoloCompletoDao mobod = new ArticoloCompletoDao();
+        ArticoloCompletoDao cpud = new ArticoloCompletoDao();
+        ArticoloCompletoDao ramd = new ArticoloCompletoDao();
+        ArticoloCompletoDao gpud = new ArticoloCompletoDao();
+        ArticoloCompletoDao psud = new ArticoloCompletoDao();
+        ArticoloCompletoDao fand= new ArticoloCompletoDao();
+        ArticoloCompletoDao storaged = new ArticoloCompletoDao();
+        ArticoloCompletoDao _cased  = new ArticoloCompletoDao();
+       
+        
+        try {
+        	mobo=mobod.doRetrieveByName(rawMobo);
+        	cpu=cpud.doRetrieveByName(processor);
+        	ram=ramd.doRetrieveByName(rame);
+        	gpu=gpud.doRetrieveByName(gpus);
+        	psu=psud.doRetrieveByName(psus);
+        	fan=fand.doRetrieveByName(ventole);
+        	storage=storaged.doRetrieveByName(ssd);
+        	_case=_cased.doRetrieveByName(Case);
+        }catch(SQLException e) {
+        	e.printStackTrace();
+        }
+        
+        
+        ProcessoreDao p = new ProcessoreDao();
+        AlimentatoreDao a = new AlimentatoreDao();
+        SchedaVideoDAO g = new SchedaVideoDAO();
+        RamDao r = new RamDao();
+        CaseDao c = new CaseDao();
+        SchedaMadreDao m = new SchedaMadreDao();
+        
+        Processore cpur = null;
+        SchedaMadre mb = null;
+        SchedaVideo gpur= null;
+        Ram ramr = null;
+        Alimentatore psur = null;
+        Case contenitore = null;
+        
+        try {
+        	cpur=p.doRetrieveByKey(processor);
+        	psur=a.doRetrieveByKey(psus);
+        	gpur=g.doRetrieveByKey(gpus);
+        	ramr=r.doRetrieveByKey(rame);
+        	contenitore=c.doRetrieveByKey(Case);
+        	mb=m.doRetrieveByKey(rawMobo);
+        	
+        }catch ( SQLException e) {
+        	e.printStackTrace();
+        }
 	        
-	        ProcessoreDao p = new ProcessoreDao();
-	        AlimentatoreDao a = new AlimentatoreDao();
-	        SchedaVideoDAO g = new SchedaVideoDAO();
-	        RamDao r = new RamDao();
-	        CaseDao c = new CaseDao();
-	        SchedaMadreDao m = new SchedaMadreDao();
-	        
-	        Processore cpur = null;
-	        SchedaMadre mb = null;
-	        SchedaVideo gpur= null;
-	        Ram ramr = null;
-	        Alimentatore psur = null;
-	        it.unisa.model.Filters.Case contenitore = null;
-	        
-	        try {
-	        	cpur=p.doRetrieveByKey(processor);
-	        	psur=a.doRetrieveByKey(psus);
-	        	gpur=g.doRetrieveByKey(gpus);
-	        	ramr=r.doRetrieveByKey(rame);
-	        	contenitore=c.doRetrieveByKey(Case);
-	        	mb=m.doRetrieveByKey(rawMobo);
-	        	
-	        }catch ( SQLException e) {
-	        	e.printStackTrace();
-	        }
-	        
-	        
-	        System.out.println("case" + BuildChecker.isCompatible(contenitore, mb));
+        	System.out.println("case" + BuildChecker.isCompatible(contenitore, mb));
 	        System.out.println("cpu" + BuildChecker.isCompatible(cpur, mb));
 	        System.out.println("ram" + BuildChecker.isCompatible(mb, ramr));
-	        System.out.println("watt" + BuildChecker.minimumWatt(mb, gpur, cpur));
+	        System.out.println("watt " + BuildChecker.minimumWatt(mb, gpur, cpur));
 	      Boolean result = BuildChecker.buildValidator(contenitore, mb, cpur, ramr, gpur,psur);
 	      
 	      System.out.println(result);
@@ -126,8 +180,8 @@ public class ConfiguratorCartServlet extends HttpServlet {
 		    	disp.forward(request, response);
 		    	return;
 	    	}
+	    	
 	    
-
 		
 		// Costruisci la chiave da usare per il doRetrieve di carrello
         ArrayList<ArticoloCompletoBean> lista = new ArrayList<ArticoloCompletoBean>();				
@@ -178,7 +232,7 @@ public class ConfiguratorCartServlet extends HttpServlet {
         	return;
         }
 		
-		RequestDispatcher disp = request.getRequestDispatcher("/carrello.jsp");
+		RequestDispatcher disp = request.getRequestDispatcher("/configuratore.jsp");
 		disp.forward(request, response);
 		
 	}

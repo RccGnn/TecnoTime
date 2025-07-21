@@ -24,6 +24,7 @@ import it.unisa.model.Filters.SchedaMadre;
 import it.unisa.model.Filters.SchedaVideo;
 import it.unisa.model.beans.ArticoloCompletoBean;
 
+import it.unisa.model.Filters.Case;
 /**
  * Servlet implementation class configuratore
  */
@@ -53,6 +54,8 @@ public class configuratore extends HttpServlet {
 	        String ventole = request.getParameter("fans");
 	        
 	        
+	        
+	        System.out.println(Case);        
 	        ArticoloCompletoBean mobo = new ArticoloCompletoBean();
 	        ArticoloCompletoBean cpu = new ArticoloCompletoBean();
 	        ArticoloCompletoBean ram = new ArticoloCompletoBean();
@@ -100,7 +103,7 @@ public class configuratore extends HttpServlet {
 	        SchedaVideo gpur= null;
 	        Ram ramr = null;
 	        Alimentatore psur = null;
-	        it.unisa.model.Filters.Case contenitore = null;
+	        Case contenitore = null;
 	        
 	        try {
 	        	cpur=p.doRetrieveByKey(processor);
