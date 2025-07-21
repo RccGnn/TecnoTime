@@ -1,5 +1,6 @@
 package it.unisa.control.Cart;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,6 +15,18 @@ import java.util.ArrayList;
 import it.unisa.control.CookieUtils;
 import it.unisa.model.DAO.Articoli.ArticoloCompletoDao;
 import it.unisa.model.DAO.Cart.CarrelloRiempitoDao;
+import it.unisa.model.DAO.ComponentiFisici.AlimentatoreDao;
+import it.unisa.model.DAO.ComponentiFisici.CaseDao;
+import it.unisa.model.DAO.ComponentiFisici.ProcessoreDao;
+import it.unisa.model.DAO.ComponentiFisici.RamDao;
+import it.unisa.model.DAO.ComponentiFisici.SchedaMadreDao;
+import it.unisa.model.DAO.ComponentiFisici.SchedaVideoDAO;
+import it.unisa.model.Filters.Alimentatore;
+import it.unisa.model.Filters.BuildChecker;
+import it.unisa.model.Filters.Processore;
+import it.unisa.model.Filters.Ram;
+import it.unisa.model.Filters.SchedaMadre;
+import it.unisa.model.Filters.SchedaVideo;
 import it.unisa.model.beans.ArticoloCompletoBean;
 import it.unisa.model.beans.CarrelloRiempitoBean;
 
@@ -53,6 +66,7 @@ public class ConfiguratorCartServlet extends HttpServlet {
 		flags.add(addParameter(request, "psu", paramList));
 		flags.add(addParameter(request, "fans", paramList));
 
+		// Controllo parametri non nulli
 		for (Boolean flag : flags) {
 			if(!flag) {
 				response.sendError(500, "Errore nella lettura dei parametri");
@@ -60,6 +74,55 @@ public class ConfiguratorCartServlet extends HttpServlet {
 			}
 		}
 		
+		 	String rawMobo = request.getParameter("motherboard");
+	        String processor = request.getParameter("processor");
+	        String Case =  request.getParameter("_case");
+	        String rame = request.getParameter("ram");
+	        String gpus = request.getParameter("gpu");
+	        String ssd = request.getParameter("storage");
+	        String psus = request.getParameter("psu"); 
+	        String ventole = request.getParameter("fans");
+	        
+	        ProcessoreDao p = new ProcessoreDao();
+	        AlimentatoreDao a = new AlimentatoreDao();
+	        SchedaVideoDAO g = new SchedaVideoDAO();
+	        RamDao r = new RamDao();
+	        CaseDao c = new CaseDao();
+	        SchedaMadreDao m = new SchedaMadreDao();
+	        
+	        Processore cpur = null;
+	        SchedaMadre mb = null;
+	        SchedaVideo gpur= null;
+	        Ram ramr = null;
+	        Alimentatore psur = null;
+	        it.unisa.model.Filters.Case contenitore = null;
+	        
+	        try {
+	        	cpur=p.doRetrieveByKey(processor);
+	        	psur=a.doRetrieveByKey(psus);
+	        	gpur=g.doRetrieveByKey(gpus);
+	        	ramr=r.doRetrieveByKey(rame);
+	        	contenitore=c.doRetrieveByKey(Case);
+	        	mb=m.doRetrieveByKey(rawMobo);
+	        	
+	        }catch ( SQLException e) {
+	        	e.printStackTrace();
+	        }
+	        
+	      Boolean result = BuildChecker.buildValidator(contenitore, mb, cpur, ramr, gpur,psur);
+	      
+	      System.out.println(result);
+	    	if(result) {
+	    		request.setAttribute("result", Boolean.TRUE);
+	    	}
+	    	else {
+	    		request.setAttribute("result", Boolean.FALSE);
+	    		RequestDispatcher disp = request.getRequestDispatcher("/configuratore.jsp");
+		    	disp.forward(request, response);
+		    	return;
+	    	}
+	    
+
 		
 		// Costruisci la chiave da usare per il doRetrieve di carrello
         ArrayList<ArticoloCompletoBean> lista = new ArrayList<ArticoloCompletoBean>();				

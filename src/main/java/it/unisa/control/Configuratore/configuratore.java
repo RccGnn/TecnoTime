@@ -43,7 +43,7 @@ public class configuratore extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 String rawMobo = request.getParameter("motherboard");
+		 	String rawMobo = request.getParameter("motherboard");
 	        String processor = request.getParameter("processor");
 	        String Case =  request.getParameter("_case");
 	        String rame = request.getParameter("ram");

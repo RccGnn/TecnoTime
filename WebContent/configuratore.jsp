@@ -14,7 +14,6 @@
 	ArrayList<ArticoloCompletoBean>  casePc = new ArrayList<ArticoloCompletoBean>();
   %>
 
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -46,7 +45,9 @@
 			%>
 <main>
     <div class="form-container">
+
       <h2>Inserire informazioni richieste per la configurazione</h2>
+
 
       <form id="pcConfigForm" method="GET" action="ConfiguratorCartServlet">
 
@@ -204,7 +205,7 @@
         	<%}%>
         	
         	<%Boolean result = (Boolean) request.getAttribute("result");
-        		if(result){%>
+        		if(result != null && result){%>
         			<div class = success-message>Complimenti la tua build è pronta all' acquisto</div>
         		
         		<%}else{ %>
