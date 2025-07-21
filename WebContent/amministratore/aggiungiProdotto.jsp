@@ -32,6 +32,7 @@
 			
 			<h1 class="productsingle-title">Aggiungi Nuovo Prodotto</h1>
 
+			<h2> Caratteristiche base </h2>
 			<label for="tipologia">Tipologia di prodotto: </label> 
 			<select
 				onchange="modifyForm()" name="tipologia" id="tipologia"
@@ -64,7 +65,7 @@
 
 
 			<!-- CATEGORIE SPECIFICHE DELLA TIPOLOGIA DI PRODOTTO -->
-			<h1 class="productsingle-title">Aggiungi specifiche: </h1>
+			<h2>Aggiungi specifiche </h2>
 
 			<div id="optionElements"></div>
 

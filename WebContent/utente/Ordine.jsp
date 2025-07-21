@@ -30,7 +30,7 @@
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/login_registrazione.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/cart.css">
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/filters.css">
-	
+		
 	
 </head>
 
@@ -117,7 +117,7 @@
 
       				<div class="cart-header"> Totale: <%= df.format(totale) %>  </div>
       			          			 
-				<button type="submit" id="payBtn">PAGAAAH</button>
+				<button type="submit" id="payBtn"> PROCEDI ALL'ACQUISTO </button>
       		</form>
       		
     	</div>
