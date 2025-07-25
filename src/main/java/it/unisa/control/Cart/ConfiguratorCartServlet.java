@@ -24,6 +24,10 @@ import it.unisa.model.DAO.ComponentiFisici.SchedaVideoDAO;
 import it.unisa.model.Filters.Alimentatore;
 import it.unisa.model.Filters.BuildChecker;
 import it.unisa.model.Filters.Case;
+import it.unisa.model.Filters.CaseMotherBoardRule;
+import it.unisa.model.Filters.Compatible;
+import it.unisa.model.Filters.MotherBoardRamRule;
+import it.unisa.model.Filters.ProcessorMotherBoardRule;
 import it.unisa.model.Filters.Processore;
 import it.unisa.model.Filters.Ram;
 import it.unisa.model.Filters.SchedaMadre;
@@ -61,6 +65,11 @@ public class ConfiguratorCartServlet extends HttpServlet {
 		ArrayList<Boolean> flags = new ArrayList<>();
 		
 
+
+		Compatible<Case, SchedaMadre> caseRule = new CaseMotherBoardRule();
+		Compatible<Processore,SchedaMadre> cpuRule = new ProcessorMotherBoardRule();
+		Compatible<SchedaMadre, Ram> ramRule = new MotherBoardRamRule();
+		
 		
 	 	String rawMobo = request.getParameter("motherboard");
         String processor = request.getParameter("processor");
@@ -164,9 +173,9 @@ public class ConfiguratorCartServlet extends HttpServlet {
         	e.printStackTrace();
         }
 	        
-        	System.out.println("case" + BuildChecker.isCompatible(contenitore, mb));
-	        System.out.println("cpu" + BuildChecker.isCompatible(cpur, mb));
-	        System.out.println("ram" + BuildChecker.isCompatible(mb, ramr));
+        	System.out.println("case" + caseRule.isCompatible(contenitore, mb));
+	        System.out.println("cpu" + cpuRule.isCompatible(cpur, mb));
+	        System.out.println("ram" + ramRule.isCompatible(mb, ramr));
 	        System.out.println("watt " + BuildChecker.minimumWatt(mb, gpur, cpur));
 	      Boolean result = BuildChecker.buildValidator(contenitore, mb, cpur, ramr, gpur,psur);
 	      

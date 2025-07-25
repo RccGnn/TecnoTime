@@ -20,6 +20,11 @@ import it.unisa.model.DAO.ComponentiFisici.ProcessoreDao;
 import it.unisa.model.DAO.ComponentiFisici.RamDao;
 import it.unisa.model.DAO.ComponentiFisici.SchedaMadreDao;
 import it.unisa.model.Filters.BuildChecker;
+import it.unisa.model.Filters.Case;
+import it.unisa.model.Filters.CaseMotherBoardRule;
+import it.unisa.model.Filters.Compatible;
+import it.unisa.model.Filters.MotherBoardRamRule;
+import it.unisa.model.Filters.ProcessorMotherBoardRule;
 import it.unisa.model.Filters.Processore;
 import it.unisa.model.Filters.Ram;
 import it.unisa.model.Filters.SchedaMadre;
@@ -38,6 +43,11 @@ public class FetchProduct extends HttpServlet {
         List<ArticoloCompletoBean> artcpu = new ArrayList<>();
         List<ArticoloCompletoBean> artram = new ArrayList<>();
 
+    	Compatible<Case, SchedaMadre> caseRule = new CaseMotherBoardRule();
+        Compatible<Processore,SchedaMadre> cpuRule = new ProcessorMotherBoardRule();
+    	Compatible<SchedaMadre, Ram> ramRule = new MotherBoardRamRule();
+       
+
         if (rawNameM != null && !rawNameM.trim().isEmpty()) {
             try {
                 SchedaMadreDao moboDao = new SchedaMadreDao();
@@ -51,14 +61,14 @@ public class FetchProduct extends HttpServlet {
                 ArticoloCompletoDao articoloDao = new ArticoloCompletoDao();
 
                 for (Processore cpu : allCpus) {
-                    if (BuildChecker.isCompatible(cpu, selectedMobo)) {
+                    if ( cpuRule.isCompatible(cpu, selectedMobo)) {
                         ArticoloCompletoBean bean = articoloDao.doRetrieveByName(cpu.nome());
                         if (bean != null) artcpu.add(bean);
                     }
                 }
 
                 for (Ram ram : allRams) {
-                    if (BuildChecker.isCompatible(selectedMobo, ram)) {
+                    if (ramRule.isCompatible(selectedMobo, ram)) {
                         ArticoloCompletoBean bean = articoloDao.doRetrieveByName(ram.nome());
                         if (bean != null) artram.add(bean);
                     }
